@@ -1,0 +1,5 @@
+baseurl = "http://kunalkushwaha.github.io"
+languageCode = "en-us"
+title = "Kunal Kushwaha"
+[params]
+  Description = "Random thoughts"
