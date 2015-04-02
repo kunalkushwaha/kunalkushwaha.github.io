@@ -10,12 +10,29 @@
     <atom:link href="http://kunalkushwaha.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>moved to github</title>
+      <title>Moving to Hugo &amp; github</title>
       <link>http://kunalkushwaha.github.io/post/moved-to-github/</link>
       <pubDate>Wed, 04 Mar 2015 14:53:05 +0530</pubDate>
       
       <guid>http://kunalkushwaha.github.io/post/moved-to-github/</guid>
-      <description></description>
+      <description>
+
+&lt;p&gt;Started blogging today after few years of gap. Had stopped blogging few years back on &lt;a href=&#34;http://kunalkushwaha.wordpress.com&#34;&gt;wordpress&lt;/a&gt; .&lt;/p&gt;
+
+&lt;p&gt;Blogging is always fun and great way to share your experiences and findings with others.&lt;/p&gt;
+
+&lt;p&gt;Lot of things have changed in last 3-5 years in world of Web Technology, So is the blogging platform too.
+While exploring Web Technologies and Golang, I came across the static site genrator and Hugo.&lt;/p&gt;
+
+&lt;p&gt;I found it really powerful tool for blogging as well as Product Documentations.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-not-to-continue-with-wordpress:1dd8e767a925214d802c5a963c76c86a&#34;&gt;Why not to continue with wordpress!&lt;/h2&gt;
+
+&lt;p&gt;I work most of times on linux terminal and &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; with github is seamlessly integrated with  git workflow.
+Also, I have complete control over theme and customization. This learning is helpful to me for product documentation too :)&lt;/p&gt;
+
+&lt;p&gt;Going ahead I am hopeful, will write regularly and share intresting findings from work and side projects.&lt;/p&gt;
+</description>
     </item>
     
     <item>
