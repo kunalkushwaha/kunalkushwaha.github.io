@@ -6,8 +6,84 @@
     <description>Recent content in Posts on Kunal Kushwaha</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Mar 2015 14:53:05 +0530</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2015 23:20:04 +0900</lastBuildDate>
     <atom:link href="http://kunalkushwaha.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Layman guide to Platform Virtualization</title>
+      <link>http://kunalkushwaha.github.io/post/Layman-guide-to-Platform-Virtualization/</link>
+      <pubDate>Sat, 25 Apr 2015 23:20:04 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/post/Layman-guide-to-Platform-Virtualization/</guid>
+      <description>
+
+&lt;p&gt;&lt;img align=&#34;center&#34; src=https://github.com/kunalkushwaha/blog-hugo/static/VirtualMachineCartoon.jpg&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;platform-virtualization:a88864bb2e02cbfffb44963e73e3622a&#34;&gt;Platform Virtualization!&lt;/h3&gt;
+
+&lt;p&gt;Virtualization is not new in Computer World today.
+But when I am asked what I am working on, I say &amp;ldquo;Cloud Infrastructure and trying to build a private Cloud Platform!&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Explaining cloud service is easy but Cloud Infrastructure becomes little difficult.
+So I am writing a blog series to explain Cloud Infrastructure and it building blocks.
+Hope it will help many others too :)&lt;/p&gt;
+
+&lt;h3 id=&#34;virtualization:a88864bb2e02cbfffb44963e73e3622a&#34;&gt;Virtualization.&lt;/h3&gt;
+
+&lt;p&gt;Though simple meaning of Virtualization is creating virtual version of anything.
+But in computer software world everything is already Virtual :).
+But computer hardware devices, Network cable etc are real!&lt;/p&gt;
+
+&lt;p&gt;When all these things are created virtually i.e. software simulation of all such hardware its called virtualization!&lt;/p&gt;
+
+&lt;p&gt;But why that is required? I heard Hardware is becoming cheap day by day :-|
+These are genuine doubts! indeed hardware is becoming cheap and also performance of capacity wise is improving at much faster rate then ever.&lt;/p&gt;
+
+&lt;p&gt;Also, with increase of hardware capacity, most of hardware are underutilized :O
+Yes and this becomes huge concern for business owner, How to utilize best of your hardware.
+Second Management of hardware resources is also a addition of cost.&lt;/p&gt;
+
+&lt;p&gt;Using Virtualization both issues can be addressed.
+Multiple systems workload is executed on same hardware which result into better utilization,
+and Managing multiple systems with software also makes more efficient and easy.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-is-virtualization-is-achieved:a88864bb2e02cbfffb44963e73e3622a&#34;&gt;How is Virtualization is achieved?&lt;/h3&gt;
+
+&lt;p&gt;There are broadly three types of Virtualization Techniques.
+&lt;a href=&#34;http://en.wikipedia.org/wiki/Virtualization#Hardware_virtualization&#34;&gt;Wikipedia&lt;/a&gt; has short and crisp definition for all three.&lt;/p&gt;
+
+&lt;p&gt;Here Host OS is the OS which runs on Actual Hardware and Guest OS is running on Virtual Hardware/Machine.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Full virtualization – almost complete simulation of the actual hardware to allow software, which typically consists of a guest operating system, to run unmodified.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;e.g. VirtualBox, VMWare Workstations, Parallel for MAC works on full virtualization, No change is required in guest OS
+2. Partial virtualization – some but not all of the target environment attributes are simulated. As a result, some guest programs may need modifications to run in such virtual environments.&lt;/p&gt;
+
+&lt;p&gt;Probably this is first approach to virtualization which lead to full virtualization.
+   e.g. IBM mainfraim system &lt;a href=&#34;http://en.wikipedia.org/wiki/IBM_M44/44X&#34;&gt;IBM M44/44X&lt;/a&gt; was one of such experimental machine.
+3. Paravirtualization – a hardware environment is not simulated; however, the guest programs are executed in their own isolated domains, as if they are running on a separate system. Guest programs need to be specifically modified to run in this environment.&lt;/p&gt;
+
+&lt;p&gt;Paravirtulization is lightweight as compared to full virtualization.
+   e.g. XEN is based on paravirtualization.&lt;/p&gt;
+
+&lt;h3 id=&#34;so-what-we-understood:a88864bb2e02cbfffb44963e73e3622a&#34;&gt;So what we understood!&lt;/h3&gt;
+
+&lt;p&gt;Well, We must have realized with all these techniques, all that is achieved here is Isolation!
+Isolation of Hardware, so OS running in Virtual Machine gets a feel all hardware is available for its use.
+That is the way all OS are implemented! Exclusive access to hardware.&lt;/p&gt;
+
+&lt;p&gt;But above three methods are not that efficient with Hardware support for Virtualization.
+So, CPU also have extra core and support to run the Virtualization code efficently. More you can find on &lt;a href=&#34;http://en.wikipedia.org/wiki/X86_virtualization&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Since Isolation is the key to virtulization, Unix &amp;amp; Linux based OS have few features, which provides Isolation to process.
+Features like namespaces, cgroups and chroot.
+Utilzing these features, OS level virtualization can be achieved. In linux these are called Containers.&lt;/p&gt;
+
+&lt;p&gt;I will be writing details of containers in my next blog. So stay tuned :)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Moving to Hugo &amp; github</title>
