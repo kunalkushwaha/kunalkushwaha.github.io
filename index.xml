@@ -55,18 +55,17 @@ and Managing multiple systems with software also makes more efficient and easy.&
 &lt;p&gt;Here Host OS is the OS which runs on Actual Hardware and Guest OS is running on Virtual Hardware/Machine.&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Full virtualization – almost complete simulation of the actual hardware to allow software, which typically consists of a guest operating system, to run unmodified.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Full virtualization – almost complete simulation of the actual hardware to allow software, which typically consists of a guest operating system, to run unmodified.
+&lt;br&gt;e.g. VirtualBox, VMWare Workstations, Parallel for MAC works on full virtualization, No change is required in guest OS&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Partial virtualization – some but not all of the target environment attributes are simulated. As a result, some guest programs may need modifications to run in such virtual environments.
+&lt;br&gt;Probably this is first approach to virtualization which lead to full virtualization.
+&lt;br&gt;e.g. IBM mainfraim system &lt;a href=&#34;http://en.wikipedia.org/wiki/IBM_M44/44X&#34;&gt;IBM M44/44X&lt;/a&gt; was one of such experimental machine.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Paravirtualization – a hardware environment is not simulated; however, the guest programs are executed in their own isolated domains, as if they are running on a separate system. Guest programs need to be specifically modified to run in this environment.
+&lt;br&gt;Paravirtulization is lightweight as compared to full virtualization.
+&lt;br&gt;e.g. XEN is based on paravirtualization.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;e.g. VirtualBox, VMWare Workstations, Parallel for MAC works on full virtualization, No change is required in guest OS
-2. Partial virtualization – some but not all of the target environment attributes are simulated. As a result, some guest programs may need modifications to run in such virtual environments.&lt;/p&gt;
-
-&lt;p&gt;Probably this is first approach to virtualization which lead to full virtualization.
-   e.g. IBM mainfraim system &lt;a href=&#34;http://en.wikipedia.org/wiki/IBM_M44/44X&#34;&gt;IBM M44/44X&lt;/a&gt; was one of such experimental machine.
-3. Paravirtualization – a hardware environment is not simulated; however, the guest programs are executed in their own isolated domains, as if they are running on a separate system. Guest programs need to be specifically modified to run in this environment.&lt;/p&gt;
-
-&lt;p&gt;Paravirtulization is lightweight as compared to full virtualization.
-   e.g. XEN is based on paravirtualization.&lt;/p&gt;
 
 &lt;h3 id=&#34;so-what-we-understood:a88864bb2e02cbfffb44963e73e3622a&#34;&gt;So what we understood!&lt;/h3&gt;
 
