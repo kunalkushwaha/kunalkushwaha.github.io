@@ -1,13 +1,140 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kunal Kushwaha</title>
+    <title>TechLatte</title>
     <link>http://kunalkushwaha.github.io/</link>
-    <description>Recent content on Kunal Kushwaha</description>
+    <description>Recent content on TechLatte</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2015 23:20:04 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2015 22:29:36 +0900</lastBuildDate>
     <atom:link href="http://kunalkushwaha.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Golang Development Environment</title>
+      <link>http://kunalkushwaha.github.io/post/Golang-dev-environment/</link>
+      <pubDate>Mon, 27 Apr 2015 22:29:36 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/post/Golang-dev-environment/</guid>
+      <description>
+
+&lt;p&gt;Setting up golang environment is quite simple good docs are already present in golang.org.
+&lt;br&gt;But I couldn&amp;rsquo;t find any simple doc, where complete setup with GOROOT and GOPATH along with github is explained.&lt;/p&gt;
+
+&lt;p&gt;So I thought it might be helpful to others too.
+&lt;br&gt;My dev environment is ubuntu based &lt;a href=&#34;https://elementary.io/&#34;&gt;ElementryOS &amp;ldquo;Freya&amp;rdquo;&lt;/a&gt;, So it would work on all Ubuntu based distros.&lt;/p&gt;
+
+&lt;p&gt;###Golang Installer
+Golang comes with single tar file setup can be downloaded from &lt;a href=&#34;https://golang.org/dl/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;extract the tar file to your /usr/local using below command&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;this will install your all go binaries under following dir structure.&lt;/p&gt;
+
+&lt;p&gt;base folder where go is installed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;/usr/local/go
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All standard go binaries are in&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;/usr/local/go/bin 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;golang-environment-setup:22b90498ad19ed8bfadbfc3c440b6be8&#34;&gt;Golang environment setup.&lt;/h3&gt;
+
+&lt;p&gt;Now next step is to define golang related environment variable.
+&lt;br&gt;There are two important golang Env variables that need to be defined.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;GOROOT : This variable have value, where golang is installed.&lt;/li&gt;
+&lt;li&gt;GOPATH : This is like workspace. This folder will be root of all go getable packages and projects.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;br&gt;So you need to create a folder for GOPATH. My fav is ~/go folder.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;kunal@kunal-Aspire-5670:~$ mkdir ~/go
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So now define GOROOT, GOPATH and append PATH variables.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Its better to append your ~/.profile file with these 3 lines. So no need to export these variables every time you restart machine.&lt;/p&gt;
+
+&lt;p&gt;After setting environment variables check if everything is set as per expected or not!
+&lt;br&gt;Use &amp;ldquo;go env&amp;rdquo; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;kunal@kunal-Aspire-5670:~$ go env
+GOARCH=&amp;quot;386&amp;quot;
+GOBIN=&amp;quot;&amp;quot;
+GOCHAR=&amp;quot;8&amp;quot;
+GOEXE=&amp;quot;&amp;quot;
+GOHOSTARCH=&amp;quot;386&amp;quot;
+GOHOSTOS=&amp;quot;linux&amp;quot;
+GOOS=&amp;quot;linux&amp;quot;
+GOPATH=&amp;quot;/home/kunal/go&amp;quot;
+GORACE=&amp;quot;&amp;quot;
+GOROOT=&amp;quot;/usr/local/go&amp;quot;
+GOTOOLDIR=&amp;quot;/usr/local/go/pkg/tool/linux_386&amp;quot;
+CC=&amp;quot;gcc&amp;quot;
+GOGCCFLAGS=&amp;quot;-fPIC -m32 -pthread -fmessage-length=0&amp;quot;
+CXX=&amp;quot;g++&amp;quot;
+CGO_ENABLED=&amp;quot;1&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;verify GOPATH and GOROOT.&lt;/p&gt;
+
+&lt;h3 id=&#34;go-getable:22b90498ad19ed8bfadbfc3c440b6be8&#34;&gt;go getable.&lt;/h3&gt;
+
+&lt;p&gt;One of beauty of golang is &amp;ldquo;go get&amp;rdquo; command.
+&lt;br&gt;It automatically downloads the all required packages along with your program from git repo or mercurial.&lt;/p&gt;
+
+&lt;p&gt;Prerequisite to this is you should install git and mercurial both on your machine.
+mercurial is required as lot of official libraries of golang is still hosted at google code and it hosted with mercurial.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;kunal@kunal-Aspire-5670:~$ sudo apt-get install mercurial
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So we are set with all basics, now ready for go getable your code!&lt;/p&gt;
+
+&lt;p&gt;after your go get github.com/&lt;some-go-project&gt;, You will see your ~/go folder have sum folder structure created.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;kunal@kunal-Aspire-5670:~$ ll go
+total 32
+drwxrwxr-x  6 kunal kunal  4096 Apr 20 20:28 ./
+drwx------ 24 kunal kunal 12288 Apr 27 22:45 ../
+drwxrwxr-x  2 kunal kunal  4096 Apr 16 03:27 bin/
+drwxrwxr-x  3 kunal kunal  4096 Apr 12 21:26 pkg/
+drwxrwxr-x  8 kunal kunal  4096 Apr 16 03:24 src/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These are folder which will have all your go getable code/packages and binaries.
+*bin : folder will have binaries build after you build go project using &amp;ldquo;go build&amp;rdquo;
+*pkg : this will have all pakages downloaded due to dependencies of your program. These packages compiled packages.
+*src : this will have your source code under folder of source of code like github.com , bitbucket.com, code.google.com etc
+e.g&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;kunal@kunal-Aspire-5670:~$ ll go/src/
+total 32
+drwxrwxr-x  8 kunal kunal 4096 Apr 16 03:24 ./
+drwxrwxr-x  6 kunal kunal 4096 Apr 20 20:28 ../
+drwxrwxr-x  3 kunal kunal 4096 Apr 16 03:24 bitbucket.org/
+drwxrwxr-x  3 kunal kunal 4096 Apr 12 21:28 code.google.com/
+drwxrwxr-x 38 kunal kunal 4096 Apr 20 20:05 github.com/
+drwxrwxr-x  3 kunal kunal 4096 Apr 12 21:29 golang.org/
+drwxrwxr-x  3 kunal kunal 4096 Apr 12 21:29 google.golang.org/
+drwxrwxr-x  6 kunal kunal 4096 Apr 16 03:26 gopkg.in/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So you are now all set for code/test/ship in golang. Happy Coding :)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Layman guide to Platform Virtualization</title>
