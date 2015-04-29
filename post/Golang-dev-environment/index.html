@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> Golang Development Environment &middot; TechLatte </title>
+
+  
+  <link rel="stylesheet" href="http://kunalkushwaha.github.io//css/poole.css">
+  <link rel="stylesheet" href="http://kunalkushwaha.github.io//css/syntax.css">
+  <link rel="stylesheet" href="http://kunalkushwaha.github.io//css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="TechLatte" />
+</head>
+
+<body>
+
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>TechLatte</h1>
+      <p class="lead">
+       from Kunal Kushwaha 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      <li><a href="/about">About</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2015. All rights reserved. </p>
+  </div>
+</div>
+
+
+    <div class="content container">
+<div class="post">
+  <h1>Golang Development Environment</h1>
+  <span class="post-date">Mon, Apr 27, 2015</span>
+      
+
+<p>Setting up golang environment is quite simple good docs are already present in golang.org.
+<br>But I couldn&rsquo;t find any simple doc, where complete setup with GOROOT and GOPATH along with github is explained.</p>
+
+<p>So I thought it might be helpful to others too.
+<br>My dev environment is ubuntu based <a href="https://elementary.io/">ElementryOS &ldquo;Freya&rdquo;</a>, So it would work on all Ubuntu based distros.</p>
+
+<h3 id="golang-installer:22b90498ad19ed8bfadbfc3c440b6be8">Golang Installer</h3>
+
+<p>Golang comes with single tar file setup can be downloaded from <a href="https://golang.org/dl/">here</a>
+<br>extract the tar file to your /usr/local using below command</p>
+
+<pre><code class="language-shell">tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+</code></pre>
+
+<p>this will install your all go binaries under following dir structure.</p>
+
+<p>base folder where go is installed.</p>
+
+<pre><code class="language-shell">/usr/local/go
+</code></pre>
+
+<p>All standard go binaries are in</p>
+
+<pre><code class="language-shell">/usr/local/go/bin 
+</code></pre>
+
+<h3 id="golang-environment-setup:22b90498ad19ed8bfadbfc3c440b6be8">Golang environment setup.</h3>
+
+<p>Now next step is to define golang related environment variable.
+<br>There are two important golang Env variables that need to be defined.</p>
+
+<ol>
+<li>GOROOT : This variable have value, where golang is installed.</li>
+<li>GOPATH : This is like workspace. This folder will be root of all go getable packages and projects.</li>
+</ol>
+
+<p><br>So you need to create a folder for GOPATH. My fav is ~/go folder.</p>
+
+<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ mkdir ~/go
+</code></pre>
+
+<p>So now define GOROOT, GOPATH and append PATH variables.</p>
+
+<pre><code class="language-shell">export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+</code></pre>
+
+<p>Its better to append your ~/.profile file with these 3 lines. So no need to export these variables every time you restart machine.</p>
+
+<p>After setting environment variables check if everything is set as per expected or not!
+<br>Use &ldquo;go env&rdquo; command.</p>
+
+<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ go env
+GOARCH=&quot;386&quot;
+GOBIN=&quot;&quot;
+GOCHAR=&quot;8&quot;
+GOEXE=&quot;&quot;
+GOHOSTARCH=&quot;386&quot;
+GOHOSTOS=&quot;linux&quot;
+GOOS=&quot;linux&quot;
+GOPATH=&quot;/home/kunal/go&quot;
+GORACE=&quot;&quot;
+GOROOT=&quot;/usr/local/go&quot;
+GOTOOLDIR=&quot;/usr/local/go/pkg/tool/linux_386&quot;
+CC=&quot;gcc&quot;
+GOGCCFLAGS=&quot;-fPIC -m32 -pthread -fmessage-length=0&quot;
+CXX=&quot;g++&quot;
+CGO_ENABLED=&quot;1&quot;
+</code></pre>
+
+<p>verify GOPATH and GOROOT.</p>
+
+<h3 id="go-getable:22b90498ad19ed8bfadbfc3c440b6be8">go getable.</h3>
+
+<p>One of beauty of golang is &ldquo;go get&rdquo; command.
+<br>It automatically downloads the all required packages along with your program from git repo or mercurial.</p>
+
+<p>Prerequisite to this is you should install git and mercurial both on your machine.
+mercurial is required as lot of official libraries of golang is still hosted at google code and it hosted with mercurial.</p>
+
+<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ sudo apt-get install mercurial
+</code></pre>
+
+<p>So we are set with all basics, now ready for go getable your code!</p>
+
+<p>after your go get github.com/<some-go-project>, You will see your ~/go folder have sum folder structure created.</p>
+
+<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ ll go
+total 32
+drwxrwxr-x  6 kunal kunal  4096 Apr 20 20:28 ./
+drwx------ 24 kunal kunal 12288 Apr 27 22:45 ../
+drwxrwxr-x  2 kunal kunal  4096 Apr 16 03:27 bin/
+drwxrwxr-x  3 kunal kunal  4096 Apr 12 21:26 pkg/
+drwxrwxr-x  8 kunal kunal  4096 Apr 16 03:24 src/
+</code></pre>
+
+<p>These are folder which will have all your go getable code/packages and binaries.
+*bin : folder will have binaries build after you build go project using &ldquo;go build&rdquo;
+*pkg : this will have all pakages downloaded due to dependencies of your program. These packages compiled packages.
+*src : this will have your source code under folder of source of code like github.com , bitbucket.com, code.google.com etc
+e.g</p>
+
+<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ ll go/src/
+total 32
+drwxrwxr-x  8 kunal kunal 4096 Apr 16 03:24 ./
+drwxrwxr-x  6 kunal kunal 4096 Apr 20 20:28 ../
+drwxrwxr-x  3 kunal kunal 4096 Apr 16 03:24 bitbucket.org/
+drwxrwxr-x  3 kunal kunal 4096 Apr 12 21:28 code.google.com/
+drwxrwxr-x 38 kunal kunal 4096 Apr 20 20:05 github.com/
+drwxrwxr-x  3 kunal kunal 4096 Apr 12 21:29 golang.org/
+drwxrwxr-x  3 kunal kunal 4096 Apr 12 21:29 google.golang.org/
+drwxrwxr-x  6 kunal kunal 4096 Apr 16 03:26 gopkg.in/
+</code></pre>
+
+<p>So you are now all set for code/test/ship in golang. Happy Coding :)</p>
+
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+     
+     
+     if (window.location.hostname == "localhost")
+             return;
+
+	         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		     var disqus_shortname = 'kunalkushwaha';
+		         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+</div>
+
+  </body>
+</html>

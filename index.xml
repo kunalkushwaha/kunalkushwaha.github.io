@@ -23,10 +23,10 @@
 &lt;p&gt;So I thought it might be helpful to others too.
 &lt;br&gt;My dev environment is ubuntu based &lt;a href=&#34;https://elementary.io/&#34;&gt;ElementryOS &amp;ldquo;Freya&amp;rdquo;&lt;/a&gt;, So it would work on all Ubuntu based distros.&lt;/p&gt;
 
-&lt;p&gt;###Golang Installer
-Golang comes with single tar file setup can be downloaded from &lt;a href=&#34;https://golang.org/dl/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;golang-installer:22b90498ad19ed8bfadbfc3c440b6be8&#34;&gt;Golang Installer&lt;/h3&gt;
 
-&lt;p&gt;extract the tar file to your /usr/local using below command&lt;/p&gt;
+&lt;p&gt;Golang comes with single tar file setup can be downloaded from &lt;a href=&#34;https://golang.org/dl/&#34;&gt;here&lt;/a&gt;
+&lt;br&gt;extract the tar file to your /usr/local using below command&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
 &lt;/code&gt;&lt;/pre&gt;
