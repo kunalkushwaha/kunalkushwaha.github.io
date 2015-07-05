@@ -143,6 +143,8 @@ To understand other type of virtualization please read &lt;a href=&#34;http://ku
 - Namespaces provides isolation of filesystem view, devices, network and processes.
 - Cgroups helps to allocate, devices accessibility, and allocate quota to use the devices.&lt;/p&gt;
 
+&lt;p&gt;&lt;img align=&#34;center&#34; src=http://kunalkushwaha.github.io/images/containers.png&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;is-this-all-sufficient-for-virtualization:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;Is this all sufficient for Virtualization?&lt;/h2&gt;
 
 &lt;p&gt;No, still security is left. To create secure containers features like Capablities, secomp , SELinux and Apparmor are used for that. These all are integrated with new container solutions like Docker, CoreOS rocket etc.&lt;/p&gt;
