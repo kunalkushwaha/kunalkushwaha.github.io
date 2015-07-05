@@ -6,8 +6,164 @@
     <description>Recent content in Posts on Kunal Kushwaha&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Apr 2015 22:29:36 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jul 2015 20:25:44 +0900</lastBuildDate>
     <atom:link href="http://kunalkushwaha.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Container Virtualization and its building blocks</title>
+      <link>http://kunalkushwaha.github.io/post/container-virtualization/</link>
+      <pubDate>Sat, 04 Jul 2015 20:25:44 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/post/container-virtualization/</guid>
+      <description>
+
+&lt;p&gt;Since 2014, Linux containers have become buzz word in Cloud Infrastructure. Almost all, from Big corporations to startups, all have started using it. Huge credit goes to &lt;a href=&#34;www.docker.com&#34;&gt;Docker&lt;/a&gt; for making using containers so easy to use.&lt;/p&gt;
+
+&lt;p&gt;Linux Containers are there in Linux systems for alomst decade old, But making them work, was not so easy, and generally required linux admin experts for doing same. Few Solution as linux containers like FreeBSD Jails, LXC, openVZ, Solaris Zones etc exists for quite some time.&lt;/p&gt;
+
+&lt;p&gt;These are also known as OS level Virtualization.
+To understand other type of virtualization please read &lt;a href=&#34;http://kunalkushwaha.github.io/post/Layman-guide-to-Platform-Virtualization&#34;&gt;Layman guide to Platform virtualization&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;operating-system-level-virtualization:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;Operating System level Virtualization&lt;/h2&gt;
+
+&lt;p&gt;Quoting below from Wikipedia, I it explains beautifully in technical and yet not too complex.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;OS level Virtualization is a server virtualization method where the kernel of an operating system allows for multiple isolated user space instances, instead of just one. Such instances (often called containers, virtualization engines (VE), virtual private servers (VPS), or jails) may look and feel like a real server from the point of view of its owners and users.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In simple words, it allows to run multiple rootfs (user-space) simultaneously and all running rootfs have their own view of filesystem and devices. So they are not aware of each others and resource usage can be configured.&lt;/p&gt;
+
+&lt;p&gt;Sounds similar to virtual Machines? Yes it is!&lt;/p&gt;
+
+&lt;h4 id=&#34;how-this-isolation-is-achieved:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;How this isolation is achieved?&lt;/h4&gt;
+
+&lt;p&gt;This isolation is achieved using linux features like namespaces, cgroups and chroot. To understand details we need to first understand each of them.&lt;/p&gt;
+
+&lt;h4 id=&#34;namespaces:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;Namespaces&lt;/h4&gt;
+
+&lt;p&gt;Namespace wraps a particular global system resource in an abstraction that makes it appear to the processes within the namespace that they have their own isolated instance of the global resource.&lt;/p&gt;
+
+&lt;p&gt;Currently, Linux implements six different types of namespaces&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;h5 id=&#34;mount-namespaces-clone-newns:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;Mount namespaces (CLONE_NEWNS)&lt;/h5&gt;
+
+&lt;p&gt;This isolate the set of filesystem mount points seen by a group of processes. Thus, processes in different mount namespaces can have different views of the filesystem hierarchy. With the addition of mount namespaces, the mount() and umount() system calls ceased operating on a global set of mount points visible to all processes on the system and instead performed operations that affected just the mount namespace associated with the calling process.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This is also an alternative to chroot system call.&lt;/li&gt;
+&lt;li&gt;This is supported since Linux 2.4.19&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;h5 id=&#34;uts-namespaces-clone-newuts:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;UTS namespaces (CLONE_NEWUTS)&lt;/h5&gt;
+
+&lt;p&gt;This isolate two system identifiers—nodename and domainname—returned by the uname() system call; the names are set using the sethostname() and setdomainname() system calls.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;In the context of containers, the UTS namespaces feature allows each container to have its own hostname and NIS domain name. This can be useful for initialization and configuration scripts that tailor their actions based on these names.&lt;/li&gt;
+&lt;li&gt;This is supported in Linux kernel since  Linux 2.6.19.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;h5 id=&#34;ipc-namespaces-clone-newipc:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;IPC namespaces (CLONE_NEWIPC)&lt;/h5&gt;
+
+&lt;p&gt;This isolate certain interprocess communication (IPC) resources, namely, System V IPC objects and (since Linux 2.6.30) POSIX message queues.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The common characteristic of these IPC mechanisms is that IPC objects are identified by mechanisms other than filesystem pathnames. Each IPC namespace has its own set of System V IPC identifiers and its own POSIX message queue filesystem.&lt;/li&gt;
+&lt;li&gt;This is supported in Linux kernel since Linux 2.6.19&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;h5 id=&#34;pid-namespaces-clone-newpid:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;PID namespaces (CLONE_NEWPID)&lt;/h5&gt;
+
+&lt;p&gt;This isolate the process ID number space. In other words, processes in different PID namespaces can have the same PID.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This helps migrating containers between hosts while keeping the same process IDs for the processes inside the container.&lt;/li&gt;
+&lt;li&gt;PID namespaces also allow each container to have its own init (PID 1), the &amp;ldquo;ancestor of all processes&amp;rdquo; that manages various system initialization tasks and reaps orphaned child processes when they terminate.&lt;/li&gt;
+&lt;li&gt;This is supported since Linux 2.6.24&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;h5 id=&#34;network-namespaces-clone-newnet:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;Network namespaces (CLONE_NEWNET)&lt;/h5&gt;
+
+&lt;p&gt;This provide isolation of the system resources associated with networking. Thus, each network namespace has its own network devices, IP addresses, IP routing tables, /proc/net directory, port numbers, and so on.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Network namespaces make containers useful from a networking perspective: each container can have its own (virtual) network device and its own applications that bind to the per-namespace port number space.&lt;/li&gt;
+&lt;li&gt;started in Linux 2.4.19 2.6.24 and largely completed by about Linux 2.6.29&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;h5 id=&#34;user-namespaces-clone-newuser:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;User namespaces (CLONE_NEWUSER)&lt;/h5&gt;
+
+&lt;p&gt;This isolate the user and group ID number spaces. In other words, a process&amp;rsquo;s user and group IDs can be different inside and outside a user namespace.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The most interesting case here is that a process can have a normal unprivileged user ID outside a user namespace while at the same time having a user ID of 0 inside the namespace. This means that the process has full root privileges for operations inside the user namespace, but is unprivileged for operations outside the namespace.&lt;/li&gt;
+&lt;li&gt;This was partially supported since Linux 2.6.23 and completed in Linux 3.8.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&#34;control-groups-a-k-a-cgroups:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;Control groups a.k.a. cgroups&lt;/h4&gt;
+
+&lt;p&gt;Cgroups allow you to allocate resources—such as CPU time, system memory, network bandwidth, or combinations of these resources—among user-defined groups of tasks (processes) running on a system.
+  - One can configure cgroups, deny cgroups access to certain resources, and even reconfigure cgroups dynamically on a running system.
+  - The cgconfig (control group config) service can be configured to start up at boot time and reestablish your predefined cgroups, thus making them persistent across reboots.
+  - By using cgroups, we gain fine-grained control over allocating, prioritizing, denying, managing, and monitoring system resources. Hardware resources can be appropriately divided up among tasks and users, increasing overall efficiency.
+  - These are like process, hierarchical in nature i.e. child cgroups inherit certain attributes from their parent cgroup.&lt;/p&gt;
+
+&lt;p&gt;Follwing resources are supported currently in cgroups.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;blkio — this subsystem sets limits on input/output access to and from block devices such as physical drives (disk, solid state, USB, etc.).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;cpu — this subsystem uses the scheduler to provide cgroup tasks access to the CPU.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;cpuacct — this subsystem generates automatic reports on CPU resources used by tasks in a cgroup.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;cpuset — this subsystem assigns individual CPUs (on a multicore system) and memory nodes to tasks in a cgroup.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;devices — this subsystem allows or denies access to devices by tasks in a cgroup.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;freezer — this subsystem suspends or resumes tasks in a cgroup.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;memory — this subsystem sets limits on memory use by tasks in a cgroup, and generates automatic reports on memory resources used by those tasks.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;net_cls — this subsystem tags network packets with a class identifier (classid) that allows the Linux traffic controller (tc) to identify packets originating from a particular cgroup task.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;net_prio — this subsystem provides a way to dynamically set the priority of network traffic per network interface.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ns — the namespace subsystem.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For details you may refer : &lt;a href=&#34;https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt&#34;&gt;https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;so-how-these-helps-in-containers:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;So how these helps in containers?&lt;/h2&gt;
+
+&lt;p&gt;By now, you must have understood, namespaces and cgroups help to create isolated environment.
+- Namespaces provides isolation of filesystem view, devices, network and processes.
+- Cgroups helps to allocate, devices accessibility, and allocate quota to use the devices.&lt;/p&gt;
+
+&lt;h2 id=&#34;is-this-all-sufficient-for-virtualization:b9f02760c1e2afe4297fc7674428ef9f&#34;&gt;Is this all sufficient for Virtualization?&lt;/h2&gt;
+
+&lt;p&gt;No, still security is left. To create secure containers features like Capablities, secomp , SELinux and Apparmor are used for that. These all are integrated with new container solutions like Docker, CoreOS rocket etc.&lt;/p&gt;
+
+&lt;p&gt;Few Container projects worth wating are
+- LXC - Linux containers : This is default container hypervisior on all linux based systems. &lt;a href=&#34;https://linuxcontainers.org/&#34;&gt;https://linuxcontainers.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Docker libcontainer:
+This is now donated by Docker to Linux foundation and new name will is OpenContainers. &lt;a href=&#34;http://www.opencontainers.org/&#34;&gt;http://www.opencontainers.org/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;CoreOS - Rocket - &lt;a href=&#34;https://github.com/coreos/rkt&#34;&gt;https://github.com/coreos/rkt&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Redhat&amp;rsquo;s systemd-nspawn. &lt;a href=&#34;http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html&#34;&gt;http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I hope this blog would have help you to understand Linux Containers.&lt;/p&gt;
+
+&lt;p&gt;I will be writing more on current status of linux containers projects in my next blog so stay tuned :)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Golang Development Environment</title>
