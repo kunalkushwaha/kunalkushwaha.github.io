@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    Conditional compilation in golang // Kunal Kushwaha&#39;s Blog
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="generator" content="Hugo 0.14" />
+
+  <meta property="og:title" content="Conditional compilation in golang" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://kunalkushwaha.github.io/post/conditional-compilation-in-golang/" />
+
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/base-min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/redlounge.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,700,300,500,600,800' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Kunal Kushwaha&#39;s Blog" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-62566203-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/tomorrow-night-bright.min.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+
+  
+
+    
+</head>
+
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+    
+    
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://kunalkushwaha.github.io">Home</a></li>
+        
+      </ul>
+    </nav>
+
+    
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+		    <div id="toc" class="pure-u-1 pure-u-md-1-4">
+				<small class="toc-label">Contents</small>
+		   	 	<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#conditional-compiling-in-golang:2d62b9b37d02354b93f9e4e4f4d7ca80">Conditional compiling in golang.</a>
+<ul>
+<li>
+<ul>
+<li><a href="#build-tags:2d62b9b37d02354b93f9e4e4f4d7ca80">Build Tags:</a></li>
+<li><a href="#so-it-that-all-about-conditional-compiling-in-golang:2d62b9b37d02354b93f9e4e4f4d7ca80">So it that all about conditional compiling in golang?</a></li>
+<li><a href="#which-one-should-be-used:2d62b9b37d02354b93f9e4e4f4d7ca80">Which one should be used?</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		    </div>
+		    
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="/post/conditional-compilation-in-golang/">Conditional compilation in golang</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>24</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jul</span> <span class="post-date-year">2015</span>
+            	</span>
+            	
+            
+            	
+            
+
+			
+			
+
+			
+
+			
+
+            
+
+<h2 id="conditional-compiling-in-golang:2d62b9b37d02354b93f9e4e4f4d7ca80">Conditional compiling in golang.</h2>
+
+<p>While hacking around experimental builds of docker, I learned about conditional compiling in golang.
+As any project grew or ported to multiple architecture/platforms  the need of conditional compiling is obvious.</p>
+
+<p>Unlike C golang, do not have macros. Golang make use of build tags to achieve this.</p>
+
+<h4 id="build-tags:2d62b9b37d02354b93f9e4e4f4d7ca80">Build Tags:</h4>
+
+<p>Build tags are basically annotation in source code. generally it is first line of file, where build tags are defined.</p>
+
+<p><code>// +build &lt;tags&gt;</code></p>
+
+<p>These tags are searched by <code>go build</code> tool before passing to go compiler. These tags can be passed while go build command like</p>
+
+<p><code>$ go build -tags &lt;tags&gt;</code></p>
+
+<p>Here are few points to remember regarding tags.
+- Tags specifies architecture and platforms are special. i.e. No need to pass such tags, <code>go build</code> is smart enough to pass them.
+    - e.g. linux, windows, darwin, 386, arch etc
+- Tags can be passed with negation i.e. !<tag>
+- A blank line must be present between build tags and code, else that line will be ignored.
+- OR condition for tags can be specified with space.
+- AND condition can be specified with <code>,</code></p>
+
+<p>If some tag is defined in file and is not passed in <code>go build</code>` command, it will be ignored.</p>
+
+<p>Lets see this with example with custom tag.</p>
+
+<ul>
+<li>Here we will take three files</li>
+<li>main.go</li>
+<li>include.go</li>
+<li>exclude.go</li>
+</ul>
+
+<pre><code class="language-go">○ cat main.go
+package main
+
+import (
+&quot;fmt&quot;
+)
+
+func init() {
+        fmt.Println(&quot;Hello from Main init()&quot;)
+}
+
+
+func main() {
+        fmt.Println(&quot;Hello from main&quot;)
+}
+</code></pre>
+
+<pre><code class="language-go">
+○ cat include.go
+
+package main
+
+import &quot;fmt&quot;
+
+func init() {
+        fmt.Println(&quot;Hello from IncludeInit()&quot;)
+}
+</code></pre>
+
+<pre><code class="language-go">○ cat exclude.go
+// +build exclude
+
+package main
+
+import &quot;fmt&quot;
+
+func init(){
+        fmt.Println(&quot;Hello from exclude&quot;)
+}
+</code></pre>
+
+<p>As you can see, here exclude file has build tag of <code>exclude</code>.</p>
+
+<p>Now if do <code>go build</code>, It will not compile exclude.go.</p>
+
+<pre><code>○ go build
+
+○ ./temp
+Hello from IncludeInit()
+Hello from Main init()
+Hello from main
+</code></pre>
+
+<p>Now let try using buildtag exclude.</p>
+
+<pre><code>○ go build -tags exclude
+
+○ ./temp
+Hello from exclude
+Hello from IncludeInit()
+Hello from Main init()
+Hello from main
+</code></pre>
+
+<p>You can see now, the exclude.go is part of binary.</p>
+
+<p>One more interesting thing with golang is <code>go list</code> tool.
+Using the <code>go list</code>, without compiling, you can see which files will be compiled, with given gotags or default.</p>
+
+<p>I found <code>go list --help</code> not great, but the summary of this tool is a go template can be used to check the list of files that will be included in the build.
+A simple example as below will help you to understand better.</p>
+
+<pre><code>○ go list -f '{{.GoFiles}}' --tags exclude
+[exclude.go include.go main.go]
+
+○ go list -f '{{.GoFiles}}'
+[include.go main.go]
+</code></pre>
+
+<p>As you can see, if exclude tag is not used, only include.go and main.go files are used.</p>
+
+<h4 id="so-it-that-all-about-conditional-compiling-in-golang:2d62b9b37d02354b93f9e4e4f4d7ca80">So it that all about conditional compiling in golang?</h4>
+
+<p>No, There is even simpler method available too :-) and it is file-name suffixes.</p>
+
+<p>In golang, there are few go environment variables defined.
+GOOS and GOARCH are two of such.
+- GOOS defines the current OS
+- GOARCH defines the current machine architecture.</p>
+
+<p><code>go build</code> matches value of these two environment variables in filename and if it matches then only include for compiling.</p>
+
+<p>So by naming files like <code>exclude_linux.go</code>, it will be included only if compiled in linux system.
+<code>exclude_linux_amd64.go</code> will ensure, it will be inlcuded only if OS is linux and architecture of system in 64 bit.</p>
+
+<p>You may try these combination.</p>
+
+<h4 id="which-one-should-be-used:2d62b9b37d02354b93f9e4e4f4d7ca80">Which one should be used?</h4>
+
+<ul>
+<li>For custom tags build tags are the only options.</li>
+<li>For platform and architecture specific, if you plan to use cross build on one systems, build tags will be preferable.</li>
+<li>Also, if same file does work for multiple platforms, build tags will be better choice.</li>
+</ul>
+
+<p>For rest, file sufixes can be used.</p>
+
+<p>Hope this info will be useful.</p>
+
+	
+			
+
+			
+
+			
+				<div class="paging">
+					<span class="paging-label">More Reading</span>
+					
+
+					
+					<div class="paging-older">
+						<span class="dark-red">Older</span><span class="decorative-marker">//</span>
+			            <a class="paging-link" href="/post/container-virtualization/">Container Virtualization and its building blocks</a>
+		            </div>
+		            
+	            </div>
+            
+          </section>
+          
+          	
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2015. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>

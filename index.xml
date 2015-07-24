@@ -6,16 +6,170 @@
     <description>Recent content on Kunal Kushwaha&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License. Some rights reserved by James R. Cogley</copyright>
-    <lastBuildDate>Sat, 04 Jul 2015 20:25:44 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2015 22:21:27 +0900</lastBuildDate>
     <atom:link href="http://kunalkushwaha.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Conditional compilation in golang</title>
+      <link>http://kunalkushwaha.github.io/post/conditional-compilation-in-golang/</link>
+      <pubDate>Fri, 24 Jul 2015 22:21:27 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/post/conditional-compilation-in-golang/</guid>
+      <description>
+
+&lt;h2 id=&#34;conditional-compiling-in-golang:2d62b9b37d02354b93f9e4e4f4d7ca80&#34;&gt;Conditional compiling in golang.&lt;/h2&gt;
+
+&lt;p&gt;While hacking around experimental builds of docker, I learned about conditional compiling in golang.
+As any project grew or ported to multiple architecture/platforms  the need of conditional compiling is obvious.&lt;/p&gt;
+
+&lt;p&gt;Unlike C golang, do not have macros. Golang make use of build tags to achieve this.&lt;/p&gt;
+
+&lt;h4 id=&#34;build-tags:2d62b9b37d02354b93f9e4e4f4d7ca80&#34;&gt;Build Tags:&lt;/h4&gt;
+
+&lt;p&gt;Build tags are basically annotation in source code. generally it is first line of file, where build tags are defined.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;// +build &amp;lt;tags&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;These tags are searched by &lt;code&gt;go build&lt;/code&gt; tool before passing to go compiler. These tags can be passed while go build command like&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ go build -tags &amp;lt;tags&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Here are few points to remember regarding tags.
+- Tags specifies architecture and platforms are special. i.e. No need to pass such tags, &lt;code&gt;go build&lt;/code&gt; is smart enough to pass them.
+    - e.g. linux, windows, darwin, 386, arch etc
+- Tags can be passed with negation i.e. !&lt;tag&gt;
+- A blank line must be present between build tags and code, else that line will be ignored.
+- OR condition for tags can be specified with space.
+- AND condition can be specified with &lt;code&gt;,&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;If some tag is defined in file and is not passed in &lt;code&gt;go build&lt;/code&gt;` command, it will be ignored.&lt;/p&gt;
+
+&lt;p&gt;Lets see this with example with custom tag.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Here we will take three files&lt;/li&gt;
+&lt;li&gt;main.go&lt;/li&gt;
+&lt;li&gt;include.go&lt;/li&gt;
+&lt;li&gt;exclude.go&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;○ cat main.go
+package main
+
+import (
+&amp;quot;fmt&amp;quot;
+)
+
+func init() {
+        fmt.Println(&amp;quot;Hello from Main init()&amp;quot;)
+}
+
+
+func main() {
+        fmt.Println(&amp;quot;Hello from main&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;
+○ cat include.go
+
+package main
+
+import &amp;quot;fmt&amp;quot;
+
+func init() {
+        fmt.Println(&amp;quot;Hello from IncludeInit()&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;○ cat exclude.go
+// +build exclude
+
+package main
+
+import &amp;quot;fmt&amp;quot;
+
+func init(){
+        fmt.Println(&amp;quot;Hello from exclude&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, here exclude file has build tag of &lt;code&gt;exclude&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now if do &lt;code&gt;go build&lt;/code&gt;, It will not compile exclude.go.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;○ go build
+
+○ ./temp
+Hello from IncludeInit()
+Hello from Main init()
+Hello from main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now let try using buildtag exclude.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;○ go build -tags exclude
+
+○ ./temp
+Hello from exclude
+Hello from IncludeInit()
+Hello from Main init()
+Hello from main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see now, the exclude.go is part of binary.&lt;/p&gt;
+
+&lt;p&gt;One more interesting thing with golang is &lt;code&gt;go list&lt;/code&gt; tool.
+Using the &lt;code&gt;go list&lt;/code&gt;, without compiling, you can see which files will be compiled, with given gotags or default.&lt;/p&gt;
+
+&lt;p&gt;I found &lt;code&gt;go list --help&lt;/code&gt; not great, but the summary of this tool is a go template can be used to check the list of files that will be included in the build.
+A simple example as below will help you to understand better.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;○ go list -f &#39;{{.GoFiles}}&#39; --tags exclude
+[exclude.go include.go main.go]
+
+○ go list -f &#39;{{.GoFiles}}&#39;
+[include.go main.go]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, if exclude tag is not used, only include.go and main.go files are used.&lt;/p&gt;
+
+&lt;h4 id=&#34;so-it-that-all-about-conditional-compiling-in-golang:2d62b9b37d02354b93f9e4e4f4d7ca80&#34;&gt;So it that all about conditional compiling in golang?&lt;/h4&gt;
+
+&lt;p&gt;No, There is even simpler method available too :-) and it is file-name suffixes.&lt;/p&gt;
+
+&lt;p&gt;In golang, there are few go environment variables defined.
+GOOS and GOARCH are two of such.
+- GOOS defines the current OS
+- GOARCH defines the current machine architecture.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;go build&lt;/code&gt; matches value of these two environment variables in filename and if it matches then only include for compiling.&lt;/p&gt;
+
+&lt;p&gt;So by naming files like &lt;code&gt;exclude_linux.go&lt;/code&gt;, it will be included only if compiled in linux system.
+&lt;code&gt;exclude_linux_amd64.go&lt;/code&gt; will ensure, it will be inlcuded only if OS is linux and architecture of system in 64 bit.&lt;/p&gt;
+
+&lt;p&gt;You may try these combination.&lt;/p&gt;
+
+&lt;h4 id=&#34;which-one-should-be-used:2d62b9b37d02354b93f9e4e4f4d7ca80&#34;&gt;Which one should be used?&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For custom tags build tags are the only options.&lt;/li&gt;
+&lt;li&gt;For platform and architecture specific, if you plan to use cross build on one systems, build tags will be preferable.&lt;/li&gt;
+&lt;li&gt;Also, if same file does work for multiple platforms, build tags will be better choice.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For rest, file sufixes can be used.&lt;/p&gt;
+
+&lt;p&gt;Hope this info will be useful.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Container Virtualization and its building blocks</title>
-      <link>http://kunalkushwaha.github.io/post/container-virtualization-and-its-building-blocks</link>
+      <link>http://kunalkushwaha.github.io/post/container-virtualization/</link>
       <pubDate>Sat, 04 Jul 2015 20:25:44 +0900</pubDate>
       
-      <guid>http://kunalkushwaha.github.io/post/container-virtualization-and-its-building-blocks</guid>
+      <guid>http://kunalkushwaha.github.io/post/container-virtualization/</guid>
       <description>
 
 &lt;p&gt;Since 2014, Linux containers have become buzz word in Cloud Infrastructure. Almost all, from Big corporations to startups, all have started using it. Huge credit goes to &lt;a href=&#34;www.docker.com&#34;&gt;Docker&lt;/a&gt; for making using containers so easy to use.&lt;/p&gt;
@@ -170,10 +324,10 @@ This is now donated by Docker to Linux foundation and new name will is OpenConta
     
     <item>
       <title>Golang Development Environment</title>
-      <link>http://kunalkushwaha.github.io/post/golang-development-environment</link>
+      <link>http://kunalkushwaha.github.io/post/Golang-dev-environment/</link>
       <pubDate>Mon, 27 Apr 2015 22:29:36 +0900</pubDate>
       
-      <guid>http://kunalkushwaha.github.io/post/golang-development-environment</guid>
+      <guid>http://kunalkushwaha.github.io/post/Golang-dev-environment/</guid>
       <description>
 
 &lt;p&gt;Setting up golang environment is quite simple good docs are already present in golang.org.
@@ -297,10 +451,10 @@ drwxrwxr-x  6 kunal kunal 4096 Apr 16 03:26 gopkg.in/
     
     <item>
       <title>Layman guide to Platform Virtualization</title>
-      <link>http://kunalkushwaha.github.io/post/layman-guide-to-platform-virtualization</link>
+      <link>http://kunalkushwaha.github.io/post/Layman-guide-to-Platform-Virtualization/</link>
       <pubDate>Sat, 25 Apr 2015 23:20:04 +0900</pubDate>
       
-      <guid>http://kunalkushwaha.github.io/post/layman-guide-to-platform-virtualization</guid>
+      <guid>http://kunalkushwaha.github.io/post/Layman-guide-to-Platform-Virtualization/</guid>
       <description>
 
 &lt;p&gt;&lt;img align=&#34;center&#34; src=http://kunalkushwaha.github.io/VirtualMachineCartoon.jpg&gt;&lt;/p&gt;
@@ -372,10 +526,10 @@ Utilzing these features, OS level virtualization can be achieved. In linux these
     
     <item>
       <title>Moving to Hugo &amp; github</title>
-      <link>http://kunalkushwaha.github.io/post/moving-to-hugo--github</link>
+      <link>http://kunalkushwaha.github.io/post/moved-to-github/</link>
       <pubDate>Wed, 04 Mar 2015 14:53:05 +0530</pubDate>
       
-      <guid>http://kunalkushwaha.github.io/post/moving-to-hugo--github</guid>
+      <guid>http://kunalkushwaha.github.io/post/moved-to-github/</guid>
       <description>
 
 &lt;p&gt;Started blogging today after few years of gap. Had stopped blogging few years back on &lt;a href=&#34;http://kunalkushwaha.wordpress.com&#34;&gt;wordpress&lt;/a&gt; .&lt;/p&gt;
