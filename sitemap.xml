@@ -2,38 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://kunalkushwaha.github.io/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2015-07-24T22:21:27+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://kunalkushwaha.github.io/post/conditional-compilation-in-golang</loc>
+    <loc>http://localhost:1313/post/conditional-compilation-in-golang</loc>
     <lastmod>2015-07-24T22:21:27+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://kunalkushwaha.github.io/post/container-virtualization-and-its-building-blocks</loc>
+    <loc>http://localhost:1313/post/container-virtualization-and-its-building-blocks</loc>
     <lastmod>2015-07-04T20:25:44+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://kunalkushwaha.github.io/post/golang-development-environment</loc>
+    <loc>http://localhost:1313/post/golang-development-environment</loc>
     <lastmod>2015-04-27T22:29:36+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://kunalkushwaha.github.io/post/layman-guide-to-platform-virtualization</loc>
+    <loc>http://localhost:1313/post/layman-guide-to-platform-virtualization</loc>
     <lastmod>2015-04-25T23:20:04+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://kunalkushwaha.github.io/post/moving-to-hugo--github</loc>
+    <loc>http://localhost:1313/post/moving-to-hugo--github</loc>
     <lastmod>2015-03-04T14:53:05+05:30</lastmod>
   </url>
   
   <url>
-    <loc>http://kunalkushwaha.github.io/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2015-03-03T17:59:00+05:30</lastmod>
   </url>
   
