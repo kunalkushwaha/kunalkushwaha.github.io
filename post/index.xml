@@ -6,15 +6,16 @@
     <description>Recent content in Posts on Kunal Kushwaha&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License. Some rights reserved by James R. Cogley</copyright>
     <lastBuildDate>Fri, 24 Jul 2015 22:21:27 +0900</lastBuildDate>
     <atom:link href="http://kunalkushwaha.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Conditional compilation in golang</title>
-      <link>http://kunalkushwaha.github.io/post/conditional-compilation-in-golang/</link>
+      <link>http://kunalkushwaha.github.io/post/conditional-compilation-in-golang</link>
       <pubDate>Fri, 24 Jul 2015 22:21:27 +0900</pubDate>
       
-      <guid>http://kunalkushwaha.github.io/post/conditional-compilation-in-golang/</guid>
+      <guid>http://kunalkushwaha.github.io/post/conditional-compilation-in-golang</guid>
       <description>
 
 &lt;h2 id=&#34;conditional-compiling-in-golang:2d62b9b37d02354b93f9e4e4f4d7ca80&#34;&gt;Conditional compiling in golang.&lt;/h2&gt;
@@ -166,10 +167,10 @@ GOOS and GOARCH are two of such.
     
     <item>
       <title>Container Virtualization and its building blocks</title>
-      <link>http://kunalkushwaha.github.io/post/container-virtualization/</link>
+      <link>http://kunalkushwaha.github.io/post/container-virtualization-and-its-building-blocks</link>
       <pubDate>Sat, 04 Jul 2015 20:25:44 +0900</pubDate>
       
-      <guid>http://kunalkushwaha.github.io/post/container-virtualization/</guid>
+      <guid>http://kunalkushwaha.github.io/post/container-virtualization-and-its-building-blocks</guid>
       <description>
 
 &lt;p&gt;Since 2014, Linux containers have become buzz word in Cloud Infrastructure. Almost all, from Big corporations to startups, all have started using it. Huge credit goes to &lt;a href=&#34;www.docker.com&#34;&gt;Docker&lt;/a&gt; for making using containers so easy to use.&lt;/p&gt;
@@ -324,10 +325,10 @@ This is now donated by Docker to Linux foundation and new name will is OpenConta
     
     <item>
       <title>Golang Development Environment</title>
-      <link>http://kunalkushwaha.github.io/post/Golang-dev-environment/</link>
+      <link>http://kunalkushwaha.github.io/post/golang-development-environment</link>
       <pubDate>Mon, 27 Apr 2015 22:29:36 +0900</pubDate>
       
-      <guid>http://kunalkushwaha.github.io/post/Golang-dev-environment/</guid>
+      <guid>http://kunalkushwaha.github.io/post/golang-development-environment</guid>
       <description>
 
 &lt;p&gt;Setting up golang environment is quite simple good docs are already present in golang.org.
@@ -353,7 +354,7 @@ This is now donated by Docker to Linux foundation and new name will is OpenConta
 
 &lt;p&gt;All standard go binaries are in&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;/usr/local/go/bin 
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;/usr/local/go/bin
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;golang-environment-setup:22b90498ad19ed8bfadbfc3c440b6be8&#34;&gt;Golang environment setup.&lt;/h3&gt;
@@ -451,10 +452,10 @@ drwxrwxr-x  6 kunal kunal 4096 Apr 16 03:26 gopkg.in/
     
     <item>
       <title>Layman guide to Platform Virtualization</title>
-      <link>http://kunalkushwaha.github.io/post/Layman-guide-to-Platform-Virtualization/</link>
+      <link>http://kunalkushwaha.github.io/post/layman-guide-to-platform-virtualization</link>
       <pubDate>Sat, 25 Apr 2015 23:20:04 +0900</pubDate>
       
-      <guid>http://kunalkushwaha.github.io/post/Layman-guide-to-Platform-Virtualization/</guid>
+      <guid>http://kunalkushwaha.github.io/post/layman-guide-to-platform-virtualization</guid>
       <description>
 
 &lt;p&gt;&lt;img align=&#34;center&#34; src=http://kunalkushwaha.github.io/VirtualMachineCartoon.jpg&gt;&lt;/p&gt;
@@ -526,10 +527,10 @@ Utilzing these features, OS level virtualization can be achieved. In linux these
     
     <item>
       <title>Moving to Hugo &amp; github</title>
-      <link>http://kunalkushwaha.github.io/post/moved-to-github/</link>
+      <link>http://kunalkushwaha.github.io/post/moving-to-hugo--github</link>
       <pubDate>Wed, 04 Mar 2015 14:53:05 +0530</pubDate>
       
-      <guid>http://kunalkushwaha.github.io/post/moved-to-github/</guid>
+      <guid>http://kunalkushwaha.github.io/post/moving-to-hugo--github</guid>
       <description>
 
 &lt;p&gt;Started blogging today after few years of gap. Had stopped blogging few years back on &lt;a href=&#34;http://kunalkushwaha.wordpress.com&#34;&gt;wordpress&lt;/a&gt; .&lt;/p&gt;
