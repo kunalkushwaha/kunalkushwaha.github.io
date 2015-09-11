@@ -7,8 +7,191 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License. Some rights reserved by James R. Cogley</copyright>
-    <lastBuildDate>Fri, 24 Jul 2015 22:21:27 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2015 15:14:46 +0900</lastBuildDate>
     <atom:link href="http://kunalkushwaha.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Understanding Golang Interfaces</title>
+      <link>http://kunalkushwaha.github.io/post/understanding-golang-interfaces</link>
+      <pubDate>Fri, 11 Sep 2015 15:14:46 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/post/understanding-golang-interfaces</guid>
+      <description>
+
+&lt;p&gt;Even after writing Go code for a while, there have been couple of time, when I get confused about Interfaces in golang.
+So I think, it may help people, who have started with Golang, or don&amp;rsquo;t use much Interfaces in there code.&lt;/p&gt;
+
+&lt;h3 id=&#34;interfaces:8e8f150f0261927c23fb2a377a40072b&#34;&gt;Interfaces&lt;/h3&gt;
+
+&lt;p&gt;By definition, Interfaces are named collections of method signatures. But usage of Interfaces in go is little confusing as it is used a in context of data type also and defining the behavior of methods also.&lt;/p&gt;
+
+&lt;p&gt;Lets try to understand each of them.&lt;/p&gt;
+
+&lt;h3 id=&#34;1-interface-interface-as-data-type:8e8f150f0261927c23fb2a377a40072b&#34;&gt;1. interface{} , interface as data-type&lt;/h3&gt;
+
+&lt;p&gt;This is commonly mistaken as ( void type of C/C++), But it&amp;rsquo;s not! It still holds its property from the above definition.
+Since, &lt;code&gt;interface{}&lt;/code&gt; is empty interface i.e. No methods associated with it, all data type satisfy the behavior and hence, all data types can be passed/assigned to &lt;code&gt;interface{}&lt;/code&gt; type.&lt;/p&gt;
+
+&lt;p&gt;Lets take a example,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;
+type Stack struct {
+       data []interface{}
+}
+
+func NewStack() *Stack {
+	s := Stack{data: make([]interface{},0)}
+	return &amp;amp;s
+}
+
+func (s *Stack) Push(data interface{}) {
+	s.data = append(s.data, data)
+}
+
+func (s *Stack) Pop() interface{} {
+	if len(s.data) == 0 {
+		return nil
+	}
+	data := s.data[len(s.data) -1]
+	s.data = s.data[0:len(s.data)-1]
+	return data
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To use the above stack, a simple example shows retrieval of values from interface type.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;s := NewStack()
+d.Push(10)
+d.Push(&amp;quot;Hello&amp;quot;)
+obj1 := s.Pop()
+obj2 = s.Pop()
+// To retrieve int value, use type assertion.
+elem1 := obj.(string)
+elem2 := obj.(int)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here are few things needs to be understood about interfaces to be used as type.
+ - Whenever variables of any datatype is assigned to interface type, it is converted into interface type and stored.
+     - So properties of original data-type cannot be retrieved until, it is converted again back to original data-type.
+ - conversion to data-type from interfaces cannot be achieved using typecasting, Here it required, &lt;a href=&#34;http://golang.org/ref/spec#Type_assertions&#34;&gt;type assertion&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So use interface{}, wherever you wish to add generic data-type and remember at retrieval time, use type assertion!&lt;/p&gt;
+
+&lt;h3 id=&#34;2-interface-as-set-of-methods:8e8f150f0261927c23fb2a377a40072b&#34;&gt;2. Interface as set of methods.&lt;/h3&gt;
+
+&lt;p&gt;Unlike above type, here interface have some function prototype.&lt;/p&gt;
+
+&lt;p&gt;If you come from &amp;ldquo;C/C++&amp;rdquo; background, you can relate it with function pointers or abstract functions/pure virtual functions. These functions don&amp;rsquo;t have any implementation.&lt;/p&gt;
+
+&lt;p&gt;But, to implement these functions, no need to inherit in structs or assign to function pointers.&lt;/p&gt;
+
+&lt;p&gt;In Go, if some structs or functions have same behavior as of interface, it automatically can be used in interface. Here behavior mean, all functions in interface should be implemented with same signature of functions as of interface.&lt;/p&gt;
+
+&lt;p&gt;Lets take a simple example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;type Plugin interface {
+    Execute(string, int) bool
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, a Plugin interface is defined with one function. Any Structure, which have this one function, will automatically implements the interface.&lt;/p&gt;
+
+&lt;p&gt;i.e. Any structure, which has same behavior means the Plugin interface can represent that structure. No explicitly need to show via any keyword like implement or inherit.&lt;/p&gt;
+
+&lt;p&gt;I feel, it is very simple approach to build OOP design. Such simple approaches, to create design patterns, make Go even more interesting.&lt;/p&gt;
+
+&lt;p&gt;Lets see examples which explains the behavior of interfaces&lt;/p&gt;
+
+&lt;h3 id=&#34;1-example-1:8e8f150f0261927c23fb2a377a40072b&#34;&gt;1. Example #1&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt; type aPlugin struct {
+     name string
+ }
+
+ func (p aPlugin) Execute(name string, count int) bool {
+     fmt.Println(&amp;quot;aPlugin executing&amp;quot;, name, count)
+     return 0
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, structure &lt;code&gt;aPlugin&lt;/code&gt; have exactly same function as of &lt;code&gt;Plugin&lt;/code&gt; interface, so this &lt;code&gt;aPlugin&lt;/code&gt; can be assigned to Plugin interface.&lt;/p&gt;
+
+&lt;p&gt;So main function will look like this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt; func main() {
+    // Create a Plugin array
+    obj := []Plugin{aPlugin{}, bPlugin{}}
+    obj[0].Execute(&amp;quot;Hello&amp;quot;, 1)
+    obj[1].Execute(&amp;quot;World&amp;quot;, 2)
+ }
+
+ $ go run main.go
+ aPlugin executing Hello 1
+ bPLugin executing World 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-example-2:8e8f150f0261927c23fb2a377a40072b&#34;&gt;2. Example #2&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt; type bPlugin struct {
+     name string
+ }
+
+ func (p bPlugin) Execute(name string, count int) bool {
+     fmt.Println(&amp;quot;bPlugin executing&amp;quot;, name, count)
+     return 0
+ }
+
+ func (p bPlugin) DumpInfo() {
+     fmt.Println(p.name)
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, another structure &lt;code&gt;bPlugin&lt;/code&gt; have one additional function then of &lt;code&gt;Plugin&lt;/code&gt; interface. So this &lt;code&gt;bPlugin&lt;/code&gt; can be assigned to Plugin interface.&lt;/p&gt;
+
+&lt;p&gt;Only, if it is assigned to Plugin object, the additional function DumpInfo() cannot be invoked from Plugin object.
+    - So a Structure can have additional functions, data members and still it can assigned to interface object.&lt;/p&gt;
+
+&lt;h3 id=&#34;3-example-3:8e8f150f0261927c23fb2a377a40072b&#34;&gt;3. Example #3&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt; type cPlugin struct {
+     name string
+ }
+
+ func (p cPlugin) Execute() bool {
+     fmt.Println(&amp;quot;cPlugin executing&amp;quot;)
+     return 0
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, structure &lt;code&gt;cPlugin&lt;/code&gt; have function with same name &lt;code&gt;Execute&lt;/code&gt;, but with different signatures. So cPlugin object cannot be assigned to &lt;code&gt;Plugin&lt;/code&gt; object.&lt;/p&gt;
+
+&lt;p&gt;go compiler will raise error if it is tried to do so.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;obj := []Plugin{aPlugin{}, bPlugin{}, cPlugin{}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt; $ go run main.go
+ ./main.go:22: cannot use cPlugin literal (type cPlugin) as type Plugin in array element:
+        cPlugin does not implement Plugin (wrong type for Execute method)
+                have Execute() bool
+                want Execute(string, int) bool
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;how-should-these-interfaces-should-be-used:8e8f150f0261927c23fb2a377a40072b&#34;&gt;How should these interfaces should be used.&lt;/h2&gt;
+
+&lt;p&gt;Interfaces are one of most important building blocks of golang. Also, its usage make golang as language very simpler to use.
+for example, you can look into &lt;a href=&#34;http://golang.org/src/io/io.go&#34;&gt;&amp;ldquo;io&amp;rdquo; package&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you implement any kind of framework or as simple as muti-platform program, where you wish functionalities, differ for each OS, interfaces are perfect candidates to use.&lt;/p&gt;
+
+&lt;p&gt;I hope this blog would have helped to understand the interfaces in Golang.
+Please comment in case you have any feedback.&lt;/p&gt;
+
+&lt;p&gt;Happy Coding :)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Conditional compilation in golang</title>
