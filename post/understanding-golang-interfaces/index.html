@@ -224,8 +224,8 @@ func (s *Stack) Pop() interface{} {
 <p>To use the above stack, a simple example shows retrieval of values from interface type.</p>
 
 <pre><code class="language-golang">s := NewStack()
-d.Push(10)
-d.Push(&quot;Hello&quot;)
+s.Push(10)
+s.Push(&quot;Hello&quot;)
 obj1 := s.Pop()
 obj2 = s.Pop()
 // To retrieve int value, use type assertion.
