@@ -7,8 +7,474 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License. Some rights reserved by James R. Cogley</copyright>
-    <lastBuildDate>Fri, 11 Sep 2015 15:14:46 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 14 Jan 2016 12:45:10 +0900</lastBuildDate>
     <atom:link href="http://kunalkushwaha.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Tutorial: Getting started with docker machine and Swarm</title>
+      <link>http://kunalkushwaha.github.io/post/tutorial-getting-started-with-docker-machine-and-swarm</link>
+      <pubDate>Thu, 14 Jan 2016 12:45:10 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/post/tutorial-getting-started-with-docker-machine-and-swarm</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/docker/machine&#34;&gt;Docker-machine&lt;/a&gt; is tool to create Docker hosts on computer, on cloud providers, and inside data center. It creates &lt;a href=&#34;https://docs.docker.com/machine/drivers/os-base/&#34;&gt;Linux based&lt;/a&gt; server, and installs and configures docker. It is also capable of configuring docker-swarm nodes.&lt;/p&gt;
+
+&lt;p&gt;This blog, will explain stepwise walkthrough for docker host creation using docker-machine.&lt;/p&gt;
+
+&lt;h2 id=&#34;installation:fce0df6d9ab4aa14b09a0b333f488e03&#34;&gt;Installation.&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;If you use Windows or Mac, Docker has already made awesome packaged installer for you &lt;a href=&#34;https://www.docker.com/products/docker-toolbox&#34;&gt;Docker-toolbox&lt;/a&gt;. Download and Install it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For Linux users, you can download docker-machine binaries from &lt;a href=&#34;https://github.com/docker/machine/releases&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;NOTE: &lt;i&gt; Linux users, do remember, you need to install docker client also on your machine.&lt;/i&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;creation-of-docker-host-with-machine:fce0df6d9ab4aa14b09a0b333f488e03&#34;&gt;Creation of docker host with machine.&lt;/h2&gt;
+
+&lt;p&gt;I will be using VirtualBox in this demo, but you can explore cloud options too.&lt;/p&gt;
+
+&lt;p&gt;Docker host can be created with command &lt;code&gt;docker-machine create&lt;/code&gt;. Here &lt;code&gt;-d&lt;/code&gt; flags specifies driver-name. So command looks like as follows.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ docker-machine create -d &amp;lt;driver-name&amp;gt; &amp;lt;name-of-machine&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This command does couple of things at backend such as
+ - It downloads latest boot2docker image, if not locally available.
+ - Create a machine with &lt;code&gt;name-of-machine&lt;/code&gt;
+ - Creates ssh keys and copies to machine.
+ - Installs &lt;code&gt;docker&lt;/code&gt;
+ - Configures docker daemon at port 2376, so that docker daemon accessible at  &lt;code&gt;tcp://&amp;lt;HostIP&amp;gt;:2376&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Lets create our first host &lt;code&gt;testhost&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; $ docker-machine create -d virtualbox testhost
+ Running pre-create checks...
+Creating machine...
+(testhost) Copying C:\Users\kunal\.docker\machine\cache\boot2docker.iso to C:\Users\kunal\.docker\machine\machines\testhost\boot2docker.iso...
+(testhost) Creating VirtualBox VM...
+(testhost) Creating SSH key...
+(testhost) Starting VM...
+Waiting for machine to be running, this may take a few minutes...
+Machine is running, waiting for SSH to be available...
+Detecting operating system of created instance...
+Detecting the provisioner...
+Provisioning with boot2docker...
+Copying certs to the local machine directory...
+Copying certs to the remote machine...
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+To see how to connect Docker to this machine, run: C:\Program Files\Docker Toolbox\docker-machine.exe env testhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here our docker host is ready for use. But wait! host is not same machine as your machine right? It is running inside Virtual Machine.
+So how docker daemon is accessed remotely?&lt;/p&gt;
+
+&lt;p&gt;Docker works on client-server model. Docker daemon is server and it can communicates though &lt;a href=&#34;https://docs.docker.com/engine/reference/api/docker_remote_api/&#34;&gt;REST API&amp;rsquo;s&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt; NOTE: &lt;code&gt;docker-machine create&lt;/code&gt; is most important command of docker-machine. Understanding various flags help you to get best of docker-machine. You must spend some time in understanding all &lt;a href=&#34;https://docs.docker.com/machine/reference/create/&#34;&gt;flags&lt;/a&gt; &lt;/i&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To access docker host with docker client binary remotely, we need to export some environment variables.
+Docker-machine provides a handy command for printing these variables and their values for us as shown below.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker-machine env testhost
+  export DOCKER_TLS_VERIFY=&amp;quot;1&amp;quot;
+  export DOCKER_HOST=&amp;quot;tcp://192.168.99.110:2376&amp;quot;
+  export DOCKER_CERT_PATH=&amp;quot;C:\Users\kunal\.docker\machine\machines\testhost&amp;quot;
+  export DOCKER_MACHINE_NAME=&amp;quot;testhost&amp;quot;
+  # Run this command to configure your shell:
+  # eval $(&amp;quot;C:\Program Files\Docker Toolbox\docker-machine.exe&amp;quot; env testhost)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To export all environment variable at once, simply run
+&lt;code&gt;
+$ eval $(docker-machine env testhost)
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Now all docker commands will communicates with docker daemon of &lt;code&gt;testhost&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker info
+  Containers: 0
+  Images: 0
+  Server Version: 1.9.1
+  Storage Driver: aufs
+   Root Dir: /mnt/sda1/var/lib/docker/aufs
+   Backing Filesystem: extfs
+   Dirs: 0
+   Dirperm1 Supported: true
+  Execution Driver: native-0.2
+  Logging Driver: json-file
+  Kernel Version: 4.1.13-boot2docker
+  Operating System: Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015
+  CPUs: 1
+  Total Memory: 996.2 MiB
+  Name: testhost
+  ID: 26MF:TVKB:JI7Q:TL4S:7RXM:U5CD:VHIR:W2NH:CUNZ:RGB3:C6GC:POBS
+  Debug mode (server): true
+   File Descriptors: 14
+   Goroutines: 21
+   System Time: 2016-01-07T07:09:51.081394779Z
+   EventsListeners: 0
+   Init SHA1:
+   Init Path: /usr/local/bin/docker
+   Docker Root Dir: /mnt/sda1/var/lib/docker
+  Labels:
+   provider=virtualbox
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lets create our first docker container on this host.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker run busybox sh
+  Unable to find image &#39;busybox:latest&#39; locally
+  latest: Pulling from library/busybox
+  c00ef186408b: Pulling fs layer
+  ac6a7980c6c2: Pulling fs layer
+  ac6a7980c6c2: Verifying Checksum
+  ac6a7980c6c2: Download complete
+  c00ef186408b: Verifying Checksum
+  c00ef186408b: Download complete
+  c00ef186408b: Pull complete
+  ac6a7980c6c2: Pull complete
+  Digest: sha256:e4f93f6ed15a0cdd342f5aae387886fba0ab98af0a102da6276eaf24d6e6ade0
+  Status: Downloaded newer image for busybox:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;i&gt; NOTE: If you are one of user, who works behind proxy, then you may face problem like, your newly created docker host may not communicate with &lt;a href=&#34;https://hub.docker.com/&#34;&gt;docker-hub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To Fix that, you need to pass few environment flags at creation time as below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker-machine create -d virtualbox \
+  --engine-env HTTP_PROXY=&amp;quot;http://example.com:8080&amp;quot; \
+  --engine-env HTTPS_PROXY=&amp;quot;http://example.com:8080&amp;quot; \
+  testhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/i&gt;&lt;/p&gt;
+
+&lt;p&gt;So now we learnt how to create a docker host and run docker containers using docker-machine.
+But Docker-machine not only lets you to create independent hosts, but also can put these host in one cluster!&lt;/p&gt;
+
+&lt;p&gt;Isn&amp;rsquo;t it interesting?&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s see how we can build whole cluster of docker-hosts using docker-machine.&lt;/p&gt;
+
+&lt;p&gt;Docker &lt;a href=&#34;https://www.docker.com/products/docker-swarm&#34;&gt;Swarm&lt;/a&gt; is native clustering solution for docker. Here with native means, Swarm understands and exports &lt;a href=&#34;https://docs.docker.com/swarm/swarm-api/&#34;&gt;all(almost)&lt;/a&gt; docker API&amp;rsquo;s. i.e. API for docker and docker swarm are same.
+If one product/scripts works with docker, it will automatically work with swarm :)&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-swarm:fce0df6d9ab4aa14b09a0b333f488e03&#34;&gt;Docker Swarm&lt;/h2&gt;
+
+&lt;p&gt;Docker swarm has three components.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Discovery Backend : Swarm requires a discovery backend, which is used by each node(agent) to discover the master.
+
+&lt;ul&gt;
+&lt;li&gt;Default discovery is provided by Docker Hub. (Not for production usage)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Master : Swarm master takes care of all scheduling logic and HA.&lt;/li&gt;
+&lt;li&gt;Agent : These runs on each node and communicates with Swarm master.
+
+&lt;ul&gt;
+&lt;li&gt;All agent node must listen to the same network interface (TCP port).&lt;/li&gt;
+&lt;li&gt;Each node runs a node agent that registers the referenced Docker daemon, monitors it, and updates the discovery backend with the node’s status&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In this demo, We will create a docker swarm consisting one Master and three agents including master.
+Also, Consul will be used for discovery backend.&lt;/p&gt;
+
+&lt;h3 id=&#34;discovery-backend-using-consul:fce0df6d9ab4aa14b09a0b333f488e03&#34;&gt;Discovery Backend using consul.&lt;/h3&gt;
+
+&lt;p&gt;We will create a dedicated machine for consul, but running &lt;a href=&#34;https://www.consul.io/&#34;&gt;consul&lt;/a&gt; using docker is just one command task.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker-machine create -d virtualbox \
+     --engine-env HTTP_PROXY=&amp;quot;http://example.com:8080&amp;quot; \
+     --engine-env HTTPS_PROXY=&amp;quot;http://example.com:8080&amp;quot; \
+     swl-consul
+
+$ docker $(docker-machine config swl-consul) run \
+     -e &amp;quot;http_proxy=http://example.com:8080&amp;quot; \
+     -e &amp;quot;https_proxy=http://example.com:8080&amp;quot; \
+     --restart=&amp;quot;always&amp;quot; \
+     -d -p &amp;quot;8500:8500&amp;quot; \
+     -h &amp;quot;consul&amp;quot; \
+     progrium/consul -server -bootstrap
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check if consul container is created as expected.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker-machine ls
+  NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
+  swl-consul   -        virtualbox   Running   tcp://192.168.99.100:2376           v1.9.1
+
+  $ eval $(docker-machine env swl-consul)
+
+  $ docker ps
+  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                                            NAMES
+  5357e85abcb5        progrium/consul     &amp;quot;/bin/start -server -&amp;quot;   16 minutes ago      Up 16 minutes       53/tcp, 53/udp, 8300-8302/tcp, 8400/tcp, 8301-8302/udp, 0.0.0.0:8500-&amp;gt;8500/tcp   goofy_aryabhata
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;creation-of-swarm-master:fce0df6d9ab4aa14b09a0b333f488e03&#34;&gt;Creation of Swarm Master.&lt;/h3&gt;
+
+&lt;p&gt;In cluster, we will have one master and 2 agents. But master will also have agent, so practically we will have 3 agents.&lt;/p&gt;
+
+&lt;p&gt;Docker machine helps to setup docker host with swarm in single command.&lt;/p&gt;
+
+&lt;p&gt;Few highlights of docker machine provisioned swarm enabled host.
+- Swarm master and agent runs as docker containers.
+- Swarm manager bind on &amp;ldquo;3376&amp;rdquo; port, So to communicate with master &lt;code&gt;tcp://&amp;lt;IP:3376&amp;gt;&amp;gt;&lt;/code&gt; should be used.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker-machine create \
+  &amp;gt;    -d virtualbox \
+  &amp;gt;    --swarm \
+  &amp;gt;    --swarm-master \
+  &amp;gt;    --swarm-discovery=consul://$(docker-machine ip swl-consul):8500 \
+  &amp;gt;    --engine-env HTTP_PROXY=http://example.com:8080 \
+  &amp;gt;    --engine-env HTTPS_PROXY=http://example.com:8080 \
+  &amp;gt;    --engine-env NO_PROXY=192.168.99.100 \
+  &amp;gt;    --engine-opt=&amp;quot;cluster-store=consul://$(docker-machine ip swl-consul):8500&amp;quot; \
+  &amp;gt;    --engine-opt=&amp;quot;cluster-advertise=eth1:3376&amp;quot; \
+  &amp;gt;    node1
+  Running pre-create checks...
+   .
+   .
+  (node1) Starting VM...
+  Waiting for machine to be running, this may take a few minutes...
+  Machine is running, waiting for SSH to be available...
+  Detecting operating system of created instance...
+  Detecting the provisioner...
+  Provisioning with boot2docker...
+  Copying certs to the local machine directory...
+  Copying certs to the remote machine...
+  Setting Docker configuration on the remote daemon...
+  Configuring swarm...
+  Checking connection to Docker...
+  Docker is up and running!
+  To see how to connect Docker to this machine, run: C:\Program Files\Docker Toolbox\docker-machine.exe env node1
+
+  $ eval $(docker-machine env node1)
+
+  $ docker ps
+  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+  7e644b71f606        swarm:latest        &amp;quot;/swarm join --advert&amp;quot;   19 seconds ago      Up 16 seconds                           swarm-agent
+  58f2a4da438b        swarm:latest        &amp;quot;/swarm manage --tlsv&amp;quot;   22 seconds ago      Up 19 seconds                           swarm-agent-master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;i&gt; NOTE: You may have seen &lt;code&gt;NO_PROXY&lt;/code&gt; is also set as environment variable.
+This is to skip proxy for communicating with consul server &lt;/i&gt;&lt;/p&gt;
+
+&lt;p&gt;Here,
+- &lt;code&gt;--swarm&lt;/code&gt; indicates, swarm agent will be configured.
+- &lt;code&gt;--swarm-master&lt;/code&gt; indicates, swarm master will be configured.
+&lt;code&gt;--swarm-discovery&lt;/code&gt; sets the backend discovery for swarm.&lt;/p&gt;
+
+&lt;p&gt;Here you go, we have our swarm master node up and running. Before communicating to swarm, let me remind you again.
+- Swarm and docker talks in same API signature. But on our host, we have both docker daemon and swarm running.
+- Our docker client can communicate with both, but we need to choose whom it has to talk.
+  - To talk with docker daemon use &lt;code&gt;eval $(docker-machine env &amp;lt;host-name&amp;gt;)&lt;/code&gt;
+  - To talk with swarm use &lt;code&gt;eval $(docker-machine env --swarm &amp;lt;host-name&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So, since we want our docker client should communicate with swarm, we will add &lt;code&gt;--swarm&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ eval $(docker-machine env --swarm node1)
+
+  $ docker info
+  Containers: 2
+  Images: 1
+  Role: primary
+  Strategy: spread
+  Filters: health, port, dependency, affinity, constraint
+  Nodes: 1
+   node1: 192.168.99.102:2376
+    └ Status: Healthy
+    └ Containers: 2
+    └ Reserved CPUs: 0 / 1
+    └ Reserved Memory: 0 B / 1.021 GiB
+    └ Labels: executiondriver=native-0.2, kernelversion=4.1.13-boot2docker, operatingsystem=Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015, provider=virtualbox, storagedriver=aufs
+  CPUs: 1
+  Total Memory: 1.021 GiB
+  Name: node1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now add two nodes with only agent.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker-machine create \
+  &amp;gt;    -d virtualbox \
+  &amp;gt;    --swarm \
+  &amp;gt;    --swarm-discovery=&amp;quot;consul://$(docker-machine ip swl-consul):8500&amp;quot; \
+  &amp;gt;    --engine-env HTTP_PROXY=&amp;quot;http://example.com:8080&amp;quot; \
+  &amp;gt;    --engine-env HTTPS_PROXY=&amp;quot;http://example.com:8080&amp;quot; \
+  &amp;gt;    --engine-env NO_PROXY=&amp;quot;192.168.99.100&amp;quot; \
+  &amp;gt;    --engine-opt=&amp;quot;cluster-store=consul://$(docker-machine ip swl-consul):8500&amp;quot; \
+  &amp;gt;    --engine-opt=&amp;quot;cluster-advertise=eth1:3376&amp;quot; \  
+  &amp;gt;    node3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Command for adding agent doesn&amp;rsquo;t requires &lt;code&gt;--swarm-master&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cluster-advertise&lt;/code&gt; and &lt;code&gt;cluster-store&lt;/code&gt; are required for overlay networking also, Will be explained later.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So after adding two more machines with swarm agent, we have 4 machines running as below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker-machine ls
+  NAME         ACTIVE   DRIVER       STATE     URL                         SWARM            DOCKER   ERRORS
+  node1        -        virtualbox   Running   tcp://192.168.99.102:2376   node1 (master)   v1.9.1
+  node2        -        virtualbox   Running   tcp://192.168.99.103:2376   node1            v1.9.1
+  node3        -        virtualbox   Running   tcp://192.168.99.104:2376   node1            v1.9.1
+  swl-consul   -        virtualbox   Running   tcp://192.168.99.100:2376                    v1.9.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lets see information of our cluster.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ eval $(docker-machine env --swarm node1)
+
+  $ docker info
+  Containers: 4
+  Images: 3
+  Role: primary
+  Strategy: spread
+  Filters: health, port, dependency, affinity, constraint
+  Nodes: 3
+   node1: 192.168.99.102:2376
+    └ Status: Healthy
+    └ Containers: 2
+    └ Reserved CPUs: 0 / 1
+    └ Reserved Memory: 0 B / 1.021 GiB
+    └ Labels: executiondriver=native-0.2, kernelversion=4.1.13-boot2docker, operatingsystem=Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015, provider=virtualbox, storagedriver=aufs
+   node2: 192.168.99.103:2376
+    └ Status: Healthy
+    └ Containers: 1
+    └ Reserved CPUs: 0 / 1
+    └ Reserved Memory: 0 B / 1.021 GiB
+    └ Labels: executiondriver=native-0.2, kernelversion=4.1.13-boot2docker, operatingsystem=Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015, provider=virtualbox, storagedriver=aufs
+   node3: 192.168.99.104:2376
+    └ Status: Healthy
+    └ Containers: 1
+    └ Reserved CPUs: 0 / 1
+    └ Reserved Memory: 0 B / 1.021 GiB
+    └ Labels: executiondriver=native-0.2, kernelversion=4.1.13-boot2docker, operatingsystem=Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015, provider=virtualbox, storagedriver=aufs
+  CPUs: 3
+  Total Memory: 3.064 GiB
+  Name: node1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Superb! we have three nodes running in our cluster.
+This completes the swarm setup!!&lt;/p&gt;
+
+&lt;h2 id=&#34;understanding-few-more-swarm-functionality:fce0df6d9ab4aa14b09a0b333f488e03&#34;&gt;Understanding few more Swarm functionality.&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Strategy&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Currently &amp;ldquo;Spread&amp;rdquo; strategy is set. So the containers will be spread over all the hosts in cluster.&lt;/p&gt;
+
+&lt;p&gt;e.g.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ docker run -d -P -m 1G -e MYSQL_ROOT_PASSWORD=test123 --name db mysql
+  57a1af46d72117306b833a28a219d3523e1531c98a19ef25cba00a7bc94c9645
+
+  $ docker run -d -P -m 1G --name frontend nginx
+  f40776d7c9f7583965263340c1542a09eb7cb881c53bcf18a290df0d6ce2fd51
+
+  $ docker ps
+  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                         NAMES
+  f40776d7c9f7        nginx               &amp;quot;nginx -g &#39;daemon off&amp;quot;   4 seconds ago       Up 4 seconds        192.168.99.103:32770-&amp;gt;80/tcp, 192.168.99.103:32769-&amp;gt;443/tcp   node2/frontend
+  57a1af46d721        mysql               &amp;quot;/entrypoint.sh mysql&amp;quot;   3 minutes ago       Up 3 minutes        192.168.99.104:32769-&amp;gt;3306/tcp                                node3/db
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Here node3 have &lt;code&gt;db&lt;/code&gt; and node2 have &lt;code&gt;frontend&lt;/code&gt; container.&lt;/li&gt;
+&lt;li&gt;If two nodes have the same amount of available RAM and CPUs, the spread strategy prefers the node with least containers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Other available strategies are BinPack and Random.
+- BinPack tries to pack all possible containers on single node first and so on.
+- If two nodes have the same amount of available RAM and CPUs, the binpack strategy prefers the node with most containers.&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;Things to Try:
+- Create swarm with BinPack and create multiple containers to see the behavior. &lt;/i&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;filters:fce0df6d9ab4aa14b09a0b333f488e03&#34;&gt;Filters&lt;/h3&gt;
+
+&lt;p&gt;Filters tell Docker Swarm scheduler which nodes to use when creating and running a container.&lt;/p&gt;
+
+&lt;p&gt;Filters are divided into two categories, node filters and container configuration filters.
+- Node filters operate on characteristics of the Docker host or on the configuration of the Docker daemon.
+- Container configuration filters operate on characteristics of containers, or on the availability of images on a host.
+- Each filter has a name that identifies it.&lt;/p&gt;
+
+&lt;p&gt;The node filters are:
+  - constraint
+  - health&lt;/p&gt;
+
+&lt;p&gt;The container configuration filters are:
+  - affinity
+  - dependency
+  - port&lt;/p&gt;
+
+&lt;p&gt;When you start a Swarm manager with the swarm manage command, all the filters are enabled.
+If you want to limit the filters available to your Swarm, specify a subset of filters by passing the &lt;code&gt;--filter&lt;/code&gt; flag and the name:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ swarm manage --filter=health --filter=dependency
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In case of docker machine, while provisioning &lt;code&gt;--swarm-opt&lt;/code&gt; can be used to set filters.&lt;/p&gt;
+
+&lt;h4 id=&#34;use-a-constraint-filter:fce0df6d9ab4aa14b09a0b333f488e03&#34;&gt;Use a constraint filter&lt;/h4&gt;
+
+&lt;p&gt;Node constraints can refer to Docker’s default tags or to custom labels. Default tags are sourced from docker info. Often, they relate to properties of the Docker host. Currently, the dafult tags include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;node to refer to the node by ID or name&lt;/li&gt;
+&lt;li&gt;storagedriver&lt;/li&gt;
+&lt;li&gt;executiondriver&lt;/li&gt;
+&lt;li&gt;kernelversion&lt;/li&gt;
+&lt;li&gt;operatingsystem&lt;/li&gt;
+&lt;li&gt;Custom node labels can be applied while provisioning docker machine.
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--engine-label&lt;/code&gt; can be used for setting custom label.&lt;/li&gt;
+&lt;li&gt;custom label like &lt;code&gt;environment&lt;/code&gt;, &lt;code&gt;storage&lt;/code&gt; etc are helpful.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since we have all labels same except node name, we will try creating new container using node-name constraint.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -itd -e constraint:node==node3 --name test1 ubuntu
+ae4013d014931e43cd5342a625f6b549a8c920cb146b1371a7226359a4bcf014
+
+$ docker run -itd -e constraint:node==node3 --name test2 ubuntu
+a6b371773e1a2609122ca68df00d1e03ee274ba3db504d3942c301f8e2c45504
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+a6b371773e1a        ubuntu              &amp;quot;/bin/bash&amp;quot;         3 seconds ago       Up 2 seconds                            node3/test2
+ae4013d01493        ubuntu              &amp;quot;/bin/bash&amp;quot;         19 seconds ago      Up 18 seconds                           node3/test1
+934501aed30f        ubuntu              &amp;quot;/bin/bash&amp;quot;         19 hours ago        Up 2 hours                              node3/n4
+30358292be89        ubuntu              &amp;quot;/bin/bash&amp;quot;         19 hours ago        Up 19 hours                             node1/n3
+6a13aa3eca8b        ubuntu              &amp;quot;/bin/bash&amp;quot;         21 hours ago        Up 21 hours                             node2/n1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Similarly other filters can be used. While using filters the syntax to use in &lt;code&gt;docker run&lt;/code&gt; is as below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- ``-e &amp;lt;filter-name&amp;gt;:&amp;lt;key&amp;gt;&amp;lt;operator&amp;gt;&amp;lt;value&amp;gt;``
+- Here operator used are  ``==`` , ``!=`` &amp;amp; ``~``
+- For ``==`` &amp;amp; ``!=``, exact match is found.
+  - If nothing satisfies the condition, it does schedule container.
+- ``~`` is for soft condition. i.e. if nothing matches, it ignores the condition and use default scheduler.
+- Here value can contain any valid regex (https://github.com/google/re2/wiki/Syntax)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hope this article will be helpful in getting started with docker-machine and swarm :)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Understanding Golang Interfaces</title>
@@ -61,8 +527,8 @@ func (s *Stack) Pop() interface{} {
 &lt;p&gt;To use the above stack, a simple example shows retrieval of values from interface type.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;s := NewStack()
-d.Push(10)
-d.Push(&amp;quot;Hello&amp;quot;)
+s.Push(10)
+s.Push(&amp;quot;Hello&amp;quot;)
 obj1 := s.Pop()
 obj2 = s.Pop()
 // To retrieve int value, use type assertion.
