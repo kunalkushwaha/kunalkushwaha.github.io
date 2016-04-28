@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Conditional compilation in golang &middot; Kunal Kushwaha</title>
+        <meta name="description" content="Golang | Containers | Cloud | Tech">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.15" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://kunalkushwaha.github.iocss/normalize.css">
+        <link rel="stylesheet" href="http://kunalkushwaha.github.iocss/highlight.css">
+        <link rel="stylesheet" href="http://kunalkushwaha.github.iocss/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-62566203-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io">Kunal Kushwaha</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://kunalkushwaha.github.ioindex.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Conditional compilation in golang</h1>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2015-07-24" itemprop="datePublished">Fri, Jul 24, 2015</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<h2 id="conditional-compiling-in-golang:2d62b9b37d02354b93f9e4e4f4d7ca80">Conditional compiling in golang.</h2>
+
+<p>While hacking around experimental builds of docker, I learned about conditional compiling in golang.
+As any project grew or ported to multiple architecture/platforms  the need of conditional compiling is obvious.</p>
+
+<p>Unlike C golang, do not have macros. Golang make use of build tags to achieve this.</p>
+
+<h4 id="build-tags:2d62b9b37d02354b93f9e4e4f4d7ca80">Build Tags:</h4>
+
+<p>Build tags are basically annotation in source code. generally it is first line of file, where build tags are defined.</p>
+
+<p><code>// +build &lt;tags&gt;</code></p>
+
+<p>These tags are searched by <code>go build</code> tool before passing to go compiler. These tags can be passed while go build command like</p>
+
+<p><code>$ go build -tags &lt;tags&gt;</code></p>
+
+<p>Here are few points to remember regarding tags.
+- Tags specifies architecture and platforms are special. i.e. No need to pass such tags, <code>go build</code> is smart enough to pass them.
+    - e.g. linux, windows, darwin, 386, arch etc
+- Tags can be passed with negation i.e. !<tag>
+- A blank line must be present between build tags and code, else that line will be ignored.
+- OR condition for tags can be specified with space.
+- AND condition can be specified with <code>,</code></p>
+
+<p>If some tag is defined in file and is not passed in <code>go build</code>` command, it will be ignored.</p>
+
+<p>Lets see this with example with custom tag.</p>
+
+<ul>
+<li>Here we will take three files</li>
+<li>main.go</li>
+<li>include.go</li>
+<li>exclude.go</li>
+</ul>
+
+<pre><code class="language-go">○ cat main.go
+package main
+
+import (
+&quot;fmt&quot;
+)
+
+func init() {
+        fmt.Println(&quot;Hello from Main init()&quot;)
+}
+
+
+func main() {
+        fmt.Println(&quot;Hello from main&quot;)
+}
+</code></pre>
+
+<pre><code class="language-go">
+○ cat include.go
+
+package main
+
+import &quot;fmt&quot;
+
+func init() {
+        fmt.Println(&quot;Hello from IncludeInit()&quot;)
+}
+</code></pre>
+
+<pre><code class="language-go">○ cat exclude.go
+// +build exclude
+
+package main
+
+import &quot;fmt&quot;
+
+func init(){
+        fmt.Println(&quot;Hello from exclude&quot;)
+}
+</code></pre>
+
+<p>As you can see, here exclude file has build tag of <code>exclude</code>.</p>
+
+<p>Now if do <code>go build</code>, It will not compile exclude.go.</p>
+
+<pre><code>○ go build
+
+○ ./temp
+Hello from IncludeInit()
+Hello from Main init()
+Hello from main
+</code></pre>
+
+<p>Now let try using buildtag exclude.</p>
+
+<pre><code>○ go build -tags exclude
+
+○ ./temp
+Hello from exclude
+Hello from IncludeInit()
+Hello from Main init()
+Hello from main
+</code></pre>
+
+<p>You can see now, the exclude.go is part of binary.</p>
+
+<p>One more interesting thing with golang is <code>go list</code> tool.
+Using the <code>go list</code>, without compiling, you can see which files will be compiled, with given gotags or default.</p>
+
+<p>I found <code>go list --help</code> not great, but the summary of this tool is a go template can be used to check the list of files that will be included in the build.
+A simple example as below will help you to understand better.</p>
+
+<pre><code>○ go list -f '{{.GoFiles}}' --tags exclude
+[exclude.go include.go main.go]
+
+○ go list -f '{{.GoFiles}}'
+[include.go main.go]
+</code></pre>
+
+<p>As you can see, if exclude tag is not used, only include.go and main.go files are used.</p>
+
+<h4 id="so-it-that-all-about-conditional-compiling-in-golang:2d62b9b37d02354b93f9e4e4f4d7ca80">So it that all about conditional compiling in golang?</h4>
+
+<p>No, There is even simpler method available too :-) and it is file-name suffixes.</p>
+
+<p>In golang, there are few go environment variables defined.
+GOOS and GOARCH are two of such.
+- GOOS defines the current OS
+- GOARCH defines the current machine architecture.</p>
+
+<p><code>go build</code> matches value of these two environment variables in filename and if it matches then only include for compiling.</p>
+
+<p>So by naming files like <code>exclude_linux.go</code>, it will be included only if compiled in linux system.
+<code>exclude_linux_amd64.go</code> will ensure, it will be inlcuded only if OS is linux and architecture of system in 64 bit.</p>
+
+<p>You may try these combination.</p>
+
+<h4 id="which-one-should-be-used:2d62b9b37d02354b93f9e4e4f4d7ca80">Which one should be used?</h4>
+
+<ul>
+<li>For custom tags build tags are the only options.</li>
+<li>For platform and architecture specific, if you plan to use cross build on one systems, build tags will be preferable.</li>
+<li>Also, if same file does work for multiple platforms, build tags will be better choice.</li>
+</ul>
+
+<p>For rest, file sufixes can be used.</p>
+
+<p>Hope this info will be useful.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=Conditional%20compilation%20in%20golang&url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f07%2f24%2fconditional-compilation-in-golang%2f"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f07%2f24%2fconditional-compilation-in-golang%2f"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f07%2f24%2fconditional-compilation-in-golang%2f"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kunalkushwaha';
+    var disqus_identifier = 'http:\/\/kunalkushwaha.github.io\/2015\/07\/24\/conditional-compilation-in-golang\/';
+    var disqus_title = 'Conditional compilation in golang';
+    var disqus_url = 'http:\/\/kunalkushwaha.github.io\/2015\/07\/24\/conditional-compilation-in-golang\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io">Kunal Kushwaha</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://kunalkushwaha.github.iojs/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="http://kunalkushwaha.github.iojs/jquery.fitvids.js"></script>
+        <script src="http://kunalkushwaha.github.iojs/scripts.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Layman guide to Platform Virtualization &middot; Kunal Kushwaha</title>
+        <meta name="description" content="Golang | Containers | Cloud | Tech">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.15" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://kunalkushwaha.github.iocss/normalize.css">
+        <link rel="stylesheet" href="http://kunalkushwaha.github.iocss/highlight.css">
+        <link rel="stylesheet" href="http://kunalkushwaha.github.iocss/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-62566203-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io">Kunal Kushwaha</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://kunalkushwaha.github.ioindex.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Layman guide to Platform Virtualization</h1>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2015-04-25" itemprop="datePublished">Sat, Apr 25, 2015</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<p><img align="center" src=http://kunalkushwaha.github.io/VirtualMachineCartoon.jpg></p>
+
+<h3 id="platform-virtualization:a88864bb2e02cbfffb44963e73e3622a">Platform Virtualization!</h3>
+
+<p>Virtualization is not new in Computer World today.
+But when I am asked what I am working on, I say &ldquo;Cloud Infrastructure and trying to build a private Cloud Platform!&rdquo;.</p>
+
+<p>Explaining cloud service is easy but Cloud Infrastructure becomes little difficult.
+So I am writing a blog series to explain Cloud Infrastructure and it building blocks.
+Hope it will help many others too :)</p>
+
+<h3 id="virtualization:a88864bb2e02cbfffb44963e73e3622a">Virtualization.</h3>
+
+<p>Though simple meaning of Virtualization is creating virtual version of anything.
+But in computer software world everything is already Virtual :).
+But computer hardware devices, Network cable etc are real!</p>
+
+<p>When all these things are created virtually i.e. software simulation of all such hardware its called virtualization!</p>
+
+<p>But why that is required? I heard Hardware is becoming cheap day by day :-|
+These are genuine doubts! indeed hardware is becoming cheap and also performance of capacity wise is improving at much faster rate then ever.</p>
+
+<p>Also, with increase of hardware capacity, most of hardware are underutilized :O
+Yes and this becomes huge concern for business owner, How to utilize best of your hardware.
+Second Management of hardware resources is also a addition of cost.</p>
+
+<p>Using Virtualization both issues can be addressed.
+Multiple systems workload is executed on same hardware which result into better utilization,
+and Managing multiple systems with software also makes more efficient and easy.</p>
+
+<h3 id="how-is-virtualization-is-achieved:a88864bb2e02cbfffb44963e73e3622a">How is Virtualization is achieved?</h3>
+
+<p>There are broadly three types of Virtualization Techniques.
+<a href="http://en.wikipedia.org/wiki/Virtualization#Hardware_virtualization">Wikipedia</a> has short and crisp definition for all three.</p>
+
+<p>Here Host OS is the OS which runs on Actual Hardware and Guest OS is running on Virtual Hardware/Machine.</p>
+
+<ol>
+<li><p>Full virtualization – almost complete simulation of the actual hardware to allow software, which typically consists of a guest operating system, to run unmodified.
+<br>e.g. VirtualBox, VMWare Workstations, Parallel for MAC works on full virtualization, No change is required in guest OS</p></li>
+
+<li><p>Partial virtualization – some but not all of the target environment attributes are simulated. As a result, some guest programs may need modifications to run in such virtual environments.
+<br>Probably this is first approach to virtualization which lead to full virtualization.
+<br>e.g. IBM mainfraim system <a href="http://en.wikipedia.org/wiki/IBM_M44/44X">IBM M44/44X</a> was one of such experimental machine.</p></li>
+
+<li><p>Paravirtualization – a hardware environment is not simulated; however, the guest programs are executed in their own isolated domains, as if they are running on a separate system. Guest programs need to be specifically modified to run in this environment.
+<br>Paravirtulization is lightweight as compared to full virtualization.
+<br>e.g. XEN is based on paravirtualization.</p></li>
+</ol>
+
+<h3 id="so-what-we-understood:a88864bb2e02cbfffb44963e73e3622a">So what we understood!</h3>
+
+<p>Well, We must have realized with all these techniques, all that is achieved here is Isolation!
+Isolation of Hardware, so OS running in Virtual Machine gets a feel all hardware is available for its use.
+That is the way all OS are implemented! Exclusive access to hardware.</p>
+
+<p>But above three methods are not that efficient with Hardware support for Virtualization.
+So, CPU also have extra core and support to run the Virtualization code efficently. More you can find on <a href="http://en.wikipedia.org/wiki/X86_virtualization">here</a></p>
+
+<p>Since Isolation is the key to virtulization, Unix &amp; Linux based OS have few features, which provides Isolation to process.
+Features like namespaces, cgroups and chroot.
+Utilzing these features, OS level virtualization can be achieved. In linux these are called Containers.</p>
+
+<p>I will be writing details of containers in my next blog. So stay tuned :)</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=Layman%20guide%20to%20Platform%20Virtualization&url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f04%2f25%2flayman-guide-to-platform-virtualization%2f"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f04%2f25%2flayman-guide-to-platform-virtualization%2f"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f04%2f25%2flayman-guide-to-platform-virtualization%2f"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kunalkushwaha';
+    var disqus_identifier = 'http:\/\/kunalkushwaha.github.io\/2015\/04\/25\/layman-guide-to-platform-virtualization\/';
+    var disqus_title = 'Layman guide to Platform Virtualization';
+    var disqus_url = 'http:\/\/kunalkushwaha.github.io\/2015\/04\/25\/layman-guide-to-platform-virtualization\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io">Kunal Kushwaha</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://kunalkushwaha.github.iojs/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="http://kunalkushwaha.github.iojs/jquery.fitvids.js"></script>
+        <script src="http://kunalkushwaha.github.iojs/scripts.js"></script>
+    </body>
+</html>
+

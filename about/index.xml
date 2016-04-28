@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on Kunal Kushwaha</title>
+    <link>http://kunalkushwaha.github.io/about/</link>
+    <description>Recent content in Abouts on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Tue, 03 Mar 2015 17:59:00 +0530</lastBuildDate>
+    <atom:link href="http://kunalkushwaha.github.io/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About Kunal Kushwaha</title>
+      <link>http://kunalkushwaha.github.io/about/about/</link>
+      <pubDate>Tue, 03 Mar 2015 17:59:00 +0530</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/about/about/</guid>
+      <description>&lt;p&gt;A wannabe Entrepreneur and Experienced Technical Leader in building multiple v1.0 version software&amp;rsquo;s, right from conceptualizing to delivery.&lt;/p&gt;
+
+&lt;p&gt;Have hands on experience in building enterprise storage products, Linux kernel block susbsystem hacking, RAID, High Available systems,  Linux Containers and Docker.&lt;/p&gt;
+
+&lt;p&gt;Few of my area of interests are&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Distributed systems&lt;/li&gt;
+&lt;li&gt;Scalability&lt;/li&gt;
+&lt;li&gt;Storage systems&lt;/li&gt;
+&lt;li&gt;Health Care&lt;/li&gt;
+&lt;li&gt;Cloud Technology&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Drop me mail or connect me though social media.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
