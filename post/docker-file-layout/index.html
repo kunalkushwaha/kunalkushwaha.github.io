@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    docker file layout // Kunal Kushwaha&#39;s Blog
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="generator" content="Hugo 0.15" />
+
+  <meta property="og:title" content="docker file layout" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://kunalkushwaha.github.io/post/docker-file-layout" />
+
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/base-min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/redlounge.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,700,300,500,600,800' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Kunal Kushwaha&#39;s Blog" />
+
+    
+
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+
+  
+
+    
+</head>
+
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+    <h1 class="brand-title">Kunal Kushwaha&#39;s Blog</h1>
+    <h2 class="brand-tagline">Golang | Containers | Cloud | Tech</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://kunalkushwaha.github.io">Home</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="/about/">About</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="/post/">Blog</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="http://www.twitter.com/kunalkushwaha" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+        
+        <a href="https://plus.google.com/&#43;KunalKushwaha14?rel=author" target="_blank"><i class='fa fa-google-plus'></i></a>
+        
+      
+        
+        <a href="https://www.facebook.com/kunalkushwaha" target="_blank"><i class='fa fa-facebook'></i></a>
+        
+      
+        
+        <a href="http://www.linkedin.com/in/kunalkushwaha" target="_blank"><i class='fa fa-linkedin-square'></i></a>
+        
+      
+        
+        <a href="https://github.com/kunalkushwaha" target="_blank"><i class='fa fa-github'></i></a>
+        
+      
+        
+        <a href="/index.xml" target="_blank"><i class='fa fa-rss'></i></a>
+        
+      
+      
+    </div>
+    
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+		    <div id="toc" class="pure-u-1 pure-u-md-1-4">
+				<small class="toc-label">Contents</small>
+		   	 	<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#docker-storage:502ed9c9d2d9babae3d2183c47110cbc">Docker Storage.</a>
+<ul>
+<li>
+<ul>
+<li><a href="#what-does-this-means:502ed9c9d2d9babae3d2183c47110cbc">What does this means?</a></li>
+<li><a href="#how-docker-utilizes-these-storage-drivers:502ed9c9d2d9babae3d2183c47110cbc">How docker utilizes these storage drivers?</a></li>
+<li><a href="#docker-folder-layout:502ed9c9d2d9babae3d2183c47110cbc">Docker folder layout.</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		    </div>
+		    
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="/post/docker-file-layout">docker file layout</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>9</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jul</span> <span class="post-date-year">2015</span>
+            	</span>
+            	
+            
+            	
+            
+
+			
+			
+
+			
+
+			
+
+            
+
+<p>If you are a <a href="www.docker.com">docker</a> user, have you tried looking for the where exactly docker images stored on disk?</p>
+
+<p>I tried to dig around for the answer and found these information.</p>
+
+<h2 id="docker-storage:502ed9c9d2d9babae3d2183c47110cbc">Docker Storage.</h2>
+
+<p>Since docker 0.7 release, docker supports various storage drivers like AUFS, devicemapper, btrfs, vfs etc.</p>
+
+<h4 id="what-does-this-means:502ed9c9d2d9babae3d2183c47110cbc">What does this means?</h4>
+
+<p>Earlier, docker used to support only AUFS, which  not part of upstream kernel and had no plan also.
+By providing support like devicemapper and btrfs, docker can be used on other distributions like RHEL/CentOS etc.
+Using VFS, It can be ported and supported on all *nix OS.</p>
+
+<h4 id="how-docker-utilizes-these-storage-drivers:502ed9c9d2d9babae3d2183c47110cbc">How docker utilizes these storage drivers?</h4>
+
+<p>Docker uses Copy On Write (COW) mechanism for creating containers and Images. So when any container is created, Practically container metadata
+is created and no data is copied. Once, some data is modified, new copy of data is made and modification happens on the new copy.
+This is also one of the main reason, docker can start a container so quickly almost no delay, as no copy of data is required!!
+I wont go much deep here, but you can go through <a href="https://docs.docker.com/introduction/understanding-docker/">docker docs</a> for details.</p>
+
+<p>So here apart from VFS, rest of the storage drivers support snapshot mechanism and docker utilizes the snapshot mechanism to achieve COW.</p>
+
+<h4 id="docker-folder-layout:502ed9c9d2d9babae3d2183c47110cbc">Docker folder layout.</h4>
+
+<p>Docker uses a <code>/var/lib/docker</code> folder for storing all its data and metadata. Few config files are there in <code>/etc</code> folder for docker daemon,
+But everything related to docker images and containers are managed in <code>/var/lib/docker</code> folder.</p>
+
+<p>Lets take a look inside <code>/var/lib/docker</code> folder. <br>
+Since I am using CentOS 7 machine for this, so storage driver is being used here is devicemapper.</p>
+
+<p>Below is 1st level file/folders of this.
+Lets try to understand each one by one.</p>
+
+<pre><code>± tree -L 1 /var/lib/docker
+/var/lib/docker/
+|-- containers
+|-- devicemapper
+|-- graph
+|-- init
+|-- linkgraph.db
+|-- netns
+|-- repositories-devicemapper
+|-- trust
+|-- vfs
+`-- volumes
+</code></pre>
+
+<ol>
+<li><p>containers : This folder keeps all the containers information with folder names as container-id <uuid>.</p>
+
+<ul>
+<li>As shown below for one container that is created on system, the folder with its id is created.</li>
+<li>All files generated by docker at creation time resides under that.</li>
+<li><uuid>.json file is log file, which is used when <code>docker log</code> command is used.</li>
+<li>This does not hold any COW data for container.</li>
+</ul>
+
+<pre><code>± tree /var/lib/docker/containers
+/var/lib/docker/containers
+`-- 79edcdc9c75ca4bddd889423a3a7e880d2da3975ffdaf43a614a75b440875725
+    |-- 79edcdc9c75ca4bddd889423a3a7e880d2da3975ffdaf43a614a75b440875725-json.log
+    |-- config.json
+    |-- hostconfig.json
+    |-- hostname
+    |-- hosts
+    |-- resolv.conf
+    `-- resolv.conf.hash
+</code></pre></li>
+
+<li><p>devicemapper: This is the folder, under which all images and containers data is stored.</p>
+
+<ul>
+<li>By default the device mapper creates two sparse files data and metadata under <code>devicemapper/devicemapper</code> folder,
+which is formatted as xfs or ext4 as per configuration.
+
+<ul>
+<li>These files, will be created, if dedicated physical volumes or disks assigned for data and meta-data in docker configuration.</li>
+</ul></li>
+<li>All images are stored here.</li>
+<li>The metadata on <code>/devicemapper</code> folder, have metadata in form of json.</li>
+</ul>
+
+<pre><code>± tree -L 1  /var/lib/docker/devicemapper
+/var/lib/docker/devicemapper
+|-- devicemapper
+|   |-- data
+|   `-- metadata
+|-- metadata
+`-- mnt
+
+
+± ls -lh   /var/lib/docker/devicemapper/devicemapper
+total 4.8G
+-rw-r--r--. 1 root root 250G  7月 10 04:55 data
+-rw-------. 1 root root 2.0G  7月 10 05:52 metadata
+
+
+</code></pre></li>
+
+<li><p>graph : This folder keeps layerwise image  information i.e. One folder for each layer of images.</p>
+
+<ul>
+<li>Folders name is uuid of layer.</li>
+<li>each folder keeps information about its checksum, layersize and a Json file which keeps all information associated with image.</li>
+<li>The <code>docker history</code> shows information of this json file.</li>
+</ul>
+
+<pre><code>/var/lib/docker/graph
+|-- 005c90a2563599e0021e6cb02d8ae34d2f948c7d05d1a6322ffbacd16932f0b7
+|   |-- checksum
+|   |-- json
+|   `-- layersize
+|-- 02e7035d95ed3e570b1bbddb457a59e2fc2aabd24777f7e1a43fdfc89ca076eb
+    |-- checksum
+    |-- json
+    `-- layersize
+</code></pre></li>
+
+<li><p>init : This folder has a binary file, which is used while creating every container. This is specific to libcontainer.</p>
+
+<pre><code>± tree -L 1  /var/lib/docker/init
+/var/lib/docker/init
+|-- dockerinit-1.6.0
+|-- dockerinit-1.6.1
+|-- dockerinit-1.6.2
+|-- dockerinit-1.7.0
+`-- dockerinit-1.7.0-dev
+</code></pre></li>
+
+<li><p>linkgraph.db</p></li>
+
+<li><p>netns</p></li>
+
+<li><p>repositories-devicemapper</p></li>
+
+<li><p>trust</p>
+
+<pre><code>± tree -L 1  /var/lib/docker/trust
+/var/lib/docker/trust
+`-- official.json
+</code></pre></li>
+
+<li><p>volumes</p>
+
+<pre><code>/var/lib/docker/volumes
+`-- 5aa5ee0f370733b4c5c82f82de9715ad87d1e6670bd144f602f1453d92317594
+    `-- _data
+        |-- somefile1
+        `-- somefile4
+</code></pre></li>
+</ol>
+
+<pre><code>/var/lib/docker/
+├── aufs                                       # Storage area for AUFS driver
+│   ├── diff                                   # Branch directory of layer
+│   ├── layers                                 # Infomation about docker layer
+│   └── mnt                                    # Mount point of aufs, root of containers
+├── containers                                 # Container configurations
+│                                                (both LXC and Docker-specific)
+├── graph                                      # Storage for the images
+├── init
+│   └── dockerinit-0.7.3                       # Used as /sbin/init in containers
+├── linkgraph.db                               # SQLite database storing links
+│                                                and names.
+├── lxc-start-unconfined -&gt; /usr/bin/lxc-start # When starting a privileged
+│                                                container, this is used in
+│                                                lieu of lxc-start, to evade
+│                                                AppArmor confinement (which
+│                                                matches by exact path).
+├── repositories-aufs                          # repository infomation
+└── volumes                                    # Storage for &quot;anonymous&quot; volumes
+                                                 (those which are not bind-mounts)
+
+</code></pre>
+
+	
+			
+
+			
+
+			
+				<div class="paging">
+					<span class="paging-label">More Reading</span>
+					
+					<div class="paging-newer">
+						<span class="dark-red">Newer</span><span class="decorative-marker">//</span>
+						<a class="paging-link" href="/post/conditional-compilation-in-golang">Conditional compilation in golang</a>
+		            </div>
+		            
+
+					
+					<div class="paging-older">
+						<span class="dark-red">Older</span><span class="decorative-marker">//</span>
+			            <a class="paging-link" href="/post/container-virtualization-and-its-building-blocks">Container Virtualization and its building blocks</a>
+		            </div>
+		            
+	            </div>
+            
+          </section>
+          
+          	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kunalkushwaha';
+    var disqus_identifier = 'http:\/\/kunalkushwaha.github.io\/post\/docker-file-layout';
+    var disqus_title = 'docker file layout';
+    var disqus_url = 'http:\/\/kunalkushwaha.github.io\/post\/docker-file-layout';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+			<li><a href="/post/">Blog</a></li>
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2016. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>

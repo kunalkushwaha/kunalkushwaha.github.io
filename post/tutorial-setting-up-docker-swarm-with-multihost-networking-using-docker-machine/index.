@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>
+    Tutorial setting up docker-swarm with multihost networking using docker-machine. // Kunal Kushwaha&#39;s Blog
+  </title>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="generator" content="Hugo 0.15" />
+
+  <meta property="og:title" content="Tutorial setting up docker-swarm with multihost networking using docker-machine." />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="http://kunalkushwaha.github.io/post/tutorial-setting-up-docker-swarm-with-multihost-networking-using-docker-machine." />
+
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/base-min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
+  
+  
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/grids-responsive-min.css">
+  
+  
+
+  <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/redlounge.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,700,300,500,600,800' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Kunal Kushwaha&#39;s Blog" />
+
+    
+
+    
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+
+  
+
+    
+</head>
+
+<body>
+	
+
+	<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+  <div class="header">
+    
+
+    <h1 class="brand-title">Kunal Kushwaha&#39;s Blog</h1>
+    <h2 class="brand-tagline">Golang | Containers | Cloud | Tech</h2>
+
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><span class="nav-item-separator">//</span><a href="http://kunalkushwaha.github.io">Home</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="/about/">About</a></li>
+        
+          <li class="nav-item"><span class="nav-item-separator">//</span><a href="/post/">Blog</a></li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="social-buttons">
+      
+        
+        <a href="http://www.twitter.com/kunalkushwaha" target="_blank"><i class='fa fa-twitter'></i></a>
+        
+      
+        
+        <a href="https://plus.google.com/&#43;KunalKushwaha14?rel=author" target="_blank"><i class='fa fa-google-plus'></i></a>
+        
+      
+        
+        <a href="https://www.facebook.com/kunalkushwaha" target="_blank"><i class='fa fa-facebook'></i></a>
+        
+      
+        
+        <a href="http://www.linkedin.com/in/kunalkushwaha" target="_blank"><i class='fa fa-linkedin-square'></i></a>
+        
+      
+        
+        <a href="https://github.com/kunalkushwaha" target="_blank"><i class='fa fa-github'></i></a>
+        
+      
+        
+        <a href="/index.xml" target="_blank"><i class='fa fa-rss'></i></a>
+        
+      
+      
+    </div>
+    
+
+  </div>
+</div>
+
+	
+	
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+		<a name="top"></a>
+		
+
+		
+			
+		    <div id="toc" class="pure-u-1 pure-u-md-1-4">
+				<small class="toc-label">Contents</small>
+		   	 	<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#installation:b7bef7e2cdd7681f0182f26cab562e4a">Installation.</a></li>
+<li><a href="#creation-of-docker-host-with-machine:b7bef7e2cdd7681f0182f26cab562e4a">Creation of docker host with machine.</a></li>
+<li><a href="#docker-swarm:b7bef7e2cdd7681f0182f26cab562e4a">Docker Swarm</a>
+<ul>
+<li><a href="#discovery-backend-using-consul:b7bef7e2cdd7681f0182f26cab562e4a">Discovery Backend using consul.</a></li>
+<li><a href="#creation-of-swarm-master:b7bef7e2cdd7681f0182f26cab562e4a">Creation of Swarm Master.</a></li>
+</ul></li>
+<li><a href="#understanding-few-more-swarm-functionality:b7bef7e2cdd7681f0182f26cab562e4a">Understanding few more Swarm functionality.</a>
+<ul>
+<li><a href="#filters:b7bef7e2cdd7681f0182f26cab562e4a">Filters</a>
+<ul>
+<li><a href="#use-a-constraint-filter:b7bef7e2cdd7681f0182f26cab562e4a">Use a constraint filter</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+		    </div>
+		    
+	    
+  		<section class="post">
+            <h1 class="post-title">
+              <a href="/post/tutorial-setting-up-docker-swarm-with-multihost-networking-using-docker-machine.">Tutorial setting up docker-swarm with multihost networking using docker-machine.</a>
+            </h1>
+            <h3 class="post-subtitle">
+            	
+            </h3>
+            
+            	<span class="post-date">
+                	<span class="post-date-day"><sup>14</sup></span><span class="post-date-separator">/</span><span class="post-date-month">Jan</span> <span class="post-date-year">2016</span>
+            	</span>
+            	
+            
+            	
+            
+
+			
+			
+
+			
+
+			
+
+            
+
+<p><a href="https://github.com/docker/machine">Docker-machine</a> is tool to create Docker hosts on computer, on cloud providers, and inside data center. It creates <a href="https://docs.docker.com/machine/drivers/os-base/">Linux based</a> server, and installs and configures docker. It is also capable of configuring docker-swarm nodes.</p>
+
+<p>This blog, will explain stepwise walkthrough for docker host creation using docker-machine.</p>
+
+<h2 id="installation:b7bef7e2cdd7681f0182f26cab562e4a">Installation.</h2>
+
+<p>If you use Windows or Mac, Docker has already made awesome packaged installer for you <a href="https://www.docker.com/products/docker-toolbox">Docker-toolbox</a>. Download and Install it.
+For Linux users, you can download docker-machine binaries from <a href="https://github.com/docker/machine/releases">here</a>.</p>
+
+<p>NOTE: <i> Linux users, do remember, you need to install docker client also on your machine.</i></p>
+
+<h2 id="creation-of-docker-host-with-machine:b7bef7e2cdd7681f0182f26cab562e4a">Creation of docker host with machine.</h2>
+
+<p>I will be using VirtualBox in this demo, but you can explore cloud options too.</p>
+
+<p>Docker host can be created with command <code>docker-machine create</code>. Here <code>-d</code> flags specifies driver-name. So command looks like as follows.</p>
+
+<p><code>$ docker-machine create -d &lt;driver-name&gt; &lt;name-of-machine&gt;</code></p>
+
+<p>This command does couple of things at backend such as
+ - It downloads latest boot2docker image, if not locally available.
+ - Create a machine with <code>name-of-machine</code>
+ - Creates ssh keys and copies to machine.
+ - Installs <code>docker</code>
+ - Configures docker daemon at port 2376, so that docker daemon accessible at  <code>tcp://&lt;HostIP&gt;:2376</code></p>
+
+<p>Lets create our first host <code>testhost</code>.</p>
+
+<pre><code> $ docker-machine create -d virtualbox testhost
+ Running pre-create checks...
+Creating machine...
+(testhost) Copying C:\Users\kunal\.docker\machine\cache\boot2docker.iso to C:\Users\kunal\.docker\machine\machines\testhost\boot2docker.iso...
+(testhost) Creating VirtualBox VM...
+(testhost) Creating SSH key...
+(testhost) Starting VM...
+Waiting for machine to be running, this may take a few minutes...
+Machine is running, waiting for SSH to be available...
+Detecting operating system of created instance...
+Detecting the provisioner...
+Provisioning with boot2docker...
+Copying certs to the local machine directory...
+Copying certs to the remote machine...
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+To see how to connect Docker to this machine, run: C:\Program Files\Docker Toolbox\docker-machine.exe env testhost
+</code></pre>
+
+<p>Here our docker host is ready for use. But wait! host is not same machine as your machine right? It is running inside Virtual Machine.
+So how docker daemon is accessed remotely?</p>
+
+<p>Docker works on client-server model. Docker daemon is server and it can communicates though <a href="https://docs.docker.com/engine/reference/api/docker_remote_api/">REST API&rsquo;s</a></p>
+
+<p><i> NOTE: <code>docker-machine create</code> is most important command of docker-machine. Understanding various flags help you to get best of docker-machine. You must spend some time in understanding all <a href="https://docs.docker.com/machine/reference/create/">flags</a> </i></p>
+
+<ul>
+<li>To access docker host with docker client binary remotely, we need to export some environment variables.
+Docker-machine provides a handy command for printing these variables and their values for us as shown below.</li>
+</ul>
+
+<pre><code>  $ docker-machine env testhost
+  export DOCKER_TLS_VERIFY=&quot;1&quot;
+  export DOCKER_HOST=&quot;tcp://192.168.99.110:2376&quot;
+  export DOCKER_CERT_PATH=&quot;C:\Users\kunal\.docker\machine\machines\testhost&quot;
+  export DOCKER_MACHINE_NAME=&quot;testhost&quot;
+  # Run this command to configure your shell:
+  # eval $(&quot;C:\Program Files\Docker Toolbox\docker-machine.exe&quot; env testhost)
+</code></pre>
+
+<ul>
+<li>To export all environment variable at once, simply run
+<code>
+$ eval $(docker-machine env testhost)
+</code></li>
+<li>Now all docker commands will communicates with docker daemon of <code>testhost</code></li>
+</ul>
+
+<pre><code>  $ docker info
+  Containers: 0
+  Images: 0
+  Server Version: 1.9.1
+  Storage Driver: aufs
+   Root Dir: /mnt/sda1/var/lib/docker/aufs
+   Backing Filesystem: extfs
+   Dirs: 0
+   Dirperm1 Supported: true
+  Execution Driver: native-0.2
+  Logging Driver: json-file
+  Kernel Version: 4.1.13-boot2docker
+  Operating System: Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015
+  CPUs: 1
+  Total Memory: 996.2 MiB
+  Name: testhost
+  ID: 26MF:TVKB:JI7Q:TL4S:7RXM:U5CD:VHIR:W2NH:CUNZ:RGB3:C6GC:POBS
+  Debug mode (server): true
+   File Descriptors: 14
+   Goroutines: 21
+   System Time: 2016-01-07T07:09:51.081394779Z
+   EventsListeners: 0
+   Init SHA1:
+   Init Path: /usr/local/bin/docker
+   Docker Root Dir: /mnt/sda1/var/lib/docker
+  Labels:
+   provider=virtualbox
+</code></pre>
+
+<p>Lets create our first docker container on this host.</p>
+
+<pre><code>  $ docker run busybox sh
+  Unable to find image 'busybox:latest' locally
+  latest: Pulling from library/busybox
+  c00ef186408b: Pulling fs layer
+  ac6a7980c6c2: Pulling fs layer
+  ac6a7980c6c2: Verifying Checksum
+  ac6a7980c6c2: Download complete
+  c00ef186408b: Verifying Checksum
+  c00ef186408b: Download complete
+  c00ef186408b: Pull complete
+  ac6a7980c6c2: Pull complete
+  Digest: sha256:e4f93f6ed15a0cdd342f5aae387886fba0ab98af0a102da6276eaf24d6e6ade0
+  Status: Downloaded newer image for busybox:latest
+</code></pre>
+
+<p><i> NOTE: If you are one of user, who works behind proxy, then you may face problem like, your newly created docker host may not communicate with <a href="https://hub.docker.com/">docker-hub</a>.</p>
+
+<p>To Fix that, you need to pass few environment flags at creation time as below.</p>
+
+<pre><code>  $ docker-machine create -d virtualbox \
+  --engine-env HTTP_PROXY=&quot;http://example.com:8080&quot; \
+  --engine-env HTTPS_PROXY=&quot;http://example.com:8080&quot; \
+  testhost
+</code></pre>
+
+<p></i></p>
+
+<p>So now we learnt how to create a docker host and run docker containers using docker-machine.
+But Docker-machine not only lets you to create independent hosts, but also can put these host in one cluster!</p>
+
+<p>Isn&rsquo;t it interesting?</p>
+
+<p>Let&rsquo;s see how we can build whole cluster of docker-hosts using docker-machine.</p>
+
+<p>Docker <a href="https://www.docker.com/products/docker-swarm">Swarm</a> is native clustering solution for docker. Here with native means, Swarm understands and exports <a href="https://docs.docker.com/swarm/swarm-api/">all(almost)</a> docker API&rsquo;s. i.e. API for docker and docker swarm are same.
+If one product/scripts works with docker, it will automatically work with swarm :)</p>
+
+<h2 id="docker-swarm:b7bef7e2cdd7681f0182f26cab562e4a">Docker Swarm</h2>
+
+<p>Docker swarm has three components.</p>
+
+<ul>
+<li>Discovery Backend : Swarm requires a discovery backend, which is used by each node(agent) to discover the master.
+
+<ul>
+<li>Default discovery is provided by Docker Hub. (Not for production usage)</li>
+</ul></li>
+<li>Master : Swarm master takes care of all scheduling logic and HA.</li>
+<li>Agent : These runs on each node and communicates with Swarm master.
+
+<ul>
+<li>All agent node must listen to the same network interface (TCP port).</li>
+<li>Each node runs a node agent that registers the referenced Docker daemon, monitors it, and updates the discovery backend with the node’s status</li>
+</ul></li>
+</ul>
+
+<p>In this demo, We will create a docker swarm consisting one Master and three agents including master.
+Also, Consul will be used for discovery backend.</p>
+
+<h3 id="discovery-backend-using-consul:b7bef7e2cdd7681f0182f26cab562e4a">Discovery Backend using consul.</h3>
+
+<p>We will create a dedicated machine for consul, but running <a href="https://www.consul.io/">consul</a> using docker is just one command task.</p>
+
+<pre><code>  $ docker-machine create -d virtualbox \
+     --engine-env HTTP_PROXY=&quot;http://example.com:8080&quot; \
+     --engine-env HTTPS_PROXY=&quot;http://example.com:8080&quot; \
+     swl-consul
+
+$ docker $(docker-machine config swl-consul) run \
+     -e &quot;http_proxy=http://example.com:8080&quot; \
+     -e &quot;https_proxy=http://example.com:8080&quot; \
+     --restart=&quot;always&quot; \
+     -d -p &quot;8500:8500&quot; \
+     -h &quot;consul&quot; \
+     progrium/consul -server -bootstrap
+</code></pre>
+
+<p>Check if consul container is created as expected.</p>
+
+<pre><code>  $ docker-machine ls
+  NAME         ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
+  swl-consul   -        virtualbox   Running   tcp://192.168.99.100:2376           v1.9.1
+
+  $ eval $(docker-machine env swl-consul)
+
+  $ docker ps
+  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                                            NAMES
+  5357e85abcb5        progrium/consul     &quot;/bin/start -server -&quot;   16 minutes ago      Up 16 minutes       53/tcp, 53/udp, 8300-8302/tcp, 8400/tcp, 8301-8302/udp, 0.0.0.0:8500-&gt;8500/tcp   goofy_aryabhata
+</code></pre>
+
+<h3 id="creation-of-swarm-master:b7bef7e2cdd7681f0182f26cab562e4a">Creation of Swarm Master.</h3>
+
+<p>In cluster, we will have one master and 2 agents. But master will also have agent, so practically we will have 3 agents.</p>
+
+<p>Docker machine helps to setup docker host with swarm in single command.</p>
+
+<p>Few highlights of docker machine provisioned swarm enabled host.
+- Swarm master and agent runs as docker containers.
+- Swarm manager bind on &ldquo;3376&rdquo; port, So to communicate with master <code>tcp://&lt;IP:3376&gt;&gt;</code> should be used.</p>
+
+<pre><code>  $ docker-machine create \
+  &gt;    -d virtualbox \
+  &gt;    --swarm \
+  &gt;    --swarm-master \
+  &gt;    --swarm-discovery=consul://$(docker-machine ip swl-consul):8500 \
+  &gt;    --engine-env HTTP_PROXY=http://example.com:8080 \
+  &gt;    --engine-env HTTPS_PROXY=http://example.com:8080 \
+  &gt;    --engine-env NO_PROXY=192.168.99.100 \
+  &gt;    --engine-opt=&quot;cluster-store=consul://$(docker-machine ip swl-consul):8500&quot; \
+  &gt;    --engine-opt=&quot;cluster-advertise=eth1:3376&quot; \
+  &gt;    node1
+  Running pre-create checks...
+   .
+   .
+  (node1) Starting VM...
+  Waiting for machine to be running, this may take a few minutes...
+  Machine is running, waiting for SSH to be available...
+  Detecting operating system of created instance...
+  Detecting the provisioner...
+  Provisioning with boot2docker...
+  Copying certs to the local machine directory...
+  Copying certs to the remote machine...
+  Setting Docker configuration on the remote daemon...
+  Configuring swarm...
+  Checking connection to Docker...
+  Docker is up and running!
+  To see how to connect Docker to this machine, run: C:\Program Files\Docker Toolbox\docker-machine.exe env node1
+
+  $ eval $(docker-machine env node1)
+
+  $ docker ps
+  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+  7e644b71f606        swarm:latest        &quot;/swarm join --advert&quot;   19 seconds ago      Up 16 seconds                           swarm-agent
+  58f2a4da438b        swarm:latest        &quot;/swarm manage --tlsv&quot;   22 seconds ago      Up 19 seconds                           swarm-agent-master
+</code></pre>
+
+<p><i> NOTE: You may have seen <code>NO_PROXY</code> is also set as environment variable.</p>
+
+<p>This is to skip proxy for communicating with consul server </i></p>
+
+<p>Here,
+- <code>--swarm</code> indicates, swarm agent will be configured.
+- <code>--swarm-master</code> indicates, swarm master will be configured.
+<code>--swarm-discovery</code> sets the backend discovery for swarm.</p>
+
+<p>Here you go, we have our swarm master node up and running. Before communicating to swarm, let me remind you again.
+- Swarm and docker talks in same API signature. But on our host, we have both docker daemon and swarm running.
+- Our docker client can communicate with both, but we need to choose whom it has to talk.
+  - To talk with docker daemon use <code>eval $(docker-machine env &lt;host-name&gt;)</code>
+  - To talk with swarm use <code>eval $(docker-machine env --swarm &lt;host-name&gt;</code></p>
+
+<p>So, since we want our docker client should communicate with swarm, we will add <code>--swarm</code></p>
+
+<pre><code>  $ eval $(docker-machine env --swarm node1)
+
+  $ docker info
+  Containers: 2
+  Images: 1
+  Role: primary
+  Strategy: spread
+  Filters: health, port, dependency, affinity, constraint
+  Nodes: 1
+   node1: 192.168.99.102:2376
+    └ Status: Healthy
+    └ Containers: 2
+    └ Reserved CPUs: 0 / 1
+    └ Reserved Memory: 0 B / 1.021 GiB
+    └ Labels: executiondriver=native-0.2, kernelversion=4.1.13-boot2docker, operatingsystem=Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015, provider=virtualbox, storagedriver=aufs
+  CPUs: 1
+  Total Memory: 1.021 GiB
+  Name: node1
+</code></pre>
+
+<p>Now add two nodes with only agent.</p>
+
+<pre><code>  $ docker-machine create \
+  &gt;    -d virtualbox \
+  &gt;    --swarm \
+  &gt;    --swarm-discovery=&quot;consul://$(docker-machine ip swl-consul):8500&quot; \
+  &gt;    --engine-env HTTP_PROXY=&quot;http://example.com:8080&quot; \
+  &gt;    --engine-env HTTPS_PROXY=&quot;http://example.com:8080&quot; \
+  &gt;    --engine-env NO_PROXY=&quot;192.168.99.100&quot; \
+  &gt;    --engine-opt=&quot;cluster-store=consul://$(docker-machine ip swl-consul):8500&quot; \
+  &gt;    --engine-opt=&quot;cluster-advertise=eth1:3376&quot; \  
+  &gt;    node3
+</code></pre>
+
+<ul>
+<li>Command for adding agent doesn&rsquo;t requires <code>--swarm-master</code>.</li>
+<li><code>cluster-advertise</code> and <code>cluster-store</code> are required for overlay networking also, Will be explained later.</li>
+</ul>
+
+<p>So after adding two more machines with swarm agent, we have 4 machines running as below.</p>
+
+<pre><code>  $ docker-machine ls
+  NAME         ACTIVE   DRIVER       STATE     URL                         SWARM            DOCKER   ERRORS
+  node1        -        virtualbox   Running   tcp://192.168.99.102:2376   node1 (master)   v1.9.1
+  node2        -        virtualbox   Running   tcp://192.168.99.103:2376   node1            v1.9.1
+  node3        -        virtualbox   Running   tcp://192.168.99.104:2376   node1            v1.9.1
+  swl-consul   -        virtualbox   Running   tcp://192.168.99.100:2376                    v1.9.1
+</code></pre>
+
+<p>Lets see information of our cluster.</p>
+
+<pre><code>  $ eval $(docker-machine env --swarm node1)
+
+  $ docker info
+  Containers: 4
+  Images: 3
+  Role: primary
+  Strategy: spread
+  Filters: health, port, dependency, affinity, constraint
+  Nodes: 3
+   node1: 192.168.99.102:2376
+    └ Status: Healthy
+    └ Containers: 2
+    └ Reserved CPUs: 0 / 1
+    └ Reserved Memory: 0 B / 1.021 GiB
+    └ Labels: executiondriver=native-0.2, kernelversion=4.1.13-boot2docker, operatingsystem=Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015, provider=virtualbox, storagedriver=aufs
+   node2: 192.168.99.103:2376
+    └ Status: Healthy
+    └ Containers: 1
+    └ Reserved CPUs: 0 / 1
+    └ Reserved Memory: 0 B / 1.021 GiB
+    └ Labels: executiondriver=native-0.2, kernelversion=4.1.13-boot2docker, operatingsystem=Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015, provider=virtualbox, storagedriver=aufs
+   node3: 192.168.99.104:2376
+    └ Status: Healthy
+    └ Containers: 1
+    └ Reserved CPUs: 0 / 1
+    └ Reserved Memory: 0 B / 1.021 GiB
+    └ Labels: executiondriver=native-0.2, kernelversion=4.1.13-boot2docker, operatingsystem=Boot2Docker 1.9.1 (TCL 6.4.1); master : cef800b - Fri Nov 20 19:33:59 UTC 2015, provider=virtualbox, storagedriver=aufs
+  CPUs: 3
+  Total Memory: 3.064 GiB
+  Name: node1
+</code></pre>
+
+<p>Superb! we have three nodes running in our cluster.
+This completes the swarm setup!!</p>
+
+<h2 id="understanding-few-more-swarm-functionality:b7bef7e2cdd7681f0182f26cab562e4a">Understanding few more Swarm functionality.</h2>
+
+<ol>
+<li>Strategy</li>
+</ol>
+
+<p>Currently &ldquo;Spread&rdquo; strategy is set. So the containers will be spread over all the hosts in cluster.</p>
+
+<p>e.g.</p>
+
+<pre><code>  $ docker run -d -P -m 1G -e MYSQL_ROOT_PASSWORD=test123 --name db mysql
+  57a1af46d72117306b833a28a219d3523e1531c98a19ef25cba00a7bc94c9645
+
+  $ docker run -d -P -m 1G --name frontend nginx
+  f40776d7c9f7583965263340c1542a09eb7cb881c53bcf18a290df0d6ce2fd51
+
+  $ docker ps
+  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                         NAMES
+  f40776d7c9f7        nginx               &quot;nginx -g 'daemon off&quot;   4 seconds ago       Up 4 seconds        192.168.99.103:32770-&gt;80/tcp, 192.168.99.103:32769-&gt;443/tcp   node2/frontend
+  57a1af46d721        mysql               &quot;/entrypoint.sh mysql&quot;   3 minutes ago       Up 3 minutes        192.168.99.104:32769-&gt;3306/tcp                                node3/db
+</code></pre>
+
+<ul>
+<li>Here node3 have <code>db</code> and node2 have <code>frontend</code> container.</li>
+<li>If two nodes have the same amount of available RAM and CPUs, the spread strategy prefers the node with least containers.</li>
+</ul>
+
+<p>Other available strategies are BinPack and Random.
+- BinPack tries to pack all possible containers on single node first and so on.
+- If two nodes have the same amount of available RAM and CPUs, the binpack strategy prefers the node with most containers.</p>
+
+<p><i>Things to Try:
+- Create swarm with BinPack and create multiple containers to see the behavior. </i></p>
+
+<h3 id="filters:b7bef7e2cdd7681f0182f26cab562e4a">Filters</h3>
+
+<p>Filters tell Docker Swarm scheduler which nodes to use when creating and running a container.</p>
+
+<p>Filters are divided into two categories, node filters and container configuration filters.
+- Node filters operate on characteristics of the Docker host or on the configuration of the Docker daemon.
+- Container configuration filters operate on characteristics of containers, or on the availability of images on a host.
+- Each filter has a name that identifies it.</p>
+
+<p>The node filters are:
+  - constraint
+  - health</p>
+
+<p>The container configuration filters are:
+  - affinity
+  - dependency
+  - port</p>
+
+<p>When you start a Swarm manager with the swarm manage command, all the filters are enabled.
+If you want to limit the filters available to your Swarm, specify a subset of filters by passing the <code>--filter</code> flag and the name:</p>
+
+<pre><code>$ swarm manage --filter=health --filter=dependency
+</code></pre>
+
+<p>In case of docker machine, while provisioning <code>--swarm-opt</code> can be used to set filters.</p>
+
+<h4 id="use-a-constraint-filter:b7bef7e2cdd7681f0182f26cab562e4a">Use a constraint filter</h4>
+
+<p>Node constraints can refer to Docker’s default tags or to custom labels. Default tags are sourced from docker info. Often, they relate to properties of the Docker host. Currently, the dafult tags include:</p>
+
+<ul>
+<li>node to refer to the node by ID or name</li>
+<li>storagedriver</li>
+<li>executiondriver</li>
+<li>kernelversion</li>
+<li>operatingsystem</li>
+<li>Custom node labels can be applied while provisioning docker machine.
+
+<ul>
+<li><code>--engine-label</code> can be used for setting custom label.</li>
+<li>custom label like <code>environment</code>, <code>storage</code> etc are helpful.</li>
+</ul></li>
+</ul>
+
+<p>Since we have all labels same except node name, we will try creating new container using node-name constraint.</p>
+
+<pre><code>$ docker run -itd -e constraint:node==node3 --name test1 ubuntu
+ae4013d014931e43cd5342a625f6b549a8c920cb146b1371a7226359a4bcf014
+
+$ docker run -itd -e constraint:node==node3 --name test2 ubuntu
+a6b371773e1a2609122ca68df00d1e03ee274ba3db504d3942c301f8e2c45504
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+a6b371773e1a        ubuntu              &quot;/bin/bash&quot;         3 seconds ago       Up 2 seconds                            node3/test2
+ae4013d01493        ubuntu              &quot;/bin/bash&quot;         19 seconds ago      Up 18 seconds                           node3/test1
+934501aed30f        ubuntu              &quot;/bin/bash&quot;         19 hours ago        Up 2 hours                              node3/n4
+30358292be89        ubuntu              &quot;/bin/bash&quot;         19 hours ago        Up 19 hours                             node1/n3
+6a13aa3eca8b        ubuntu              &quot;/bin/bash&quot;         21 hours ago        Up 21 hours                             node2/n1
+</code></pre>
+
+<p>Similarly other filters can be used. While using filters the syntax to use in <code>docker run</code> is as below.</p>
+
+<pre><code>- ``-e &lt;filter-name&gt;:&lt;key&gt;&lt;operator&gt;&lt;value&gt;``
+- Here operator used are  ``==`` , ``!=`` &amp; ``~``
+- For ``==`` &amp; ``!=``, exact match is found.
+  - If nothing satisfies the condition, it does schedule container.
+- ``~`` is for soft condition. i.e. if nothing matches, it ignores the condition and use default scheduler.
+- Here value can contain any valid regex (https://github.com/google/re2/wiki/Syntax)
+</code></pre>
+
+<p>Hope this article will be helpful in getting started with docker-machine and swarm :)</p>
+
+	
+			
+
+			
+
+			
+				<div class="paging">
+					<span class="paging-label">More Reading</span>
+					
+
+					
+					<div class="paging-older">
+						<span class="dark-red">Older</span><span class="decorative-marker">//</span>
+			            <a class="paging-link" href="/post/tutorial-getting-started-with-docker-machine-and-swarm">Tutorial: Getting started with docker machine and Swarm</a>
+		            </div>
+		            
+	            </div>
+            
+          </section>
+          
+          	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kunalkushwaha';
+    var disqus_identifier = 'http:\/\/kunalkushwaha.github.io\/post\/tutorial-setting-up-docker-swarm-with-multihost-networking-using-docker-machine.';
+    var disqus_title = 'Tutorial setting up docker-swarm with multihost networking using docker-machine.';
+    var disqus_url = 'http:\/\/kunalkushwaha.github.io\/post\/tutorial-setting-up-docker-swarm-with-multihost-networking-using-docker-machine.';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          
+        
+      <div class="footer">
+	<hr class="thin" />
+	<div class="pure-menu pure-menu-horizontal pure-menu-open">
+		<ul class="footer-menu">
+		
+			<li><a href="/post/">Blog</a></li>
+		
+		</ul>
+	</div>
+
+	<p>&copy; 2016. All rights reserved.</p>
+</div>
+    </div>
+  </div>
+	
+
+	
+
+  
+</body>
+</html>
