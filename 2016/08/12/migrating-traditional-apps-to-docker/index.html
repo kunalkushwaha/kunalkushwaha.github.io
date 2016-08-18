@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Migrating traditional apps to docker &middot; Kunal Kushwaha</title>
+        <meta name="description" content="Deploying Traditional apps as docker containers in traditional way">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.15" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/normalize.css">
+        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/highlight.css">
+        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-62566203-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io/">Kunal Kushwaha</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://kunalkushwaha.github.io/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Migrating traditional apps to docker</h1>
+    
+        <p class="post-description" itemprop="description">Deploying Traditional apps as docker containers in traditional way</p>
+    
+    <p class="post-date">
+        <span>Published <time datetime="2016-08-12" itemprop="datePublished">Fri, Aug 12, 2016</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<p>If title of this blog, attracted you towards this blog, Most likely, you will be one of us, who want to migrate old traditional application&rsquo;s in container environment. This blog covers my experience of Migrating old traditional application into Docker.</p>
+
+<p><img align="center" src=http://kunalkushwaha.github.io/LegacyMigration.png></p>
+
+<p>Before beginning with migration procedure, Let me explain requirements I had to met with migrated system.</p>
+
+<h3 id="problems:3b2a0f0135cb172f18bec86ce1483615">Problems</h3>
+
+<ul>
+<li>Old apps running on servers/VMs, resource utilization not optimal.</li>
+<li>High maintenance cost.
+
+<ul>
+<li>OS running is no longer supported by vendors, so in-house support required.</li>
+<li>Maintenance downtime high.</li>
+</ul></li>
+<li>Platform to adopt DevOps practice for fast refactoring.</li>
+</ul>
+
+<h3 id="challenges:3b2a0f0135cb172f18bec86ce1483615">Challenges</h3>
+
+<ul>
+<li>Migrate Application with least changes in existing platform and infrastructure use.
+
+<ul>
+<li>Use same OS distribution.</li>
+<li>No rewriting application for new OS.</li>
+<li>No changes in network infrastructure.</li>
+</ul></li>
+<li>Behavioral changes for accessing the application should be none.
+
+<ul>
+<li>Use hardware load balancer.</li>
+<li>Use Fixed-IP with pre-approved MAC address.</li>
+</ul></li>
+</ul>
+
+<h3 id="solution:3b2a0f0135cb172f18bec86ce1483615">Solution</h3>
+
+<p>Migrating old applications into containers can be divided into two parts.
+1. Application code/binary migration into image.
+2. Application deployment, as per requirements.</p>
+
+<p>The first part is specific to each application, as every application have different challenges for migration.
+I will not discuss details of that. Though few of things need be considered before migrating.</p>
+
+<h4 id="docker-host:3b2a0f0135cb172f18bec86ce1483615">Docker Host</h4>
+
+<p>Which OS/distribution to be chosen for docker host.
+Ideally any distribution which have LTS should be fine.</p>
+
+<p>Though, sometime you may need to consider alternate from latest due compatibility with application.
+To check application compatibility, follow the below Checklist.</p>
+
+<h4 id="application-compatibility-checklist:3b2a0f0135cb172f18bec86ce1483615">Application compatibility Checklist</h4>
+
+<ul>
+<li>Check if any changes in ABI for linux kernel functionality and libraries used by application.
+
+<ul>
+<li>If ABI breaks, either we need to choose old kernel, where you may need to work little bit to make docker work properly.</li>
+<li>OR, recompile application with new libraries.</li>
+</ul></li>
+<li>Any special Kernel settings required by application.
+
+<ul>
+<li>Host kernel parameters may need to be tweaked and/or cgroups/namespaces need to be adjusted accordingly.</li>
+</ul></li>
+</ul>
+
+<p>After detailed analysis, we can decide and configure Docker Host.</p>
+
+<h4 id="application-migration:3b2a0f0135cb172f18bec86ce1483615">Application migration</h4>
+
+<p>Application migration in my case is simple. Just containerize the whole application.
+i.e. Build an image/rootfs with old libraries and application code. Typically old application requires more then one process to run, using <a href="https://docs.docker.com/engine/admin/using_supervisord/">Supervisord</a>, it can be achieved.</p>
+
+<p>Now once, you successfully able build &amp; test image for application, Lets focus on how it can be deployed with least changes to current setup.</p>
+
+<h3 id="deployment:3b2a0f0135cb172f18bec86ce1483615">Deployment</h3>
+
+<p>As started in challenges section, we are using hardware load-balancer and want to continue the same.
+Also, this application is bind to fixed-IP and specific MAC address.</p>
+
+<p>Since docker supports <a href="https://github.com/docker/libnetwork/blob/master/docs/macvlan.md">macvlan</a> network driver, the above two goals can be easily achieved.
+Using macvlan driver, we can put a container on same network as old servers. Also macvlan user less CPU and slightly better <a href="http://events.linuxfoundation.org/sites/events/files/slides/LinuxConJapan2014_makita_0.pdf">throughput</a> then bridge network.</p>
+
+<p>Lets go through its details.</p>
+
+<p>On docker host, lets create a macvlan network.</p>
+
+<pre><code>$ docker network create -d macvlan --subnet=172.20.20.0/18 --gateway=172.20.0.1 -o parent=enp1s0 -o macvlan_mode=bridge maclan
+798b8a2ee7988dc0388c9985eaa7f0bc9373f11cf1be4a3b3a44abee162442fd
+
+
+$ docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+9a9ff4851e71        bridge              bridge              local               
+ddbc211bcf8f        docker_gwbridge     bridge              local               
+a7211f1ae74d        host                host                local               
+8aetfb2dtwmu        ingress             overlay             swarm               
+798b8a2ee798        maclan              macvlan             local               
+d43c2f84509b        none                null                local               
+</code></pre>
+
+<p><em>NOTE: macvlan network is local to host, so this cannot be used over swarm.</em></p>
+
+<p>Now, I need to create an network interfaces for my containers. I need to deploy two containers as replacement of two Application servers.
+For security reason, I need to assign predefined MAC address to this interface. But with macvlan driver this is also possible.</p>
+
+<p>Now my network is ready, I can deploy my applications on same.
+Lets create containers on these network.</p>
+
+<pre><code>$ docker run --net=maclan --ip=172.20.20.51 --mac-address 08:00:27:0B:1C:FE -itd alpine sh                                                                                                     
+1f0307c12ea7a666bffc4224665f304aae67056a7cbc6f037ec19d73b5a8a64d
+
+$ docker run --net=maclan --ip=172.20.20.52 --mac-address 08:00:27:3F:FE:8E -itd alpine sh                                                                                                     
+72849de4f1e23b2bd2394ef579c48045260b4f8f0026a601c5ac93514bc90e0d
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+72849de4f1e2        alpine              &quot;sh&quot;                5 seconds ago       Up 2 seconds                            grave_pike
+1f0307c12ea7        alpine              &quot;sh&quot;                49 seconds ago      Up 46 seconds                           elegant_yalow
+</code></pre>
+
+<p>Test it and containers are reachable from other machine on network.</p>
+
+<pre><code>$ ping 172.20.20.51
+PING 172.20.20.51 (172.20.20.51): 56 data bytes
+64 bytes from 172.20.20.51: seq=0 ttl=64 time=0.090 ms
+64 bytes from 172.20.20.51: seq=1 ttl=64 time=0.057 ms
+64 bytes from 172.20.20.51: seq=2 ttl=64 time=0.058 ms
+^C
+--- 172.20.20.51 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.057/0.068/0.090 ms
+
+$ ping 172.20.20.52
+PING 172.20.20.52 (172.20.20.52): 56 data bytes
+64 bytes from 172.20.20.52: seq=0 ttl=64 time=0.075 ms
+64 bytes from 172.20.20.52: seq=1 ttl=64 time=0.058 ms
+64 bytes from 172.20.20.52: seq=2 ttl=64 time=0.066 ms
+^C
+--- 172.20.20.52 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.058/0.066/0.075 ms
+</code></pre>
+
+<p>Now these containers have successfully replaced the two app servers, and for external load balancer, there is no changes.</p>
+
+<p><em>NOTE: Alternative to macvlan is IPVlan, but since it is not yet stable in docker, I choose macvlan</em></p>
+
+<p>So what are the Benefits, I finally achieved through this migration.</p>
+
+<h3 id="benefits:3b2a0f0135cb172f18bec86ce1483615">Benefits</h3>
+
+<ul>
+<li>Portability: Application,can be migrated to different machines easily.</li>
+<li>Flexibility: Image can be shared and experiment within team.</li>
+<li>Modularity: Provides a base to break application into further smaller services.</li>
+<li>Reuse: Reuse current infrastructure like network, load balancer. Least disturbance.</li>
+</ul>
+
+<p>Hope this blog will help you to find some answers, if you are looking for migrating legacy/old/monolithic applications to docker.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+                 <a href="/tags/docker/">docker</a>
+            
+                 <a href="/tags/migration/">migration</a>
+            
+                 <a href="/tags/fixed-ip/">fixed-ip</a>
+            
+                 <a href="/tags/legacy/">legacy</a>
+            
+        </p>
+    
+
+    <div class="share">
+        <a class="icon-twitter" href="http://twitter.com/share?text=Migrating%20traditional%20apps%20to%20docker&url=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f08%2f12%2fmigrating-traditional-apps-to-docker%2f"
+            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+            <i class="fa fa-twitter"></i>
+            <span class="hidden">Twitter</span>
+        </a>
+
+        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f08%2f12%2fmigrating-traditional-apps-to-docker%2f"
+            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+            <i class="fa fa-facebook"></i>
+            <span class="hidden">Facebook</span>
+        </a>
+
+        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f08%2f12%2fmigrating-traditional-apps-to-docker%2f"
+           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+           <i class="fa fa-google-plus"></i>
+            <span class="hidden">Google+</span>
+        </a>
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kunalkushwaha';
+    var disqus_identifier = 'http:\/\/kunalkushwaha.github.io\/2016\/08\/12\/migrating-traditional-apps-to-docker\/';
+    var disqus_title = 'Migrating traditional apps to docker';
+    var disqus_url = 'http:\/\/kunalkushwaha.github.io\/2016\/08\/12\/migrating-traditional-apps-to-docker\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io/">Kunal Kushwaha</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://kunalkushwaha.github.io/js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="http://kunalkushwaha.github.io/js/jquery.fitvids.js"></script>
+        <script src="http://kunalkushwaha.github.io/js/scripts.js"></script>
+    </body>
+</html>
+

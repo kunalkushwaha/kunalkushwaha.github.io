@@ -338,7 +338,7 @@ $ docker service ls
 ID            NAME     REPLICAS  IMAGE                           COMMAND
 8fwyujxnc1rm  demoapp  4/6       kunalkushwaha/demoapp_image:v1
 
-$ docker service tasks demoapp
+$ docker service ps demoapp
 ID                         NAME       SERVICE  IMAGE                           LAST STATE                DESIRED STATE  NODE
 a2yczjfyhyryg4pkg8m27ztd6  demoapp.1  demoapp  kunalkushwaha/demoapp_image:v1  Running 13 minutes ago    Running        manager
 aj080rydyghazbhco6h9dhaaw  demoapp.2  demoapp  kunalkushwaha/demoapp_image:v1  Running 13 minutes ago    Running        worker2
@@ -362,7 +362,7 @@ About to remove worker2
 Are you sure? (y/n): y
 Successfully removed worker2
 
-$ docker service tasks demoapp
+$ docker service ps demoapp
 ID                         NAME       SERVICE  IMAGE                           LAST STATE              DESIRED STATE  NODE
 a2yczjfyhyryg4pkg8m27ztd6  demoapp.1  demoapp  kunalkushwaha/demoapp_image:v1  Running 27 minutes ago  Running        manager
 5afbnsfl5p3xyygbk1b6aawc6  demoapp.2  demoapp  kunalkushwaha/demoapp_image:v1  Accepted 3 seconds ago  Accepted       worker1
@@ -436,7 +436,7 @@ c6nvb1ljj9mntt1v8qlmxl2my    worker2   Accepted    Down    Active
 
 <p>Now, demoapp is running only on worker1 and manager nodes.</p>
 
-<pre><code>$ docker service tasks demoapp
+<pre><code>$ docker service ps demoapp
 ID                         NAME       SERVICE  IMAGE                           LAST STATE              DESIRED STATE  NODE
 9ucohwuw91e8uuquhxidhplsu  demoapp.1  demoapp  kunalkushwaha/demoapp_image:v2  Running 15 minutes ago  Running        manager
 a1odej6m4pz1k4lowzt2l48rz  demoapp.2  demoapp  kunalkushwaha/demoapp_image:v2  Running 16 minutes ago  Running        worker1

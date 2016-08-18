@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://kunalkushwaha.github.io/</loc>
-    <lastmod>2016-07-25T13:39:38+09:00</lastmod>
+    <lastmod>2016-08-12T17:10:24+09:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</loc>
+    <lastmod>2016-08-12T17:10:24+09:00</lastmod>
   </url>
   
   <url>

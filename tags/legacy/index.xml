@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Legacy on Kunal Kushwaha</title>
+    <link>http://kunalkushwaha.github.io/tags/legacy/</link>
+    <description>Recent content in Legacy on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Fri, 12 Aug 2016 17:10:24 +0900</lastBuildDate>
+    <atom:link href="http://kunalkushwaha.github.io/tags/legacy/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Migrating traditional apps to docker</title>
+      <link>http://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</link>
+      <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</guid>
+      <description>
+
+&lt;p&gt;If title of this blog, attracted you towards this blog, Most likely, you will be one of us, who want to migrate old traditional application&amp;rsquo;s in container environment. This blog covers my experience of Migrating old traditional application into Docker.&lt;/p&gt;
+
+&lt;p&gt;&lt;img align=&#34;center&#34; src=http://kunalkushwaha.github.io/LegacyMigration.png&gt;&lt;/p&gt;
+
+&lt;p&gt;Before beginning with migration procedure, Let me explain requirements I had to met with migrated system.&lt;/p&gt;
+
+&lt;h3 id=&#34;problems:3b2a0f0135cb172f18bec86ce1483615&#34;&gt;Problems&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Old apps running on servers/VMs, resource utilization not optimal.&lt;/li&gt;
+&lt;li&gt;High maintenance cost.
+
+&lt;ul&gt;
+&lt;li&gt;OS running is no longer supported by vendors, so in-house support required.&lt;/li&gt;
+&lt;li&gt;Maintenance downtime high.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Platform to adopt DevOps practice for fast refactoring.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;challenges:3b2a0f0135cb172f18bec86ce1483615&#34;&gt;Challenges&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Migrate Application with least changes in existing platform and infrastructure use.
+
+&lt;ul&gt;
+&lt;li&gt;Use same OS distribution.&lt;/li&gt;
+&lt;li&gt;No rewriting application for new OS.&lt;/li&gt;
+&lt;li&gt;No changes in network infrastructure.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Behavioral changes for accessing the application should be none.
+
+&lt;ul&gt;
+&lt;li&gt;Use hardware load balancer.&lt;/li&gt;
+&lt;li&gt;Use Fixed-IP with pre-approved MAC address.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;solution:3b2a0f0135cb172f18bec86ce1483615&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;Migrating old applications into containers can be divided into two parts.
+1. Application code/binary migration into image.
+2. Application deployment, as per requirements.&lt;/p&gt;
+
+&lt;p&gt;The first part is specific to each application, as every application have different challenges for migration.
+I will not discuss details of that. Though few of things need be considered before migrating.&lt;/p&gt;
+
+&lt;h4 id=&#34;docker-host:3b2a0f0135cb172f18bec86ce1483615&#34;&gt;Docker Host&lt;/h4&gt;
+
+&lt;p&gt;Which OS/distribution to be chosen for docker host.
+Ideally any distribution which have LTS should be fine.&lt;/p&gt;
+
+&lt;p&gt;Though, sometime you may need to consider alternate from latest due compatibility with application.
+To check application compatibility, follow the below Checklist.&lt;/p&gt;
+
+&lt;h4 id=&#34;application-compatibility-checklist:3b2a0f0135cb172f18bec86ce1483615&#34;&gt;Application compatibility Checklist&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Check if any changes in ABI for linux kernel functionality and libraries used by application.
+
+&lt;ul&gt;
+&lt;li&gt;If ABI breaks, either we need to choose old kernel, where you may need to work little bit to make docker work properly.&lt;/li&gt;
+&lt;li&gt;OR, recompile application with new libraries.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Any special Kernel settings required by application.
+
+&lt;ul&gt;
+&lt;li&gt;Host kernel parameters may need to be tweaked and/or cgroups/namespaces need to be adjusted accordingly.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After detailed analysis, we can decide and configure Docker Host.&lt;/p&gt;
+
+&lt;h4 id=&#34;application-migration:3b2a0f0135cb172f18bec86ce1483615&#34;&gt;Application migration&lt;/h4&gt;
+
+&lt;p&gt;Application migration in my case is simple. Just containerize the whole application.
+i.e. Build an image/rootfs with old libraries and application code. Typically old application requires more then one process to run, using &lt;a href=&#34;https://docs.docker.com/engine/admin/using_supervisord/&#34;&gt;Supervisord&lt;/a&gt;, it can be achieved.&lt;/p&gt;
+
+&lt;p&gt;Now once, you successfully able build &amp;amp; test image for application, Lets focus on how it can be deployed with least changes to current setup.&lt;/p&gt;
+
+&lt;h3 id=&#34;deployment:3b2a0f0135cb172f18bec86ce1483615&#34;&gt;Deployment&lt;/h3&gt;
+
+&lt;p&gt;As started in challenges section, we are using hardware load-balancer and want to continue the same.
+Also, this application is bind to fixed-IP and specific MAC address.&lt;/p&gt;
+
+&lt;p&gt;Since docker supports &lt;a href=&#34;https://github.com/docker/libnetwork/blob/master/docs/macvlan.md&#34;&gt;macvlan&lt;/a&gt; network driver, the above two goals can be easily achieved.
+Using macvlan driver, we can put a container on same network as old servers. Also macvlan user less CPU and slightly better &lt;a href=&#34;http://events.linuxfoundation.org/sites/events/files/slides/LinuxConJapan2014_makita_0.pdf&#34;&gt;throughput&lt;/a&gt; then bridge network.&lt;/p&gt;
+
+&lt;p&gt;Lets go through its details.&lt;/p&gt;
+
+&lt;p&gt;On docker host, lets create a macvlan network.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker network create -d macvlan --subnet=172.20.20.0/18 --gateway=172.20.0.1 -o parent=enp1s0 -o macvlan_mode=bridge maclan
+798b8a2ee7988dc0388c9985eaa7f0bc9373f11cf1be4a3b3a44abee162442fd
+
+
+$ docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+9a9ff4851e71        bridge              bridge              local               
+ddbc211bcf8f        docker_gwbridge     bridge              local               
+a7211f1ae74d        host                host                local               
+8aetfb2dtwmu        ingress             overlay             swarm               
+798b8a2ee798        maclan              macvlan             local               
+d43c2f84509b        none                null                local               
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;NOTE: macvlan network is local to host, so this cannot be used over swarm.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, I need to create an network interfaces for my containers. I need to deploy two containers as replacement of two Application servers.
+For security reason, I need to assign predefined MAC address to this interface. But with macvlan driver this is also possible.&lt;/p&gt;
+
+&lt;p&gt;Now my network is ready, I can deploy my applications on same.
+Lets create containers on these network.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --net=maclan --ip=172.20.20.51 --mac-address 08:00:27:0B:1C:FE -itd alpine sh                                                                                                     
+1f0307c12ea7a666bffc4224665f304aae67056a7cbc6f037ec19d73b5a8a64d
+
+$ docker run --net=maclan --ip=172.20.20.52 --mac-address 08:00:27:3F:FE:8E -itd alpine sh                                                                                                     
+72849de4f1e23b2bd2394ef579c48045260b4f8f0026a601c5ac93514bc90e0d
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+72849de4f1e2        alpine              &amp;quot;sh&amp;quot;                5 seconds ago       Up 2 seconds                            grave_pike
+1f0307c12ea7        alpine              &amp;quot;sh&amp;quot;                49 seconds ago      Up 46 seconds                           elegant_yalow
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Test it and containers are reachable from other machine on network.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ping 172.20.20.51
+PING 172.20.20.51 (172.20.20.51): 56 data bytes
+64 bytes from 172.20.20.51: seq=0 ttl=64 time=0.090 ms
+64 bytes from 172.20.20.51: seq=1 ttl=64 time=0.057 ms
+64 bytes from 172.20.20.51: seq=2 ttl=64 time=0.058 ms
+^C
+--- 172.20.20.51 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.057/0.068/0.090 ms
+
+$ ping 172.20.20.52
+PING 172.20.20.52 (172.20.20.52): 56 data bytes
+64 bytes from 172.20.20.52: seq=0 ttl=64 time=0.075 ms
+64 bytes from 172.20.20.52: seq=1 ttl=64 time=0.058 ms
+64 bytes from 172.20.20.52: seq=2 ttl=64 time=0.066 ms
+^C
+--- 172.20.20.52 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.058/0.066/0.075 ms
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now these containers have successfully replaced the two app servers, and for external load balancer, there is no changes.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;NOTE: Alternative to macvlan is IPVlan, but since it is not yet stable in docker, I choose macvlan&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;So what are the Benefits, I finally achieved through this migration.&lt;/p&gt;
+
+&lt;h3 id=&#34;benefits:3b2a0f0135cb172f18bec86ce1483615&#34;&gt;Benefits&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Portability: Application,can be migrated to different machines easily.&lt;/li&gt;
+&lt;li&gt;Flexibility: Image can be shared and experiment within team.&lt;/li&gt;
+&lt;li&gt;Modularity: Provides a base to break application into further smaller services.&lt;/li&gt;
+&lt;li&gt;Reuse: Reuse current infrastructure like network, load balancer. Least disturbance.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hope this blog will help you to find some answers, if you are looking for migrating legacy/old/monolithic applications to docker.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
