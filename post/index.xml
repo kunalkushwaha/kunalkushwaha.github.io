@@ -7,8 +7,116 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Fri, 12 Aug 2016 17:10:24 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 14 Oct 2016 14:05:58 +0900</lastBuildDate>
     <atom:link href="http://kunalkushwaha.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Understanding Infrakit</title>
+      <link>http://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</link>
+      <pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</guid>
+      <description>
+
+&lt;p&gt;Docker recently open sourced new project &lt;a href=&#34;https://github.com/docker/infrakit&#34;&gt;Infrakit&lt;/a&gt; at ContainerCon 2016, Berlin. As project describes itself as&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;A toolkit for creating and managing declarative, self-healing infrastructure&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lets try to understand what it does and how it adds value to existing tools.&lt;/p&gt;
+
+&lt;h3 id=&#34;infrakit:688c9f714106adece8c5c499d991286e&#34;&gt;Infrakit&lt;/h3&gt;
+
+&lt;h5 id=&#34;problem:688c9f714106adece8c5c499d991286e&#34;&gt;Problem&lt;/h5&gt;
+
+&lt;p&gt;Managing docker on different infrastructure is difficult and not portable.&lt;/p&gt;
+
+&lt;h4 id=&#34;history:688c9f714106adece8c5c499d991286e&#34;&gt;History&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Initially Docker machine project was focused for building docker environment on various platforms, but there were lot of issues mainly due to unreliable drivers.
+
+&lt;ul&gt;
+&lt;li&gt;User experience was not great on developer platforms like Mac (VirtualBox issues)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Idea of declarative infrastructure was thought in Docker Machine Project also.&lt;/li&gt;
+&lt;li&gt;Few &lt;a href=&#34;https://github.com/docker/machine/issues/773&#34;&gt;Proposals&lt;/a&gt; and &lt;a href=&#34;https://github.com/docker/machine/pull/2422&#34;&gt;PR were made for declarative infrastructure&lt;/a&gt; but never got merged due to user experience issues and Docker Inc&amp;rsquo;s long term Roadmap vision.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;NOTE:Docker Machine is still very much active project with great userbase.&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Later during &lt;a href=&#34;http://2016.dockercon.com/&#34;&gt;Dockercon16&lt;/a&gt;, while interacting with docker developers &amp;amp; maintainer of Docker Machine, I understood, long term plan is to merge docker machine capabilities into docker engine.&lt;/li&gt;
+&lt;li&gt;Meanwhile Docker had already released &lt;a href=&#34;https://docs.docker.com/engine/installation/mac/&#34;&gt;Docker For Mac&lt;/a&gt;. It is amazing product, as it just works and upgrade itself for new releases too.&lt;/li&gt;
+&lt;li&gt;Docker for AWS/Azure were announced in &lt;a href=&#34;http://2016.dockercon.com/&#34;&gt;Dockercon16&lt;/a&gt;. Infrakit is born out of these projects.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;overview:688c9f714106adece8c5c499d991286e&#34;&gt;Overview&lt;/h4&gt;
+
+&lt;p&gt;Unlike most of docker projects, Infrakit is not about containers, it is about preparing &amp;amp; managing Infrastructure for distributed computing.
+Infrakit by design is build of active process(a.k.a. plugins) which collaborate with each other to analyze and take action to bring infrastructure in desired state. As other plugins in Docker Projects, Infrakit plugins also communicate over unix sockets and use HTTP protocol. This makes plugin implementation language agnostic and can be deployed separately as containers.&lt;/p&gt;
+
+&lt;p&gt;These Plugins are also building block of Infrakit to manage infrastructure.&lt;/p&gt;
+
+&lt;p&gt;Currently there are three kind of plugins supported by Infrakit which represents different layer of abstraction representing whole stack of infrastructure.
+Lets go through each and try to understand their roles.&lt;/p&gt;
+
+&lt;h4 id=&#34;groups:688c9f714106adece8c5c499d991286e&#34;&gt;Groups&lt;/h4&gt;
+
+&lt;p&gt;Groups plugins are for managing cluster of machine. These clusters can be represented by two set of machines.
+- Cattle or Replica : Machines with identical configuration.
+- Pets or Quorum :  Machine with slightly different properties like Ordering and Identity.&lt;/p&gt;
+
+&lt;p&gt;The size of group can be increased and decreased. While changing configuration of machines, rolling updates by swarmkit ensures, no downtime and smooth up-gradation.
+Following actions can be done on group plugin.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;watch/ unwatch a group (start / stop managing a group)&lt;/li&gt;
+&lt;li&gt;inspect a group&lt;/li&gt;
+&lt;li&gt;trigger an update the configuration of a group - like changing its size or underlying properties of instances.&lt;/li&gt;
+&lt;li&gt;stop an update&lt;/li&gt;
+&lt;li&gt;destroy a group&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;instance:688c9f714106adece8c5c499d991286e&#34;&gt;Instance&lt;/h4&gt;
+
+&lt;p&gt;Instance plugin represent, one instance of machine can be Cloud instance or just a VM. These Cloud instance or VMs have same specs.
+Instances define spec of VM or Cloud instance and also we can associate some tags to identify etc.&lt;/p&gt;
+
+&lt;h4 id=&#34;flavors:688c9f714106adece8c5c499d991286e&#34;&gt;Flavors&lt;/h4&gt;
+
+&lt;p&gt;Flavor plugin give flavor to each instance. i.e. What exactly should one instance should contain and running. e.g. setting up software packages etc.&lt;/p&gt;
+
+&lt;p&gt;With these plugins all kind of infrastructure from machine instance point of view can be configured.&lt;/p&gt;
+
+&lt;p&gt;I won&amp;rsquo;t go into implementation details in this blog, but if you want to play with Infrakit, they have very good introductory  &lt;a href=&#34;https://github.com/docker/infrakit/blob/master/docs/tutorial.md&#34;&gt;tutorial&lt;/a&gt;. You must try.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-infrakit-is-different-from-existing-products-and-solutions-available:688c9f714106adece8c5c499d991286e&#34;&gt;How Infrakit is different from existing products and solutions available?&lt;/h3&gt;
+
+&lt;h5 id=&#34;configuration-management-softwares-puppet-chef-etc:688c9f714106adece8c5c499d991286e&#34;&gt;Configuration Management softwares(Puppet/Chef etc).&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;All configuration management software works, once machine are up and running. They do not have capability to create and destroy the computing instances.&lt;/li&gt;
+&lt;li&gt;Infrakit&amp;rsquo;s itself don&amp;rsquo;t have any defined syntax for configuring such as Puppet/Chef. So Puppet/Chef could to be used in Infakit&amp;rsquo;s flavor plugins, where computing node is configured.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&#34;terraform-cloudformation-heat:688c9f714106adece8c5c499d991286e&#34;&gt;Terraform/CloudFormation/Heat.&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Infrakit is similar to these, in terms of works on configuration with state reconciliation feature i.e. Infrakit not only builds the infrastructure but also monitors them for changes and restore to expected state. i.e. If some instances in cluster stops, it will create new instances.&lt;/li&gt;
+&lt;li&gt;Terraform/CloudFormation/Heat can be used as Instance Plugins. Example of &lt;a href=&#34;https://github.com/docker/infrakit/tree/master/example/instance/terraform&#34;&gt;Terraform plugin&lt;/a&gt; is provided by Infrakit&lt;/li&gt;
+&lt;li&gt;Also, Infrakit is not finished product like Terraform, it is a framework which can be used by any existing/new product, to manage different infrastructure is similar fashion.
+It abstracts the details of different infrastructure&amp;rsquo;s to end user.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;final-notes:688c9f714106adece8c5c499d991286e&#34;&gt;Final Notes&lt;/h4&gt;
+
+&lt;p&gt;Infrakit is amazing piece of code &amp;amp; concept for build self healing infrastructure, like Swarmkit to build distributed softwares. Though it is very early in development, so community contribution in ideas and code may bring more changes(in good ways) in Project.&lt;/p&gt;
+
+&lt;p&gt;Issues like preparing docker platform with third party services/framework enabled for Storage/Networking/Security plugins should be far more smoother and I am looking forward to work on same.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Migrating traditional apps to docker</title>
