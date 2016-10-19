@@ -102,7 +102,9 @@ ga('send', 'pageview');
 
     
 
-<p>Docker recently open sourced new project <a href="https://github.com/docker/infrakit">Infrakit</a> at ContainerCon 2016, Berlin. As project describes itself as</p>
+<p>Docker recently open sourced new project <a href="https://github.com/docker/infrakit">Infrakit</a> at ContainerCon 2016, Berlin.</p>
+
+<p>As project describes itself as</p>
 
 <blockquote>
 <p>&ldquo;A toolkit for creating and managing declarative, self-healing infrastructure&rdquo;</p>
@@ -119,7 +121,7 @@ ga('send', 'pageview');
 <h4 id="history:688c9f714106adece8c5c499d991286e">History</h4>
 
 <ul>
-<li>Initially Docker machine project was focused for building docker environment on various platforms, but there were lot of issues mainly due to unreliable drivers.
+<li>Initially Docker machine project was focused for building docker environment on various platforms, but there were lot of issues mainly due to unreliable third party drivers.
 
 <ul>
 <li>User experience was not great on developer platforms like Mac (VirtualBox issues)</li>
@@ -188,15 +190,15 @@ Instances define spec of VM or Cloud instance and also we can associate some tag
 <h5 id="terraform-cloudformation-heat:688c9f714106adece8c5c499d991286e">Terraform/CloudFormation/Heat.</h5>
 
 <ul>
-<li>Infrakit is similar to these, in terms of works on configuration with state reconciliation feature i.e. Infrakit not only builds the infrastructure but also monitors them for changes and restore to expected state. i.e. If some instances in cluster stops, it will create new instances.</li>
+<li>Infrakit is similar to these, in terms of it also works on configuration plus state reconciliation feature i.e. Infrakit not only builds the infrastructure but also monitors them for changes and restore to expected state. i.e. If some instances in cluster stops, it will create new instances.</li>
 <li>Terraform/CloudFormation/Heat can be used as Instance Plugins. Example of <a href="https://github.com/docker/infrakit/tree/master/example/instance/terraform">Terraform plugin</a> is provided by Infrakit</li>
-<li>Also, Infrakit is not finished product like Terraform, it is a framework which can be used by any existing/new product, to manage different infrastructure is similar fashion.
+<li>Also, Infrakit is not polished product like Terraform, it is a framework which can be used by any existing/new product, to manage different infrastructure is similar fashion.
 It abstracts the details of different infrastructure&rsquo;s to end user.</li>
 </ul>
 
 <h4 id="final-notes:688c9f714106adece8c5c499d991286e">Final Notes</h4>
 
-<p>Infrakit is amazing piece of code &amp; concept for build self healing infrastructure, like Swarmkit to build distributed softwares. Though it is very early in development, so community contribution in ideas and code may bring more changes(in good ways) in Project.</p>
+<p>Infrakit is amazing piece of code &amp; concept for build self healing infrastructure, like Swarmkit to building distributed softwares. Though it is very early in development, so community contribution in ideas and code may bring more changes(in good ways) in Project.</p>
 
 <p>Issues like preparing docker platform with third party services/framework enabled for Storage/Networking/Security plugins should be far more smoother and I am looking forward to work on same.</p>
 
