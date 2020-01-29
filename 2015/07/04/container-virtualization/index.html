@@ -2,30 +2,37 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Container Virtualization and its building blocks &middot; Kunal Kushwaha</title>
-        <meta name="description" content="Golang | Containers | Cloud | Tech">
+        <meta name="description" content="Since 2014, Linux containers have become buzz word in Cloud Infrastructure. Almost all, from Big corporations to startups, all have started using it. Huge credit goes to Docker for making using containers so easy to use.
+Linux Containers are there in Linux systems for alomst decade old, But making them work, was not so easy, and generally required linux admin experts for doing same. Few Solution as linux containers like FreeBSD Jails, LXC, openVZ, Solaris Zones etc exists for quite some time.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.15" />
+        <meta name="generator" content="Hugo 0.63.2" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/normalize.css">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/highlight.css">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/style.css">
+        
+        <link rel="stylesheet" href="http://kunalkushwaha.github.io/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
     </head>
     <body>
         
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-62566203-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-62566203-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 
@@ -40,25 +47,28 @@ ga('send', 'pageview');
                         
                         <a class="button-square" href="http://kunalkushwaha.github.io/index.xml"><i class="fa fa-rss"></i></a>
                         
-                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha">
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha" rel="me">
                                 <i class="fa fa-twitter"></i>
                             </a>
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha">
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha" rel="me">
                                 <i class="fa fa-github-alt"></i>
                             </a>
                         
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha">
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha" rel="me">
                                 <i class="fa fa-linkedin"></i>
                             </a>
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14">
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14" rel="me">
                                 <i class="fa fa-google-plus"></i>
                             </a>
+                        
                         
                     </div>
 
@@ -84,168 +94,165 @@ ga('send', 'pageview');
         <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Container Virtualization and its building blocks</h1>
     
-    <p class="post-date">
+    <p class="post-date post-line">
         <span>Published <time datetime="2015-07-04" itemprop="datePublished">Sat, Jul 4, 2015</time></span>
         <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
             <span itemprop="name">
                 <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
             </span>
         </span>
     </p>
+    
 </header>
 
         <div class="post-content clearfix" itemprop="articleBody">
     
 
-    
-
-<p>Since 2014, Linux containers have become buzz word in Cloud Infrastructure. Almost all, from Big corporations to startups, all have started using it. Huge credit goes to <a href="www.docker.com">Docker</a> for making using containers so easy to use.</p>
-
+    <p>Since 2014, Linux containers have become buzz word in Cloud Infrastructure. Almost all, from Big corporations to startups, all have started using it. Huge credit goes to <a href="www.docker.com">Docker</a> for making using containers so easy to use.</p>
 <p>Linux Containers are there in Linux systems for alomst decade old, But making them work, was not so easy, and generally required linux admin experts for doing same. Few Solution as linux containers like FreeBSD Jails, LXC, openVZ, Solaris Zones etc exists for quite some time.</p>
-
 <p>These are also known as OS level Virtualization.
 To understand other type of virtualization please read <a href="http://kunalkushwaha.github.io/post/Layman-guide-to-Platform-Virtualization">Layman guide to Platform virtualization</a></p>
-
-<h2 id="operating-system-level-virtualization:b9f02760c1e2afe4297fc7674428ef9f">Operating System level Virtualization</h2>
-
+<h2 id="operating-system-level-virtualization">Operating System level Virtualization</h2>
 <p>Quoting below from Wikipedia, I it explains beautifully in technical and yet not too complex.</p>
-
 <blockquote>
 <p>OS level Virtualization is a server virtualization method where the kernel of an operating system allows for multiple isolated user space instances, instead of just one. Such instances (often called containers, virtualization engines (VE), virtual private servers (VPS), or jails) may look and feel like a real server from the point of view of its owners and users.</p>
 </blockquote>
-
 <p>In simple words, it allows to run multiple rootfs (user-space) simultaneously and all running rootfs have their own view of filesystem and devices. So they are not aware of each others and resource usage can be configured.</p>
-
 <p>Sounds similar to virtual Machines? Yes it is!</p>
-
-<h4 id="how-this-isolation-is-achieved:b9f02760c1e2afe4297fc7674428ef9f">How this isolation is achieved?</h4>
-
+<h4 id="how-this-isolation-is-achieved">How this isolation is achieved?</h4>
 <p>This isolation is achieved using linux features like namespaces, cgroups and chroot. To understand details we need to first understand each of them.</p>
-
-<h4 id="namespaces:b9f02760c1e2afe4297fc7674428ef9f">Namespaces</h4>
-
+<h4 id="namespaces">Namespaces</h4>
 <p>Namespace wraps a particular global system resource in an abstraction that makes it appear to the processes within the namespace that they have their own isolated instance of the global resource.</p>
-
 <p>Currently, Linux implements six different types of namespaces</p>
-
 <ol>
-<li><h5 id="mount-namespaces-clone-newns:b9f02760c1e2afe4297fc7674428ef9f">Mount namespaces (CLONE_NEWNS)</h5>
-
+<li>
+<h5 id="mount-namespaces-clone_newns">Mount namespaces (CLONE_NEWNS)</h5>
+</li>
+</ol>
 <p>This isolate the set of filesystem mount points seen by a group of processes. Thus, processes in different mount namespaces can have different views of the filesystem hierarchy. With the addition of mount namespaces, the mount() and umount() system calls ceased operating on a global set of mount points visible to all processes on the system and instead performed operations that affected just the mount namespace associated with the calling process.</p>
-
 <ul>
 <li>This is also an alternative to chroot system call.</li>
 <li>This is supported since Linux 2.4.19</li>
-</ul></li>
-
-<li><h5 id="uts-namespaces-clone-newuts:b9f02760c1e2afe4297fc7674428ef9f">UTS namespaces (CLONE_NEWUTS)</h5>
-
+</ul>
+<ol start="2">
+<li>
+<h5 id="uts-namespaces-clone_newuts">UTS namespaces (CLONE_NEWUTS)</h5>
+</li>
+</ol>
 <p>This isolate two system identifiers—nodename and domainname—returned by the uname() system call; the names are set using the sethostname() and setdomainname() system calls.</p>
-
 <ul>
 <li>In the context of containers, the UTS namespaces feature allows each container to have its own hostname and NIS domain name. This can be useful for initialization and configuration scripts that tailor their actions based on these names.</li>
 <li>This is supported in Linux kernel since  Linux 2.6.19.</li>
-</ul></li>
-
-<li><h5 id="ipc-namespaces-clone-newipc:b9f02760c1e2afe4297fc7674428ef9f">IPC namespaces (CLONE_NEWIPC)</h5>
-
+</ul>
+<ol start="3">
+<li>
+<h5 id="ipc-namespaces-clone_newipc">IPC namespaces (CLONE_NEWIPC)</h5>
+</li>
+</ol>
 <p>This isolate certain interprocess communication (IPC) resources, namely, System V IPC objects and (since Linux 2.6.30) POSIX message queues.</p>
-
 <ul>
 <li>The common characteristic of these IPC mechanisms is that IPC objects are identified by mechanisms other than filesystem pathnames. Each IPC namespace has its own set of System V IPC identifiers and its own POSIX message queue filesystem.</li>
 <li>This is supported in Linux kernel since Linux 2.6.19</li>
-</ul></li>
-
-<li><h5 id="pid-namespaces-clone-newpid:b9f02760c1e2afe4297fc7674428ef9f">PID namespaces (CLONE_NEWPID)</h5>
-
-<p>This isolate the process ID number space. In other words, processes in different PID namespaces can have the same PID.</p>
-
+</ul>
+<ol start="4">
+<li>
+<h5 id="pid-namespaces-clone_newpid">PID namespaces (CLONE_NEWPID)</h5>
+This isolate the process ID number space. In other words, processes in different PID namespaces can have the same PID.</li>
+</ol>
 <ul>
 <li>This helps migrating containers between hosts while keeping the same process IDs for the processes inside the container.</li>
 <li>PID namespaces also allow each container to have its own init (PID 1), the &ldquo;ancestor of all processes&rdquo; that manages various system initialization tasks and reaps orphaned child processes when they terminate.</li>
 <li>This is supported since Linux 2.6.24</li>
-</ul></li>
-
-<li><h5 id="network-namespaces-clone-newnet:b9f02760c1e2afe4297fc7674428ef9f">Network namespaces (CLONE_NEWNET)</h5>
-
+</ul>
+<ol start="5">
+<li>
+<h5 id="network-namespaces-clone_newnet">Network namespaces (CLONE_NEWNET)</h5>
+</li>
+</ol>
 <p>This provide isolation of the system resources associated with networking. Thus, each network namespace has its own network devices, IP addresses, IP routing tables, /proc/net directory, port numbers, and so on.</p>
-
 <ul>
 <li>Network namespaces make containers useful from a networking perspective: each container can have its own (virtual) network device and its own applications that bind to the per-namespace port number space.</li>
 <li>started in Linux 2.4.19 2.6.24 and largely completed by about Linux 2.6.29</li>
-</ul></li>
-
-<li><h5 id="user-namespaces-clone-newuser:b9f02760c1e2afe4297fc7674428ef9f">User namespaces (CLONE_NEWUSER)</h5>
-
+</ul>
+<ol start="6">
+<li>
+<h5 id="user-namespaces-clone_newuser">User namespaces (CLONE_NEWUSER)</h5>
+</li>
+</ol>
 <p>This isolate the user and group ID number spaces. In other words, a process&rsquo;s user and group IDs can be different inside and outside a user namespace.</p>
-
 <ul>
 <li>The most interesting case here is that a process can have a normal unprivileged user ID outside a user namespace while at the same time having a user ID of 0 inside the namespace. This means that the process has full root privileges for operations inside the user namespace, but is unprivileged for operations outside the namespace.</li>
 <li>This was partially supported since Linux 2.6.23 and completed in Linux 3.8.</li>
-</ul></li>
-</ol>
-
-<h4 id="control-groups-a-k-a-cgroups:b9f02760c1e2afe4297fc7674428ef9f">Control groups a.k.a. cgroups</h4>
-
-<p>Cgroups allow you to allocate resources—such as CPU time, system memory, network bandwidth, or combinations of these resources—among user-defined groups of tasks (processes) running on a system.
-  - One can configure cgroups, deny cgroups access to certain resources, and even reconfigure cgroups dynamically on a running system.
-  - The cgconfig (control group config) service can be configured to start up at boot time and reestablish your predefined cgroups, thus making them persistent across reboots.
-  - By using cgroups, we gain fine-grained control over allocating, prioritizing, denying, managing, and monitoring system resources. Hardware resources can be appropriately divided up among tasks and users, increasing overall efficiency.
-  - These are like process, hierarchical in nature i.e. child cgroups inherit certain attributes from their parent cgroup.</p>
-
+</ul>
+<h4 id="control-groups-aka-cgroups">Control groups a.k.a. cgroups</h4>
+<p>Cgroups allow you to allocate resources—such as CPU time, system memory, network bandwidth, or combinations of these resources—among user-defined groups of tasks (processes) running on a system.</p>
+<ul>
+<li>One can configure cgroups, deny cgroups access to certain resources, and even reconfigure cgroups dynamically on a running system.</li>
+<li>The cgconfig (control group config) service can be configured to start up at boot time and reestablish your predefined cgroups, thus making them persistent across reboots.</li>
+<li>By using cgroups, we gain fine-grained control over allocating, prioritizing, denying, managing, and monitoring system resources. Hardware resources can be appropriately divided up among tasks and users, increasing overall efficiency.</li>
+<li>These are like process, hierarchical in nature i.e. child cgroups inherit certain attributes from their parent cgroup.</li>
+</ul>
 <p>Follwing resources are supported currently in cgroups.</p>
-
 <ul>
-<li><p>blkio — this subsystem sets limits on input/output access to and from block devices such as physical drives (disk, solid state, USB, etc.).</p></li>
-
-<li><p>cpu — this subsystem uses the scheduler to provide cgroup tasks access to the CPU.</p></li>
-
-<li><p>cpuacct — this subsystem generates automatic reports on CPU resources used by tasks in a cgroup.</p></li>
-
-<li><p>cpuset — this subsystem assigns individual CPUs (on a multicore system) and memory nodes to tasks in a cgroup.</p></li>
-
-<li><p>devices — this subsystem allows or denies access to devices by tasks in a cgroup.</p></li>
-
-<li><p>freezer — this subsystem suspends or resumes tasks in a cgroup.</p></li>
-
-<li><p>memory — this subsystem sets limits on memory use by tasks in a cgroup, and generates automatic reports on memory resources used by those tasks.</p></li>
-
-<li><p>net_cls — this subsystem tags network packets with a class identifier (classid) that allows the Linux traffic controller (tc) to identify packets originating from a particular cgroup task.</p></li>
-
-<li><p>net_prio — this subsystem provides a way to dynamically set the priority of network traffic per network interface.</p></li>
-
-<li><p>ns — the namespace subsystem.</p></li>
+<li>
+<p>blkio — this subsystem sets limits on input/output access to and from block devices such as physical drives (disk, solid state, USB, etc.).</p>
+</li>
+<li>
+<p>cpu — this subsystem uses the scheduler to provide cgroup tasks access to the CPU.</p>
+</li>
+<li>
+<p>cpuacct — this subsystem generates automatic reports on CPU resources used by tasks in a cgroup.</p>
+</li>
+<li>
+<p>cpuset — this subsystem assigns individual CPUs (on a multicore system) and memory nodes to tasks in a cgroup.</p>
+</li>
+<li>
+<p>devices — this subsystem allows or denies access to devices by tasks in a cgroup.</p>
+</li>
+<li>
+<p>freezer — this subsystem suspends or resumes tasks in a cgroup.</p>
+</li>
+<li>
+<p>memory — this subsystem sets limits on memory use by tasks in a cgroup, and generates automatic reports on memory resources used by those tasks.</p>
+</li>
+<li>
+<p>net_cls — this subsystem tags network packets with a class identifier (classid) that allows the Linux traffic controller (tc) to identify packets originating from a particular cgroup task.</p>
+</li>
+<li>
+<p>net_prio — this subsystem provides a way to dynamically set the priority of network traffic per network interface.</p>
+</li>
+<li>
+<p>ns — the namespace subsystem.</p>
+</li>
 </ul>
-
 <p>For details you may refer : <a href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt</a></p>
-
-<h2 id="so-how-these-helps-in-containers:b9f02760c1e2afe4297fc7674428ef9f">So how these helps in containers?</h2>
-
-<p>By now, you must have understood, namespaces and cgroups help to create isolated environment.
-- Namespaces provides isolation of filesystem view, devices, network and processes.
-- Cgroups helps to allocate, devices accessibility, and allocate quota to use the devices.</p>
-
-<p><img align="center" src=http://kunalkushwaha.github.io/images/containers.png></p>
-
-<h2 id="is-this-all-sufficient-for-virtualization:b9f02760c1e2afe4297fc7674428ef9f">Is this all sufficient for Virtualization?</h2>
-
-<p>No, still security is left. To create secure containers features like Capablities, secomp , SELinux and Apparmor are used for that. These all are integrated with new container solutions like Docker, CoreOS rocket etc.</p>
-
-<p>Few Container projects worth wating are
-- LXC - Linux containers : This is default container hypervisior on all linux based systems. <a href="https://linuxcontainers.org/">https://linuxcontainers.org/</a></p>
-
+<h2 id="so-how-these-helps-in-containers">So how these helps in containers?</h2>
+<p>By now, you must have understood, namespaces and cgroups help to create isolated environment.</p>
 <ul>
-<li><p>Docker libcontainer:
-This is now donated by Docker to Linux foundation and new name will is OpenContainers. <a href="http://www.opencontainers.org/">http://www.opencontainers.org/</a></p></li>
-
-<li><p>CoreOS - Rocket - <a href="https://github.com/coreos/rkt">https://github.com/coreos/rkt</a></p></li>
-
-<li><p>Redhat&rsquo;s systemd-nspawn. <a href="http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html">http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html</a></p></li>
+<li>Namespaces provides isolation of filesystem view, devices, network and processes.</li>
+<li>Cgroups helps to allocate, devices accessibility, and allocate quota to use the devices.</li>
 </ul>
-
+<!-- raw HTML omitted -->
+<h2 id="is-this-all-sufficient-for-virtualization">Is this all sufficient for Virtualization?</h2>
+<p>No, still security is left. To create secure containers features like Capablities, secomp , SELinux and Apparmor are used for that. These all are integrated with new container solutions like Docker, CoreOS rocket etc.</p>
+<p>Few Container projects worth wating are</p>
+<ul>
+<li>
+<p>LXC - Linux containers : This is default container hypervisior on all linux based systems. <a href="https://linuxcontainers.org/">https://linuxcontainers.org/</a></p>
+</li>
+<li>
+<p>Docker libcontainer:
+This is now donated by Docker to Linux foundation and new name will is OpenContainers. <a href="http://www.opencontainers.org/">http://www.opencontainers.org/</a></p>
+</li>
+<li>
+<p>CoreOS - Rocket - <a href="https://github.com/coreos/rkt">https://github.com/coreos/rkt</a></p>
+</li>
+<li>
+<p>Redhat&rsquo;s systemd-nspawn. <a href="http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html">http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html</a></p>
+</li>
+</ul>
 <p>I hope this blog would have help you to understand Linux Containers.</p>
-
 <p>I will be writing more on current status of linux containers projects in my next blog so stay tuned :)</p>
 
 </div>
@@ -254,43 +261,55 @@ This is now donated by Docker to Linux foundation and new name will is OpenConta
     
 
     <div class="share">
-        <a class="icon-twitter" href="http://twitter.com/share?text=Container%20Virtualization%20and%20its%20building%20blocks&url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f07%2f04%2fcontainer-virtualization%2f"
-            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-            <i class="fa fa-twitter"></i>
-            <span class="hidden">Twitter</span>
-        </a>
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Container%20Virtualization%20and%20its%20building%20blocks&url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f07%2f04%2fcontainer-virtualization%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
 
-        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f07%2f04%2fcontainer-virtualization%2f"
-            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-            <i class="fa fa-facebook"></i>
-            <span class="hidden">Facebook</span>
-        </a>
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f07%2f04%2fcontainer-virtualization%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
 
-        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f07%2f04%2fcontainer-virtualization%2f"
-           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-           <i class="fa fa-google-plus"></i>
-            <span class="hidden">Google+</span>
-        </a>
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f07%2f04%2fcontainer-virtualization%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
     </div>
 </footer>
 
         
     <div class="comments">
         <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'kunalkushwaha';
-    var disqus_identifier = 'http:\/\/kunalkushwaha.github.io\/2015\/07\/04\/container-virtualization\/';
-    var disqus_title = 'Container Virtualization and its building blocks';
-    var disqus_url = 'http:\/\/kunalkushwaha.github.io\/2015\/07\/04\/container-virtualization\/';
-
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kunalkushwaha" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
 
     </article>
@@ -311,7 +330,7 @@ This is now donated by Docker to Linux foundation and new name will is OpenConta
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2020 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -321,8 +340,12 @@ This is now donated by Docker to Linux foundation and new name will is OpenConta
         </footer>
 
         <script src="http://kunalkushwaha.github.io/js/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
         <script src="http://kunalkushwaha.github.io/js/jquery.fitvids.js"></script>
+        
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        
+        
         <script src="http://kunalkushwaha.github.io/js/scripts.js"></script>
     </body>
 </html>

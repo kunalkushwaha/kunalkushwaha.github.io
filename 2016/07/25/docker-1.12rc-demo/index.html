@@ -2,30 +2,36 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>docker 1.12RC demo &middot; Kunal Kushwaha</title>
         <meta name="description" content="Docker1.12 orchestration demo.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.15" />
+        <meta name="generator" content="Hugo 0.63.2" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/normalize.css">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/highlight.css">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/style.css">
+        
+        <link rel="stylesheet" href="http://kunalkushwaha.github.io/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
     </head>
     <body>
         
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-62566203-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-62566203-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 
@@ -40,25 +46,28 @@ ga('send', 'pageview');
                         
                         <a class="button-square" href="http://kunalkushwaha.github.io/index.xml"><i class="fa fa-rss"></i></a>
                         
-                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha">
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha" rel="me">
                                 <i class="fa fa-twitter"></i>
                             </a>
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha">
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha" rel="me">
                                 <i class="fa fa-github-alt"></i>
                             </a>
                         
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha">
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha" rel="me">
                                 <i class="fa fa-linkedin"></i>
                             </a>
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14">
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14" rel="me">
                                 <i class="fa fa-google-plus"></i>
                             </a>
+                        
                         
                     </div>
 
@@ -86,34 +95,27 @@ ga('send', 'pageview');
     
         <p class="post-description" itemprop="description">Docker1.12 orchestration demo.</p>
     
-    <p class="post-date">
+    <p class="post-date post-line">
         <span>Published <time datetime="2016-07-25" itemprop="datePublished">Mon, Jul 25, 2016</time></span>
         <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
             <span itemprop="name">
                 <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
             </span>
         </span>
     </p>
+    
 </header>
 
         <div class="post-content clearfix" itemprop="articleBody">
     
 
-    
-
-<p>Last friday (22nd July), I gave DockerCon16 Recap Talk and demo at <a href="https://www.meetup.com/Docker-Tokyo/events/231737938/">Docker Meetup Tokyo</a></p>
-
+    <p>Last friday (22nd July), I gave DockerCon16 Recap Talk and demo at <a href="https://www.meetup.com/Docker-Tokyo/events/231737938/">Docker Meetup Tokyo</a></p>
 <p>This blog post gives a walk through my Docker Meetup demonstration, and you can follow these steps to try at your machines.</p>
-
 <p>In DockerCon16, docker 1.12 RC was announced. This release has an important &amp; interesting feature called docker <em>swarm mode</em></p>
-
-<h3 id="get-docker-1-12-rc:6855b0581c631fde987ca5dc2ca3bf28">Get Docker 1.12 RC.</h3>
-
+<h3 id="get-docker-112-rc">Get Docker 1.12 RC.</h3>
 <p>If you are using <a href="https://docs.docker.com/engine/installation/mac/#/docker-for-mac">Docker for Mac</a> or <a href="https://docs.docker.com/engine/installation/windows/#/docker-for-windows">Docker for Windows</a>, You already have docker 1.12RC installed on your machine.</p>
-
 <p>You can check version</p>
-
 <pre><code>$ docker version
 Client:
  Version:      1.12.0-rc4
@@ -132,16 +134,10 @@ Server:
  Built:        Wed Jul 13 03:28:51 2016
  OS/Arch:      linux/amd64
  Experimental: true
-</code></pre>
-
-<p>In case you are using linux or not using above, you can get latest releases from <a href="https://github.com/docker/docker/releases">https://github.com/docker/docker/releases</a></p>
-
-<h3 id="create-demo-docker-hosts:6855b0581c631fde987ca5dc2ca3bf28">Create demo docker hosts.</h3>
-
+</code></pre><p>In case you are using linux or not using above, you can get latest releases from <a href="https://github.com/docker/docker/releases">https://github.com/docker/docker/releases</a></p>
+<h3 id="create-demo-docker-hosts">Create demo docker hosts.</h3>
 <p>To create a swarm of docker hosts, you require more then one docker-host. I use <a href="https://docs.docker.com/machine/">docker-machine</a> to create my docker hosts.</p>
-
 <p>With following commands, my three docker hosts will be ready with docker 1.12 RC installed with default <a href="http://boot2docker.io/">boot2docker</a> image.</p>
-
 <pre><code>$docker-machine -d virtualbox manager
 
 $docker-machine -d virtualbox worker1
@@ -154,22 +150,13 @@ manager   *        virtualbox   Running   tcp://192.168.99.100:2376           v1
 worker1   -        virtualbox   Running   tcp://192.168.99.101:2376           v1.12.0-rc4
 worker2   -        virtualbox   Running   tcp://192.168.99.102:2376           v1.12.0-rc4
 
-</code></pre>
-
-<p><em>Note: If you work behind proxy, use command as <code>docker-machine -d virtualbox -engine-env http_proxy=&quot;example.com:port&quot; manager</code></em></p>
-
+</code></pre><p><em>Note: If you work behind proxy, use command as <code>docker-machine -d virtualbox -engine-env http_proxy=&quot;example.com:port&quot; manager</code></em></p>
 <p>Once, all machines are up and running, we can create swarm.</p>
-
-<h3 id="initialize-swarm:6855b0581c631fde987ca5dc2ca3bf28">Initialize swarm.</h3>
-
+<h3 id="initialize-swarm">Initialize swarm.</h3>
 <p>To run command on my <em>manager</em> node, I need to set my environment variables, so all docker commands gets executed at manager.
 This can be achieved by single command as follows.</p>
-
 <pre><code>$ eval $(docker-machine env manager)
-</code></pre>
-
-<p>Now initialize docker swarm mode.</p>
-
+</code></pre><p>Now initialize docker swarm mode.</p>
 <pre><code>$ docker swarm init --listen-addr $(docker-machine ip manager):2377
 No --secret provided. Generated random secret:
 	aj92ivakk282slwal0ujwaloj
@@ -180,21 +167,13 @@ To add a worker to this swarm, run the following command:
 	docker swarm join --secret aj92ivakk282slwal0ujwaloj \
 	--ca-hash sha256:1f7176d2474cf8dd3fa7a29e46ce42250c5a0aecaf07e40e014f039a7bf1e5ba \
 	192.168.99.100:2377
-</code></pre>
-
-<p>The above command initializes and generates relevant secrets and CA Key for swarm.</p>
-
+</code></pre><p>The above command initializes and generates relevant secrets and CA Key for swarm.</p>
 <p>Currently swarm is created with only one node &ldquo;master&rdquo;</p>
-
 <pre><code>$ docker node ls
 ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
 2ksrqgk2x3vbjh3bw0aly5dwr *  manager   Accepted    Ready   Active        Leader
-</code></pre>
-
-<h3 id="adding-workers-node:6855b0581c631fde987ca5dc2ca3bf28">Adding Workers node</h3>
-
+</code></pre><h3 id="adding-workers-node">Adding Workers node</h3>
 <p>To add swarm workers <code>docker swarm join</code> command will be used.</p>
-
 <pre><code>$ eval $(docker-machine env worker1)
 
 $ docker swarm join --secret aj92ivakk282slwal0ujwaloj \
@@ -208,12 +187,8 @@ $ docker swarm join --secret aj92ivakk282slwal0ujwaloj \
     --ca-hash sha256:1f7176d2474cf8dd3fa7a29e46ce42250c5a0aecaf07e40e014f039a7bf1e5ba \
     192.168.99.100:2377
 This node joined a Swarm as a worker.
-</code></pre>
-
-<p>To view complete list of nodes in swarm, we need to query swarm master.</p>
-
+</code></pre><p>To view complete list of nodes in swarm, we need to query swarm master.</p>
 <p><em>NOTE: In case of multiple masters, query can be made to any master</em></p>
-
 <pre><code>$ eval $(docker-machine env manager)
 
 $ docker node ls
@@ -221,38 +196,22 @@ ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER
 0cs0e5phve5onp41pxfe9c1kj    worker1   Accepted    Ready   Active
 2ksrqgk2x3vbjh3bw0aly5dwr *  manager   Accepted    Ready   Active        Leader
 c6nvb1ljj9mntt1v8qlmxl2my    worker2   Accepted    Ready   Active
-</code></pre>
-
-<blockquote>
-<p><strong><em>Thats it! two commands create whole docker swarm. No external KV Store, No tricky CA Key generation, It all just two commands</em></strong></p>
+</code></pre><blockquote>
+<p><em><strong>Thats it! two commands create whole docker swarm. No external KV Store, No tricky CA Key generation, It all just two commands</strong></em></p>
 </blockquote>
-
-<h3 id="monitoring-events-of-swarm:6855b0581c631fde987ca5dc2ca3bf28">Monitoring events of swarm</h3>
-
+<h3 id="monitoring-events-of-swarm">Monitoring events of swarm</h3>
 <p>In swarm mode all managers have consistent view that enables, the monitoring of whole swarm through any  manager node.
 All you need to listen at /var/run/docker.sock of any manager node.</p>
-
-<h3 id="creating-visualizer-for-swarm:6855b0581c631fde987ca5dc2ca3bf28">Creating Visualizer for Swarm.</h3>
-
+<h3 id="creating-visualizer-for-swarm">Creating Visualizer for Swarm.</h3>
 <p>Visualizer is a simple nodejs app, which listen on <code>/var/run/docker.sock</code> and show nodes present in swarm and containers within as boxes.</p>
-
 <pre><code>$ docker run -it -d -p 8080:8080 -e HOST=$(docker-machine ip manager) -v /var/run/docker.sock:/var/run/docker.sock manomarks/visualizer
-</code></pre>
-
-<p>Open the visualizer in browser with <a href="http://192.168.99.100:8080">http://192.168.99.100:8080</a>, here &ldquo;192.168.99.100&rdquo; is manager node IP.</p>
-
-<p><img align="center" src=http://kunalkushwaha.github.io/SwarmVisualizer-1.jpg></p>
-
-<h3 id="lets-deploy-some-application-in-swarm:6855b0581c631fde987ca5dc2ca3bf28">Lets deploy some Application in swarm</h3>
-
+</code></pre><p>Open the visualizer in browser with http://192.168.99.100:8080, here &ldquo;192.168.99.100&rdquo; is manager node IP.</p>
+<!-- raw HTML omitted -->
+<h3 id="lets-deploy-some-application-in-swarm">Lets deploy some Application in swarm</h3>
 <p>Till now applications can be deployed using <code>docker run</code> command. To support orchestration, docker 1.12 have introduced <code>docker service</code> command. Using <code>service</code> commands, we can define properties of an application, which docker swarm mode tries to reconcile in case of any application errors or node failure.</p>
-
 <p>For demo, I have a simple application <a href="https://github.com/kunalkushwaha/slides/tree/master/examples/webserver">demoapp</a>, which is a simple web-server listen on port <code>5000</code>, prints the some message. Lets try to deploy this application.</p>
-
 <p>Since, I want my application to be spread all over swarm, and all instance should be discoverable, at first, I will create an <a href="https://en.wikipedia.org/wiki/Overlay_network">overlay network</a>.</p>
-
 <p>Lets create overlay network using <code>docker network create</code> command.</p>
-
 <pre><code>$ docker network create -d overlay mynet
 2xjpxwugr0glog7sqywdsnbn6
 
@@ -264,15 +223,12 @@ NETWORK ID          NAME                DRIVER              SCOPE
 dyk8o6w5cddo        ingress             overlay             swarm
 2xjpxwugr0gl        mynet               overlay             swarm
 ae968fa64609        none                null                local
-</code></pre>
-
-<p>In above list of docker networks, there are two overlay networks.
-- ingress is default overlay network which uses <a href="http://www.linuxvirtualserver.org/software/ipvs.html">IPVS</a> and blazing fast due to kernel only data path. This is used for exposing services to external <a href="https://docs.docker.com/engine/swarm/key-concepts/#/load-balancing">load balancers</a>.</p>
-
-<h3 id="create-service:6855b0581c631fde987ca5dc2ca3bf28">Create service</h3>
-
+</code></pre><p>In above list of docker networks, there are two overlay networks.</p>
+<ul>
+<li>ingress is default overlay network which uses <a href="http://www.linuxvirtualserver.org/software/ipvs.html">IPVS</a> and blazing fast due to kernel only data path. This is used for exposing services to external <a href="https://docs.docker.com/engine/swarm/key-concepts/#/load-balancing">load balancers</a>.</li>
+</ul>
+<h3 id="create-service">Create service</h3>
 <p>Lets create a service with 2 replicas(instance) attached to <code>mynet</code> from image <a href="https://hub.docker.com/r/kunalkushwaha/demoapp_image/">kunalkushwaha/demoapp_image</a></p>
-
 <pre><code>$ docker service create \
 &gt; --name demoapp \
 &gt;     --replicas 2 \
@@ -280,14 +236,10 @@ ae968fa64609        none                null                local
 &gt; -p 5000:5000 \
 &gt; kunalkushwaha/demoapp_image:v1
 8fwyujxnc1rm0jwewx5tfeai1
-</code></pre>
-
-<p><code>Service create</code> commands defines that service and docker swarm manager, picks up the definition to schedule it.
+</code></pre><p><code>Service create</code> commands defines that service and docker swarm manager, picks up the definition to schedule it.
 You can monitor, service state by following commands.</p>
-
 <p><code>docker service ls</code> just lists the service and shows how many instance running.
 <code>docker service tasks</code> command give details like on which node service instance is running.</p>
-
 <pre><code>$ docker service ls
 ID            NAME     REPLICAS  IMAGE                           COMMAND
 8fwyujxnc1rm  demoapp  0/2       kunalkushwaha/demoapp_image:v1
@@ -296,10 +248,7 @@ $ docker service tasks demoapp
 ID                         NAME       SERVICE  IMAGE                           LAST STATE              DESIRED STATE  NODE
 a2yczjfyhyryg4pkg8m27ztd6  demoapp.1  demoapp  kunalkushwaha/demoapp_image:v1  Running 21 seconds ago  Running        manager
 aj080rydyghazbhco6h9dhaaw  demoapp.2  demoapp  kunalkushwaha/demoapp_image:v1  Running 21 seconds ago  Running        worker2
-</code></pre>
-
-<p>To read configuration of service, you can use <code>docker service inspect</code> command.</p>
-
+</code></pre><p>To read configuration of service, you can use <code>docker service inspect</code> command.</p>
 <pre><code>$ docker service inspect  demoapp --pretty
 ID:		8fwyujxnc1rm0jwewx5tfeai1
 Name:		demoapp
@@ -319,18 +268,11 @@ Networks: 2xjpxwugr0glog7sqywdsnbn6Ports:
  Protocol = tcp
  TargetPort = 5000
  PublishedPort = 5000
-</code></pre>
-
-<p><img align="center" src=http://kunalkushwaha.github.io/serviceInstance.jpg></p>
-
+</code></pre><!-- raw HTML omitted -->
 <p>Now our service is deployed successfully, lets try to access and see if, it works properly.</p>
-
 <pre><code>$ curl 192.168.99.100:5000
 This is DemoApp v1
-</code></pre>
-
-<p>So far all good! Now lets try to scale this service by 6 instances.</p>
-
+</code></pre><p>So far all good! Now lets try to scale this service by 6 instances.</p>
 <pre><code>$ docker service scale demoapp=6
 demoapp scaled to 6
 
@@ -346,17 +288,11 @@ aj080rydyghazbhco6h9dhaaw  demoapp.2  demoapp  kunalkushwaha/demoapp_image:v1  R
 dzooellh3a2vsbsr2soesfhir  demoapp.4  demoapp  kunalkushwaha/demoapp_image:v1  Running 10 seconds ago    Running        worker2
 5r114sf8i0n5o53s0hwv911g4  demoapp.5  demoapp  kunalkushwaha/demoapp_image:v1  Preparing 10 seconds ago  Running        worker1
 85fbs7z0ntazachrxw98xnjfo  demoapp.6  demoapp  kunalkushwaha/demoapp_image:v1  Preparing 10 seconds ago  Running        worker1
-</code></pre>
-
-<p>If you observe carefully, column of <code>LAST STATE</code> &amp; <code>DESIRED STATE</code> shows <code>demoapp.5</code> and <code>demoapp.6</code> as &ldquo;Preparing&rdquo; and &ldquo;Running&rdquo;
+</code></pre><p>If you observe carefully, column of <code>LAST STATE</code> &amp; <code>DESIRED STATE</code> shows <code>demoapp.5</code> and <code>demoapp.6</code> as &ldquo;Preparing&rdquo; and &ldquo;Running&rdquo;
 This is same as explained above i.e. <code>docker scale</code> command changes the configuration of service. Now docker swarm mode is trying to achieve desired state.</p>
-
-<p><img align="center" src=http://kunalkushwaha.github.io/swarm-scale.jpg></p>
-
-<h3 id="node-failure:6855b0581c631fde987ca5dc2ca3bf28">Node failure.</h3>
-
+<!-- raw HTML omitted -->
+<h3 id="node-failure">Node failure.</h3>
 <p>Let try to delete one of worker node and see how swarm it tries to reconcile the configuration of service.</p>
-
 <pre><code>$ docker-machine rm worker2
 About to remove worker2
 Are you sure? (y/n): y
@@ -370,26 +306,15 @@ a2yczjfyhyryg4pkg8m27ztd6  demoapp.1  demoapp  kunalkushwaha/demoapp_image:v1  R
 8lgqtsewc0vbgh318fx27sm0m  demoapp.4  demoapp  kunalkushwaha/demoapp_image:v1  Accepted 3 seconds ago  Accepted       manager
 5r114sf8i0n5o53s0hwv911g4  demoapp.5  demoapp  kunalkushwaha/demoapp_image:v1  Running 13 minutes ago  Running        worker1
 85fbs7z0ntazachrxw98xnjfo  demoapp.6  demoapp  kunalkushwaha/demoapp_image:v1  Running 13 minutes ago  Running        worker1
-</code></pre>
-
-<p>You can see now, worker2&rsquo;s instances (<code>demoapp.2</code> &amp; <code>demoapp.4</code>) got rescheduled on manager and worker1. All by its own :).</p>
-
-<p><img align="center" src=http://kunalkushwaha.github.io/node-failure.jpg></p>
-
-<h3 id="rolling-updates:6855b0581c631fde987ca5dc2ca3bf28">Rolling updates.</h3>
-
+</code></pre><p>You can see now, worker2&rsquo;s instances (<code>demoapp.2</code> &amp; <code>demoapp.4</code>) got rescheduled on manager and worker1. All by its own :).</p>
+<!-- raw HTML omitted -->
+<h3 id="rolling-updates">Rolling updates.</h3>
 <p>I have v2 of demoapp, which appends IP address of container to message. Lets try to upgrade the application.
 Here we can define how many instances should get upgraded at one point <code>--update-parallelism</code> and also delay between two updates <code>--update-delay</code>.</p>
-
 <p>These both are important feature, which helps to upgrade the application without any downtime. Also, while upgrading if some error occurs, you can rollback the service.</p>
-
 <p>In this example, I will try to upgrade <code>2</code> instances at a time and with delay of <code>30s</code>.</p>
-
 <pre><code>docker service update demoapp --update-parallelism=2 --update-delay 10s --image kunalkushwaha/demoapp_image:v2
-</code></pre>
-
-<p>Now try to get the output of app.</p>
-
+</code></pre><p>Now try to get the output of app.</p>
 <pre><code>$ curl  192.168.99.100:5000
 This is DemoApp v2 @  IP: 10.255.0.13
 
@@ -404,16 +329,10 @@ This is DemoApp v1
 
 $ curl 192.168.99.100:5000
 This is DemoApp v1
-</code></pre>
-
-<p>You can see output is mixed from v1 and v2 application instance. This is due to docker&rsquo;s internal load-balancer. Docker has embedded DNS, which is used for service discovery and load balancing. By default its round-robin.</p>
-
-<h3 id="routing-mesh:6855b0581c631fde987ca5dc2ca3bf28">Routing Mesh.</h3>
-
+</code></pre><p>You can see output is mixed from v1 and v2 application instance. This is due to docker&rsquo;s internal load-balancer. Docker has embedded DNS, which is used for service discovery and load balancing. By default its round-robin.</p>
+<h3 id="routing-mesh">Routing Mesh.</h3>
 <p>With routing mesh, service discovery of services in swarm can be done through any node of swarm. i.e. even if service instance not running on any particular node, still if request comes of application/service port, it will be redirected to one of running instance of service. This is achieved by <code>ingress</code> network.</p>
-
 <p>To demonstrate, lets add one more node into swarm.</p>
-
 <pre><code>$ docker-machine create -d virtualbox worker3
 
 $ eval $(docker-machine env worker3)
@@ -432,10 +351,7 @@ ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER
 5gfj06su4l885zg88qyze7imu    worker3   Accepted    Ready   Active
 c6nvb1ljj9mntt1v8qlmxl2my    worker2   Accepted    Down    Active
 
-</code></pre>
-
-<p>Now, demoapp is running only on worker1 and manager nodes.</p>
-
+</code></pre><p>Now, demoapp is running only on worker1 and manager nodes.</p>
 <pre><code>$ docker service ps demoapp
 ID                         NAME       SERVICE  IMAGE                           LAST STATE              DESIRED STATE  NODE
 9ucohwuw91e8uuquhxidhplsu  demoapp.1  demoapp  kunalkushwaha/demoapp_image:v2  Running 15 minutes ago  Running        manager
@@ -444,10 +360,7 @@ crm4zjjb1hjxdr59zraef4yj9  demoapp.3  demoapp  kunalkushwaha/demoapp_image:v2  R
 9q84itlob65mbzzvpb1dyjtij  demoapp.4  demoapp  kunalkushwaha/demoapp_image:v2  Running 15 minutes ago  Running        worker1
 7bg8r15bq617ghupei8yegqdi  demoapp.5  demoapp  kunalkushwaha/demoapp_image:v2  Running 16 minutes ago  Running        worker1
 5uu9qppsh7ohopc7td1tjs9lg  demoapp.6  demoapp  kunalkushwaha/demoapp_image:v2  Running 15 minutes ago  Running        manager
-</code></pre>
-
-<p>If I try to send request on worker3, still I will be able to get demoapp output and that too with load balancing.</p>
-
+</code></pre><p>If I try to send request on worker3, still I will be able to get demoapp output and that too with load balancing.</p>
 <pre><code>$ docker-machine ip worker3
 192.168.99.103
 
@@ -459,18 +372,14 @@ This is DemoApp v2 @  IP: 10.255.0.14
 
 $ curl --noproxy 192.168.99.103 192.168.99.103:5000
 This is DemoApp v2 @  IP: 10.0.0.7
-</code></pre>
-
-<p>Isnt&rsquo;t this cool!</p>
-
+</code></pre><p>Isnt&rsquo;t this cool!</p>
 <blockquote>
 <p>Docker swarm mode is about making orchestration simple, so anyone without deep understanding of distributed computing, clustering, security should be able to create a robust, scalable and super secure cluster and still focus on his main work.</p>
-
+</blockquote>
+<blockquote>
 <p>Also Docker swarm mode do no expect you to change your workflow and application deployment. It just adapts to you.</p>
 </blockquote>
-
 <p>If you find docker swarm mode interesting, You should look at <a href="https://github.com/docker/swarmkit">SwarmKit</a>. This project does all magic for docker swarm mode and you can use to build your own distributed application.</p>
-
 <p>Hope this blog will help you to explore docker 1.12 RC.</p>
 
 </div>
@@ -480,53 +389,66 @@ This is DemoApp v2 @  IP: 10.0.0.7
         <p class="post-tags">
             <span>Tagged:</span>
             
-                 <a href="/tags/docker1.12/">docker1.12</a>
             
-                 <a href="/tags/swarm-mode/">swarm mode</a>
+                <a href="/tags/docker1.12/">docker1.12</a>, 
             
-                 <a href="/tags/orchestration/">orchestration</a>
+                <a href="/tags/swarm-mode/">swarm mode</a>, 
+            
+                <a href="/tags/orchestration/">orchestration</a>
             
         </p>
     
 
     <div class="share">
-        <a class="icon-twitter" href="http://twitter.com/share?text=docker%201.12RC%20demo&url=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f07%2f25%2fdocker-1.12rc-demo%2f"
-            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-            <i class="fa fa-twitter"></i>
-            <span class="hidden">Twitter</span>
-        </a>
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=docker%201.12RC%20demo&url=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f07%2f25%2fdocker-1.12rc-demo%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
 
-        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f07%2f25%2fdocker-1.12rc-demo%2f"
-            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-            <i class="fa fa-facebook"></i>
-            <span class="hidden">Facebook</span>
-        </a>
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f07%2f25%2fdocker-1.12rc-demo%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
 
-        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f07%2f25%2fdocker-1.12rc-demo%2f"
-           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-           <i class="fa fa-google-plus"></i>
-            <span class="hidden">Google+</span>
-        </a>
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f07%2f25%2fdocker-1.12rc-demo%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
     </div>
 </footer>
 
         
     <div class="comments">
         <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'kunalkushwaha';
-    var disqus_identifier = 'http:\/\/kunalkushwaha.github.io\/2016\/07\/25\/docker-1.12rc-demo\/';
-    var disqus_title = 'docker 1.12RC demo';
-    var disqus_url = 'http:\/\/kunalkushwaha.github.io\/2016\/07\/25\/docker-1.12rc-demo\/';
-
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kunalkushwaha" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
 
     </article>
@@ -547,7 +469,7 @@ This is DemoApp v2 @  IP: 10.0.0.7
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2020 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -557,8 +479,12 @@ This is DemoApp v2 @  IP: 10.0.0.7
         </footer>
 
         <script src="http://kunalkushwaha.github.io/js/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
         <script src="http://kunalkushwaha.github.io/js/jquery.fitvids.js"></script>
+        
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        
+        
         <script src="http://kunalkushwaha.github.io/js/scripts.js"></script>
     </body>
 </html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scheduling on Kunal Kushwaha</title>
+    <link>http://localhost:1313/tags/scheduling/</link>
+    <description>Recent content in scheduling on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Tue, 22 Nov 2016 14:49:48 +0900</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/scheduling/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker Services Scheduling</title>
+      <link>http://localhost:1313/2016/11/22/docker-service-scheduling/</link>
+      <pubDate>Tue, 22 Nov 2016 14:49:48 +0900</pubDate>
+      
+      <guid>http://localhost:1313/2016/11/22/docker-service-scheduling/</guid>
+      <description>Overview Docker service scheduling is one of important aspect in planing and deployment of service over docker cluster. Your Docker swarm mode default&amp;rsquo;s scheduling strategy is &amp;ldquo;spread&amp;rdquo;. With spread strategy, swarm scheduler ranks node based on available CPU,RAM and number of containers.
+NOTE: Docker containers eat resources during its life-cycle irrespective of their state, even containers with Exited state. Hence scheduler consider all containers including container with Exited state
+TODO: Why needs to be controlled?</description>
+    </item>
+    
+  </channel>
+</rss>

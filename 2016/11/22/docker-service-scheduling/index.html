@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Docker Services Scheduling &middot; Kunal Kushwaha</title>
+        <meta name="description" content="Understanding how docker services scheduling works in swarm mode">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.63.2" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="http://localhost:1313/dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-62566203-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Kunal Kushwaha" href="http://localhost:1313/">Kunal Kushwaha</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://localhost:1313/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha" rel="me">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha" rel="me">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha" rel="me">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14" rel="me">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Docker Services Scheduling</h1>
+    
+        <p class="post-description" itemprop="description">Understanding how docker services scheduling works in swarm mode</p>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2016-11-22" itemprop="datePublished">Tue, Nov 22, 2016</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <h4 id="overview">Overview</h4>
+<p>Docker service scheduling is one of important aspect in planing and deployment of service over docker cluster.
+Your Docker swarm mode default&rsquo;s scheduling strategy is &ldquo;spread&rdquo;. With spread strategy, swarm scheduler ranks node based on available CPU,RAM and number of containers.</p>
+<p><em>NOTE: Docker containers eat resources during its life-cycle irrespective of their state, even containers with <code>Exited</code> state. Hence scheduler consider all containers including container with <code>Exited</code> state</em></p>
+<h1 id="todo-why-needs-to-be-controlled">TODO: Why needs to be controlled?</h1>
+<p>But it can be controlled by adding various constraints.</p>
+<p>Constraints: Operators can control or limit the set of nodes on which tasks can be scheduled.</p>
+<p>Constraints: Operators can limit the set of nodes where a task can be scheduled by defining constraint expressions. Multiple constraints find nodes that satisfy every expression, i.e., an AND match. Constraints can match node attributes in the following table. Note that engine.labels are collected from Docker Engine with information like operating system, drivers, etc. node.labels are added by cluster administrators for operational purpose. For example, some nodes have security compliant labels to run tasks with compliant requirements.</p>
+<table>
+<thead>
+<tr>
+<th>node attribute</th>
+<th>matches</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node.id</td>
+<td>node&rsquo;s ID</td>
+<td><code>node.id == 2ivku8v2gvtg4</code></td>
+</tr>
+<tr>
+<td>node.hostname</td>
+<td>node&rsquo;s hostname</td>
+<td><code>node.hostname != node-2</code></td>
+</tr>
+<tr>
+<td>node.role</td>
+<td>node&rsquo;s manager or worker role</td>
+<td><code>node.role == manager</code></td>
+</tr>
+<tr>
+<td>node.labels</td>
+<td>node&rsquo;s labels added by cluster admins</td>
+<td><code>node.labels.security == high</code></td>
+</tr>
+<tr>
+<td>engine.labels</td>
+<td>Docker Engine&rsquo;s labels</td>
+<td><code>engine.labels.operatingsystem == ubuntu 14.04</code></td>
+</tr>
+</tbody>
+</table>
+<p>Why node lebels when docker engines had engine labels?</p>
+<ul>
+<li>Engine labels can&rsquo;t be trusted for security sensitive scheduling decisions, since any worker can report any label up to a manager. They are, however, useful for things like &ldquo;Does this host have an SSD?&quot;, or &ldquo;how much ram/disk space does this host have?&quot;.</li>
+</ul>
+<p>These swarm labels, on the other hand, are always trustworthy, since they are set by an administrator explicitly. This means that we can label a host as pci-dss, and create a constraint to ensure that credit-card-app only gets scheduled on worker nodes that are labeled as pci-dss, and that no malicious worker can self-label itself as pci-dss.</p>
+<pre><code>$ docker-machine create -d virtualbox --engine-env HTTP_PROXY=&quot;http://proxy.rdh.ecl.ntt.co.jp:20066&quot; --engine-env HTTPS_PROXY=&quot;http://proxy.rdh.ecl.ntt.co.jp:20066&quot; --engine-label node=node2 --engine-label storage=ssd node2
+Running pre-create checks...
+Creating machine...
+(node2) Unable to get the latest Boot2Docker ISO release version:  Get https://api.github.com/repos/boot2docker/boot2docker/releases/latest: x509: certificate is valid for inetnf.auth, not api.github.com
+(node2) Copying /Users/kunalkushwaha/.docker/machine/cache/boot2docker.iso to /Users/kunalkushwaha/.docker/machine/machines/node2/boot2docker.iso...
+(node2) Creating VirtualBox VM...
+(node2) Creating SSH key...
+(node2) Starting the VM...
+(node2) Check network to re-create if needed...
+(node2) Waiting for an IP...
+Waiting for machine to be running, this may take a few minutes...
+Detecting operating system of created instance...
+Waiting for SSH to be available...
+Detecting the provisioner...
+Provisioning with boot2docker...
+Copying certs to the local machine directory...
+Copying certs to the remote machine...
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env node2
+
+$ eval $(docker-machine env node2)
+
+$ docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 1.12.3
+Storage Driver: aufs
+ Root Dir: /mnt/sda1/var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 0
+ Dirperm1 Supported: true
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: overlay null host bridge
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Security Options: seccomp
+Kernel Version: 4.4.27-boot2docker
+Operating System: Boot2Docker 1.12.3 (TCL 7.2); HEAD : 7fc7575 - Thu Oct 27 17:23:17 UTC 2016
+OSType: linux
+Architecture: x86_64
+CPUs: 1
+Total Memory: 995.8 MiB
+Name: node2
+ID: 5HAZ:LAGO:KVF4:WLRP:P356:O6IA:W6GD:3LYO:JGDJ:5QN6:U6L6:J3BZ
+Docker Root Dir: /mnt/sda1/var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): true
+ File Descriptors: 13
+ Goroutines: 23
+ System Time: 2016-11-22T02:20:13.630275393Z
+ EventsListeners: 0
+Http Proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
+Https Proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
+Username: kunalkushwaha
+Registry: https://index.docker.io/v1/
+Labels:
+ node=node2
+ storage=ssd
+ provider=virtualbox
+Insecure Registries:
+ 127.0.0.0/8
+
+
+
+ $ eval $(docker-machine env default)
+
+~/Downloads ⌚ 11:21:03
+$ docker swarm init --advertise-addr 192.168.99.100
+Swarm initialized: current node (4r4qnxd8ztxuiusldvrf9gub6) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join \
+    --token SWMTKN-1-1b7a6a6ophwlo85ihe3ss2lkg678d0re52p5dqezk5m3xtwur5-2vsgk9in2cm2b97f3gg3xmii4 \
+    192.168.99.100:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+
+~/Downloads ⌚ 11:21:22
+$ eval $(docker-machine env node2)
+
+~/Downloads ⌚ 11:21:37
+$ docker swarm join \
+    --token SWMTKN-1-1b7a6a6ophwlo85ihe3ss2lkg678d0re52p5dqezk5m3xtwur5-2vsgk9in2cm2b97f3gg3xmii4 \
+    192.168.99.100:2377
+This node joined a swarm as a worker.
+
+$ docker info
+Containers: 0
+ Running: 0
+ Paused: 0
+ Stopped: 0
+Images: 0
+Server Version: 1.12.3
+Storage Driver: aufs
+ Root Dir: /mnt/sda1/var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 0
+ Dirperm1 Supported: true
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: bridge null overlay host
+Swarm: active
+ NodeID: 5z607lfu3sigaliuzcpo0wsrf
+ Is Manager: false
+ Node Address: 192.168.99.101
+Runtimes: runc
+Default Runtime: runc
+Security Options: seccomp
+Kernel Version: 4.4.27-boot2docker
+Operating System: Boot2Docker 1.12.3 (TCL 7.2); HEAD : 7fc7575 - Thu Oct 27 17:23:17 UTC 2016
+OSType: linux
+Architecture: x86_64
+CPUs: 1
+Total Memory: 995.8 MiB
+Name: node2
+ID: 5HAZ:LAGO:KVF4:WLRP:P356:O6IA:W6GD:3LYO:JGDJ:5QN6:U6L6:J3BZ
+Docker Root Dir: /mnt/sda1/var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): true
+ File Descriptors: 22
+ Goroutines: 68
+ System Time: 2016-11-22T02:21:46.868274301Z
+ EventsListeners: 0
+Http Proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
+Https Proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
+Username: kunalkushwaha
+Registry: https://index.docker.io/v1/
+Labels:
+ node=node2
+ storage=ssd
+ provider=virtualbox
+Insecure Registries:
+ 127.0.0.0/8
+
+
+ docker service create \
+  --replicas 2 \
+  --name helloworld1 \
+  --constraint 'engine.labels.storage == ssd' \
+  alpine ping docker.com
+
+  ~/work/GlobalMentorWeek on  master! ⌚ 13:53:25
+  $ docker node update --label-add key1=master default
+  default
+
+  ~/work/GlobalMentorWeek on  master! ⌚ 13:54:05
+  $ docker node inspect 4r4qnxd8ztxuiusldvrf9gub6 --pretty
+  ID:			4r4qnxd8ztxuiusldvrf9gub6
+  Labels:
+   - key = primary
+   - key1 = master
+  Hostname:		default
+  Joined at:		2016-11-22 02:21:21.596149476 +0000 utc
+  Status:
+   State:			Ready
+   Availability:		Active
+  Manager Status:
+   Address:		192.168.99.100:2377
+   Raft Status:		Reachable
+   Leader:		Yes
+  Platform:
+   Operating System:	linux
+   Architecture:		x86_64
+  Resources:
+   CPUs:			1
+   Memory:		995.8 MiB
+  Plugins:
+    Network:		bridge, host, null, overlay
+    Volume:		local
+  Engine Version:		1.12.3
+  Engine Labels:
+   - node = node1
+   - provider = virtualbox
+   - storage = hdd
+
+
+$ docker service create \
+  --replicas 2 \
+  --name helloworld2 \
+  --constraint 'node.labels.key == primary' \
+  alpine ping docker.com
+b2g40mrmok4ii9wcmqdlgv7s0
+
+</code></pre>
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+            
+                <a href="/tags/docker/">docker</a>, 
+            
+                <a href="/tags/swarm-mode/">swarm mode</a>, 
+            
+                <a href="/tags/services/">services</a>, 
+            
+                <a href="/tags/scheduling/">scheduling</a>
+            
+        </p>
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Docker%20Services%20Scheduling&url=http%3a%2f%2flocalhost%3a1313%2f2016%2f11%2f22%2fdocker-service-scheduling%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2f2016%2f11%2f22%2fdocker-service-scheduling%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2f2016%2f11%2f22%2fdocker-service-scheduling%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kunalkushwaha" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Kunal Kushwaha" href="http://localhost:1313/">Kunal Kushwaha</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2020 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://localhost:1313/js/jquery-1.11.3.min.js"></script>
+        <script src="http://localhost:1313/js/jquery.fitvids.js"></script>
+        
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        
+        
+        <script src="http://localhost:1313/js/scripts.js"></script>
+    <script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10&v=2"></' + 'script>')</script></body>
+</html>
+

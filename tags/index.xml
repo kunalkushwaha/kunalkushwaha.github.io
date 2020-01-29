@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Kunal Kushwaha</title>
+    <link>http://kunalkushwaha.github.io/tags/</link>
+    <description>Recent content in Tags on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Tue, 28 Jan 2020 14:26:37 +0900</lastBuildDate>
+    
+	<atom:link href="http://kunalkushwaha.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>configmap</title>
+      <link>http://kunalkushwaha.github.io/tags/configmap/</link>
+      <pubDate>Tue, 28 Jan 2020 14:26:37 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/configmap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>http://kunalkushwaha.github.io/tags/k8s/</link>
+      <pubDate>Tue, 28 Jan 2020 14:26:37 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/k8s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>http://kunalkushwaha.github.io/tags/kubernetes/</link>
+      <pubDate>Tue, 28 Jan 2020 14:26:37 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pods</title>
+      <link>http://kunalkushwaha.github.io/tags/pods/</link>
+      <pubDate>Tue, 28 Jan 2020 14:26:37 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/pods/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>secret</title>
+      <link>http://kunalkushwaha.github.io/tags/secret/</link>
+      <pubDate>Tue, 28 Jan 2020 14:26:37 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/secret/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chef</title>
+      <link>http://kunalkushwaha.github.io/tags/chef/</link>
+      <pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/chef/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker machine</title>
+      <link>http://kunalkushwaha.github.io/tags/docker-machine/</link>
+      <pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/docker-machine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>infrakit</title>
+      <link>http://kunalkushwaha.github.io/tags/infrakit/</link>
+      <pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/infrakit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>puppet</title>
+      <link>http://kunalkushwaha.github.io/tags/puppet/</link>
+      <pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/puppet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>http://kunalkushwaha.github.io/tags/docker/</link>
+      <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fixed-ip</title>
+      <link>http://kunalkushwaha.github.io/tags/fixed-ip/</link>
+      <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/fixed-ip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>legacy</title>
+      <link>http://kunalkushwaha.github.io/tags/legacy/</link>
+      <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/legacy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>migration</title>
+      <link>http://kunalkushwaha.github.io/tags/migration/</link>
+      <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/migration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker1.12</title>
+      <link>http://kunalkushwaha.github.io/tags/docker1.12/</link>
+      <pubDate>Mon, 25 Jul 2016 13:39:38 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/docker1.12/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>orchestration</title>
+      <link>http://kunalkushwaha.github.io/tags/orchestration/</link>
+      <pubDate>Mon, 25 Jul 2016 13:39:38 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/orchestration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>swarm mode</title>
+      <link>http://kunalkushwaha.github.io/tags/swarm-mode/</link>
+      <pubDate>Mon, 25 Jul 2016 13:39:38 +0900</pubDate>
+      
+      <guid>http://kunalkushwaha.github.io/tags/swarm-mode/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

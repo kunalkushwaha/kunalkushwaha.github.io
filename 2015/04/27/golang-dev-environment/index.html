@@ -2,30 +2,38 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Golang Development Environment &middot; Kunal Kushwaha</title>
-        <meta name="description" content="Golang | Containers | Cloud | Tech">
+        <meta name="description" content="Setting up golang environment is quite simple good docs are already present in golang.org. But I couldn&rsquo;t find any simple doc, where complete setup with GOROOT and GOPATH along with github is explained.
+So I thought it might be helpful to others too. My dev environment is ubuntu based ElementryOS &ldquo;Freya&rdquo;, So it would work on all Ubuntu based distros.
+Golang Installer Golang comes with single tar file setup can be downloaded from here extract the tar file to your /usr/local using below command">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.15" />
+        <meta name="generator" content="Hugo 0.63.2" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/normalize.css">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/highlight.css">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/style.css">
+        
+        <link rel="stylesheet" href="http://kunalkushwaha.github.io/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
     </head>
     <body>
         
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-62566203-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-62566203-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 
@@ -40,25 +48,28 @@ ga('send', 'pageview');
                         
                         <a class="button-square" href="http://kunalkushwaha.github.io/index.xml"><i class="fa fa-rss"></i></a>
                         
-                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha">
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha" rel="me">
                                 <i class="fa fa-twitter"></i>
                             </a>
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha">
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha" rel="me">
                                 <i class="fa fa-github-alt"></i>
                             </a>
                         
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha">
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha" rel="me">
                                 <i class="fa fa-linkedin"></i>
                             </a>
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14">
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14" rel="me">
                                 <i class="fa fa-google-plus"></i>
                             </a>
+                        
                         
                     </div>
 
@@ -84,138 +95,98 @@ ga('send', 'pageview');
         <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Golang Development Environment</h1>
     
-    <p class="post-date">
+    <p class="post-date post-line">
         <span>Published <time datetime="2015-04-27" itemprop="datePublished">Mon, Apr 27, 2015</time></span>
         <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
             <span itemprop="name">
                 <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
             </span>
         </span>
     </p>
+    
 </header>
 
         <div class="post-content clearfix" itemprop="articleBody">
     
 
-    
-
-<p>Setting up golang environment is quite simple good docs are already present in golang.org.
-<br>But I couldn&rsquo;t find any simple doc, where complete setup with GOROOT and GOPATH along with github is explained.</p>
-
+    <p>Setting up golang environment is quite simple good docs are already present in golang.org.
+<!-- raw HTML omitted -->But I couldn&rsquo;t find any simple doc, where complete setup with GOROOT and GOPATH along with github is explained.</p>
 <p>So I thought it might be helpful to others too.
-<br>My dev environment is ubuntu based <a href="https://elementary.io/">ElementryOS &ldquo;Freya&rdquo;</a>, So it would work on all Ubuntu based distros.</p>
-
-<h3 id="golang-installer:22b90498ad19ed8bfadbfc3c440b6be8">Golang Installer</h3>
-
+<!-- raw HTML omitted -->My dev environment is ubuntu based <a href="https://elementary.io/">ElementryOS &ldquo;Freya&rdquo;</a>, So it would work on all Ubuntu based distros.</p>
+<h3 id="golang-installer">Golang Installer</h3>
 <p>Golang comes with single tar file setup can be downloaded from <a href="https://golang.org/dl/">here</a>
-<br>extract the tar file to your /usr/local using below command</p>
-
-<pre><code class="language-shell">tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
-</code></pre>
-
-<p>this will install your all go binaries under following dir structure.</p>
-
+<!-- raw HTML omitted -->extract the tar file to your /usr/local using below command</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tar -C /usr/local -xzf go$VERSION.$OS-$ARCH.tar.gz
+</code></pre></div><p>this will install your all go binaries under following dir structure.</p>
 <p>base folder where go is installed.</p>
-
-<pre><code class="language-shell">/usr/local/go
-</code></pre>
-
-<p>All standard go binaries are in</p>
-
-<pre><code class="language-shell">/usr/local/go/bin
-</code></pre>
-
-<h3 id="golang-environment-setup:22b90498ad19ed8bfadbfc3c440b6be8">Golang environment setup.</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">/usr/local/go
+</code></pre></div><p>All standard go binaries are in</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">/usr/local/go/bin
+</code></pre></div><h3 id="golang-environment-setup">Golang environment setup.</h3>
 <p>Now next step is to define golang related environment variable.
-<br>There are two important golang Env variables that need to be defined.</p>
-
+<!-- raw HTML omitted -->There are two important golang Env variables that need to be defined.</p>
 <ol>
 <li>GOROOT : This variable have value, where golang is installed.</li>
 <li>GOPATH : This is like workspace. This folder will be root of all go getable packages and projects.</li>
 </ol>
-
-<p><br>So you need to create a folder for GOPATH. My fav is ~/go folder.</p>
-
-<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ mkdir ~/go
-</code></pre>
-
-<p>So now define GOROOT, GOPATH and append PATH variables.</p>
-
-<pre><code class="language-shell">export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-</code></pre>
-
-<p>Its better to append your ~/.profile file with these 3 lines. So no need to export these variables every time you restart machine.</p>
-
+<p><!-- raw HTML omitted -->So you need to create a folder for GOPATH. My fav is ~/go folder.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kunal@kunal-Aspire-5670:~$ mkdir ~/go
+</code></pre></div><p>So now define GOROOT, GOPATH and append PATH variables.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">export GOROOT<span style="color:#f92672">=</span>/usr/local/go
+export GOPATH<span style="color:#f92672">=</span>$HOME/go
+export PATH<span style="color:#f92672">=</span>$PATH:$GOROOT/bin:$GOPATH/bin
+</code></pre></div><p>Its better to append your ~/.profile file with these 3 lines. So no need to export these variables every time you restart machine.</p>
 <p>After setting environment variables check if everything is set as per expected or not!
-<br>Use &ldquo;go env&rdquo; command.</p>
-
-<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ go env
-GOARCH=&quot;386&quot;
-GOBIN=&quot;&quot;
-GOCHAR=&quot;8&quot;
-GOEXE=&quot;&quot;
-GOHOSTARCH=&quot;386&quot;
-GOHOSTOS=&quot;linux&quot;
-GOOS=&quot;linux&quot;
-GOPATH=&quot;/home/kunal/go&quot;
-GORACE=&quot;&quot;
-GOROOT=&quot;/usr/local/go&quot;
-GOTOOLDIR=&quot;/usr/local/go/pkg/tool/linux_386&quot;
-CC=&quot;gcc&quot;
-GOGCCFLAGS=&quot;-fPIC -m32 -pthread -fmessage-length=0&quot;
-CXX=&quot;g++&quot;
-CGO_ENABLED=&quot;1&quot;
-</code></pre>
-
-<p>verify GOPATH and GOROOT.</p>
-
-<h3 id="go-getable:22b90498ad19ed8bfadbfc3c440b6be8">go getable.</h3>
-
+<!-- raw HTML omitted -->Use &ldquo;go env&rdquo; command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kunal@kunal-Aspire-5670:~$ go env
+GOARCH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;386&#34;</span>
+GOBIN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+GOCHAR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;8&#34;</span>
+GOEXE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+GOHOSTARCH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;386&#34;</span>
+GOHOSTOS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;linux&#34;</span>
+GOOS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;linux&#34;</span>
+GOPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/home/kunal/go&#34;</span>
+GORACE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+GOROOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/go&#34;</span>
+GOTOOLDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/go/pkg/tool/linux_386&#34;</span>
+CC<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gcc&#34;</span>
+GOGCCFLAGS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-fPIC -m32 -pthread -fmessage-length=0&#34;</span>
+CXX<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;g++&#34;</span>
+CGO_ENABLED<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>
+</code></pre></div><p>verify GOPATH and GOROOT.</p>
+<h3 id="go-getable">go getable.</h3>
 <p>One of beauty of golang is &ldquo;go get&rdquo; command.
-<br>It automatically downloads the all required packages along with your program from git repo or mercurial.</p>
-
+<!-- raw HTML omitted -->It automatically downloads the all required packages along with your program from git repo or mercurial.</p>
 <p>Prerequisite to this is you should install git and mercurial both on your machine.
 mercurial is required as lot of official libraries of golang is still hosted at google code and it hosted with mercurial.</p>
-
-<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ sudo apt-get install mercurial
-</code></pre>
-
-<p>So we are set with all basics, now ready for go getable your code!</p>
-
-<p>after your go get github.com/<some-go-project>, You will see your ~/go folder have sum folder structure created.</p>
-
-<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ ll go
-total 32
-drwxrwxr-x  6 kunal kunal  4096 Apr 20 20:28 ./
-drwx------ 24 kunal kunal 12288 Apr 27 22:45 ../
-drwxrwxr-x  2 kunal kunal  4096 Apr 16 03:27 bin/
-drwxrwxr-x  3 kunal kunal  4096 Apr 12 21:26 pkg/
-drwxrwxr-x  8 kunal kunal  4096 Apr 16 03:24 src/
-</code></pre>
-
-<p>These are folder which will have all your go getable code/packages and binaries.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kunal@kunal-Aspire-5670:~$ sudo apt-get install mercurial
+</code></pre></div><p>So we are set with all basics, now ready for go getable your code!</p>
+<p>after your go get github.com/<!-- raw HTML omitted -->, You will see your ~/go folder have sum folder structure created.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kunal@kunal-Aspire-5670:~$ ll go
+total <span style="color:#ae81ff">32</span>
+drwxrwxr-x  <span style="color:#ae81ff">6</span> kunal kunal  <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">20</span> 20:28 ./
+drwx------ <span style="color:#ae81ff">24</span> kunal kunal <span style="color:#ae81ff">12288</span> Apr <span style="color:#ae81ff">27</span> 22:45 ../
+drwxrwxr-x  <span style="color:#ae81ff">2</span> kunal kunal  <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">16</span> 03:27 bin/
+drwxrwxr-x  <span style="color:#ae81ff">3</span> kunal kunal  <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">12</span> 21:26 pkg/
+drwxrwxr-x  <span style="color:#ae81ff">8</span> kunal kunal  <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">16</span> 03:24 src/
+</code></pre></div><p>These are folder which will have all your go getable code/packages and binaries.
 *bin : folder will have binaries build after you build go project using &ldquo;go build&rdquo;
 *pkg : this will have all pakages downloaded due to dependencies of your program. These packages compiled packages.
 *src : this will have your source code under folder of source of code like github.com , bitbucket.com, code.google.com etc
 e.g</p>
-
-<pre><code class="language-shell">kunal@kunal-Aspire-5670:~$ ll go/src/
-total 32
-drwxrwxr-x  8 kunal kunal 4096 Apr 16 03:24 ./
-drwxrwxr-x  6 kunal kunal 4096 Apr 20 20:28 ../
-drwxrwxr-x  3 kunal kunal 4096 Apr 16 03:24 bitbucket.org/
-drwxrwxr-x  3 kunal kunal 4096 Apr 12 21:28 code.google.com/
-drwxrwxr-x 38 kunal kunal 4096 Apr 20 20:05 github.com/
-drwxrwxr-x  3 kunal kunal 4096 Apr 12 21:29 golang.org/
-drwxrwxr-x  3 kunal kunal 4096 Apr 12 21:29 google.golang.org/
-drwxrwxr-x  6 kunal kunal 4096 Apr 16 03:26 gopkg.in/
-</code></pre>
-
-<p>So you are now all set for code/test/ship in golang. Happy Coding :)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kunal@kunal-Aspire-5670:~$ ll go/src/
+total <span style="color:#ae81ff">32</span>
+drwxrwxr-x  <span style="color:#ae81ff">8</span> kunal kunal <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">16</span> 03:24 ./
+drwxrwxr-x  <span style="color:#ae81ff">6</span> kunal kunal <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">20</span> 20:28 ../
+drwxrwxr-x  <span style="color:#ae81ff">3</span> kunal kunal <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">16</span> 03:24 bitbucket.org/
+drwxrwxr-x  <span style="color:#ae81ff">3</span> kunal kunal <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">12</span> 21:28 code.google.com/
+drwxrwxr-x <span style="color:#ae81ff">38</span> kunal kunal <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">20</span> 20:05 github.com/
+drwxrwxr-x  <span style="color:#ae81ff">3</span> kunal kunal <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">12</span> 21:29 golang.org/
+drwxrwxr-x  <span style="color:#ae81ff">3</span> kunal kunal <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">12</span> 21:29 google.golang.org/
+drwxrwxr-x  <span style="color:#ae81ff">6</span> kunal kunal <span style="color:#ae81ff">4096</span> Apr <span style="color:#ae81ff">16</span> 03:26 gopkg.in/
+</code></pre></div><p>So you are now all set for code/test/ship in golang. Happy Coding :)</p>
 
 </div>
 
@@ -223,43 +194,55 @@ drwxrwxr-x  6 kunal kunal 4096 Apr 16 03:26 gopkg.in/
     
 
     <div class="share">
-        <a class="icon-twitter" href="http://twitter.com/share?text=Golang%20Development%20Environment&url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f04%2f27%2fgolang-dev-environment%2f"
-            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-            <i class="fa fa-twitter"></i>
-            <span class="hidden">Twitter</span>
-        </a>
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Golang%20Development%20Environment&url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f04%2f27%2fgolang-dev-environment%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
 
-        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f04%2f27%2fgolang-dev-environment%2f"
-            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-            <i class="fa fa-facebook"></i>
-            <span class="hidden">Facebook</span>
-        </a>
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f04%2f27%2fgolang-dev-environment%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
 
-        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f04%2f27%2fgolang-dev-environment%2f"
-           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-           <i class="fa fa-google-plus"></i>
-            <span class="hidden">Google+</span>
-        </a>
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f04%2f27%2fgolang-dev-environment%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
     </div>
 </footer>
 
         
     <div class="comments">
         <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'kunalkushwaha';
-    var disqus_identifier = 'http:\/\/kunalkushwaha.github.io\/2015\/04\/27\/golang-dev-environment\/';
-    var disqus_title = 'Golang Development Environment';
-    var disqus_url = 'http:\/\/kunalkushwaha.github.io\/2015\/04\/27\/golang-dev-environment\/';
-
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kunalkushwaha" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
 
     </article>
@@ -280,7 +263,7 @@ drwxrwxr-x  6 kunal kunal 4096 Apr 16 03:26 gopkg.in/
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2020 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -290,8 +273,12 @@ drwxrwxr-x  6 kunal kunal 4096 Apr 16 03:26 gopkg.in/
         </footer>
 
         <script src="http://kunalkushwaha.github.io/js/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
         <script src="http://kunalkushwaha.github.io/js/jquery.fitvids.js"></script>
+        
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        
+        
         <script src="http://kunalkushwaha.github.io/js/scripts.js"></script>
     </body>
 </html>

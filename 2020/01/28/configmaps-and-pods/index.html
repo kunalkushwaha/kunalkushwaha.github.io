@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>ConfigMaps and Pods &middot; Kunal Kushwaha</title>
+        <meta name="description" content="A Pod is collection of containers running in shared namespace. A container is created from Docker/OCI Image, which is immutable in nature i.e. data bundled into the image cannot be changed later in image.
+ &ldquo;While immutable image of application is great for security, but putting configurations &amp; data like security keys is bad for security as well as portability&rdquo;
+ There are various ways to pass data to application in containers, without changing the flow of application e.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.63.2" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="http://kunalkushwaha.github.io/dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+    </head>
+    <body>
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-62566203-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io/">Kunal Kushwaha</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://kunalkushwaha.github.io/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha" rel="me">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha" rel="me">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha" rel="me">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14" rel="me">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Blog" href="/">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="/about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">ConfigMaps and Pods</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2020-01-28" itemprop="datePublished">Tue, Jan 28, 2020</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    <p><img src="http://kunalkushwaha.github.io/ConfigMap-Pod.jpg" alt="ConfigMap and Pod Relation" title=""></p>
+<p>A Pod is collection of containers running in shared namespace. A container is created from Docker/OCI Image, which is immutable in nature i.e. data bundled into the image cannot be changed later in image.</p>
+<blockquote>
+<p>&ldquo;While immutable image of application is great for security, but putting configurations &amp; data like security keys is bad for security as well as portability&rdquo;</p>
+</blockquote>
+<p>There are various ways to pass data to application in containers, without changing the flow of application e.g. by setting environment variables or using volume mount to provide configuration file at the time pf container creation.</p>
+<p>In Kubernetes, ConfigMaps and Secrets are two objects using which configuration data can be passed to Pods and containers running within them.</p>
+<p><em>In this blog, I will give you a walkthough of how to use ConfigMap and Secrets with a Pod.</em></p>
+<hr>
+<p><strong>ConfigMaps:</strong> &ldquo;It allows you to decouple configuration artifacts from image content to keep containerized applications portable&rdquo;</p>
+<ul>
+<li>It stores the data as key-value pairs, where value can be a string or entire content of file.</li>
+</ul>
+<h3 id="creating-configmap">Creating ConfigMap</h3>
+<ul>
+<li>Since ConfigMap is standard object of Kubernetes, it can be created using command <code>kubectl create configmap</code> as well as <code>kubectl apply</code> with ConfigMap definition file.</li>
+</ul>
+<p>e.g. ConfigMap with two key-value pairs <code>log=debug</code> &amp; <code>environment=test</code></p>
+<pre><code>$ kubectl create configmap testapp-pod-config --from-literal=log=debug --from-literal=environment=test
+configmap/testapp-pod-config created
+</code></pre><p>Literal values can be seen using with <code>kubectl describe</code> command</p>
+<pre><code>$ kubectl describe configmap testapp-pod-config
+Name:         testapp-pod-config
+Namespace:    default
+Labels:       &lt;none&gt;
+Annotations:  &lt;none&gt;
+
+Data
+====
+environment:
+----
+test
+log:
+----
+debug
+Events:  &lt;none&gt;
+
+</code></pre><p>Simillarly, The ConfigMap can be created using files too.</p>
+<p>e.g. creating a config map to store ha-proxy config stored in <code>./ha-proxy.cfg</code> file</p>
+<pre><code>$ kubectl create configmap ha-proxy-cfg --from-file=ha-proxy-cfg=ha-proxy-config.cfg
+configmap/ha-proxy-cfg created
+</code></pre><p>You may go through various examples of ConfigMap creation in <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap">Kubernetes documentation</a></p>
+<h3 id="how-to-use-it-with-pod">How to use it with Pod?</h3>
+<p>ConfigMap data can be consumed in Pod broadly either as an environment variable or by mounting them as files in a container.
+Lets see in detail, how this is done.</p>
+<h4 id="1-import-all-data-as-environment-variable">1. Import all data as environment variable:</h4>
+<p>This is simplest form, where we will import all data present in a ConfigMap into the Pod as environment variable.
+Use <code>envFrom</code> &amp; <code>configMapRef</code> to import all. In the below example, I am importing all the key-value pairs of ConfigMap<code>testapp-pod-config</code> which we created above.</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+    name: testapp-pod
+spec:
+    containers:
+    - name: testapp-container
+    image: docker.io/library/busybox:latest
+    command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;env&quot;]
+    envFrom:
+    - configMapRef:
+            name: testapp-pod-config
+</code></pre><p>You can see below, both key-value pairs are now part of environment variables of Pod.</p>
+<pre><code>$ kubectl apply -f testapp-pod.yaml
+pod/testapp-pod created
+
+$ kubectl logs testapp-pod | grep -E -i -w  'log|environment'
+environment=test
+log=debug
+
+</code></pre><hr>
+<p><strong>Note</strong></p>
+<p><em>If you are looking at container environment variables first time, don&rsquo;t get intimidated with list of enviornment variables list not related to your pod/container.</em></p>
+<p><em>A list of all services that were running when a Container is created is available to that Container as <a href="https://kubernetes.io/docs/concepts/containers/container-environment-variables/">environment variables.</a></em></p>
+<hr>
+<h4 id="2-import-selected-keys-as-environment-variables">2. Import selected keys as environment variables:</h4>
+<p>Sometimes, not all key-value pairs are required to be exposed to container especially when same ConfigMap is used by multiple Pods. In such cases, we can import selected keys to a container.</p>
+<p>This can be done using <code>env</code> , <code>valueFrom</code> &amp; <code>configMapKeyRef</code>.
+Below is example, where we import only <code>log</code> key from <code>test-pod-config</code></p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+    name: testapp-pod-single-key
+spec:
+    containers:
+    - name: testapp-container
+      image: docker.io/library/busybox:latest
+      command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;env&quot;]
+      env:
+      - name: &quot;log-level&quot;
+        valueFrom:
+          configMapKeyRef:
+            name: testapp-pod-config
+            key: &quot;log&quot; 
+
+</code></pre><p>You can see only <code>log</code> key is imported and its renamed as <code>log-level</code> as defined in above yaml file.
+Hence while importing key wise, we can even rename the environment varaibles too.</p>
+<pre><code>$ kubectl apply -f example-single-config-pod.yaml 
+pod/testapp-pod-single-key created
+
+$ kubectl logs testapp-pod-single-key | grep -E -i -w  'log|environment'
+log-level=debug
+
+</code></pre><hr>
+<p><strong>Note</strong></p>
+<p><em>Since, <code>env</code> and <code>envFrom</code> are defined as list, environment list from multiple ConfigMaps can be imported.</em></p>
+<hr>
+<h4 id="3-import-as-a-volume">3. Import as a volume:</h4>
+<p>This option is helpful, if the application bundled in the container needs to be configured using config file.
+We can mount the file to specific path within container.</p>
+<p>For this, we need to first use ConfigMap as volume of Pod and then mount within the container.</p>
+<p>In below example, a pod will mount the ConfigMap <code>ha-proxy-cfg</code>.</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+    name: testapp-pod-mnt
+spec:
+    volumes:
+    - name: ha-proxy-volume
+      configMap:
+        name: ha-proxy-cfg
+    containers:
+    - name: testapp-container
+      image: docker.io/library/busybox:latest
+      command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;ls -l /etc/config/&quot;]
+      volumeMounts:
+      - name: ha-proxy-volume
+        mountPath: &quot;/etc/config&quot;
+</code></pre><p>You can see below, the key became filename and value assigned to key will be contents of file(<em>not shown</em>)
+Using <code>configMap</code> &amp; just <code>name</code> items, all the keys defined in ConfigMap will be mounted on provided <code>mountPath</code></p>
+<pre><code>$ kubectl get configmaps
+NAME                 DATA   AGE
+ha-proxy-cfg         1      20h
+
+$ kubectl apply -f mount-file-example.yaml                                      
+pod/testapp-pod-mnt created
+
+$ kubectl logs testapp-pod-mnt
+total 0
+lrwxrwxrwx    1 root     root            19 Jan 29 05:17 ha-proxy-cfg -&gt; ..data/ha-proxy-cfg
+
+</code></pre><h4 id="4-import-selected-keys-to-volume">4. Import selected keys to volume.</h4>
+<p>Again similar to #2 case, selected keys can be imported within mounted volume.
+This can be done by putting keys in <code>volumes</code> section of Pod as shown below.</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+    name: testapp-pod-mnt-single
+spec:
+    volumes:
+    - name: ha-proxy-volume-single
+      configMap:
+        name: ha-proxy
+        items:
+        - key: &quot;ha-proxy-cfg&quot;
+          path: ha-proxy.cfg
+    containers:
+    - name: testapp-container
+      image: docker.io/library/busybox:latest
+      command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;ls -l /etc/config/&quot;]
+      volumeMounts:
+      - name: ha-proxy-volume-single
+        mountPath: /etc/config
+</code></pre><p>As you can see, the filename can be chosen in this case.</p>
+<pre><code>$ kubectl apply -f mount-single-file-example.yaml
+pod/testapp-pod-mnt-single created
+
+$ kubectl logs testapp-pod-mnt-single
+total 0
+lrwxrwxrwx    1 root     root            19 Jan 29 05:48 ha-proxy.cfg -&gt; ..data/ha-proxy.cfg
+
+</code></pre><hr>
+<p><strong>Note</strong></p>
+<p><em>Any changes to ConfigMap will be refletcted in volumes too.
+So this is helpful in cases where application bundled in containers can read changes and you dont need to create new pods to propogate the changes in configuration files</em></p>
+<hr>
+<pre><code>Interesting Facts: 
+
+Q. One question normally arise how big data can be stored in configMap.
+
+A. Kubernetes do not put any hard limits on ConfigMap size, though it stores configMaps in etcd.
+   Etcd has hard limit to store value upto 1MB
+   
+   Ref : https://github.com/kubernetes/kubernetes/issues/19781
+</code></pre><p>That is all for using ConfigMaps in Pod.</p>
+<p><em>Secrets are another object similar to ConfigMaps that is used to store data in encrypted form. Since this blog became quite long, so shall post about using Secrets in Pods in next blog.</em></p>
+<p>Feel free to comment, if you find anything I missed, need to be corrected or can be added as Interesting Facts.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+            
+                <a href="/tags/kubernetes/">kubernetes</a>, 
+            
+                <a href="/tags/k8s/">k8s</a>, 
+            
+                <a href="/tags/pods/">pods</a>, 
+            
+                <a href="/tags/secret/">secret</a>, 
+            
+                <a href="/tags/configmap/">configmap</a>
+            
+        </p>
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=ConfigMaps%20and%20Pods&url=http%3a%2f%2fkunalkushwaha.github.io%2f2020%2f01%2f28%2fconfigmaps-and-pods%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2020%2f01%2f28%2fconfigmaps-and-pods%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2020%2f01%2f28%2fconfigmaps-and-pods%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+    </div>
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kunalkushwaha" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io/">Kunal Kushwaha</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2020 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://kunalkushwaha.github.io/js/jquery-1.11.3.min.js"></script>
+        <script src="http://kunalkushwaha.github.io/js/jquery.fitvids.js"></script>
+        
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        
+        
+        <script src="http://kunalkushwaha.github.io/js/scripts.js"></script>
+    </body>
+</html>
+

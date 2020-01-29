@@ -2,30 +2,37 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Understanding Golang Interfaces &middot; Kunal Kushwaha</title>
-        <meta name="description" content="Golang | Containers | Cloud | Tech">
+        <meta name="description" content="Even after writing Go code for a while, there have been couple of time, when I get confused about Interfaces in golang. So I think, it may help people, who have started with Golang, or don&rsquo;t use much Interfaces in there code.
+Interfaces By definition, Interfaces are named collections of method signatures. But usage of Interfaces in go is little confusing as it is used a in context of data type also and defining the behavior of methods also.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.15" />
+        <meta name="generator" content="Hugo 0.63.2" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/normalize.css">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/highlight.css">
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/css/style.css">
+        
+        <link rel="stylesheet" href="http://kunalkushwaha.github.io/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
     </head>
     <body>
         
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-62566203-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-62566203-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 
@@ -40,25 +47,28 @@ ga('send', 'pageview');
                         
                         <a class="button-square" href="http://kunalkushwaha.github.io/index.xml"><i class="fa fa-rss"></i></a>
                         
-                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha">
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha" rel="me">
                                 <i class="fa fa-twitter"></i>
                             </a>
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha">
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha" rel="me">
                                 <i class="fa fa-github-alt"></i>
                             </a>
                         
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha">
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha" rel="me">
                                 <i class="fa fa-linkedin"></i>
                             </a>
                         
                         
-                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14">
+                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14" rel="me">
                                 <i class="fa fa-google-plus"></i>
                             </a>
+                        
                         
                     </div>
 
@@ -84,193 +94,146 @@ ga('send', 'pageview');
         <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Understanding Golang Interfaces</h1>
     
-    <p class="post-date">
+    <p class="post-date post-line">
         <span>Published <time datetime="2015-09-11" itemprop="datePublished">Fri, Sep 11, 2015</time></span>
         <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
             <span itemprop="name">
                 <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
             </span>
         </span>
     </p>
+    
 </header>
 
         <div class="post-content clearfix" itemprop="articleBody">
     
 
-    
-
-<p>Even after writing Go code for a while, there have been couple of time, when I get confused about Interfaces in golang.
+    <p>Even after writing Go code for a while, there have been couple of time, when I get confused about Interfaces in golang.
 So I think, it may help people, who have started with Golang, or don&rsquo;t use much Interfaces in there code.</p>
-
-<h3 id="interfaces:8e8f150f0261927c23fb2a377a40072b">Interfaces</h3>
-
+<h3 id="interfaces">Interfaces</h3>
 <p>By definition, Interfaces are named collections of method signatures. But usage of Interfaces in go is little confusing as it is used a in context of data type also and defining the behavior of methods also.</p>
-
 <p>Lets try to understand each of them.</p>
-
-<h3 id="1-interface-interface-as-data-type:8e8f150f0261927c23fb2a377a40072b">1. interface{} , interface as data-type</h3>
-
+<h3 id="1-interface">1. interface</h3>
 <p>This is commonly mistaken as ( void type of C/C++), But it&rsquo;s not! It still holds its property from the above definition.
 Since, <code>interface{}</code> is empty interface i.e. No methods associated with it, all data type satisfy the behavior and hence, all data types can be passed/assigned to <code>interface{}</code> type.</p>
-
 <p>Lets take a example,</p>
-
-<pre><code class="language-golang">
-type Stack struct {
-       data []interface{}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang">
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Stack</span> <span style="color:#66d9ef">struct</span> {
+       <span style="color:#a6e22e">data</span> []<span style="color:#66d9ef">interface</span>{}
 }
 
-func NewStack() *Stack {
-	s := Stack{data: make([]interface{},0)}
-	return &amp;s
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewStack</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">Stack</span> {
+	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Stack</span>{<span style="color:#a6e22e">data</span>: make([]<span style="color:#66d9ef">interface</span>{},<span style="color:#ae81ff">0</span>)}
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">s</span>
 }
 
-func (s *Stack) Push(data interface{}) {
-	s.data = append(s.data, data)
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Stack</span>) <span style="color:#a6e22e">Push</span>(<span style="color:#a6e22e">data</span> <span style="color:#66d9ef">interface</span>{}) {
+	<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">data</span> = append(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">data</span>)
 }
 
-func (s *Stack) Pop() interface{} {
-	if len(s.data) == 0 {
-		return nil
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Stack</span>) <span style="color:#a6e22e">Pop</span>() <span style="color:#66d9ef">interface</span>{} {
+	<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">data</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
 	}
-	data := s.data[len(s.data) -1]
-	s.data = s.data[0:len(s.data)-1]
-	return data
+	<span style="color:#a6e22e">data</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">data</span>[len(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">data</span>) <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+	<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">data</span> = <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">data</span>[<span style="color:#ae81ff">0</span>:len(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">data</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>
 }
-</code></pre>
+</code></pre></div><p>To use the above stack, a simple example shows retrieval of values from interface type.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewStack</span>()
+<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Push</span>(<span style="color:#ae81ff">10</span>)
+<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Push</span>(<span style="color:#e6db74">&#34;Hello&#34;</span>)
+<span style="color:#a6e22e">obj1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Pop</span>()
+<span style="color:#a6e22e">obj2</span> = <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Pop</span>()
+<span style="color:#75715e">// To retrieve int value, use type assertion.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">elem1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">obj</span>.(<span style="color:#66d9ef">string</span>)
+<span style="color:#a6e22e">elem2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">obj</span>.(<span style="color:#66d9ef">int</span>)
 
-<p>To use the above stack, a simple example shows retrieval of values from interface type.</p>
-
-<pre><code class="language-golang">s := NewStack()
-s.Push(10)
-s.Push(&quot;Hello&quot;)
-obj1 := s.Pop()
-obj2 = s.Pop()
-// To retrieve int value, use type assertion.
-elem1 := obj.(string)
-elem2 := obj.(int)
-
-</code></pre>
-
-<p>Here are few things needs to be understood about interfaces to be used as type.
- - Whenever variables of any datatype is assigned to interface type, it is converted into interface type and stored.
-     - So properties of original data-type cannot be retrieved until, it is converted again back to original data-type.
- - conversion to data-type from interfaces cannot be achieved using typecasting, Here it required, <a href="http://golang.org/ref/spec#Type_assertions">type assertion</a>.</p>
-
+</code></pre></div><p>Here are few things needs to be understood about interfaces to be used as type.</p>
+<ul>
+<li>Whenever variables of any datatype is assigned to interface type, it is converted into interface type and stored.
+<ul>
+<li>So properties of original data-type cannot be retrieved until, it is converted again back to original data-type.</li>
+</ul>
+</li>
+<li>conversion to data-type from interfaces cannot be achieved using typecasting, Here it required, <a href="http://golang.org/ref/spec#Type_assertions">type assertion</a>.</li>
+</ul>
 <p>So use interface{}, wherever you wish to add generic data-type and remember at retrieval time, use type assertion!</p>
-
-<h3 id="2-interface-as-set-of-methods:8e8f150f0261927c23fb2a377a40072b">2. Interface as set of methods.</h3>
-
+<h3 id="2-interface-as-set-of-methods">2. Interface as set of methods.</h3>
 <p>Unlike above type, here interface have some function prototype.</p>
-
 <p>If you come from &ldquo;C/C++&rdquo; background, you can relate it with function pointers or abstract functions/pure virtual functions. These functions don&rsquo;t have any implementation.</p>
-
 <p>But, to implement these functions, no need to inherit in structs or assign to function pointers.</p>
-
 <p>In Go, if some structs or functions have same behavior as of interface, it automatically can be used in interface. Here behavior mean, all functions in interface should be implemented with same signature of functions as of interface.</p>
-
 <p>Lets take a simple example.</p>
-
-<pre><code class="language-golang">type Plugin interface {
-    Execute(string, int) bool
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Plugin</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#a6e22e">Execute</span>(<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>
 }
-</code></pre>
-
-<p>Here, a Plugin interface is defined with one function. Any Structure, which have this one function, will automatically implements the interface.</p>
-
+</code></pre></div><p>Here, a Plugin interface is defined with one function. Any Structure, which have this one function, will automatically implements the interface.</p>
 <p>i.e. Any structure, which has same behavior means the Plugin interface can represent that structure. No explicitly need to show via any keyword like implement or inherit.</p>
-
 <p>I feel, it is very simple approach to build OOP design. Such simple approaches, to create design patterns, make Go even more interesting.</p>
-
 <p>Lets see examples which explains the behavior of interfaces</p>
+<h3 id="1-example-1">1. Example #1</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">aPlugin</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>
+}
 
-<h3 id="1-example-1:8e8f150f0261927c23fb2a377a40072b">1. Example #1</h3>
-
-<pre><code class="language-golang"> type aPlugin struct {
-     name string
- }
-
- func (p aPlugin) Execute(name string, count int) bool {
-     fmt.Println(&quot;aPlugin executing&quot;, name, count)
-     return 0
- }
-</code></pre>
-
-<p>Here, structure <code>aPlugin</code> have exactly same function as of <code>Plugin</code> interface, so this <code>aPlugin</code> can be assigned to Plugin interface.</p>
-
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">aPlugin</span>) <span style="color:#a6e22e">Execute</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">count</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;aPlugin executing&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">count</span>)
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+}
+</code></pre></div><p>Here, structure <code>aPlugin</code> have exactly same function as of <code>Plugin</code> interface, so this <code>aPlugin</code> can be assigned to Plugin interface.</p>
 <p>So main function will look like this.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+   <span style="color:#75715e">// Create a Plugin array
+</span><span style="color:#75715e"></span>   <span style="color:#a6e22e">obj</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Plugin</span>{<span style="color:#a6e22e">aPlugin</span>{}, <span style="color:#a6e22e">bPlugin</span>{}}
+   <span style="color:#a6e22e">obj</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">Execute</span>(<span style="color:#e6db74">&#34;Hello&#34;</span>, <span style="color:#ae81ff">1</span>)
+   <span style="color:#a6e22e">obj</span>[<span style="color:#ae81ff">1</span>].<span style="color:#a6e22e">Execute</span>(<span style="color:#e6db74">&#34;World&#34;</span>, <span style="color:#ae81ff">2</span>)
+}
 
-<pre><code class="language-golang"> func main() {
-    // Create a Plugin array
-    obj := []Plugin{aPlugin{}, bPlugin{}}
-    obj[0].Execute(&quot;Hello&quot;, 1)
-    obj[1].Execute(&quot;World&quot;, 2)
- }
+<span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">run</span> <span style="color:#a6e22e">main</span>.<span style="color:#66d9ef">go</span>
+<span style="color:#a6e22e">aPlugin</span> <span style="color:#a6e22e">executing</span> <span style="color:#a6e22e">Hello</span> <span style="color:#ae81ff">1</span>
+<span style="color:#a6e22e">bPLugin</span> <span style="color:#a6e22e">executing</span> <span style="color:#a6e22e">World</span> <span style="color:#ae81ff">2</span>
+</code></pre></div><h3 id="2-example-2">2. Example #2</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">bPlugin</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>
+}
 
- $ go run main.go
- aPlugin executing Hello 1
- bPLugin executing World 2
-</code></pre>
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">bPlugin</span>) <span style="color:#a6e22e">Execute</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">count</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;bPlugin executing&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">count</span>)
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+}
 
-<h3 id="2-example-2:8e8f150f0261927c23fb2a377a40072b">2. Example #2</h3>
-
-<pre><code class="language-golang"> type bPlugin struct {
-     name string
- }
-
- func (p bPlugin) Execute(name string, count int) bool {
-     fmt.Println(&quot;bPlugin executing&quot;, name, count)
-     return 0
- }
-
- func (p bPlugin) DumpInfo() {
-     fmt.Println(p.name)
- }
-</code></pre>
-
-<p>Here, another structure <code>bPlugin</code> have one additional function then of <code>Plugin</code> interface. So this <code>bPlugin</code> can be assigned to Plugin interface.</p>
-
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">bPlugin</span>) <span style="color:#a6e22e">DumpInfo</span>() {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">name</span>)
+}
+</code></pre></div><p>Here, another structure <code>bPlugin</code> have one additional function then of <code>Plugin</code> interface. So this <code>bPlugin</code> can be assigned to Plugin interface.</p>
 <p>Only, if it is assigned to Plugin object, the additional function DumpInfo() cannot be invoked from Plugin object.
-    - So a Structure can have additional functions, data members and still it can assigned to interface object.</p>
+- So a Structure can have additional functions, data members and still it can assigned to interface object.</p>
+<h3 id="3-example-3">3. Example #3</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">cPlugin</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>
+}
 
-<h3 id="3-example-3:8e8f150f0261927c23fb2a377a40072b">3. Example #3</h3>
-
-<pre><code class="language-golang"> type cPlugin struct {
-     name string
- }
-
- func (p cPlugin) Execute() bool {
-     fmt.Println(&quot;cPlugin executing&quot;)
-     return 0
- }
-</code></pre>
-
-<p>Here, structure <code>cPlugin</code> have function with same name <code>Execute</code>, but with different signatures. So cPlugin object cannot be assigned to <code>Plugin</code> object.</p>
-
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">cPlugin</span>) <span style="color:#a6e22e">Execute</span>() <span style="color:#66d9ef">bool</span> {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;cPlugin executing&#34;</span>)
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+}
+</code></pre></div><p>Here, structure <code>cPlugin</code> have function with same name <code>Execute</code>, but with different signatures. So cPlugin object cannot be assigned to <code>Plugin</code> object.</p>
 <p>go compiler will raise error if it is tried to do so.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">obj</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Plugin</span>{<span style="color:#a6e22e">aPlugin</span>{}, <span style="color:#a6e22e">bPlugin</span>{}, <span style="color:#a6e22e">cPlugin</span>{}}
+</code></pre></div><pre><code>$ go run main.go
+./main.go:22: cannot use cPlugin literal (type cPlugin) as type Plugin in array element:
+       cPlugin does not implement Plugin (wrong type for Execute method)
+               have Execute() bool
+               want Execute(string, int) bool
 
-<pre><code class="language-golang">obj := []Plugin{aPlugin{}, bPlugin{}, cPlugin{}}
-</code></pre>
-
-<pre><code> $ go run main.go
- ./main.go:22: cannot use cPlugin literal (type cPlugin) as type Plugin in array element:
-        cPlugin does not implement Plugin (wrong type for Execute method)
-                have Execute() bool
-                want Execute(string, int) bool
-
-</code></pre>
-
-<h2 id="how-should-these-interfaces-should-be-used:8e8f150f0261927c23fb2a377a40072b">How should these interfaces should be used.</h2>
-
+</code></pre><h2 id="how-should-these-interfaces-should-be-used">How should these interfaces should be used.</h2>
 <p>Interfaces are one of most important building blocks of golang. Also, its usage make golang as language very simpler to use.
 for example, you can look into <a href="http://golang.org/src/io/io.go">&ldquo;io&rdquo; package</a>.</p>
-
 <p>If you implement any kind of framework or as simple as muti-platform program, where you wish functionalities, differ for each OS, interfaces are perfect candidates to use.</p>
-
 <p>I hope this blog would have helped to understand the interfaces in Golang.
 Please comment in case you have any feedback.</p>
-
 <p>Happy Coding :)</p>
 
 </div>
@@ -279,43 +242,55 @@ Please comment in case you have any feedback.</p>
     
 
     <div class="share">
-        <a class="icon-twitter" href="http://twitter.com/share?text=Understanding%20Golang%20Interfaces&url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f09%2f11%2funderstanding-golang-interfaces%2f"
-            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-            <i class="fa fa-twitter"></i>
-            <span class="hidden">Twitter</span>
-        </a>
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Understanding%20Golang%20Interfaces&url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f09%2f11%2funderstanding-golang-interfaces%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
 
-        <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f09%2f11%2funderstanding-golang-interfaces%2f"
-            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-            <i class="fa fa-facebook"></i>
-            <span class="hidden">Facebook</span>
-        </a>
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f09%2f11%2funderstanding-golang-interfaces%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
 
-        <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f09%2f11%2funderstanding-golang-interfaces%2f"
-           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-           <i class="fa fa-google-plus"></i>
-            <span class="hidden">Google+</span>
-        </a>
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2015%2f09%2f11%2funderstanding-golang-interfaces%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
     </div>
 </footer>
 
         
     <div class="comments">
         <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'kunalkushwaha';
-    var disqus_identifier = 'http:\/\/kunalkushwaha.github.io\/2015\/09\/11\/understanding-golang-interfaces\/';
-    var disqus_title = 'Understanding Golang Interfaces';
-    var disqus_url = 'http:\/\/kunalkushwaha.github.io\/2015\/09\/11\/understanding-golang-interfaces\/';
-
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kunalkushwaha" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
 
     </article>
@@ -336,7 +311,7 @@ Please comment in case you have any feedback.</p>
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2020 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -346,8 +321,12 @@ Please comment in case you have any feedback.</p>
         </footer>
 
         <script src="http://kunalkushwaha.github.io/js/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
         <script src="http://kunalkushwaha.github.io/js/jquery.fitvids.js"></script>
+        
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        
+        
         <script src="http://kunalkushwaha.github.io/js/scripts.js"></script>
     </body>
 </html>
