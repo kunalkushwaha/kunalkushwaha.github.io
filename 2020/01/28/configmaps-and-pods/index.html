@@ -80,6 +80,10 @@ if (!doNotTrack) {
     </li>
 
     <li class="site-nav-item">
+        <a title="Slide Deck" href="https://speakerdeck.com/kunalkushwaha">Slide Deck</a>
+    </li>
+
+    <li class="site-nav-item">
         <a title="About" href="/about/">About</a>
     </li>
 
@@ -115,7 +119,7 @@ if (!doNotTrack) {
 <blockquote>
 <p>&ldquo;While immutable image of application is great for security, but putting configurations &amp; data like security keys is bad for security as well as portability&rdquo;</p>
 </blockquote>
-<p>There are various ways to pass data to application in containers, without changing the flow of application e.g. by setting environment variables or using volume mount to provide configuration file at the time pf container creation.</p>
+<p>There are various ways to pass data to application in containers, without changing the flow of application e.g. by setting environment variables or using volume mount to provide configuration file at the time of container creation.</p>
 <p>In Kubernetes, ConfigMaps and Secrets are two objects using which configuration data can be passed to Pods and containers running within them.</p>
 <p><em>In this blog, I will give you a walkthough of how to use ConfigMap and Secrets with a Pod.</em></p>
 <hr>
@@ -180,7 +184,7 @@ log=debug
 
 </code></pre><hr>
 <p><strong>Note</strong></p>
-<p><em>If you are looking at container environment variables first time, don&rsquo;t get intimidated with list of enviornment variables list not related to your pod/container.</em></p>
+<p><em>If you are looking at container environment variables first time, don&rsquo;t get intimidated with list of environment variables list not related to your pod/container.</em></p>
 <p><em>A list of all services that were running when a Container is created is available to that Container as <a href="https://kubernetes.io/docs/concepts/containers/container-environment-variables/">environment variables.</a></em></p>
 <hr>
 <h4 id="2-import-selected-keys-as-environment-variables">2. Import selected keys as environment variables:</h4>
@@ -204,7 +208,7 @@ spec:
             key: &quot;log&quot; 
 
 </code></pre><p>You can see only <code>log</code> key is imported and its renamed as <code>log-level</code> as defined in above yaml file.
-Hence while importing key wise, we can even rename the environment varaibles too.</p>
+Hence while importing key wise, we can even rename the environment variables too.</p>
 <pre><code>$ kubectl apply -f example-single-config-pod.yaml 
 pod/testapp-pod-single-key created
 
@@ -282,7 +286,7 @@ lrwxrwxrwx    1 root     root            19 Jan 29 05:48 ha-proxy.cfg -&gt; ..da
 </code></pre><hr>
 <p><strong>Note</strong></p>
 <p><em>Any changes to ConfigMap will be refletcted in volumes too.
-So this is helpful in cases where application bundled in containers can read changes and you dont need to create new pods to propogate the changes in configuration files</em></p>
+So this is helpful in cases where application bundled in containers can read changes and you dont need to create new pods to propagate the changes in configuration files</em></p>
 <hr>
 <pre><code>Interesting Facts: 
 
