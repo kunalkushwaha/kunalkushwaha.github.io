@@ -1,175 +1,101 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>http://kunalkushwaha.github.io/tags/configmap/</loc>
     <lastmod>2020-01-28T14:26:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/</loc>
     <lastmod>2020-01-28T14:26:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/k8s/</loc>
     <lastmod>2020-01-28T14:26:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/kubernetes/</loc>
     <lastmod>2020-01-28T14:26:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/</loc>
     <lastmod>2020-01-28T14:26:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/pods/</loc>
     <lastmod>2020-01-28T14:26:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/post/</loc>
     <lastmod>2020-01-28T14:26:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/secret/</loc>
     <lastmod>2020-01-28T14:26:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/</loc>
     <lastmod>2020-01-28T14:26:37+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/chef/</loc>
     <lastmod>2016-10-14T14:05:58+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/docker-machine/</loc>
     <lastmod>2016-10-14T14:05:58+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/infrakit/</loc>
     <lastmod>2016-10-14T14:05:58+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/puppet/</loc>
     <lastmod>2016-10-14T14:05:58+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</loc>
     <lastmod>2016-10-14T14:05:58+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/docker/</loc>
     <lastmod>2016-08-12T17:10:24+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/fixed-ip/</loc>
     <lastmod>2016-08-12T17:10:24+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/legacy/</loc>
     <lastmod>2016-08-12T17:10:24+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</loc>
     <lastmod>2016-08-12T17:10:24+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/migration/</loc>
     <lastmod>2016-08-12T17:10:24+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/</loc>
     <lastmod>2016-07-25T13:39:38+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/docker1.12/</loc>
     <lastmod>2016-07-25T13:39:38+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/orchestration/</loc>
     <lastmod>2016-07-25T13:39:38+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/tags/swarm-mode/</loc>
     <lastmod>2016-07-25T13:39:38+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2016/01/14/tutorial-docker-swarm-with-multihost-networking/</loc>
     <lastmod>2016-01-14T12:45:10+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://kunalkushwaha.github.io/2016/01/14/tutorial-getting-started-with-docker-machine-and-swarm/</loc>
-    <lastmod>2016-01-14T12:45:10+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2015/09/11/understanding-golang-interfaces/</loc>
     <lastmod>2015-09-11T15:14:46+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2015/07/24/conditional-compilation-in-golang/</loc>
     <lastmod>2015-07-24T22:21:27+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2015/07/04/container-virtualization/</loc>
     <lastmod>2015-07-04T20:25:44+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2015/04/27/golang-dev-environment/</loc>
     <lastmod>2015-04-27T22:29:36+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2015/04/25/layman-guide-to-platform-virtualization/</loc>
     <lastmod>2015-04-25T23:20:04+09:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/2015/03/04/moved-to-github/</loc>
     <lastmod>2015-03-04T14:53:05+05:30</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/about/</loc>
     <lastmod>2015-03-03T17:59:00+05:30</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>http://kunalkushwaha.github.io/about/about/</loc>
     <lastmod>2015-03-03T17:59:00+05:30</lastmod>
   </url>
-  
-  <url>
-    <loc>http://kunalkushwaha.github.io/about/</loc>
-    <lastmod>2015-03-03T17:59:00+05:30</lastmod>
-  </url>
-  
 </urlset>

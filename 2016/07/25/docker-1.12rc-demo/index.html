@@ -1,126 +1,209 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>docker 1.12RC demo &middot; Kunal Kushwaha</title>
-        <meta name="description" content="Docker1.12 orchestration demo.">
-        <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.63.2" />
-        <meta name="robots" content="index,follow">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <link rel="stylesheet" href="http://kunalkushwaha.github.io/dist/styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        
-        
-        
-        
-    </head>
-    <body>
-        
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-62566203-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+<!doctype html>
 
 
-        <div id="wrapper">
-            <header class="site-header">
-                <div class="container">
-                    <div class="site-title-wrapper">
-                        
-                            <h1 class="site-title">
-                                <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io/">Kunal Kushwaha</a>
-                            </h1>
-                        
-                        <a class="button-square" href="http://kunalkushwaha.github.io/index.xml"><i class="fa fa-rss"></i></a>
-                        
-                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha" rel="me">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        
-                        
-                        
-                        
-                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha" rel="me">
-                                <i class="fa fa-github-alt"></i>
-                            </a>
-                        
-                        
-                        
-                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha" rel="me">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                        
-                        
-                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14" rel="me">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                        
-                        
-                    </div>
-
-                    <ul class="site-nav">
-                        
-    <li class="site-nav-item">
-        <a title="Blog" href="/">Blog</a>
-    </li>
-
-    <li class="site-nav-item">
-        <a title="Slide Deck" href="https://speakerdeck.com/kunalkushwaha">Slide Deck</a>
-    </li>
-
-    <li class="site-nav-item">
-        <a title="About" href="/about/">About</a>
-    </li>
-
-                    </ul>
-                </div>
-            </header>
-
-            <div id="container">
 
 
-<div class="container">
-    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
-        <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">docker 1.12RC demo</h1>
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>docker 1.12RC demo - Kunal Kushwaha</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="Last friday (22nd July), I gave DockerCon16 Recap Talk and demo at Docker Meetup Tokyo
+This blog post gives a walk through my Docker Meetup demonstration, and you can follow these steps to try at your machines.
+In DockerCon16, docker 1.12 RC was announced. This release has an important &amp; interesting feature called docker swarm mode
+Get Docker 1.12 RC.
+If you are using Docker for Mac or Docker for Windows, You already have docker 1.12RC installed on your machine." />
+  <meta name="author" content="Kunal Kushwaha" /><link rel="preload stylesheet" as="style" href="http://kunalkushwaha.github.io/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="http://kunalkushwaha.github.io/theme.png" />
+
+  
+
+  <link rel="preload" as="image" href="http://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="http://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="http://kunalkushwaha.github.io/linkedin.svg" />
+
+  <script
+    defer
+    src="http://kunalkushwaha.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="http://kunalkushwaha.github.io/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://kunalkushwaha.github.io/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.147.2">
+  <meta itemprop="name" content="docker 1.12RC demo">
+  <meta itemprop="description" content="Docker1.12 orchestration demo.">
+  <meta itemprop="datePublished" content="2016-07-25T13:39:38+09:00">
+  <meta itemprop="dateModified" content="2016-07-25T13:39:38+09:00">
+  <meta itemprop="wordCount" content="1870">
+  <meta itemprop="keywords" content="Docker1.12,Swarm Mode,Orchestration"><meta property="og:url" content="http://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/">
+  <meta property="og:site_name" content="Kunal Kushwaha">
+  <meta property="og:title" content="docker 1.12RC demo">
+  <meta property="og:description" content="Docker1.12 orchestration demo.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2016-07-25T13:39:38+09:00">
+    <meta property="article:modified_time" content="2016-07-25T13:39:38+09:00">
+    <meta property="article:tag" content="Docker1.12">
+    <meta property="article:tag" content="Swarm Mode">
+    <meta property="article:tag" content="Orchestration">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="docker 1.12RC demo">
+  <meta name="twitter:description" content="Docker1.12 orchestration demo.">
+
+  <link rel="canonical" href="http://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/" />
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="http://kunalkushwaha.github.io/"
+      >Kunal Kushwaha</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
     
-        <p class="post-description" itemprop="description">Docker1.12 orchestration demo.</p>
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
     
-    <p class="post-date post-line">
-        <span>Published <time datetime="2016-07-25" itemprop="datePublished">Mon, Jul 25, 2016</time></span>
-        <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
-            <span itemprop="name">
-                <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
-            </span>
-        </span>
-    </p>
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
     
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Blog</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://speakerdeck.com/kunalkushwaha"
+        >Slide Deck</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      ></nav><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >twitter</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
 </header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">docker 1.12RC demo</h1><div class="text-xs antialiased opacity-60"><time>Jul 25, 2016</time><span class="mx-1">&middot;</span>
+      <span>Kunal Kushwaha</span></div></header>
 
-        <div class="post-content clearfix" itemprop="articleBody">
-    
-
-    <p>Last friday (22nd July), I gave DockerCon16 Recap Talk and demo at <a href="https://www.meetup.com/Docker-Tokyo/events/231737938/">Docker Meetup Tokyo</a></p>
+  <section><p>Last friday (22nd July), I gave DockerCon16 Recap Talk and demo at <a href="https://www.meetup.com/Docker-Tokyo/events/231737938/">Docker Meetup Tokyo</a></p>
 <p>This blog post gives a walk through my Docker Meetup demonstration, and you can follow these steps to try at your machines.</p>
 <p>In DockerCon16, docker 1.12 RC was announced. This release has an important &amp; interesting feature called docker <em>swarm mode</em></p>
 <h3 id="get-docker-112-rc">Get Docker 1.12 RC.</h3>
 <p>If you are using <a href="https://docs.docker.com/engine/installation/mac/#/docker-for-mac">Docker for Mac</a> or <a href="https://docs.docker.com/engine/installation/windows/#/docker-for-windows">Docker for Windows</a>, You already have docker 1.12RC installed on your machine.</p>
 <p>You can check version</p>
-<pre><code>$ docker version
+<pre tabindex="0"><code>$ docker version
 Client:
  Version:      1.12.0-rc4
  API version:  1.24
@@ -142,7 +225,7 @@ Server:
 <h3 id="create-demo-docker-hosts">Create demo docker hosts.</h3>
 <p>To create a swarm of docker hosts, you require more then one docker-host. I use <a href="https://docs.docker.com/machine/">docker-machine</a> to create my docker hosts.</p>
 <p>With following commands, my three docker hosts will be ready with docker 1.12 RC installed with default <a href="http://boot2docker.io/">boot2docker</a> image.</p>
-<pre><code>$docker-machine -d virtualbox manager
+<pre tabindex="0"><code>$docker-machine -d virtualbox manager
 
 $docker-machine -d virtualbox worker1
 
@@ -153,15 +236,14 @@ NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DO
 manager   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.12.0-rc4
 worker1   -        virtualbox   Running   tcp://192.168.99.101:2376           v1.12.0-rc4
 worker2   -        virtualbox   Running   tcp://192.168.99.102:2376           v1.12.0-rc4
-
 </code></pre><p><em>Note: If you work behind proxy, use command as <code>docker-machine -d virtualbox -engine-env http_proxy=&quot;example.com:port&quot; manager</code></em></p>
 <p>Once, all machines are up and running, we can create swarm.</p>
 <h3 id="initialize-swarm">Initialize swarm.</h3>
 <p>To run command on my <em>manager</em> node, I need to set my environment variables, so all docker commands gets executed at manager.
 This can be achieved by single command as follows.</p>
-<pre><code>$ eval $(docker-machine env manager)
+<pre tabindex="0"><code>$ eval $(docker-machine env manager)
 </code></pre><p>Now initialize docker swarm mode.</p>
-<pre><code>$ docker swarm init --listen-addr $(docker-machine ip manager):2377
+<pre tabindex="0"><code>$ docker swarm init --listen-addr $(docker-machine ip manager):2377
 No --secret provided. Generated random secret:
 	aj92ivakk282slwal0ujwaloj
 
@@ -173,12 +255,12 @@ To add a worker to this swarm, run the following command:
 	192.168.99.100:2377
 </code></pre><p>The above command initializes and generates relevant secrets and CA Key for swarm.</p>
 <p>Currently swarm is created with only one node &ldquo;master&rdquo;</p>
-<pre><code>$ docker node ls
+<pre tabindex="0"><code>$ docker node ls
 ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
 2ksrqgk2x3vbjh3bw0aly5dwr *  manager   Accepted    Ready   Active        Leader
 </code></pre><h3 id="adding-workers-node">Adding Workers node</h3>
 <p>To add swarm workers <code>docker swarm join</code> command will be used.</p>
-<pre><code>$ eval $(docker-machine env worker1)
+<pre tabindex="0"><code>$ eval $(docker-machine env worker1)
 
 $ docker swarm join --secret aj92ivakk282slwal0ujwaloj \
 &gt;     --ca-hash sha256:1f7176d2474cf8dd3fa7a29e46ce42250c5a0aecaf07e40e014f039a7bf1e5ba \
@@ -193,7 +275,7 @@ $ docker swarm join --secret aj92ivakk282slwal0ujwaloj \
 This node joined a Swarm as a worker.
 </code></pre><p>To view complete list of nodes in swarm, we need to query swarm master.</p>
 <p><em>NOTE: In case of multiple masters, query can be made to any master</em></p>
-<pre><code>$ eval $(docker-machine env manager)
+<pre tabindex="0"><code>$ eval $(docker-machine env manager)
 
 $ docker node ls
 ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
@@ -201,14 +283,13 @@ ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER
 2ksrqgk2x3vbjh3bw0aly5dwr *  manager   Accepted    Ready   Active        Leader
 c6nvb1ljj9mntt1v8qlmxl2my    worker2   Accepted    Ready   Active
 </code></pre><blockquote>
-<p><em><strong>Thats it! two commands create whole docker swarm. No external KV Store, No tricky CA Key generation, It all just two commands</strong></em></p>
-</blockquote>
+<p><em><strong>Thats it! two commands create whole docker swarm. No external KV Store, No tricky CA Key generation, It all just two commands</strong></em></p></blockquote>
 <h3 id="monitoring-events-of-swarm">Monitoring events of swarm</h3>
 <p>In swarm mode all managers have consistent view that enables, the monitoring of whole swarm through any  manager node.
 All you need to listen at /var/run/docker.sock of any manager node.</p>
 <h3 id="creating-visualizer-for-swarm">Creating Visualizer for Swarm.</h3>
 <p>Visualizer is a simple nodejs app, which listen on <code>/var/run/docker.sock</code> and show nodes present in swarm and containers within as boxes.</p>
-<pre><code>$ docker run -it -d -p 8080:8080 -e HOST=$(docker-machine ip manager) -v /var/run/docker.sock:/var/run/docker.sock manomarks/visualizer
+<pre tabindex="0"><code>$ docker run -it -d -p 8080:8080 -e HOST=$(docker-machine ip manager) -v /var/run/docker.sock:/var/run/docker.sock manomarks/visualizer
 </code></pre><p>Open the visualizer in browser with http://192.168.99.100:8080, here &ldquo;192.168.99.100&rdquo; is manager node IP.</p>
 <!-- raw HTML omitted -->
 <h3 id="lets-deploy-some-application-in-swarm">Lets deploy some Application in swarm</h3>
@@ -216,7 +297,7 @@ All you need to listen at /var/run/docker.sock of any manager node.</p>
 <p>For demo, I have a simple application <a href="https://github.com/kunalkushwaha/slides/tree/master/examples/webserver">demoapp</a>, which is a simple web-server listen on port <code>5000</code>, prints the some message. Lets try to deploy this application.</p>
 <p>Since, I want my application to be spread all over swarm, and all instance should be discoverable, at first, I will create an <a href="https://en.wikipedia.org/wiki/Overlay_network">overlay network</a>.</p>
 <p>Lets create overlay network using <code>docker network create</code> command.</p>
-<pre><code>$ docker network create -d overlay mynet
+<pre tabindex="0"><code>$ docker network create -d overlay mynet
 2xjpxwugr0glog7sqywdsnbn6
 
 $ docker network ls
@@ -233,7 +314,7 @@ ae968fa64609        none                null                local
 </ul>
 <h3 id="create-service">Create service</h3>
 <p>Lets create a service with 2 replicas(instance) attached to <code>mynet</code> from image <a href="https://hub.docker.com/r/kunalkushwaha/demoapp_image/">kunalkushwaha/demoapp_image</a></p>
-<pre><code>$ docker service create \
+<pre tabindex="0"><code>$ docker service create \
 &gt; --name demoapp \
 &gt;     --replicas 2 \
 &gt;     --network mynet \
@@ -244,7 +325,7 @@ ae968fa64609        none                null                local
 You can monitor, service state by following commands.</p>
 <p><code>docker service ls</code> just lists the service and shows how many instance running.
 <code>docker service tasks</code> command give details like on which node service instance is running.</p>
-<pre><code>$ docker service ls
+<pre tabindex="0"><code>$ docker service ls
 ID            NAME     REPLICAS  IMAGE                           COMMAND
 8fwyujxnc1rm  demoapp  0/2       kunalkushwaha/demoapp_image:v1
 
@@ -253,7 +334,7 @@ ID                         NAME       SERVICE  IMAGE                           L
 a2yczjfyhyryg4pkg8m27ztd6  demoapp.1  demoapp  kunalkushwaha/demoapp_image:v1  Running 21 seconds ago  Running        manager
 aj080rydyghazbhco6h9dhaaw  demoapp.2  demoapp  kunalkushwaha/demoapp_image:v1  Running 21 seconds ago  Running        worker2
 </code></pre><p>To read configuration of service, you can use <code>docker service inspect</code> command.</p>
-<pre><code>$ docker service inspect  demoapp --pretty
+<pre tabindex="0"><code>$ docker service inspect  demoapp --pretty
 ID:		8fwyujxnc1rm0jwewx5tfeai1
 Name:		demoapp
 Mode:		Replicated
@@ -274,10 +355,10 @@ Networks: 2xjpxwugr0glog7sqywdsnbn6Ports:
  PublishedPort = 5000
 </code></pre><!-- raw HTML omitted -->
 <p>Now our service is deployed successfully, lets try to access and see if, it works properly.</p>
-<pre><code>$ curl 192.168.99.100:5000
+<pre tabindex="0"><code>$ curl 192.168.99.100:5000
 This is DemoApp v1
 </code></pre><p>So far all good! Now lets try to scale this service by 6 instances.</p>
-<pre><code>$ docker service scale demoapp=6
+<pre tabindex="0"><code>$ docker service scale demoapp=6
 demoapp scaled to 6
 
 $ docker service ls
@@ -297,7 +378,7 @@ This is same as explained above i.e. <code>docker scale</code> command changes t
 <!-- raw HTML omitted -->
 <h3 id="node-failure">Node failure.</h3>
 <p>Let try to delete one of worker node and see how swarm it tries to reconcile the configuration of service.</p>
-<pre><code>$ docker-machine rm worker2
+<pre tabindex="0"><code>$ docker-machine rm worker2
 About to remove worker2
 Are you sure? (y/n): y
 Successfully removed worker2
@@ -317,9 +398,9 @@ a2yczjfyhyryg4pkg8m27ztd6  demoapp.1  demoapp  kunalkushwaha/demoapp_image:v1  R
 Here we can define how many instances should get upgraded at one point <code>--update-parallelism</code> and also delay between two updates <code>--update-delay</code>.</p>
 <p>These both are important feature, which helps to upgrade the application without any downtime. Also, while upgrading if some error occurs, you can rollback the service.</p>
 <p>In this example, I will try to upgrade <code>2</code> instances at a time and with delay of <code>30s</code>.</p>
-<pre><code>docker service update demoapp --update-parallelism=2 --update-delay 10s --image kunalkushwaha/demoapp_image:v2
+<pre tabindex="0"><code>docker service update demoapp --update-parallelism=2 --update-delay 10s --image kunalkushwaha/demoapp_image:v2
 </code></pre><p>Now try to get the output of app.</p>
-<pre><code>$ curl  192.168.99.100:5000
+<pre tabindex="0"><code>$ curl  192.168.99.100:5000
 This is DemoApp v2 @  IP: 10.255.0.13
 
 $ curl 192.168.99.100:5000
@@ -337,7 +418,7 @@ This is DemoApp v1
 <h3 id="routing-mesh">Routing Mesh.</h3>
 <p>With routing mesh, service discovery of services in swarm can be done through any node of swarm. i.e. even if service instance not running on any particular node, still if request comes of application/service port, it will be redirected to one of running instance of service. This is achieved by <code>ingress</code> network.</p>
 <p>To demonstrate, lets add one more node into swarm.</p>
-<pre><code>$ docker-machine create -d virtualbox worker3
+<pre tabindex="0"><code>$ docker-machine create -d virtualbox worker3
 
 $ eval $(docker-machine env worker3)
 
@@ -354,9 +435,8 @@ ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER
 2ksrqgk2x3vbjh3bw0aly5dwr *  manager   Accepted    Ready   Active        Leader
 5gfj06su4l885zg88qyze7imu    worker3   Accepted    Ready   Active
 c6nvb1ljj9mntt1v8qlmxl2my    worker2   Accepted    Down    Active
-
 </code></pre><p>Now, demoapp is running only on worker1 and manager nodes.</p>
-<pre><code>$ docker service ps demoapp
+<pre tabindex="0"><code>$ docker service ps demoapp
 ID                         NAME       SERVICE  IMAGE                           LAST STATE              DESIRED STATE  NODE
 9ucohwuw91e8uuquhxidhplsu  demoapp.1  demoapp  kunalkushwaha/demoapp_image:v2  Running 15 minutes ago  Running        manager
 a1odej6m4pz1k4lowzt2l48rz  demoapp.2  demoapp  kunalkushwaha/demoapp_image:v2  Running 16 minutes ago  Running        worker1
@@ -365,7 +445,7 @@ crm4zjjb1hjxdr59zraef4yj9  demoapp.3  demoapp  kunalkushwaha/demoapp_image:v2  R
 7bg8r15bq617ghupei8yegqdi  demoapp.5  demoapp  kunalkushwaha/demoapp_image:v2  Running 16 minutes ago  Running        worker1
 5uu9qppsh7ohopc7td1tjs9lg  demoapp.6  demoapp  kunalkushwaha/demoapp_image:v2  Running 15 minutes ago  Running        manager
 </code></pre><p>If I try to send request on worker3, still I will be able to get demoapp output and that too with load balancing.</p>
-<pre><code>$ docker-machine ip worker3
+<pre tabindex="0"><code>$ docker-machine ip worker3
 192.168.99.103
 
 $ curl --noproxy 192.168.99.103 192.168.99.103:5000
@@ -378,118 +458,54 @@ $ curl --noproxy 192.168.99.103 192.168.99.103:5000
 This is DemoApp v2 @  IP: 10.0.0.7
 </code></pre><p>Isnt&rsquo;t this cool!</p>
 <blockquote>
-<p>Docker swarm mode is about making orchestration simple, so anyone without deep understanding of distributed computing, clustering, security should be able to create a robust, scalable and super secure cluster and still focus on his main work.</p>
-</blockquote>
+<p>Docker swarm mode is about making orchestration simple, so anyone without deep understanding of distributed computing, clustering, security should be able to create a robust, scalable and super secure cluster and still focus on his main work.</p></blockquote>
 <blockquote>
-<p>Also Docker swarm mode do no expect you to change your workflow and application deployment. It just adapts to you.</p>
-</blockquote>
+<p>Also Docker swarm mode do no expect you to change your workflow and application deployment. It just adapts to you.</p></blockquote>
 <p>If you find docker swarm mode interesting, You should look at <a href="https://github.com/docker/swarmkit">SwarmKit</a>. This project does all magic for docker swarm mode and you can use to build your own distributed application.</p>
 <p>Hope this blog will help you to explore docker 1.12 RC.</p>
+</section>
 
-</div>
-
-        <footer class="post-footer clearfix">
-    
-        <p class="post-tags">
-            <span>Tagged:</span>
-            
-            
-                <a href="/tags/docker1.12/">docker1.12</a>, 
-            
-                <a href="/tags/swarm-mode/">swarm mode</a>, 
-            
-                <a href="/tags/orchestration/">orchestration</a>
-            
-        </p>
-    
-
-    <div class="share">
-        
-            <a class="icon-twitter" href="https://twitter.com/share?text=docker%201.12RC%20demo&url=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f07%2f25%2fdocker-1.12rc-demo%2f"
-                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                <i class="fa fa-twitter"></i>
-                <span class="hidden">Twitter</span>
-            </a>
-        
-
-        
-            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f07%2f25%2fdocker-1.12rc-demo%2f"
-                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                <i class="fa fa-facebook"></i>
-                <span class="hidden">Facebook</span>
-            </a>
-        
-
-        
-            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkunalkushwaha.github.io%2f2016%2f07%2f25%2fdocker-1.12rc-demo%2f"
-              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-              <i class="fa fa-google-plus"></i>
-                <span class="hidden">Google+</span>
-            </a>
-        
-        
-    </div>
+  <footer class="mt-12 flex flex-wrap"><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://kunalkushwaha.github.io/tags/docker1.12"
+      >docker1.12</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://kunalkushwaha.github.io/tags/swarm-mode"
+      >swarm mode</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://kunalkushwaha.github.io/tags/orchestration"
+      >orchestration</a
+    ></footer><nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="http://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Migrating traditional apps to docker</span></a
+    ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="http://kunalkushwaha.github.io/2016/01/14/tutorial-docker-swarm-with-multihost-networking/"
+      ><span>Tutorial setting up docker-swarm with multihost networking using docker-machine.</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav><div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'kunalkushwaha';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">Kunal Kushwaha</div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
 </footer>
-
-        
-    <div class="comments">
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "kunalkushwaha" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    </div>
-
-    </article>
-</div>
-
-            </div>
-        </div>
-
-        <footer class="footer">
-            <div class="container">
-                <div class="site-title-wrapper">
-                    <h1 class="site-title">
-                        <a title="Kunal Kushwaha" href="http://kunalkushwaha.github.io/">Kunal Kushwaha</a>
-                    </h1>
-                    <a class="button-square button-jump-top js-jump-top" href="#">
-                        <i class="fa fa-angle-up"></i>
-                    </a>
-                </div>
-
-                <p class="footer-copyright">
-                    <span>&copy; 2020 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
-                </p>
-                <p class="footer-copyright">
-                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
-                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
-                </p>
-            </div>
-        </footer>
-
-        <script src="http://kunalkushwaha.github.io/js/jquery-1.11.3.min.js"></script>
-        <script src="http://kunalkushwaha.github.io/js/jquery.fitvids.js"></script>
-        
-        
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        
-        
-        <script src="http://kunalkushwaha.github.io/js/scripts.js"></script>
-    </body>
+</body>
 </html>
-
