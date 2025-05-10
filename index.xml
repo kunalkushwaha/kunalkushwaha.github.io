@@ -2,102 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kunal Kushwaha</title>
-    <link>http://kunalkushwaha.github.io/</link>
+    <link>https://kunalkushwaha.github.io/</link>
     <description>Recent content on Kunal Kushwaha</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>Kunal Kushwaha</copyright>
     <lastBuildDate>Tue, 28 Jan 2020 14:26:37 +0900</lastBuildDate>
-    <atom:link href="http://kunalkushwaha.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://kunalkushwaha.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ConfigMaps and Pods</title>
-      <link>http://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/</link>
+      <link>https://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/</link>
       <pubDate>Tue, 28 Jan 2020 14:26:37 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/</guid>
+      <guid>https://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://kunalkushwaha.github.io/ConfigMap-Pod.jpg&#34; alt=&#34;ConfigMap and Pod Relation&#34; title=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;A Pod is collection of containers running in shared namespace. A container is created from Docker/OCI Image, which is immutable in nature i.e. data bundled into the image cannot be changed later in image.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;While immutable image of application is great for security, but putting configurations &amp;amp; data like security keys is bad for security as well as portability&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;There are various ways to pass data to application in containers, without changing the flow of application e.g. by setting environment variables or using volume mount to provide configuration file at the time of container creation.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Understanding Infrakit</title>
-      <link>http://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</link>
+      <link>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</link>
       <pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</guid>
+      <guid>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</guid>
       <description>&lt;p&gt;Docker recently open sourced new project &lt;a href=&#34;https://github.com/docker/infrakit&#34;&gt;Infrakit&lt;/a&gt; at ContainerCon 2016, Berlin.&lt;/p&gt;&#xA;&lt;p&gt;As project describes itself as&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;A toolkit for creating and managing declarative, self-healing infrastructure&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;Lets try to understand what it does and how it adds value to existing tools.&lt;/p&gt;&#xA;&lt;h3 id=&#34;infrakit&#34;&gt;Infrakit&lt;/h3&gt;&#xA;&lt;h5 id=&#34;problem&#34;&gt;Problem&lt;/h5&gt;&#xA;&lt;p&gt;Managing docker on different infrastructure is difficult and not portable.&lt;/p&gt;&#xA;&lt;h4 id=&#34;history&#34;&gt;History&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Initially Docker machine project was focused for building docker environment on various platforms, but there were lot of issues mainly due to unreliable third party drivers.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Migrating traditional apps to docker</title>
-      <link>http://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</link>
+      <link>https://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</link>
       <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</guid>
+      <guid>https://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</guid>
       <description>&lt;p&gt;If title of this blog, attracted you towards this blog, Most likely, you will be one of us, who want to migrate old traditional application&amp;rsquo;s in container environment. This blog covers my experience of Migrating old traditional application into Docker.&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;Before beginning with migration procedure, Let me explain requirements I had to met with migrated system.&lt;/p&gt;&#xA;&lt;h3 id=&#34;problems&#34;&gt;Problems&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Old apps running on servers/VMs, resource utilization not optimal.&lt;/li&gt;&#xA;&lt;li&gt;High maintenance cost.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;OS running is no longer supported by vendors, so in-house support required.&lt;/li&gt;&#xA;&lt;li&gt;Maintenance downtime high.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Platform to adopt DevOps practice for fast refactoring.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;challenges&#34;&gt;Challenges&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Migrate Application with least changes in existing platform and infrastructure use.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Use same OS distribution.&lt;/li&gt;&#xA;&lt;li&gt;No rewriting application for new OS.&lt;/li&gt;&#xA;&lt;li&gt;No changes in network infrastructure.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Behavioral changes for accessing the application should be none.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Use hardware load balancer.&lt;/li&gt;&#xA;&lt;li&gt;Use Fixed-IP with pre-approved MAC address.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;&#xA;&lt;p&gt;Migrating old applications into containers can be divided into two parts.&lt;/p&gt;</description>
     </item>
     <item>
       <title>docker 1.12RC demo</title>
-      <link>http://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/</link>
+      <link>https://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/</link>
       <pubDate>Mon, 25 Jul 2016 13:39:38 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/</guid>
+      <guid>https://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/</guid>
       <description>&lt;p&gt;Last friday (22nd July), I gave DockerCon16 Recap Talk and demo at &lt;a href=&#34;https://www.meetup.com/Docker-Tokyo/events/231737938/&#34;&gt;Docker Meetup Tokyo&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;This blog post gives a walk through my Docker Meetup demonstration, and you can follow these steps to try at your machines.&lt;/p&gt;&#xA;&lt;p&gt;In DockerCon16, docker 1.12 RC was announced. This release has an important &amp;amp; interesting feature called docker &lt;em&gt;swarm mode&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;get-docker-112-rc&#34;&gt;Get Docker 1.12 RC.&lt;/h3&gt;&#xA;&lt;p&gt;If you are using &lt;a href=&#34;https://docs.docker.com/engine/installation/mac/#/docker-for-mac&#34;&gt;Docker for Mac&lt;/a&gt; or &lt;a href=&#34;https://docs.docker.com/engine/installation/windows/#/docker-for-windows&#34;&gt;Docker for Windows&lt;/a&gt;, You already have docker 1.12RC installed on your machine.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Tutorial setting up docker-swarm with multihost networking using docker-machine.</title>
-      <link>http://kunalkushwaha.github.io/2016/01/14/tutorial-docker-swarm-with-multihost-networking/</link>
+      <link>https://kunalkushwaha.github.io/2016/01/14/tutorial-docker-swarm-with-multihost-networking/</link>
       <pubDate>Thu, 14 Jan 2016 12:45:10 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2016/01/14/tutorial-docker-swarm-with-multihost-networking/</guid>
+      <guid>https://kunalkushwaha.github.io/2016/01/14/tutorial-docker-swarm-with-multihost-networking/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/docker/machine&#34;&gt;Docker-machine&lt;/a&gt; is tool to create Docker hosts on computer, on cloud providers, and inside data center. It creates &lt;a href=&#34;https://docs.docker.com/machine/drivers/os-base/&#34;&gt;Linux based&lt;/a&gt; server, and installs and configures docker. It is also capable of configuring docker-swarm nodes.&lt;/p&gt;&#xA;&lt;p&gt;This blog, will explain stepwise walkthrough for docker host creation using docker-machine.&lt;/p&gt;&#xA;&lt;h2 id=&#34;installation&#34;&gt;Installation.&lt;/h2&gt;&#xA;&lt;p&gt;If you use Windows or Mac, Docker has already made awesome packaged installer for you &lt;a href=&#34;https://www.docker.com/products/docker-toolbox&#34;&gt;Docker-toolbox&lt;/a&gt;. Download and Install it.&#xA;For Linux users, you can download docker-machine binaries from &lt;a href=&#34;https://github.com/docker/machine/releases&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Understanding Golang Interfaces</title>
-      <link>http://kunalkushwaha.github.io/2015/09/11/understanding-golang-interfaces/</link>
+      <link>https://kunalkushwaha.github.io/2015/09/11/understanding-golang-interfaces/</link>
       <pubDate>Fri, 11 Sep 2015 15:14:46 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2015/09/11/understanding-golang-interfaces/</guid>
+      <guid>https://kunalkushwaha.github.io/2015/09/11/understanding-golang-interfaces/</guid>
       <description>&lt;p&gt;Even after writing Go code for a while, there have been couple of time, when I get confused about Interfaces in golang.&#xA;So I think, it may help people, who have started with Golang, or don&amp;rsquo;t use much Interfaces in there code.&lt;/p&gt;&#xA;&lt;h3 id=&#34;interfaces&#34;&gt;Interfaces&lt;/h3&gt;&#xA;&lt;p&gt;By definition, Interfaces are named collections of method signatures. But usage of Interfaces in go is little confusing as it is used a in context of data type also and defining the behavior of methods also.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Conditional compilation in golang</title>
-      <link>http://kunalkushwaha.github.io/2015/07/24/conditional-compilation-in-golang/</link>
+      <link>https://kunalkushwaha.github.io/2015/07/24/conditional-compilation-in-golang/</link>
       <pubDate>Fri, 24 Jul 2015 22:21:27 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2015/07/24/conditional-compilation-in-golang/</guid>
+      <guid>https://kunalkushwaha.github.io/2015/07/24/conditional-compilation-in-golang/</guid>
       <description>&lt;h2 id=&#34;conditional-compiling-in-golang&#34;&gt;Conditional compiling in golang.&lt;/h2&gt;&#xA;&lt;p&gt;While hacking around experimental builds of docker, I learned about conditional compiling in golang.&#xA;As any project grew or ported to multiple architecture/platforms  the need of conditional compiling is obvious.&lt;/p&gt;&#xA;&lt;p&gt;Unlike C golang, do not have macros. Golang make use of build tags to achieve this.&lt;/p&gt;&#xA;&lt;h4 id=&#34;build-tags&#34;&gt;Build Tags:&lt;/h4&gt;&#xA;&lt;p&gt;Build tags are basically annotation in source code. generally it is first line of file, where build tags are defined.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Container Virtualization and its building blocks</title>
-      <link>http://kunalkushwaha.github.io/2015/07/04/container-virtualization/</link>
+      <link>https://kunalkushwaha.github.io/2015/07/04/container-virtualization/</link>
       <pubDate>Sat, 04 Jul 2015 20:25:44 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2015/07/04/container-virtualization/</guid>
+      <guid>https://kunalkushwaha.github.io/2015/07/04/container-virtualization/</guid>
       <description>&lt;p&gt;Since 2014, Linux containers have become buzz word in Cloud Infrastructure. Almost all, from Big corporations to startups, all have started using it. Huge credit goes to &lt;a href=&#34;www.docker.com&#34;&gt;Docker&lt;/a&gt; for making using containers so easy to use.&lt;/p&gt;&#xA;&lt;p&gt;Linux Containers are there in Linux systems for alomst decade old, But making them work, was not so easy, and generally required linux admin experts for doing same. Few Solution as linux containers like FreeBSD Jails, LXC, openVZ, Solaris Zones etc exists for quite some time.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Golang Development Environment</title>
-      <link>http://kunalkushwaha.github.io/2015/04/27/golang-dev-environment/</link>
+      <link>https://kunalkushwaha.github.io/2015/04/27/golang-dev-environment/</link>
       <pubDate>Mon, 27 Apr 2015 22:29:36 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2015/04/27/golang-dev-environment/</guid>
+      <guid>https://kunalkushwaha.github.io/2015/04/27/golang-dev-environment/</guid>
       <description>&lt;p&gt;Setting up golang environment is quite simple good docs are already present in golang.org.&#xA;&lt;!-- raw HTML omitted --&gt;But I couldn&amp;rsquo;t find any simple doc, where complete setup with GOROOT and GOPATH along with github is explained.&lt;/p&gt;&#xA;&lt;p&gt;So I thought it might be helpful to others too.&#xA;&lt;!-- raw HTML omitted --&gt;My dev environment is ubuntu based &lt;a href=&#34;https://elementary.io/&#34;&gt;ElementryOS &amp;ldquo;Freya&amp;rdquo;&lt;/a&gt;, So it would work on all Ubuntu based distros.&lt;/p&gt;&#xA;&lt;h3 id=&#34;golang-installer&#34;&gt;Golang Installer&lt;/h3&gt;&#xA;&lt;p&gt;Golang comes with single tar file setup can be downloaded from &lt;a href=&#34;https://golang.org/dl/&#34;&gt;here&lt;/a&gt;&#xA;&lt;!-- raw HTML omitted --&gt;extract the tar file to your /usr/local using below command&lt;/p&gt;</description>
     </item>
     <item>
       <title>Layman guide to Platform Virtualization</title>
-      <link>http://kunalkushwaha.github.io/2015/04/25/layman-guide-to-platform-virtualization/</link>
+      <link>https://kunalkushwaha.github.io/2015/04/25/layman-guide-to-platform-virtualization/</link>
       <pubDate>Sat, 25 Apr 2015 23:20:04 +0900</pubDate>
-      <guid>http://kunalkushwaha.github.io/2015/04/25/layman-guide-to-platform-virtualization/</guid>
+      <guid>https://kunalkushwaha.github.io/2015/04/25/layman-guide-to-platform-virtualization/</guid>
       <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;h3 id=&#34;platform-virtualization&#34;&gt;Platform Virtualization!&lt;/h3&gt;&#xA;&lt;p&gt;Virtualization is not new in Computer World today.&#xA;But when I am asked what I am working on, I say &amp;ldquo;Cloud Infrastructure and trying to build a private Cloud Platform!&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;Explaining cloud service is easy but Cloud Infrastructure becomes little difficult.&#xA;So I am writing a blog series to explain Cloud Infrastructure and it building blocks.&#xA;Hope it will help many others too :)&lt;/p&gt;</description>
     </item>
     <item>
       <title>Moving to Hugo &amp; github</title>
-      <link>http://kunalkushwaha.github.io/2015/03/04/moved-to-github/</link>
+      <link>https://kunalkushwaha.github.io/2015/03/04/moved-to-github/</link>
       <pubDate>Wed, 04 Mar 2015 14:53:05 +0530</pubDate>
-      <guid>http://kunalkushwaha.github.io/2015/03/04/moved-to-github/</guid>
+      <guid>https://kunalkushwaha.github.io/2015/03/04/moved-to-github/</guid>
       <description>&lt;p&gt;Started blogging today after few years of gap. Had stopped blogging few years back on &lt;a href=&#34;http://kunalkushwaha.wordpress.com&#34;&gt;wordpress&lt;/a&gt; .&lt;/p&gt;&#xA;&lt;p&gt;Blogging is always fun and great way to share your experiences and findings with others.&lt;/p&gt;&#xA;&lt;p&gt;Lot of things have changed in last 3-5 years in world of Web Technology, So is the blogging platform too.&#xA;While exploring Web Technologies and Golang, I came across the static site genrator and Hugo.&lt;/p&gt;&#xA;&lt;p&gt;I found it really powerful tool for blogging as well as Product Documentations.&lt;/p&gt;</description>
     </item>
     <item>
       <title>About Kunal Kushwaha</title>
-      <link>http://kunalkushwaha.github.io/about/</link>
+      <link>https://kunalkushwaha.github.io/about/</link>
       <pubDate>Tue, 03 Mar 2015 17:59:00 +0530</pubDate>
-      <guid>http://kunalkushwaha.github.io/about/</guid>
+      <guid>https://kunalkushwaha.github.io/about/</guid>
       <description>&lt;p&gt;Currently focus on CloudNative Technologies and work on merging pre CloudNative Era application to CloudNative Stack.&lt;/p&gt;&#xA;&lt;p&gt;Have hands on experience in building enterprise storage products, Linux kernel block susbsystem hacking, RAID, High Available systems,  Linux Containers, Docker and Kubernetes.&lt;/p&gt;&#xA;&lt;p&gt;Few of my area of interests are&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Distributed systems&lt;/li&gt;&#xA;&lt;li&gt;Scalability&lt;/li&gt;&#xA;&lt;li&gt;Storage systems&lt;/li&gt;&#xA;&lt;li&gt;Health Care&lt;/li&gt;&#xA;&lt;li&gt;Cloud Technology&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Drop me mail or connect me though social media.&lt;/p&gt;</description>
     </item>
     <item>
       <title>About Kunal Kushwaha</title>
-      <link>http://kunalkushwaha.github.io/about/about/</link>
+      <link>https://kunalkushwaha.github.io/about/about/</link>
       <pubDate>Tue, 03 Mar 2015 17:59:00 +0530</pubDate>
-      <guid>http://kunalkushwaha.github.io/about/about/</guid>
+      <guid>https://kunalkushwaha.github.io/about/about/</guid>
       <description>&lt;p&gt;A wannabe Entrepreneur and Experienced Technical Leader in building multiple v1.0 version software&amp;rsquo;s, right from conceptualizing to delivery.&lt;/p&gt;&#xA;&lt;p&gt;Have hands on experience in building enterprise storage products, Linux kernel block susbsystem hacking, RAID, High Available systems,  Linux Containers and Docker.&lt;/p&gt;&#xA;&lt;p&gt;Few of my area of interests are&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Distributed systems&lt;/li&gt;&#xA;&lt;li&gt;Scalability&lt;/li&gt;&#xA;&lt;li&gt;Storage systems&lt;/li&gt;&#xA;&lt;li&gt;Health Care&lt;/li&gt;&#xA;&lt;li&gt;Cloud Technology&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Drop me mail or connect me though social media.&lt;/p&gt;</description>
     </item>
   </channel>
