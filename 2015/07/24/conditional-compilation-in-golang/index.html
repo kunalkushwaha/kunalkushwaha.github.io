@@ -1,0 +1,348 @@
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Conditional compilation in golang - Kunal Kushwaha</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="Conditional compiling in golang.
+While hacking around experimental builds of docker, I learned about conditional compiling in golang.
+As any project grew or ported to multiple architecture/platforms  the need of conditional compiling is obvious.
+Unlike C golang, do not have macros. Golang make use of build tags to achieve this.
+Build Tags:
+Build tags are basically annotation in source code. generally it is first line of file, where build tags are defined." />
+  <meta name="author" content="Kunal Kushwaha" /><link rel="preload stylesheet" as="style" href="http://kunalkushwaha.github.io/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="http://kunalkushwaha.github.io/theme.png" />
+
+  
+
+  <link rel="preload" as="image" href="http://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="http://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="http://kunalkushwaha.github.io/linkedin.svg" />
+
+  <script
+    defer
+    src="http://kunalkushwaha.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="http://kunalkushwaha.github.io/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://kunalkushwaha.github.io/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.147.2">
+  <meta itemprop="name" content="Conditional compilation in golang">
+  <meta itemprop="description" content="Conditional compiling in golang. While hacking around experimental builds of docker, I learned about conditional compiling in golang. As any project grew or ported to multiple architecture/platforms the need of conditional compiling is obvious.
+Unlike C golang, do not have macros. Golang make use of build tags to achieve this.
+Build Tags: Build tags are basically annotation in source code. generally it is first line of file, where build tags are defined.">
+  <meta itemprop="datePublished" content="2015-07-24T22:21:27+09:00">
+  <meta itemprop="dateModified" content="2015-07-24T22:21:27+09:00">
+  <meta itemprop="wordCount" content="623"><meta property="og:url" content="http://kunalkushwaha.github.io/2015/07/24/conditional-compilation-in-golang/">
+  <meta property="og:site_name" content="Kunal Kushwaha">
+  <meta property="og:title" content="Conditional compilation in golang">
+  <meta property="og:description" content="Conditional compiling in golang. While hacking around experimental builds of docker, I learned about conditional compiling in golang. As any project grew or ported to multiple architecture/platforms the need of conditional compiling is obvious.
+Unlike C golang, do not have macros. Golang make use of build tags to achieve this.
+Build Tags: Build tags are basically annotation in source code. generally it is first line of file, where build tags are defined.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2015-07-24T22:21:27+09:00">
+    <meta property="article:modified_time" content="2015-07-24T22:21:27+09:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Conditional compilation in golang">
+  <meta name="twitter:description" content="Conditional compiling in golang. While hacking around experimental builds of docker, I learned about conditional compiling in golang. As any project grew or ported to multiple architecture/platforms the need of conditional compiling is obvious.
+Unlike C golang, do not have macros. Golang make use of build tags to achieve this.
+Build Tags: Build tags are basically annotation in source code. generally it is first line of file, where build tags are defined.">
+
+  <link rel="canonical" href="http://kunalkushwaha.github.io/2015/07/24/conditional-compilation-in-golang/" />
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="http://kunalkushwaha.github.io/"
+      >Kunal Kushwaha</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Blog</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://speakerdeck.com/kunalkushwaha"
+        >Slide Deck</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      ></nav><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >twitter</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Conditional compilation in golang</h1><div class="text-xs antialiased opacity-60"><time>Jul 24, 2015</time></div></header>
+
+  <section><h2 id="conditional-compiling-in-golang">Conditional compiling in golang.</h2>
+<p>While hacking around experimental builds of docker, I learned about conditional compiling in golang.
+As any project grew or ported to multiple architecture/platforms  the need of conditional compiling is obvious.</p>
+<p>Unlike C golang, do not have macros. Golang make use of build tags to achieve this.</p>
+<h4 id="build-tags">Build Tags:</h4>
+<p>Build tags are basically annotation in source code. generally it is first line of file, where build tags are defined.</p>
+<p><code>// +build &lt;tags&gt;</code></p>
+<p>These tags are searched by <code>go build</code> tool before passing to go compiler. These tags can be passed while go build command like</p>
+<p><code>$ go build -tags &lt;tags&gt;</code></p>
+<p>Here are few points to remember regarding tags.</p>
+<ul>
+<li>Tags specifies architecture and platforms are special. i.e. No need to pass such tags, <code>go build</code> is smart enough to pass them.
+<ul>
+<li>e.g. linux, windows, darwin, 386, arch etc</li>
+</ul>
+</li>
+<li>Tags can be passed with negation i.e. !<!-- raw HTML omitted --></li>
+<li>A blank line must be present between build tags and code, else that line will be ignored.</li>
+<li>OR condition for tags can be specified with space.</li>
+<li>AND condition can be specified with <code>,</code></li>
+</ul>
+<p>If some tag is defined in file and is not passed in `go build`` command, it will be ignored.</p>
+<p>Lets see this with example with custom tag.</p>
+<ul>
+<li>Here we will take three files</li>
+</ul>
+<ol>
+<li>main.go</li>
+<li>include.go</li>
+<li>exclude.go</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">○</span> <span style="color:#a6e22e">cat</span> <span style="color:#a6e22e">main</span>.<span style="color:#66d9ef">go</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">init</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello from Main init()&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello from main&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">○</span> <span style="color:#a6e22e">cat</span> <span style="color:#a6e22e">include</span>.<span style="color:#66d9ef">go</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">init</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello from IncludeInit()&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">○</span> <span style="color:#a6e22e">cat</span> <span style="color:#a6e22e">exclude</span>.<span style="color:#66d9ef">go</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// +build exclude</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">init</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello from exclude&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>As you can see, here exclude file has build tag of <code>exclude</code>.</p>
+<p>Now if do <code>go build</code>, It will not compile exclude.go.</p>
+<pre tabindex="0"><code>○ go build
+
+○ ./temp
+Hello from IncludeInit()
+Hello from Main init()
+Hello from main
+</code></pre><p>Now let try using buildtag exclude.</p>
+<pre tabindex="0"><code>○ go build -tags exclude
+
+○ ./temp
+Hello from exclude
+Hello from IncludeInit()
+Hello from Main init()
+Hello from main
+</code></pre><p>You can see now, the exclude.go is part of binary.</p>
+<p>One more interesting thing with golang is <code>go list</code> tool.
+Using the <code>go list</code>, without compiling, you can see which files will be compiled, with given gotags or default.</p>
+<p>I found <code>go list --help</code> not great, but the summary of this tool is a go template can be used to check the list of files that will be included in the build.
+A simple example as below will help you to understand better.</p>
+<pre tabindex="0"><code>○ go list -f &#39;{{.GoFiles}}&#39; --tags exclude
+[exclude.go include.go main.go]
+
+○ go list -f &#39;{{.GoFiles}}&#39;
+[include.go main.go]
+</code></pre><p>As you can see, if exclude tag is not used, only include.go and main.go files are used.</p>
+<h4 id="so-it-that-all-about-conditional-compiling-in-golang">So it that all about conditional compiling in golang?</h4>
+<p>No, There is even simpler method available too :-) and it is file-name suffixes.</p>
+<p>In golang, there are few go environment variables defined.
+GOOS and GOARCH are two of such.</p>
+<ul>
+<li>GOOS defines the current OS</li>
+<li>GOARCH defines the current machine architecture.</li>
+</ul>
+<p><code>go build</code> matches value of these two environment variables in filename and if it matches then only include for compiling.</p>
+<p>So by naming files like <code>exclude_linux.go</code>, it will be included only if compiled in linux system.
+<code>exclude_linux_amd64.go</code> will ensure, it will be inlcuded only if OS is linux and architecture of system in 64 bit.</p>
+<p>You may try these combination.</p>
+<h4 id="which-one-should-be-used">Which one should be used?</h4>
+<ul>
+<li>For custom tags build tags are the only options.</li>
+<li>For platform and architecture specific, if you plan to use cross build on one systems, build tags will be preferable.</li>
+<li>Also, if same file does work for multiple platforms, build tags will be better choice.</li>
+</ul>
+<p>For rest, file sufixes can be used.</p>
+<p>Hope this info will be useful.</p>
+</section>
+
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="http://kunalkushwaha.github.io/2015/09/11/understanding-golang-interfaces/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Understanding Golang Interfaces</span></a
+    ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="http://kunalkushwaha.github.io/2015/07/04/container-virtualization/"
+      ><span>Container Virtualization and its building blocks</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav><div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'kunalkushwaha';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">Kunal Kushwaha</div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>

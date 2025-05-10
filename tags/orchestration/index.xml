@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Orchestration on Kunal Kushwaha</title>
+    <link>http://kunalkushwaha.github.io/tags/orchestration/</link>
+    <description>Recent content in Orchestration on Kunal Kushwaha</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Mon, 25 Jul 2016 13:39:38 +0900</lastBuildDate>
+    <atom:link href="http://kunalkushwaha.github.io/tags/orchestration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker 1.12RC demo</title>
+      <link>http://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/</link>
+      <pubDate>Mon, 25 Jul 2016 13:39:38 +0900</pubDate>
+      <guid>http://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/</guid>
+      <description>&lt;p&gt;Last friday (22nd July), I gave DockerCon16 Recap Talk and demo at &lt;a href=&#34;https://www.meetup.com/Docker-Tokyo/events/231737938/&#34;&gt;Docker Meetup Tokyo&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;This blog post gives a walk through my Docker Meetup demonstration, and you can follow these steps to try at your machines.&lt;/p&gt;&#xA;&lt;p&gt;In DockerCon16, docker 1.12 RC was announced. This release has an important &amp;amp; interesting feature called docker &lt;em&gt;swarm mode&lt;/em&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;get-docker-112-rc&#34;&gt;Get Docker 1.12 RC.&lt;/h3&gt;&#xA;&lt;p&gt;If you are using &lt;a href=&#34;https://docs.docker.com/engine/installation/mac/#/docker-for-mac&#34;&gt;Docker for Mac&lt;/a&gt; or &lt;a href=&#34;https://docs.docker.com/engine/installation/windows/#/docker-for-windows&#34;&gt;Docker for Windows&lt;/a&gt;, You already have docker 1.12RC installed on your machine.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

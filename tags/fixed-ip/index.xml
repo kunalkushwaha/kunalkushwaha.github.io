@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fixed-Ip on Kunal Kushwaha</title>
+    <link>http://kunalkushwaha.github.io/tags/fixed-ip/</link>
+    <description>Recent content in Fixed-Ip on Kunal Kushwaha</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Fri, 12 Aug 2016 17:10:24 +0900</lastBuildDate>
+    <atom:link href="http://kunalkushwaha.github.io/tags/fixed-ip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Migrating traditional apps to docker</title>
+      <link>http://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</link>
+      <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
+      <guid>http://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</guid>
+      <description>&lt;p&gt;If title of this blog, attracted you towards this blog, Most likely, you will be one of us, who want to migrate old traditional application&amp;rsquo;s in container environment. This blog covers my experience of Migrating old traditional application into Docker.&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;Before beginning with migration procedure, Let me explain requirements I had to met with migrated system.&lt;/p&gt;&#xA;&lt;h3 id=&#34;problems&#34;&gt;Problems&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Old apps running on servers/VMs, resource utilization not optimal.&lt;/li&gt;&#xA;&lt;li&gt;High maintenance cost.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;OS running is no longer supported by vendors, so in-house support required.&lt;/li&gt;&#xA;&lt;li&gt;Maintenance downtime high.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Platform to adopt DevOps practice for fast refactoring.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;challenges&#34;&gt;Challenges&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Migrate Application with least changes in existing platform and infrastructure use.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Use same OS distribution.&lt;/li&gt;&#xA;&lt;li&gt;No rewriting application for new OS.&lt;/li&gt;&#xA;&lt;li&gt;No changes in network infrastructure.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Behavioral changes for accessing the application should be none.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Use hardware load balancer.&lt;/li&gt;&#xA;&lt;li&gt;Use Fixed-IP with pre-approved MAC address.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;&#xA;&lt;p&gt;Migrating old applications into containers can be divided into two parts.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
