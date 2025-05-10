@@ -30,29 +30,29 @@ A Pod is collection of containers running in shared namespace. A container is cr
 
 &ldquo;While immutable image of application is great for security, but putting configurations &amp; data like security keys is bad for security as well as portability&rdquo;
 There are various ways to pass data to application in containers, without changing the flow of application e.g. by setting environment variables or using volume mount to provide configuration file at the time of container creation." />
-  <meta name="author" content="Kunal Kushwaha" /><link rel="preload stylesheet" as="style" href="http://kunalkushwaha.github.io/main.min.css" />
+  <meta name="author" content="Kunal Kushwaha" /><link rel="preload stylesheet" as="style" href="https://kunalkushwaha.github.io/main.min.css" />
 
   
-  <link rel="preload" as="image" href="http://kunalkushwaha.github.io/theme.png" />
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/theme.png" />
 
   
 
-  <link rel="preload" as="image" href="http://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="http://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="http://kunalkushwaha.github.io/linkedin.svg" />
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/linkedin.svg" />
 
   <script
     defer
-    src="http://kunalkushwaha.github.io/highlight.min.js"
+    src="https://kunalkushwaha.github.io/highlight.min.js"
     onload="hljs.initHighlightingOnLoad();"
   ></script>
 
   
   <link
     rel="icon"
-    href="http://kunalkushwaha.github.io/favicon.ico"
+    href="https://kunalkushwaha.github.io/favicon.ico"
   />
   <link
     rel="apple-touch-icon"
-    href="http://kunalkushwaha.github.io/apple-touch-icon.png"
+    href="https://kunalkushwaha.github.io/apple-touch-icon.png"
   />
 
   <meta name="generator" content="Hugo 0.147.2">
@@ -63,7 +63,7 @@ There are various ways to pass data to application in containers, without changi
   <meta itemprop="datePublished" content="2020-01-28T14:26:37+09:00">
   <meta itemprop="dateModified" content="2020-01-28T14:26:37+09:00">
   <meta itemprop="wordCount" content="1047">
-  <meta itemprop="keywords" content="Kubernetes,K8s,Pods,Secret,Configmap"><meta property="og:url" content="http://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/">
+  <meta itemprop="keywords" content="Kubernetes,K8s,Pods,Secret,Configmap"><meta property="og:url" content="https://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/">
   <meta property="og:site_name" content="Kunal Kushwaha">
   <meta property="og:title" content="ConfigMaps and Pods">
   <meta property="og:description" content="A Pod is collection of containers running in shared namespace. A container is created from Docker/OCI Image, which is immutable in nature i.e. data bundled into the image cannot be changed later in image.
@@ -86,7 +86,7 @@ There are various ways to pass data to application in containers, without changi
 “While immutable image of application is great for security, but putting configurations &amp; data like security keys is bad for security as well as portability”
 There are various ways to pass data to application in containers, without changing the flow of application e.g. by setting environment variables or using volume mount to provide configuration file at the time of container creation.">
 
-  <link rel="canonical" href="http://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/" />
+  <link rel="canonical" href="https://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/" />
 </head>
 <body
     class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
@@ -96,7 +96,7 @@ There are various ways to pass data to application in containers, without changi
   <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
     <a
       class="-translate-y-[1px] text-2xl font-medium"
-      href="http://kunalkushwaha.github.io/"
+      href="https://kunalkushwaha.github.io/"
       >Kunal Kushwaha</a
     >
     <div
@@ -387,29 +387,29 @@ A. Kubernetes do not put any hard limits on ConfigMap size, though it stores con
 
   <footer class="mt-12 flex flex-wrap"><a
       class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
-      href="http://kunalkushwaha.github.io/tags/kubernetes"
+      href="https://kunalkushwaha.github.io/tags/kubernetes"
       >kubernetes</a
     ><a
       class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
-      href="http://kunalkushwaha.github.io/tags/k8s"
+      href="https://kunalkushwaha.github.io/tags/k8s"
       >k8s</a
     ><a
       class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
-      href="http://kunalkushwaha.github.io/tags/pods"
+      href="https://kunalkushwaha.github.io/tags/pods"
       >pods</a
     ><a
       class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
-      href="http://kunalkushwaha.github.io/tags/secret"
+      href="https://kunalkushwaha.github.io/tags/secret"
       >secret</a
     ><a
       class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
-      href="http://kunalkushwaha.github.io/tags/configmap"
+      href="https://kunalkushwaha.github.io/tags/configmap"
       >configmap</a
     ></footer><nav
     class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
   ><a
       class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
-      href="http://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/"
+      href="https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/"
       ><span>Understanding Infrakit</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
     ></nav><div class="mt-24" id="disqus_thread"></div>
   <script>
