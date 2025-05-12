@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Tue, 28 Jan 2020 14:26:37 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 12 May 2025 17:15:04 +0900</lastBuildDate>
     <atom:link href="https://kunalkushwaha.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building AI Agents with AgentFlow: A Beginner&#39;s Journey</title>
+      <link>https://kunalkushwaha.github.io/2025/05/12/building-ai-agents-with-agentflow/</link>
+      <pubDate>Mon, 12 May 2025 17:15:04 +0900</pubDate>
+      <guid>https://kunalkushwaha.github.io/2025/05/12/building-ai-agents-with-agentflow/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://kunalkushwaha.github.io/AgentFlow.jpg&#34; alt=&#34;AgentFlow In Action&#34; title=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Imagine you&amp;rsquo;re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.&lt;/p&gt;&#xA;&lt;p&gt;Enter &lt;strong&gt;AgentFlow&lt;/strong&gt;—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents&amp;rsquo; behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI&amp;rsquo;s GPT-4.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>ConfigMaps and Pods</title>
       <link>https://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/</link>
