@@ -94,18 +94,18 @@
       <description>&lt;p&gt;Started blogging today after few years of gap. Had stopped blogging few years back on &lt;a href=&#34;http://kunalkushwaha.wordpress.com&#34;&gt;wordpress&lt;/a&gt; .&lt;/p&gt;&#xA;&lt;p&gt;Blogging is always fun and great way to share your experiences and findings with others.&lt;/p&gt;&#xA;&lt;p&gt;Lot of things have changed in last 3-5 years in world of Web Technology, So is the blogging platform too.&#xA;While exploring Web Technologies and Golang, I came across the static site genrator and Hugo.&lt;/p&gt;&#xA;&lt;p&gt;I found it really powerful tool for blogging as well as Product Documentations.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>About Kunal Kushwaha</title>
-      <link>https://kunalkushwaha.github.io/about/about/</link>
-      <pubDate>Tue, 03 Mar 2015 17:59:00 +0530</pubDate>
-      <guid>https://kunalkushwaha.github.io/about/about/</guid>
-      <description>&lt;p&gt;A wannabe Entrepreneur and Experienced Technical Leader in building multiple v1.0 version software&amp;rsquo;s, right from conceptualizing to delivery.&lt;/p&gt;&#xA;&lt;p&gt;Have hands on experience in building enterprise storage products, Linux kernel block susbsystem hacking, RAID, High Available systems,  Linux Containers and Docker.&lt;/p&gt;&#xA;&lt;p&gt;Few of my area of interests are&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Distributed systems&lt;/li&gt;&#xA;&lt;li&gt;Scalability&lt;/li&gt;&#xA;&lt;li&gt;Storage systems&lt;/li&gt;&#xA;&lt;li&gt;Health Care&lt;/li&gt;&#xA;&lt;li&gt;Cloud Technology&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Drop me mail or connect me though social media.&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>About Me</title>
       <link>https://kunalkushwaha.github.io/about/</link>
       <pubDate>Tue, 03 Mar 2015 17:59:00 +0530</pubDate>
       <guid>https://kunalkushwaha.github.io/about/</guid>
       <description>&lt;p&gt;Hello! I’m &lt;strong&gt;Kunal Kushwaha&lt;/strong&gt;, a technical architect with over 20 years of experience building system‑level products and cloud‑native solutions. My core passions lie at the intersection of &lt;strong&gt;AI&lt;/strong&gt; and &lt;strong&gt;cloud technologies&lt;/strong&gt;, where I design scalable architectures, leverage container ecosystems, and integrate machine learning workflows to solve complex challenges.&lt;/p&gt;&#xA;&lt;h3 id=&#34;what-i-do&#34;&gt;What I Do&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;AI &amp;amp; Cloud Architecture&lt;/strong&gt;&#xA;I architect and deploy AI‑driven applications on public and private clouds, harnessing tools like Kubernetes, Docker, and serverless frameworks to deliver robust, high‑availability systems.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Container &amp;amp; Infrastructure Engineering&lt;/strong&gt;&#xA;With 8+ years in container technologies (LXC, Docker, Kubernetes) and nearly 7 years in Linux kernel and embedded development, I streamline CI/CD pipelines, optimize resource utilization, and contribute to open‑source runtimes such as Podman and Containerd.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Developer Ecosystems &amp;amp; Community&lt;/strong&gt;&#xA;I love empowering teams through hands‑on training, public speaking, and building vibrant communities. I’ve organized meetups, delivered workshops on AI/ML integration, and written tutorials to help engineers adopt best practices in cloud‑native development.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;professional-journey&#34;&gt;Professional Journey&lt;/h3&gt;&#xA;&lt;p&gt;Over two decades, I’ve:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About Me</title>
+      <link>https://kunalkushwaha.github.io/about/about/</link>
+      <pubDate>Tue, 03 Mar 2015 17:59:00 +0530</pubDate>
+      <guid>https://kunalkushwaha.github.io/about/about/</guid>
+      <description>&lt;p&gt;Hello! I’m &lt;strong&gt;Kunal Kushwaha&lt;/strong&gt;, a technical architect with over 20 years of experience in building system-level products and cloud-native solutions. My current focus lies in the realms of &lt;strong&gt;AI&lt;/strong&gt; and &lt;strong&gt;cloud technologies&lt;/strong&gt;, where I design scalable architectures, leverage container ecosystems, and integrate machine learning workflows to address complex challenges.&lt;/p&gt;&#xA;&lt;h3 id=&#34;what-i-do&#34;&gt;What I Do&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;AI &amp;amp; Cloud Architecture&lt;/strong&gt;&#xA;I architect and deploy AI-driven applications on both public and private clouds, utilizing tools like Kubernetes, Docker, and serverless frameworks to deliver robust, high-availability systems.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
