@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Workflows on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/tags/workflows/</link>
+    <description>Recent content in Workflows on Kunal Kushwaha</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Sun, 26 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://kunalkushwaha.github.io/tags/workflows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Streaming AI Responses in Go with AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/</link>
+      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/</guid>
+      <description>&lt;p&gt;Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we&amp;rsquo;ll build two streaming experiences with AgenticGoKit:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A minimal &amp;ldquo;simple-streaming&amp;rdquo; chat&lt;/li&gt;&#xA;&lt;li&gt;A sequential multi‑agent &amp;ldquo;streaming_workflow&amp;rdquo; with step-by-step progress&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;We&amp;rsquo;ll also cover when to use streaming, why it helps, and a few gotchas and tips.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;static/simple-streaming.gif&#34; alt=&#34;Streaming demo hero&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-streaming-and-why-it-matters&#34;&gt;What is streaming and why it matters&lt;/h2&gt;&#xA;&lt;p&gt;Instead of waiting for the full response, streaming lets you consume output as it&amp;rsquo;s generated (token‑by‑token or chunk‑by‑chunk). That enables:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
