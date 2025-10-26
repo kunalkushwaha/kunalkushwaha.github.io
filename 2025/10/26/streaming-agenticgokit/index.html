@@ -242,7 +242,7 @@ What is streaming and why it matters Instead of waiting for the full response, s
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># https://&lt;your-resource-name&gt;.openai.azure.com/</span>
 </span></span></code></pre></div><p>For a deeper dive into APIs and options, see <code>core/vnext/STREAMING_GUIDE.md</code>.</p>
 <h2 id="part-1-minimal-simple-streaming">Part 1: Minimal simple-streaming</h2>
-<p>The example lives here: <code>examples/vnext/simple-streaming/main.go</code>.</p>
+<p>The example lives here: <a href="https://github.com/AgenticGoKit/AgenticGoKit/blob/master/examples/vnext/simple-streaming/main.go">examples/vnext/simple-streaming/main.go</a>.</p>
 <p>It creates a small chat agent and prints tokens as they arrive:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Start streaming</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
@@ -277,7 +277,7 @@ What is streaming and why it matters Instead of waiting for the full response, s
 <li>Always call <code>stream.Wait()</code> after consuming chunks to surface any trailing errors.</li>
 </ul>
 <h2 id="part-2-multiagent-streaming-workflow">Part 2: Multi‑agent streaming workflow</h2>
-<p>Now, let’s level up with a sequential, two‑agent workflow that streams each step in real time. Code: <code>examples/vnext/streaming_workflow/main.go</code>.</p>
+<p>Now, let’s level up with a sequential, two‑agent workflow that streams each step in real time. Code: <a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/streaming_workflow/main.go">examples/vnext/streaming_workflow/main.go</a>.</p>
 <p>We’ll create two specialized agents—Researcher and Summarizer—and wire them into a vNext Workflow. Each step streams its own tokens and emits metadata so you know what’s happening.</p>
 <h3 id="defining-agents">Defining agents</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateResearcherAgent</span>() (<span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Agent</span>, <span style="color:#66d9ef">error</span>) {
