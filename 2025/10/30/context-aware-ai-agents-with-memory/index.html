@@ -67,7 +67,7 @@ AgenticGoKit’s memory system solves this elegantly with a unified interface th
 Conversation history - Sequential chat memory RAG (Retrieval Augmented Generation) - Semantic search over memories Memory tracking - Monitor memory usage and query performance Session management - Scope memories to conversation sessions In this post, we’ll build a real interactive chat agent that demonstrates these features.">
   <meta itemprop="datePublished" content="2025-10-30T02:18:55+09:00">
   <meta itemprop="dateModified" content="2025-10-30T02:18:55+09:00">
-  <meta itemprop="wordCount" content="2158">
+  <meta itemprop="wordCount" content="2657">
   <meta itemprop="keywords" content="Go,Ai,Context,Agenticgokit,Workflows,AIagents,Memoryagents"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/">
   <meta property="og:site_name" content="Kunal Kushwaha">
   <meta property="og:title" content="Building Context-Aware AI Agents with Memory in AgenticGoKit">
@@ -220,6 +220,9 @@ Conversation history - Sequential chat memory RAG (Retrieval Augmented Generatio
 <li>Session management - Scope memories to conversation sessions</li>
 </ul>
 <p>In this post, we&rsquo;ll build a real interactive chat agent that demonstrates these features.</p>
+<hr>
+<p><em>Discover how to create conversational AI agents that remember past interactions and provide personalized, context-aware responses</em></p>
+<hr>
 <h2 id="the-memory-problem">The Memory Problem</h2>
 <p>Consider a simple conversation:</p>
 <pre tabindex="0"><code>User: &#34;My name is Sarah and I love hiking.&#34;
@@ -374,7 +377,23 @@ Assistant: &#34;Based on our conversation, I know your name is Sarah and you enj
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">MemoryQueries</span>, <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">Duration</span>)
 </span></span></code></pre></div><h2 id="how-memory-works-under-the-hood">How Memory Works Under the Hood</h2>
 <p>When you send a message to a memory-enabled agent, here&rsquo;s what happens:</p>
-<h3 id="1-memory-query-phase-before-llm-call">1. <strong>Memory Query Phase</strong> (Before LLM call)</h3>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TD
+    A[User Input] --&gt; B[Memory Query Phase]
+    B --&gt; C{RAG Query}
+    B --&gt; D{Chat History}
+    C --&gt; E[Semantic Search]
+    D --&gt; F[Sequential Retrieval]
+    E --&gt; G[Relevant Memories]
+    F --&gt; H[Recent Messages]
+    G --&gt; I[Context Enrichment]
+    H --&gt; I
+    I --&gt; J[Enriched Prompt]
+    J --&gt; K[LLM Generation]
+    K --&gt; L[Response]
+    L --&gt; M[Memory Storage]
+    M --&gt; N[Update RAG Index]
+    M --&gt; O[Update Chat History]
+</code></pre><h3 id="1-memory-query-phase-before-llm-call">1. <strong>Memory Query Phase</strong> (Before LLM call)</h3>
 <pre tabindex="0"><code>Input: &#34;What did we discuss earlier?&#34;
 
 Memory System performs:
@@ -557,10 +576,10 @@ Turn 19: &#34;What city did I mention?&#34;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The weights balance:</p>
 <ul>
-<li><strong>High PersonalWeight</strong>: Prefer recent dialogue context</li>
-<li><strong>High KnowledgeWeight</strong>: Prefer semantic relevance</li>
+<li><strong>High PersonalWeight</strong>: Prioritizes recent dialogue context, ensuring conversational continuity and immediate relevance</li>
+<li><strong>High KnowledgeWeight</strong>: Prioritizes semantic relevance over recency, better for knowledge-intensive tasks</li>
 </ul>
-<p>Most conversational agents benefit from <strong>PersonalWeight: 0.7-0.9</strong> to maintain dialogue coherence.</p>
+<p><strong>Why prioritize chat history for conversations?</strong> Recent dialogue provides immediate context, maintains conversation flow, and ensures the agent remembers what was just discussed. This creates more natural, coherent interactions compared to jumping between semantically similar but temporally distant memories.</p>
 <h2 id="production-considerations">Production Considerations</h2>
 <h3 id="1-choose-the-right-provider">1. <strong>Choose the Right Provider</strong></h3>
 <p><strong>Development/Testing:</strong></p>
@@ -610,14 +629,50 @@ Turn 19: &#34;What city did I mention?&#34;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="comparing-memory-vs-no-memory">Comparing: Memory vs. No Memory</h2>
 <p>Let&rsquo;s see the difference side-by-side:</p>
-<h3 id="without-memory">Without Memory</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Aspect</th>
+          <th>Without Memory</th>
+          <th>With Memory</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Turn 1:</strong> &ldquo;My name is Alex&rdquo;</td>
+          <td>&ldquo;Nice to meet you, Alex!&rdquo;</td>
+          <td>&ldquo;Nice to meet you, Alex!&quot;<!-- raw HTML omitted --><em>[Memory] 2 queries</em></td>
+      </tr>
+      <tr>
+          <td><strong>Turn 2:</strong> &ldquo;What&rsquo;s my name?&rdquo;</td>
+          <td>&ldquo;I don&rsquo;t know your name.&rdquo;</td>
+          <td>&ldquo;Your name is Alex!&quot;<!-- raw HTML omitted --><em>[Memory] 2 queries</em></td>
+      </tr>
+      <tr>
+          <td><strong>Turn 3:</strong> &ldquo;What do I do?&rdquo;</td>
+          <td>&ldquo;I don&rsquo;t have information about your profession.&rdquo;</td>
+          <td>&ldquo;I don&rsquo;t recall you mentioning your profession yet. What do you do?&quot;<!-- raw HTML omitted --><em>[Memory] 2 queries</em></td>
+      </tr>
+      <tr>
+          <td><strong>Turn 4:</strong> &ldquo;I&rsquo;m a teacher&rdquo;</td>
+          <td>&ldquo;That&rsquo;s interesting!&rdquo;</td>
+          <td>&ldquo;That&rsquo;s wonderful! As a teacher, you must have many interesting stories to share.&quot;<!-- raw HTML omitted --><em>[Memory] 2 queries</em></td>
+      </tr>
+      <tr>
+          <td><strong>Turn 5:</strong> &ldquo;Tell me about myself&rdquo;</td>
+          <td>&ldquo;I don&rsquo;t have personal information about you.&rdquo;</td>
+          <td>&ldquo;Based on our conversation, I know you&rsquo;re Alex and you work as a teacher. You seem passionate about education!&quot;<!-- raw HTML omitted --><em>[Memory] 2 queries</em></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="without-memory-code">Without Memory (Code)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">QuickChatAgent</span>(<span style="color:#e6db74">&#34;gpt-4o-mini&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// No memory configuration</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">result1</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;My name is Alex&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">result2</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;What&#39;s my name?&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Response: &#34;I don&#39;t know your name&#34;</span>
-</span></span></code></pre></div><h3 id="with-memory">With Memory</h3>
+</span></span></code></pre></div><h3 id="with-memory-code">With Memory (Code)</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;agent&#34;</span>).
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Config</span>{
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMConfig</span>{
@@ -640,6 +695,64 @@ Turn 19: &#34;What city did I mention?&#34;
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">result2</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;What&#39;s my name?&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Response: &#34;Your name is Alex!&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// [Memory] 2 queries</span>
+</span></span></code></pre></div><h2 id="common-pitfalls--best-practices">Common Pitfalls &amp; Best Practices</h2>
+<h3 id="privacy--data-security">Privacy &amp; Data Security</h3>
+<p><strong>Pitfall:</strong> Storing sensitive information in memory without user consent.</p>
+<p><strong>Best Practice:</strong> Always implement data retention policies and give users control over their data:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Clear user session data</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">memoryProvider</span>.<span style="color:#a6e22e">ClearSession</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">sessionID</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Failed to clear session: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Implement data retention limits</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Memory</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">MemoryConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">RetentionPolicy</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">RetentionPolicy</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">MaxAge</span>:     <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Hour</span>, <span style="color:#75715e">// 30 days</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">MaxEntries</span>: <span style="color:#ae81ff">1000</span>,                <span style="color:#75715e">// Per session</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="token-cost-explosion">Token Cost Explosion</h3>
+<p><strong>Pitfall:</strong> Memory context grows unbounded, causing skyrocketing API costs.</p>
+<p><strong>Best Practice:</strong> Set reasonable limits and monitor usage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">RAG</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">RAGConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MaxTokens</span>:    <span style="color:#ae81ff">1000</span>, <span style="color:#75715e">// Limit context size</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">HistoryLimit</span>: <span style="color:#ae81ff">10</span>,   <span style="color:#75715e">// Limit conversation turns</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Monitor costs</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">MemoryQueries</span> &gt; <span style="color:#ae81ff">5</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;High memory usage detected: %d queries&#34;</span>, <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">MemoryQueries</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="context-drift--hallucinations">Context Drift &amp; Hallucinations</h3>
+<p><strong>Pitfall:</strong> Outdated or irrelevant memories confuse the agent.</p>
+<p><strong>Best Practice:</strong> Use session management and implement relevance scoring:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Start new conversation sessions</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sessionID</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">memory</span>.<span style="color:#a6e22e">NewSession</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span> = <span style="color:#a6e22e">memory</span>.<span style="color:#a6e22e">SetSession</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">sessionID</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// AgenticGoKit automatically handles session isolation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;Hello, I&#39;m starting a new conversation&#34;</span>)
+</span></span></code></pre></div><h3 id="performance-degradation">Performance Degradation</h3>
+<p><strong>Pitfall:</strong> Memory queries slow down response times.</p>
+<p><strong>Best Practice:</strong> Choose appropriate providers and optimize configurations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Development: Fast in-memory</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Memory</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">MemoryConfig</span>{<span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;memory&#34;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Production: Optimized vector database</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Memory</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">MemoryConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;pgvector&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Embedding</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">EmbeddingConfig</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;ollama&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;nomic-embed-text:latest&#34;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="over-reliance-on-memory">Over-Reliance on Memory</h3>
+<p><strong>Pitfall:</strong> Agent becomes too dependent on past context, ignoring current instructions.</p>
+<p><strong>Best Practice:</strong> Balance memory weight with current context importance:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">RAG</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">RAGConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">PersonalWeight</span>:  <span style="color:#ae81ff">0.7</span>,  <span style="color:#75715e">// Memory context</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">KnowledgeWeight</span>: <span style="color:#ae81ff">0.3</span>,  <span style="color:#75715e">// Current/general knowledge</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="complete-working-example">Complete Working Example</h2>
 <p>Here&rsquo;s the full code for a production-ready memory-enabled chat agent:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
@@ -841,7 +954,17 @@ Turn 19: &#34;What city did I mention?&#34;
     script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
     script.setAttribute('data-timestamp', +new Date());
     document.head.appendChild(script);
-  </script></article></main><footer
+  </script><script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+<script>
+  Array.from(document.getElementsByClassName('language-mermaid')).forEach(
+    (el) => {
+      el.parentElement.outerHTML = `<div class="mermaid [&_svg]:block [&_svg]:m-auto">${el.innerHTML}</div>`;
+    },
+  );
+</script></article></main><footer
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
 >
   <div class="mr-auto">Kunal Kushwaha</div>
