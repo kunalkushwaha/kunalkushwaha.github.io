@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Sun, 26 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Oct 2025 02:18:55 +0900</lastBuildDate>
     <atom:link href="https://kunalkushwaha.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      <guid>https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://kunalkushwaha.github.io/memory-quote.PNG&#34; alt=&#34;Simple streaming (terminal)&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;One of the biggest challenges in building AI agents is making them &lt;strong&gt;remember&lt;/strong&gt;. Users expect conversational agents to recall previous interactions, maintain context across multiple turns, and provide personalized responses based on conversation history.&lt;/p&gt;&#xA;&lt;p&gt;AgenticGoKit&amp;rsquo;s memory system solves this elegantly with a unified interface that supports:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Conversation history - Sequential chat memory&lt;/li&gt;&#xA;&lt;li&gt;RAG (Retrieval Augmented Generation) - Semantic search over memories&lt;/li&gt;&#xA;&lt;li&gt;Memory tracking - Monitor memory usage and query performance&lt;/li&gt;&#xA;&lt;li&gt;Session management - Scope memories to conversation sessions&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;In this post, we&amp;rsquo;ll build a real interactive chat agent that demonstrates these features.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Streaming AI Responses in Go with AgenticGoKit</title>
       <link>https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/</link>

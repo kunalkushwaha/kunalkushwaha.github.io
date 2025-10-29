@@ -7,27 +7,55 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Sun, 26 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Oct 2025 02:18:55 +0900</lastBuildDate>
     <atom:link href="https://kunalkushwaha.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Agenticgokit</title>
       <link>https://kunalkushwaha.github.io/tags/agenticgokit/</link>
-      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
       <guid>https://kunalkushwaha.github.io/tags/agenticgokit/</guid>
       <description></description>
     </item>
     <item>
       <title>Ai</title>
       <link>https://kunalkushwaha.github.io/tags/ai/</link>
-      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
       <guid>https://kunalkushwaha.github.io/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AIagents</title>
+      <link>https://kunalkushwaha.github.io/tags/aiagents/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      <guid>https://kunalkushwaha.github.io/tags/aiagents/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Context</title>
+      <link>https://kunalkushwaha.github.io/tags/context/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      <guid>https://kunalkushwaha.github.io/tags/context/</guid>
       <description></description>
     </item>
     <item>
       <title>Go</title>
       <link>https://kunalkushwaha.github.io/tags/go/</link>
-      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
       <guid>https://kunalkushwaha.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Memoryagents</title>
+      <link>https://kunalkushwaha.github.io/tags/memoryagents/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      <guid>https://kunalkushwaha.github.io/tags/memoryagents/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Workflows</title>
+      <link>https://kunalkushwaha.github.io/tags/workflows/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      <guid>https://kunalkushwaha.github.io/tags/workflows/</guid>
       <description></description>
     </item>
     <item>
@@ -42,13 +70,6 @@
       <link>https://kunalkushwaha.github.io/tags/streaming/</link>
       <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
       <guid>https://kunalkushwaha.github.io/tags/streaming/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Workflows</title>
-      <link>https://kunalkushwaha.github.io/tags/workflows/</link>
-      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://kunalkushwaha.github.io/tags/workflows/</guid>
       <description></description>
     </item>
     <item>
