@@ -59,6 +59,20 @@ Instead of waiting for the full response, streaming lets you consume output as i
   />
 
   <meta name="generator" content="Hugo 0.147.2">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K16B935QET');
+        }
+      </script>
   <meta itemprop="name" content="Streaming AI Responses in Go with AgenticGoKit">
   <meta itemprop="description" content="Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we’ll build two streaming experiences with AgenticGoKit:
 A minimal “simple-streaming” chat A sequential multi‑agent “streaming_workflow” with step-by-step progress We’ll also cover when to use streaming, why it helps, and a few gotchas and tips.

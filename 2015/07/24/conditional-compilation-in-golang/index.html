@@ -57,6 +57,20 @@ Build tags are basically annotation in source code. generally it is first line o
   />
 
   <meta name="generator" content="Hugo 0.147.2">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K16B935QET');
+        }
+      </script>
   <meta itemprop="name" content="Conditional compilation in golang">
   <meta itemprop="description" content="Conditional compiling in golang. While hacking around experimental builds of docker, I learned about conditional compiling in golang. As any project grew or ported to multiple architecture/platforms the need of conditional compiling is obvious.
 Unlike C golang, do not have macros. Golang make use of build tags to achieve this.
