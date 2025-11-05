@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI Agents on Kunal Kushwaha</title>
+    <link>http://localhost:1313/tags/ai-agents/</link>
+    <description>Recent content in AI Agents on Kunal Kushwaha</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Thu, 06 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ai-agents/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Use MCP and Tools with AgenticGoKit</title>
+      <link>http://localhost:1313/2025/11/06/mcp-tools-with-agenticgokit/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/2025/11/06/mcp-tools-with-agenticgokit/</guid>
+      <description>&lt;p&gt;AgenticGoKit makes tools (and MCP tools) first-class citizens. This post shows exactly how to enable them, call them directly, and let your LLM trigger them—with copy‑pasteable snippets and a runnable example.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-youll-build&#34;&gt;What you&amp;rsquo;ll build&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;An agent with tools enabled&lt;/li&gt;&#xA;&lt;li&gt;MCP tools via explicit server or automatic discovery&lt;/li&gt;&#xA;&lt;li&gt;Direct tool calls from Go&lt;/li&gt;&#xA;&lt;li&gt;LLM‑driven tool calls using a simple TOOL_CALL JSON envelope&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Go 1.24+&lt;/li&gt;&#xA;&lt;li&gt;LLM provider plugin (examples use Ollama with &lt;code&gt;gemma3:1b&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;Optional: An MCP server (e.g., HTTP SSE on &lt;code&gt;localhost:8812&lt;/code&gt;)—or use discovery&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;quick-mental-model&#34;&gt;Quick mental model&lt;/h2&gt;&#xA;&lt;p&gt;AgenticGoKit supports two tool sources:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
