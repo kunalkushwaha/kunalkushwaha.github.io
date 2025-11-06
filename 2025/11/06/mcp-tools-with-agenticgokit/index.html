@@ -20,27 +20,13 @@
   />
 
   
-  <title>Use MCP and Tools with AgenticGoKit - Kunal Kushwaha</title>
+  <title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go - Kunal Kushwaha</title>
 
   
   <meta name="theme-color" />
 
-  <meta name="description" content="AgenticGoKit makes tools (and MCP tools) first-class citizens. This post shows exactly how to enable them, call them directly, and let your LLM trigger them—with copy‑pasteable snippets and a runnable example.
-What you&rsquo;ll build
-
-An agent with tools enabled
-MCP tools via explicit server or automatic discovery
-Direct tool calls from Go
-LLM‑driven tool calls using a simple TOOL_CALL JSON envelope
-
-Prerequisites
-
-Go 1.24&#43;
-LLM provider plugin (examples use Ollama with gemma3:1b)
-Optional: An MCP server (e.g., HTTP SSE on localhost:8812) or use discovery
-
-Quick mental model
-AgenticGoKit supports two tool sources:" />
+  <meta name="description" content="If you&rsquo;re new to building AI agents in Go, you might think integrating tools and external services is complex. It&rsquo;s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
+In this hands-on guide, you&rsquo;ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it&rsquo;s just a few lines of Go code." />
   <meta name="author" content="Kunal Kushwaha" /><link rel="preload stylesheet" as="style" href="https://kunalkushwaha.github.io/main.min.css" />
 
   
@@ -81,17 +67,17 @@ AgenticGoKit supports two tool sources:" />
           gtag('config', 'G-K16B935QET');
         }
       </script>
-  <meta itemprop="name" content="Use MCP and Tools with AgenticGoKit">
-  <meta itemprop="description" content="AgenticGoKit makes tools (and MCP tools) first-class citizens. This post shows exactly how to enable them, call them directly, and let your LLM trigger them—with copy‑pasteable snippets and a runnable example.
-What you’ll build An agent with tools enabled MCP tools via explicit server or automatic discovery Direct tool calls from Go LLM‑driven tool calls using a simple TOOL_CALL JSON envelope Prerequisites Go 1.24&#43; LLM provider plugin (examples use Ollama with gemma3:1b) Optional: An MCP server (e.g., HTTP SSE on localhost:8812) or use discovery Quick mental model AgenticGoKit supports two tool sources:">
+  <meta itemprop="name" content="Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go">
+  <meta itemprop="description" content="If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. It’s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
+In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it’s just a few lines of Go code.">
   <meta itemprop="datePublished" content="2025-11-06T00:00:00+00:00">
   <meta itemprop="dateModified" content="2025-11-06T00:00:00+00:00">
-  <meta itemprop="wordCount" content="1058">
+  <meta itemprop="wordCount" content="1133">
   <meta itemprop="keywords" content="Agenticgokit,Go,MCP,Tools,AI Agents,AI Tooling"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/">
   <meta property="og:site_name" content="Kunal Kushwaha">
-  <meta property="og:title" content="Use MCP and Tools with AgenticGoKit">
-  <meta property="og:description" content="AgenticGoKit makes tools (and MCP tools) first-class citizens. This post shows exactly how to enable them, call them directly, and let your LLM trigger them—with copy‑pasteable snippets and a runnable example.
-What you’ll build An agent with tools enabled MCP tools via explicit server or automatic discovery Direct tool calls from Go LLM‑driven tool calls using a simple TOOL_CALL JSON envelope Prerequisites Go 1.24&#43; LLM provider plugin (examples use Ollama with gemma3:1b) Optional: An MCP server (e.g., HTTP SSE on localhost:8812) or use discovery Quick mental model AgenticGoKit supports two tool sources:">
+  <meta property="og:title" content="Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go">
+  <meta property="og:description" content="If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. It’s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
+In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it’s just a few lines of Go code.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -105,9 +91,9 @@ What you’ll build An agent with tools enabled MCP tools via explicit server or
     <meta property="article:tag" content="AI Tooling">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Use MCP and Tools with AgenticGoKit">
-  <meta name="twitter:description" content="AgenticGoKit makes tools (and MCP tools) first-class citizens. This post shows exactly how to enable them, call them directly, and let your LLM trigger them—with copy‑pasteable snippets and a runnable example.
-What you’ll build An agent with tools enabled MCP tools via explicit server or automatic discovery Direct tool calls from Go LLM‑driven tool calls using a simple TOOL_CALL JSON envelope Prerequisites Go 1.24&#43; LLM provider plugin (examples use Ollama with gemma3:1b) Optional: An MCP server (e.g., HTTP SSE on localhost:8812) or use discovery Quick mental model AgenticGoKit supports two tool sources:">
+  <meta name="twitter:title" content="Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go">
+  <meta name="twitter:description" content="If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. It’s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
+In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it’s just a few lines of Go code.">
 
   <link rel="canonical" href="https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/" />
 </head>
@@ -225,9 +211,11 @@ What you’ll build An agent with tools enabled MCP tools via explicit server or
       class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
     ><article>
   <header class="mb-14">
-    <h1 class="my-0! pb-2.5">Use MCP and Tools with AgenticGoKit</h1><div class="text-xs antialiased opacity-60"><time>Nov 6, 2025</time></div></header>
+    <h1 class="my-0! pb-2.5">Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</h1><div class="text-xs antialiased opacity-60"><time>Nov 6, 2025</time></div></header>
 
-  <section><p>AgenticGoKit makes tools (and MCP tools) first-class citizens. This post shows exactly how to enable them, call them directly, and let your LLM trigger them—with copy‑pasteable snippets and a runnable example.</p>
+  <section><p>If you&rsquo;re new to building AI agents in Go, you might think integrating tools and external services is complex. <strong>It&rsquo;s not.</strong> AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.</p>
+<p>In this hands-on guide, you&rsquo;ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it&rsquo;s just a few lines of Go code.</p>
+<p><strong>What makes this different?</strong> No complex setup, no wrestling with schemas, no boilerplate. Just clean, idiomatic Go that gets your agent talking to the world around it.</p>
 <h2 id="what-youll-build">What you&rsquo;ll build</h2>
 <ul>
 <li>An agent with tools enabled</li>
