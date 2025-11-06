@@ -7,13 +7,48 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Thu, 30 Oct 2025 02:18:55 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 06 Nov 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://kunalkushwaha.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Agenticgokit</title>
       <link>https://kunalkushwaha.github.io/tags/agenticgokit/</link>
-      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
       <guid>https://kunalkushwaha.github.io/tags/agenticgokit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI Agents</title>
+      <link>https://kunalkushwaha.github.io/tags/ai-agents/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/tags/ai-agents/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI Tooling</title>
+      <link>https://kunalkushwaha.github.io/tags/ai-tooling/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/tags/ai-tooling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Go</title>
+      <link>https://kunalkushwaha.github.io/tags/go/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MCP</title>
+      <link>https://kunalkushwaha.github.io/tags/mcp/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/tags/mcp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tools</title>
+      <link>https://kunalkushwaha.github.io/tags/tools/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/tags/tools/</guid>
       <description></description>
     </item>
     <item>
@@ -35,13 +70,6 @@
       <link>https://kunalkushwaha.github.io/tags/context/</link>
       <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
       <guid>https://kunalkushwaha.github.io/tags/context/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Go</title>
-      <link>https://kunalkushwaha.github.io/tags/go/</link>
-      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
-      <guid>https://kunalkushwaha.github.io/tags/go/</guid>
       <description></description>
     </item>
     <item>
