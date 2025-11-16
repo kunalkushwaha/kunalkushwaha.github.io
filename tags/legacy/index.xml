@@ -1,23 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Legacy on Kunal Kushwaha</title>
-    <link>https://kunalkushwaha.github.io/tags/legacy/</link>
-    <description>Recent content in Legacy on Kunal Kushwaha</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Fri, 12 Aug 2016 17:10:24 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/legacy/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Migrating traditional apps to docker</title>
-      <link>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</link>
-      <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
-      
-      <guid>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</guid>
-      <description></description>
-      
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Legacy on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/legacy/</link><description>Recent content in Legacy on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Fri, 12 Aug 2016 17:10:24 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/legacy/index.xml" rel="self" type="application/rss+xml"/><item><title>Migrating traditional apps to docker</title><link>https://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</link><pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate><guid>https://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/</guid><description>&lt;p>If title of this blog, attracted you towards this blog, Most likely, you will be one of us, who want to migrate old traditional application&amp;rsquo;s in container environment. This blog covers my experience of Migrating old traditional application into Docker.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>Before beginning with migration procedure, Let me explain requirements I had to met with migrated system.&lt;/p>
+&lt;h3 id="problems">Problems&lt;/h3>
+&lt;ul>
+&lt;li>Old apps running on servers/VMs, resource utilization not optimal.&lt;/li>
+&lt;li>High maintenance cost.
+&lt;ul>
+&lt;li>OS running is no longer supported by vendors, so in-house support required.&lt;/li>
+&lt;li>Maintenance downtime high.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Platform to adopt DevOps practice for fast refactoring.&lt;/li>
+&lt;/ul>
+&lt;h3 id="challenges">Challenges&lt;/h3>
+&lt;ul>
+&lt;li>Migrate Application with least changes in existing platform and infrastructure use.
+&lt;ul>
+&lt;li>Use same OS distribution.&lt;/li>
+&lt;li>No rewriting application for new OS.&lt;/li>
+&lt;li>No changes in network infrastructure.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Behavioral changes for accessing the application should be none.
+&lt;ul>
+&lt;li>Use hardware load balancer.&lt;/li>
+&lt;li>Use Fixed-IP with pre-approved MAC address.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="solution">Solution&lt;/h3>
+&lt;p>Migrating old applications into containers can be divided into two parts.&lt;/p></description></item></channel></rss>

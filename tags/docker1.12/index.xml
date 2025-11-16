@@ -1,23 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Docker1.12 on Kunal Kushwaha</title>
-    <link>https://kunalkushwaha.github.io/tags/docker1.12/</link>
-    <description>Recent content in Docker1.12 on Kunal Kushwaha</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Mon, 25 Jul 2016 13:39:38 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/docker1.12/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>docker 1.12RC demo</title>
-      <link>https://kunalkushwaha.github.io/post/docker-1.12rc-demo/</link>
-      <pubDate>Mon, 25 Jul 2016 13:39:38 +0900</pubDate>
-      
-      <guid>https://kunalkushwaha.github.io/post/docker-1.12rc-demo/</guid>
-      <description></description>
-      
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker1.12 on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/docker1.12/</link><description>Recent content in Docker1.12 on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Mon, 25 Jul 2016 13:39:38 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/docker1.12/index.xml" rel="self" type="application/rss+xml"/><item><title>docker 1.12RC demo</title><link>https://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/</link><pubDate>Mon, 25 Jul 2016 13:39:38 +0900</pubDate><guid>https://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/</guid><description>&lt;p>Last friday (22nd July), I gave DockerCon16 Recap Talk and demo at &lt;a href="https://www.meetup.com/Docker-Tokyo/events/231737938/">Docker Meetup Tokyo&lt;/a>&lt;/p>
+&lt;p>This blog post gives a walk through my Docker Meetup demonstration, and you can follow these steps to try at your machines.&lt;/p>
+&lt;p>In DockerCon16, docker 1.12 RC was announced. This release has an important &amp;amp; interesting feature called docker &lt;em>swarm mode&lt;/em>&lt;/p>
+&lt;h3 id="get-docker-112-rc">Get Docker 1.12 RC.&lt;/h3>
+&lt;p>If you are using &lt;a href="https://docs.docker.com/engine/installation/mac/#/docker-for-mac">Docker for Mac&lt;/a> or &lt;a href="https://docs.docker.com/engine/installation/windows/#/docker-for-windows">Docker for Windows&lt;/a>, You already have docker 1.12RC installed on your machine.&lt;/p></description></item></channel></rss>

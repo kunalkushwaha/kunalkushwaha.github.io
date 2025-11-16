@@ -1,23 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Docker Machine on Kunal Kushwaha</title>
-    <link>https://kunalkushwaha.github.io/tags/docker-machine/</link>
-    <description>Recent content in Docker Machine on Kunal Kushwaha</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Fri, 14 Oct 2016 14:05:58 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/docker-machine/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Understanding Infrakit</title>
-      <link>https://kunalkushwaha.github.io/post/understanding-infrakit/</link>
-      <pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate>
-      
-      <guid>https://kunalkushwaha.github.io/post/understanding-infrakit/</guid>
-      <description></description>
-      
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker Machine on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/docker-machine/</link><description>Recent content in Docker Machine on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Fri, 14 Oct 2016 14:05:58 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/docker-machine/index.xml" rel="self" type="application/rss+xml"/><item><title>Understanding Infrakit</title><link>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</link><pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate><guid>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</guid><description>&lt;p>Docker recently open sourced new project &lt;a href="https://github.com/docker/infrakit">Infrakit&lt;/a> at ContainerCon 2016, Berlin.&lt;/p>
+&lt;p>As project describes itself as&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;A toolkit for creating and managing declarative, self-healing infrastructure&amp;rdquo;&lt;/p>&lt;/blockquote>
+&lt;p>Lets try to understand what it does and how it adds value to existing tools.&lt;/p>
+&lt;h3 id="infrakit">Infrakit&lt;/h3>
+&lt;h5 id="problem">Problem&lt;/h5>
+&lt;p>Managing docker on different infrastructure is difficult and not portable.&lt;/p>
+&lt;h4 id="history">History&lt;/h4>
+&lt;ul>
+&lt;li>
+&lt;p>Initially Docker machine project was focused for building docker environment on various platforms, but there were lot of issues mainly due to unreliable third party drivers.&lt;/p></description></item></channel></rss>

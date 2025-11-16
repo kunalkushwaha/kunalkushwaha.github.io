@@ -1,23 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>OpenRouter on Kunal Kushwaha</title>
-    <link>https://kunalkushwaha.github.io/tags/openrouter/</link>
-    <description>Recent content in OpenRouter on Kunal Kushwaha</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Sat, 08 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/openrouter/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>AgenticGoKit ❤️ HuggingFace and OpenRouter</title>
-      <link>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</link>
-      <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
-      
-      <guid>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</guid>
-      <description></description>
-      
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenRouter on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/openrouter/</link><description>Recent content in OpenRouter on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Sat, 08 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/openrouter/index.xml" rel="self" type="application/rss+xml"/><item><title>AgenticGoKit ❤️ HuggingFace and OpenRouter</title><link>https://kunalkushwaha.github.io/2025/11/08/agenticgokit-love-hf-and-openrouter/</link><pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/2025/11/08/agenticgokit-love-hf-and-openrouter/</guid><description>&lt;p>&lt;img src="../../agenticgokit-love-hf.png" alt="AgenticGoKit Loves HuggingFace and OpenRouter">&lt;/p>
+&lt;p>We&amp;rsquo;re excited to announce the release of &lt;strong>AgenticGoKit v0.4.6&lt;/strong> — a major update that expands how Go developers can build and experiment with agentic workflows.&lt;/p>
+&lt;p>With this release, &lt;strong>AgenticGoKit&lt;/strong> now supports:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://huggingface.co/">Hugging Face&lt;/a>&lt;/strong> — Access models through the new router API with OpenAI-compatible format&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://openrouter.ai/">OpenRouter&lt;/a>&lt;/strong> — Use a wide variety of LLMs (GPT, Claude, Gemini, Llama) through a unified API&lt;/li>
+&lt;/ul>
+&lt;p>These integrations empower developers to build richer, more flexible &lt;strong>AI agents&lt;/strong> without switching languages or managing complex SDKs.&lt;/p></description></item></channel></rss>
