@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Migration on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/migration/</link><description>Recent content in Migration on Kunal Kushwaha</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Fri, 12 Aug 2016 17:10:24 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/migration/index.xml" rel="self" type="application/rss+xml"/><item><title>Migrating traditional apps to docker</title><link>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</link><pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Migration on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/tags/migration/</link>
+    <description>Recent content in Migration on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Fri, 12 Aug 2016 17:10:24 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/migration/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Migrating traditional apps to docker</title>
+      <link>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</link>
+      <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

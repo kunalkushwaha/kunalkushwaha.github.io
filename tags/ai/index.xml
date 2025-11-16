@@ -1,1 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/ai/</link><description>Recent content in Ai on Kunal Kushwaha</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</title><link>https://kunalkushwaha.github.io/post/real-time-ai-editorial-workflows-go/</link><pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/real-time-ai-editorial-workflows-go/</guid><description>Build real-time AI editorial workflows in Go with AgenticGoKit — loop revisions, stream progress to a live UI, and publish polished stories.</description></item><item><title>AgenticGoKit ❤️ HuggingFace and OpenRouter</title><link>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</link><pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</guid><description/></item><item><title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title><link>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</link><pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</guid><description/></item><item><title>Streaming AI Responses in Go with AgenticGoKit</title><link>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</link><pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ai on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/tags/ai/</link>
+    <description>Recent content in Ai on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/post/real-time-ai-editorial-workflows-go/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/real-time-ai-editorial-workflows-go/</guid>
+      <description>Build real-time AI editorial workflows in Go with AgenticGoKit — loop revisions, stream progress to a live UI, and publish polished stories.</description>
+      
+    </item>
+    
+    <item>
+      <title>AgenticGoKit ❤️ HuggingFace and OpenRouter</title>
+      <link>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</link>
+      <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Streaming AI Responses in Go with AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</link>
+      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,1 +1,193 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/post/</link><description>Recent content in Posts on Kunal Kushwaha</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</title><link>https://kunalkushwaha.github.io/post/real-time-ai-editorial-workflows-go/</link><pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/real-time-ai-editorial-workflows-go/</guid><description>Build real-time AI editorial workflows in Go with AgenticGoKit — loop revisions, stream progress to a live UI, and publish polished stories.</description></item><item><title>AgenticGoKit ❤️ HuggingFace and OpenRouter</title><link>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</link><pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</guid><description/></item><item><title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</title><link>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</link><pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</guid><description/></item><item><title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title><link>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</link><pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</guid><description/></item><item><title>Streaming AI Responses in Go with AgenticGoKit</title><link>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</link><pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</guid><description/></item><item><title>Building Multi-Agent Workflows in Go: Simpler Than You Think</title><link>https://kunalkushwaha.github.io/post/building-multi-agent-workflows/</link><pubDate>Mon, 20 Oct 2025 00:13:47 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/building-multi-agent-workflows/</guid><description/></item><item><title>Building AI Agents with AgentFlow: A Beginner's Journey</title><link>https://kunalkushwaha.github.io/post/building-ai-agents-with-agentflow/</link><pubDate>Mon, 12 May 2025 17:15:04 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/building-ai-agents-with-agentflow/</guid><description/></item><item><title>ConfigMaps and Pods</title><link>https://kunalkushwaha.github.io/post/configmaps-and-pods/</link><pubDate>Tue, 28 Jan 2020 14:26:37 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/configmaps-and-pods/</guid><description/></item><item><title>Understanding Infrakit</title><link>https://kunalkushwaha.github.io/post/understanding-infrakit/</link><pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/understanding-infrakit/</guid><description/></item><item><title>Migrating traditional apps to docker</title><link>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</link><pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</guid><description/></item><item><title>docker 1.12RC demo</title><link>https://kunalkushwaha.github.io/post/docker-1.12rc-demo/</link><pubDate>Mon, 25 Jul 2016 13:39:38 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/docker-1.12rc-demo/</guid><description/></item><item><title>Tutorial setting up docker-swarm with multihost networking using docker-machine.</title><link>https://kunalkushwaha.github.io/post/tutorial-docker-swarm-with-multihost-networking/</link><pubDate>Thu, 14 Jan 2016 12:45:10 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/tutorial-docker-swarm-with-multihost-networking/</guid><description/></item><item><title>Understanding Golang Interfaces</title><link>https://kunalkushwaha.github.io/post/understanding-golang-interfaces/</link><pubDate>Fri, 11 Sep 2015 15:14:46 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/understanding-golang-interfaces/</guid><description/></item><item><title>Conditional compilation in golang</title><link>https://kunalkushwaha.github.io/post/conditional-compilation-in-golang/</link><pubDate>Fri, 24 Jul 2015 22:21:27 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/conditional-compilation-in-golang/</guid><description/></item><item><title>Container Virtualization and its building blocks</title><link>https://kunalkushwaha.github.io/post/container-virtualization/</link><pubDate>Sat, 04 Jul 2015 20:25:44 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/container-virtualization/</guid><description/></item><item><title>Golang Development Environment</title><link>https://kunalkushwaha.github.io/post/golang-dev-environment/</link><pubDate>Mon, 27 Apr 2015 22:29:36 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/golang-dev-environment/</guid><description/></item><item><title>Layman guide to Platform Virtualization</title><link>https://kunalkushwaha.github.io/post/layman-guide-to-platform-virtualization/</link><pubDate>Sat, 25 Apr 2015 23:20:04 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/layman-guide-to-platform-virtualization/</guid><description/></item><item><title>Moving to Hugo &amp; github</title><link>https://kunalkushwaha.github.io/post/moved-to-github/</link><pubDate>Wed, 04 Mar 2015 14:53:05 +0530</pubDate><guid>https://kunalkushwaha.github.io/post/moved-to-github/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/post/</link>
+    <description>Recent content in Posts on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/post/real-time-ai-editorial-workflows-go/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/real-time-ai-editorial-workflows-go/</guid>
+      <description>Build real-time AI editorial workflows in Go with AgenticGoKit — loop revisions, stream progress to a live UI, and publish polished stories.</description>
+      
+    </item>
+    
+    <item>
+      <title>AgenticGoKit ❤️ HuggingFace and OpenRouter</title>
+      <link>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</link>
+      <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</title>
+      <link>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Streaming AI Responses in Go with AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</link>
+      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Building Multi-Agent Workflows in Go: Simpler Than You Think</title>
+      <link>https://kunalkushwaha.github.io/post/building-multi-agent-workflows/</link>
+      <pubDate>Mon, 20 Oct 2025 00:13:47 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/building-multi-agent-workflows/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Building AI Agents with AgentFlow: A Beginner&#39;s Journey</title>
+      <link>https://kunalkushwaha.github.io/post/building-ai-agents-with-agentflow/</link>
+      <pubDate>Mon, 12 May 2025 17:15:04 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/building-ai-agents-with-agentflow/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>ConfigMaps and Pods</title>
+      <link>https://kunalkushwaha.github.io/post/configmaps-and-pods/</link>
+      <pubDate>Tue, 28 Jan 2020 14:26:37 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/configmaps-and-pods/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Understanding Infrakit</title>
+      <link>https://kunalkushwaha.github.io/post/understanding-infrakit/</link>
+      <pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/understanding-infrakit/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Migrating traditional apps to docker</title>
+      <link>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</link>
+      <pubDate>Fri, 12 Aug 2016 17:10:24 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/migrating-traditional-apps-to-docker/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>docker 1.12RC demo</title>
+      <link>https://kunalkushwaha.github.io/post/docker-1.12rc-demo/</link>
+      <pubDate>Mon, 25 Jul 2016 13:39:38 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/docker-1.12rc-demo/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Tutorial setting up docker-swarm with multihost networking using docker-machine.</title>
+      <link>https://kunalkushwaha.github.io/post/tutorial-docker-swarm-with-multihost-networking/</link>
+      <pubDate>Thu, 14 Jan 2016 12:45:10 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/tutorial-docker-swarm-with-multihost-networking/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Understanding Golang Interfaces</title>
+      <link>https://kunalkushwaha.github.io/post/understanding-golang-interfaces/</link>
+      <pubDate>Fri, 11 Sep 2015 15:14:46 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/understanding-golang-interfaces/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Conditional compilation in golang</title>
+      <link>https://kunalkushwaha.github.io/post/conditional-compilation-in-golang/</link>
+      <pubDate>Fri, 24 Jul 2015 22:21:27 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/conditional-compilation-in-golang/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Container Virtualization and its building blocks</title>
+      <link>https://kunalkushwaha.github.io/post/container-virtualization/</link>
+      <pubDate>Sat, 04 Jul 2015 20:25:44 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/container-virtualization/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Golang Development Environment</title>
+      <link>https://kunalkushwaha.github.io/post/golang-dev-environment/</link>
+      <pubDate>Mon, 27 Apr 2015 22:29:36 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/golang-dev-environment/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Layman guide to Platform Virtualization</title>
+      <link>https://kunalkushwaha.github.io/post/layman-guide-to-platform-virtualization/</link>
+      <pubDate>Sat, 25 Apr 2015 23:20:04 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/layman-guide-to-platform-virtualization/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Moving to Hugo &amp; github</title>
+      <link>https://kunalkushwaha.github.io/post/moved-to-github/</link>
+      <pubDate>Wed, 04 Mar 2015 14:53:05 +0530</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/moved-to-github/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

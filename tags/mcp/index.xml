@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MCP on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/mcp/</link><description>Recent content in MCP on Kunal Kushwaha</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Thu, 06 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/mcp/index.xml" rel="self" type="application/rss+xml"/><item><title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</title><link>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</link><pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MCP on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/tags/mcp/</link>
+    <description>Recent content in MCP on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Thu, 06 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/mcp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</title>
+      <link>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

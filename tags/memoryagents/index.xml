@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Memoryagents on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/memoryagents/</link><description>Recent content in Memoryagents on Kunal Kushwaha</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Thu, 30 Oct 2025 02:18:55 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/memoryagents/index.xml" rel="self" type="application/rss+xml"/><item><title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title><link>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</link><pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Memoryagents on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/tags/memoryagents/</link>
+    <description>Recent content in Memoryagents on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Thu, 30 Oct 2025 02:18:55 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/memoryagents/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

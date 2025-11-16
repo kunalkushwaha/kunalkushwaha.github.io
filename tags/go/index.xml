@@ -1,1 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/go/</link><description>Recent content in Go on Kunal Kushwaha</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Sat, 08 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>AgenticGoKit ❤️ HuggingFace and OpenRouter</title><link>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</link><pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</guid><description/></item><item><title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</title><link>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</link><pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</guid><description/></item><item><title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title><link>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</link><pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate><guid>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</guid><description/></item><item><title>Streaming AI Responses in Go with AgenticGoKit</title><link>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</link><pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/tags/go/</link>
+    <description>Recent content in Go on Kunal Kushwaha</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Sat, 08 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>AgenticGoKit ❤️ HuggingFace and OpenRouter</title>
+      <link>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</link>
+      <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/agenticgokit-love-hf-and-openrouter/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</title>
+      <link>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</link>
+      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/mcp-tools-with-agenticgokit/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/context-aware-ai-agents-with-memory/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Streaming AI Responses in Go with AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</link>
+      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://kunalkushwaha.github.io/post/streaming-agenticgokit/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>
