@@ -1,17 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Workflows on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/workflows/</link><description>Recent content in Workflows on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/workflows/index.xml" rel="self" type="application/rss+xml"/><item><title>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</title><link>https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/</link><pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/</guid><description>Build real-time AI editorial workflows in Go with AgenticGoKit — loop revisions, stream progress to a live UI, and publish polished stories.</description></item><item><title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title><link>https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/</link><pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate><guid>https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/</guid><description>&lt;p>&lt;img src="../../memory-quote.PNG" alt="Simple streaming (terminal)">&lt;/p>
-&lt;p>One of the biggest challenges in building AI agents is making them &lt;strong>remember&lt;/strong>. Users expect conversational agents to recall previous interactions, maintain context across multiple turns, and provide personalized responses based on conversation history.&lt;/p>
-&lt;p>AgenticGoKit&amp;rsquo;s memory system solves this elegantly with a unified interface that supports:&lt;/p>
-&lt;ul>
-&lt;li>Conversation history - Sequential chat memory&lt;/li>
-&lt;li>RAG (Retrieval Augmented Generation) - Semantic search over memories&lt;/li>
-&lt;li>Memory tracking - Monitor memory usage and query performance&lt;/li>
-&lt;li>Session management - Scope memories to conversation sessions&lt;/li>
-&lt;/ul>
-&lt;p>In this post, we&amp;rsquo;ll build a real interactive chat agent that demonstrates these features.&lt;/p></description></item><item><title>Streaming AI Responses in Go with AgenticGoKit</title><link>https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/</link><pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/</guid><description>&lt;p>Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we&amp;rsquo;ll build two streaming experiences with AgenticGoKit:&lt;/p>
-&lt;ul>
-&lt;li>A minimal &amp;ldquo;simple-streaming&amp;rdquo; chat&lt;/li>
-&lt;li>A sequential multi‑agent &amp;ldquo;streaming_workflow&amp;rdquo; with step-by-step progress&lt;/li>
-&lt;/ul>
-&lt;p>We&amp;rsquo;ll also cover when to use streaming, why it helps, and a few gotchas and tips.&lt;/p>
-&lt;h2 id="what-is-streaming-and-why-it-matters">What is streaming and why it matters&lt;/h2>
-&lt;p>Instead of waiting for the full response, streaming lets you consume output as it&amp;rsquo;s generated (token‑by‑token or chunk‑by‑chunk). That enables:&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Workflows on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/tags/workflows/</link>
+    <description>Recent content in Workflows on Kunal Kushwaha</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://kunalkushwaha.github.io/tags/workflows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/</guid>
+      <description>Build real-time AI editorial workflows in Go with AgenticGoKit — loop revisions, stream progress to a live UI, and publish polished stories.</description>
+    </item>
+    <item>
+      <title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/</link>
+      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
+      <guid>https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;../../memory-quote.PNG&#34; alt=&#34;Simple streaming (terminal)&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;One of the biggest challenges in building AI agents is making them &lt;strong&gt;remember&lt;/strong&gt;. Users expect conversational agents to recall previous interactions, maintain context across multiple turns, and provide personalized responses based on conversation history.&lt;/p&gt;&#xA;&lt;p&gt;AgenticGoKit&amp;rsquo;s memory system solves this elegantly with a unified interface that supports:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Conversation history - Sequential chat memory&lt;/li&gt;&#xA;&lt;li&gt;RAG (Retrieval Augmented Generation) - Semantic search over memories&lt;/li&gt;&#xA;&lt;li&gt;Memory tracking - Monitor memory usage and query performance&lt;/li&gt;&#xA;&lt;li&gt;Session management - Scope memories to conversation sessions&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;In this post, we&amp;rsquo;ll build a real interactive chat agent that demonstrates these features.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Streaming AI Responses in Go with AgenticGoKit</title>
+      <link>https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/</link>
+      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/</guid>
+      <description>&lt;p&gt;Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we&amp;rsquo;ll build two streaming experiences with AgenticGoKit:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A minimal &amp;ldquo;simple-streaming&amp;rdquo; chat&lt;/li&gt;&#xA;&lt;li&gt;A sequential multi‑agent &amp;ldquo;streaming_workflow&amp;rdquo; with step-by-step progress&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;We&amp;rsquo;ll also cover when to use streaming, why it helps, and a few gotchas and tips.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-streaming-and-why-it-matters&#34;&gt;What is streaming and why it matters&lt;/h2&gt;&#xA;&lt;p&gt;Instead of waiting for the full response, streaming lets you consume output as it&amp;rsquo;s generated (token‑by‑token or chunk‑by‑chunk). That enables:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

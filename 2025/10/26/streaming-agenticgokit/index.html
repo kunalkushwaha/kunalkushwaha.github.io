@@ -1,122 +1,381 @@
-<!doctype html><html class="not-ready lg:text-base" style=--bg:#faf8f1 lang=en-us dir=ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Streaming AI Responses in Go with AgenticGoKit - Kunal Kushwaha</title>
-<meta name=theme-color><meta name=description content="Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we&rsquo;ll build two streaming experiences with AgenticGoKit:
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Streaming AI Responses in Go with AgenticGoKit - Kunal Kushwaha</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we&rsquo;ll build two streaming experiences with AgenticGoKit:
 
 A minimal &ldquo;simple-streaming&rdquo; chat
 A sequential multi‑agent &ldquo;streaming_workflow&rdquo; with step-by-step progress
 
 We&rsquo;ll also cover when to use streaming, why it helps, and a few gotchas and tips.
 What is streaming and why it matters
-Instead of waiting for the full response, streaming lets you consume output as it&rsquo;s generated (token‑by‑token or chunk‑by‑chunk). That enables:"><meta name=author content="Kunal Kushwaha"><link rel="preload stylesheet" as=style href=https://kunalkushwaha.github.io/main.min.css><link rel=preload as=image href=https://kunalkushwaha.github.io/theme.png><link rel=preload as=image href=https://kunalkushwaha.github.io/twitter.svg><link rel=preload as=image href=https://kunalkushwaha.github.io/github.svg><link rel=preload as=image href=https://kunalkushwaha.github.io/linkedin.svg><script defer src=https://kunalkushwaha.github.io/highlight.min.js onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://kunalkushwaha.github.io/favicon.ico><link rel=apple-touch-icon href=https://kunalkushwaha.github.io/apple-touch-icon.png><meta name=generator content="Hugo 0.147.2"><script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-K16B935QET")}</script><meta itemprop=name content="Streaming AI Responses in Go with AgenticGoKit"><meta itemprop=description content="Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we’ll build two streaming experiences with AgenticGoKit:
+Instead of waiting for the full response, streaming lets you consume output as it&rsquo;s generated (token‑by‑token or chunk‑by‑chunk). That enables:" />
+  <meta name="author" content="Kunal Kushwaha" /><link rel="preload stylesheet" as="style" href="https://kunalkushwaha.github.io/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/theme.png" />
+
+  
+
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/linkedin.svg" />
+
+  <script
+    defer
+    src="https://kunalkushwaha.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="https://kunalkushwaha.github.io/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://kunalkushwaha.github.io/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.147.2">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K16B935QET');
+        }
+      </script>
+  <meta itemprop="name" content="Streaming AI Responses in Go with AgenticGoKit">
+  <meta itemprop="description" content="Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we’ll build two streaming experiences with AgenticGoKit:
 A minimal “simple-streaming” chat A sequential multi‑agent “streaming_workflow” with step-by-step progress We’ll also cover when to use streaming, why it helps, and a few gotchas and tips.
-What is streaming and why it matters Instead of waiting for the full response, streaming lets you consume output as it’s generated (token‑by‑token or chunk‑by‑chunk). That enables:"><meta itemprop=datePublished content="2025-10-26T00:00:00+00:00"><meta itemprop=dateModified content="2025-10-26T00:00:00+00:00"><meta itemprop=wordCount content="1048"><meta itemprop=keywords content="Go,Ai,Streaming,Agenticgokit,Workflows,Ollama"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/"><meta property="og:site_name" content="Kunal Kushwaha"><meta property="og:title" content="Streaming AI Responses in Go with AgenticGoKit"><meta property="og:description" content="Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we’ll build two streaming experiences with AgenticGoKit:
+What is streaming and why it matters Instead of waiting for the full response, streaming lets you consume output as it’s generated (token‑by‑token or chunk‑by‑chunk). That enables:">
+  <meta itemprop="datePublished" content="2025-10-26T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-10-26T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1048">
+  <meta itemprop="keywords" content="Go,Ai,Streaming,Agenticgokit,Workflows,Ollama"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/">
+  <meta property="og:site_name" content="Kunal Kushwaha">
+  <meta property="og:title" content="Streaming AI Responses in Go with AgenticGoKit">
+  <meta property="og:description" content="Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we’ll build two streaming experiences with AgenticGoKit:
 A minimal “simple-streaming” chat A sequential multi‑agent “streaming_workflow” with step-by-step progress We’ll also cover when to use streaming, why it helps, and a few gotchas and tips.
-What is streaming and why it matters Instead of waiting for the full response, streaming lets you consume output as it’s generated (token‑by‑token or chunk‑by‑chunk). That enables:"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2025-10-26T00:00:00+00:00"><meta property="article:modified_time" content="2025-10-26T00:00:00+00:00"><meta property="article:tag" content="Go"><meta property="article:tag" content="Ai"><meta property="article:tag" content="Streaming"><meta property="article:tag" content="Agenticgokit"><meta property="article:tag" content="Workflows"><meta property="article:tag" content="Ollama"><meta name=twitter:card content="summary"><meta name=twitter:title content="Streaming AI Responses in Go with AgenticGoKit"><meta name=twitter:description content="Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we’ll build two streaming experiences with AgenticGoKit:
+What is streaming and why it matters Instead of waiting for the full response, streaming lets you consume output as it’s generated (token‑by‑token or chunk‑by‑chunk). That enables:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-10-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-10-26T00:00:00+00:00">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Ai">
+    <meta property="article:tag" content="Streaming">
+    <meta property="article:tag" content="Agenticgokit">
+    <meta property="article:tag" content="Workflows">
+    <meta property="article:tag" content="Ollama">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Streaming AI Responses in Go with AgenticGoKit">
+  <meta name="twitter:description" content="Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we’ll build two streaming experiences with AgenticGoKit:
 A minimal “simple-streaming” chat A sequential multi‑agent “streaming_workflow” with step-by-step progress We’ll also cover when to use streaming, why it helps, and a few gotchas and tips.
-What is streaming and why it matters Instead of waiting for the full response, streaming lets you consume output as it’s generated (token‑by‑token or chunk‑by‑chunk). That enables:"><link rel=canonical href=https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/></head><body class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"><header class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"><div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto"><a class="-translate-y-[1px] text-2xl font-medium" href=https://kunalkushwaha.github.io/>Kunal Kushwaha</a><div class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]" role=button aria-label=Dark></div></div><div class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8" role=button aria-label=Menu></div><script>const htmlClass=document.documentElement.classList;setTimeout(()=>{htmlClass.remove("not-ready")},10);const btnMenu=document.querySelector(".btn-menu");btnMenu.addEventListener("click",()=>{htmlClass.toggle("open")});const metaTheme=document.querySelector('meta[name="theme-color"]'),lightBg="#faf8f1".replace(/"/g,""),setDark=e=>{metaTheme.setAttribute("content",e?"#000":lightBg),htmlClass[e?"add":"remove"]("dark"),localStorage.setItem("dark",e)},darkScheme=window.matchMedia("(prefers-color-scheme: dark)");if(htmlClass.contains("dark"))setDark(!0);else{const e=localStorage.getItem("dark");setDark(e?e==="true":darkScheme.matches)}darkScheme.addEventListener("change",e=>{setDark(e.matches)});const btnDark=document.querySelector(".btn-dark");btnDark.addEventListener("click",()=>{setDark(localStorage.getItem("dark")!=="true")})</script><div class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"><nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=../../../../>Blog</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=https://speakerdeck.com/kunalkushwaha>Slide Deck</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=../../../../about/>About</a></nav><nav class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"><a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./twitter.svg) href=https://twitter.com/kunalkushwaha target=_blank rel=me>twitter</a>
-<a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./github.svg) href=https://github.com/kunalkushwaha target=_blank rel=me>github</a>
-<a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./linkedin.svg) href=https://linkedin.com/in/kunalkushwaha target=_blank rel=me>linkedin</a></nav></div></header><main class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"><article><header class=mb-14><h1 class="my-0! pb-2.5">Streaming AI Responses in Go with AgenticGoKit</h1><div class="text-xs antialiased opacity-60"><time>Oct 26, 2025</time></div></header><section><p>Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we&rsquo;ll build two streaming experiences with AgenticGoKit:</p><ul><li>A minimal &ldquo;simple-streaming&rdquo; chat</li><li>A sequential multi‑agent &ldquo;streaming_workflow&rdquo; with step-by-step progress</li></ul><p>We&rsquo;ll also cover when to use streaming, why it helps, and a few gotchas and tips.</p><h2 id=what-is-streaming-and-why-it-matters>What is streaming and why it matters</h2><p>Instead of waiting for the full response, streaming lets you consume output as it&rsquo;s generated (token‑by‑token or chunk‑by‑chunk). That enables:</p><ul><li>Real‑time feedback: Users see progress immediately</li><li>Better UX for long tasks: No “blank screen” pause</li><li>Step visibility in workflows: Know which agent/step is running</li><li>Early assessment: Skim partial output and course‑correct sooner</li></ul><p>Under the hood, AgenticGoKit vNext exposes a Stream you can iterate over, with multiple chunk types like text deltas, metadata, tool calls, and final completion signals.</p><h2 id=prerequisites>Prerequisites</h2><ul><li>Go installed and working in this repo</li><li>Ollama running locally (default http://localhost:11434)</li><li>Model: gemma3:1b</li><li>Repo paths in this post are relative to the project root</li></ul><p>Pull the model if needed:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span>ollama pull gemma3<span style=color:#960050;background-color:#1e0010>:</span>1b
-</span></span></code></pre></div><p>Alternatively, you can use OpenAI or Azure OpenAI instead of Ollama by setting API keys and pointing your agent config to those providers:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e># OpenAI</span>
-</span></span><span style=display:flex><span>$env:OPENAI_API_KEY = <span style=color:#e6db74>&#34;&lt;your-openai-api-key&gt;&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Azure OpenAI</span>
-</span></span><span style=display:flex><span>$env:AZURE_OPENAI_KEY = <span style=color:#e6db74>&#34;&lt;your-azure-openai-key&gt;&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Your Azure Base URL typically looks like:</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># https://&lt;your-resource-name&gt;.openai.azure.com/</span>
-</span></span></code></pre></div><p>For a deeper dive into APIs and options, see <code>core/vnext/STREAMING_GUIDE.md</code>.</p><h2 id=part-1-minimal-simple-streaming>Part 1: Minimal simple-streaming</h2><p>The example lives here: <a href=https://github.com/AgenticGoKit/AgenticGoKit/blob/master/examples/vnext/simple-streaming/main.go>examples/vnext/simple-streaming/main.go</a>.</p><p>It creates a small chat agent and prints tokens as they arrive:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// Start streaming</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>cancel</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>WithTimeout</span>(<span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>(), <span style=color:#ae81ff>30</span><span style=color:#f92672>*</span><span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Second</span>)
-</span></span><span style=display:flex><span><span style=color:#66d9ef>defer</span> <span style=color:#a6e22e>cancel</span>()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>stream</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>agent</span>.<span style=color:#a6e22e>RunStream</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>prompt</span>)
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>log</span>.<span style=color:#a6e22e>Fatalf</span>(<span style=color:#e6db74>&#34;Failed to start streaming: %v&#34;</span>, <span style=color:#a6e22e>err</span>)
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Print tokens as they arrive</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>chunk</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>stream</span>.<span style=color:#a6e22e>Chunks</span>() {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Error</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> { <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;\n❌ Error: %v\n&#34;</span>, <span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Error</span>); <span style=color:#66d9ef>break</span> }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>switch</span> <span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Type</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ChunkTypeDelta</span>:
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Print</span>(<span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Delta</span>) <span style=color:#75715e>// token-by-token</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ChunkTypeDone</span>:
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#e6db74>&#34;\n\n✅ Streaming completed!&#34;</span>)
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Always check the final result</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>_</span> = <span style=color:#a6e22e>stream</span>.<span style=color:#a6e22e>Wait</span>()
-</span></span></code></pre></div><p>Run it:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span>cd examples/vnext/simple-streaming
-</span></span><span style=display:flex><span>go run .
-</span></span></code></pre></div><p>You’ll see something like:</p><p><img src=../../../../simple-streaming.gif alt="Simple streaming (terminal)"></p><p>Notes:</p><ul><li>The example uses Ollama with <code>gemma3:1b</code>. Adjust the model/provider in the config if needed.</li><li>Always call <code>stream.Wait()</code> after consuming chunks to surface any trailing errors.</li></ul><h2 id=part-2-multiagent-streaming-workflow>Part 2: Multi‑agent streaming workflow</h2><p>Now, let’s level up with a sequential, two‑agent workflow that streams each step in real time. Code: <a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/streaming_workflow/main.go>examples/vnext/streaming_workflow/main.go</a>.</p><p>We’ll create two specialized agents—Researcher and Summarizer—and wire them into a vNext Workflow. Each step streams its own tokens and emits metadata so you know what’s happening.</p><h3 id=defining-agents>Defining agents</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>CreateResearcherAgent</span>() (<span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Agent</span>, <span style=color:#66d9ef>error</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>QuickChatAgentWithConfig</span>(<span style=color:#e6db74>&#34;Researcher&#34;</span>, <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Config</span>{
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Name</span>:         <span style=color:#e6db74>&#34;researcher&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>SystemPrompt</span>: <span style=color:#e6db74>&#34;You are a Research Agent...&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Timeout</span>:      <span style=color:#ae81ff>60</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Second</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>LLM</span>: <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>LLMConfig</span>{ <span style=color:#a6e22e>Provider</span>: <span style=color:#e6db74>&#34;ollama&#34;</span>, <span style=color:#a6e22e>Model</span>: <span style=color:#e6db74>&#34;gemma3:1b&#34;</span>, <span style=color:#a6e22e>Temperature</span>: <span style=color:#ae81ff>0.2</span>, <span style=color:#a6e22e>MaxTokens</span>: <span style=color:#ae81ff>300</span>, <span style=color:#a6e22e>BaseURL</span>: <span style=color:#e6db74>&#34;http://localhost:11434&#34;</span> },
-</span></span><span style=display:flex><span>    })
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>CreateSummarizerAgent</span>() (<span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Agent</span>, <span style=color:#66d9ef>error</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>QuickChatAgentWithConfig</span>(<span style=color:#e6db74>&#34;Summarizer&#34;</span>, <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Config</span>{
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Name</span>:         <span style=color:#e6db74>&#34;summarizer&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>SystemPrompt</span>: <span style=color:#e6db74>&#34;You are a Summarizer Agent...&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Timeout</span>:      <span style=color:#ae81ff>60</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Second</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>LLM</span>: <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>LLMConfig</span>{ <span style=color:#a6e22e>Provider</span>: <span style=color:#e6db74>&#34;ollama&#34;</span>, <span style=color:#a6e22e>Model</span>: <span style=color:#e6db74>&#34;gemma3:1b&#34;</span>, <span style=color:#a6e22e>Temperature</span>: <span style=color:#ae81ff>0.3</span>, <span style=color:#a6e22e>MaxTokens</span>: <span style=color:#ae81ff>150</span>, <span style=color:#a6e22e>BaseURL</span>: <span style=color:#e6db74>&#34;http://localhost:11434&#34;</span> },
-</span></span><span style=display:flex><span>    })
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h4 id=using-openai-or-azure-openai>Using OpenAI or Azure OpenAI</h4><p>Where the Ollama LLM config is defined above, you can swap in OpenAI or Azure OpenAI with minimal changes:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// OpenAI</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>LLM</span>: <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>LLMConfig</span>{
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Provider</span>: <span style=color:#e6db74>&#34;openai&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Model</span>:    <span style=color:#e6db74>&#34;gpt-4&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>APIKey</span>:   <span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Getenv</span>(<span style=color:#e6db74>&#34;OPENAI_API_KEY&#34;</span>),
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Azure OpenAI</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>LLM</span>: <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>LLMConfig</span>{
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Provider</span>: <span style=color:#e6db74>&#34;azure&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Model</span>:    <span style=color:#e6db74>&#34;gpt-4&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>BaseURL</span>:  <span style=color:#e6db74>&#34;https://your-resource.openai.azure.com/&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>APIKey</span>:   <span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Getenv</span>(<span style=color:#e6db74>&#34;AZURE_OPENAI_KEY&#34;</span>),
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>Notes:</p><ul><li>Keep the rest of the streaming code exactly the same; provider selection is handled via <code>LLMConfig</code>.</li><li>Ensure the appropriate environment variables are set in your shell before running the examples.</li></ul><h3 id=building-a-sequential-workflow>Building a sequential workflow</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>workflow</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>NewSequentialWorkflow</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>WorkflowConfig</span>{ <span style=color:#a6e22e>Mode</span>: <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Sequential</span>, <span style=color:#a6e22e>Timeout</span>: <span style=color:#ae81ff>180</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Second</span> })
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> { <span style=color:#a6e22e>log</span>.<span style=color:#a6e22e>Fatal</span>(<span style=color:#a6e22e>err</span>) }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>_</span> = <span style=color:#a6e22e>workflow</span>.<span style=color:#a6e22e>AddStep</span>(<span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>WorkflowStep</span>{
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Name</span>:  <span style=color:#e6db74>&#34;research&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Agent</span>: <span style=color:#a6e22e>researcher</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Transform</span>: <span style=color:#66d9ef>func</span>(<span style=color:#a6e22e>input</span> <span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>string</span> {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;Research the topic: %s. Provide key information, benefits, and current applications.&#34;</span>, <span style=color:#a6e22e>input</span>)
-</span></span><span style=display:flex><span>    },
-</span></span><span style=display:flex><span>})
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>_</span> = <span style=color:#a6e22e>workflow</span>.<span style=color:#a6e22e>AddStep</span>(<span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>WorkflowStep</span>{
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Name</span>:  <span style=color:#e6db74>&#34;summarize&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Agent</span>: <span style=color:#a6e22e>summarizer</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Transform</span>: <span style=color:#66d9ef>func</span>(<span style=color:#a6e22e>input</span> <span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>string</span> {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;Please summarize this research into key points:\n\n%s&#34;</span>, <span style=color:#a6e22e>input</span>)
-</span></span><span style=display:flex><span>    },
-</span></span><span style=display:flex><span>})
-</span></span></code></pre></div><h3 id=running-with-streaming>Running with streaming</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>ctx</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>()
-</span></span><span style=display:flex><span><span style=color:#a6e22e>stream</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>workflow</span>.<span style=color:#a6e22e>RunStream</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>topic</span>)
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> { <span style=color:#a6e22e>log</span>.<span style=color:#a6e22e>Fatal</span>(<span style=color:#a6e22e>err</span>) }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>chunk</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>stream</span>.<span style=color:#a6e22e>Chunks</span>() {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>switch</span> <span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Type</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ChunkTypeMetadata</span>:
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>stepName</span>, <span style=color:#a6e22e>ok</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Metadata</span>[<span style=color:#e6db74>&#34;step_name&#34;</span>].(<span style=color:#66d9ef>string</span>); <span style=color:#a6e22e>ok</span> {
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;\n🔄 [STEP: %s] %s\n&#34;</span>, <span style=color:#a6e22e>strings</span>.<span style=color:#a6e22e>ToUpper</span>(<span style=color:#a6e22e>stepName</span>), <span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Content</span>)
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#e6db74>&#34;─────────────────────&#34;</span>)
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ChunkTypeDelta</span>:
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Print</span>(<span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Delta</span>)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>case</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ChunkTypeDone</span>:
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#e6db74>&#34;\n✅ Workflow step completed!&#34;</span>)
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>result</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>stream</span>.<span style=color:#a6e22e>Wait</span>() <span style=color:#75715e>// final success/error</span>
-</span></span></code></pre></div><p>Run it:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span>cd examples/vnext/streaming_workflow
-</span></span><span style=display:flex><span>go run .
-</span></span></code></pre></div><p>What you’ll see:</p><pre tabindex=0><code>🚀 vnext.Workflow Streaming Showcase
+What is streaming and why it matters Instead of waiting for the full response, streaming lets you consume output as it’s generated (token‑by‑token or chunk‑by‑chunk). That enables:">
+
+  <link rel="canonical" href="https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/" />
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="https://kunalkushwaha.github.io/"
+      >Kunal Kushwaha</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../"
+        >Blog</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://speakerdeck.com/kunalkushwaha"
+        >Slide Deck</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../about/"
+        >About</a
+      ></nav><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >twitter</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Streaming AI Responses in Go with AgenticGoKit</h1><div class="text-xs antialiased opacity-60"><time>Oct 26, 2025</time></div></header>
+
+  <section><p>Streaming makes AI feel alive—tokens show up instantly, long tasks feel responsive, and multi‑step workflows become explainable as they run. In this post, we&rsquo;ll build two streaming experiences with AgenticGoKit:</p>
+<ul>
+<li>A minimal &ldquo;simple-streaming&rdquo; chat</li>
+<li>A sequential multi‑agent &ldquo;streaming_workflow&rdquo; with step-by-step progress</li>
+</ul>
+<p>We&rsquo;ll also cover when to use streaming, why it helps, and a few gotchas and tips.</p>
+<h2 id="what-is-streaming-and-why-it-matters">What is streaming and why it matters</h2>
+<p>Instead of waiting for the full response, streaming lets you consume output as it&rsquo;s generated (token‑by‑token or chunk‑by‑chunk). That enables:</p>
+<ul>
+<li>Real‑time feedback: Users see progress immediately</li>
+<li>Better UX for long tasks: No “blank screen” pause</li>
+<li>Step visibility in workflows: Know which agent/step is running</li>
+<li>Early assessment: Skim partial output and course‑correct sooner</li>
+</ul>
+<p>Under the hood, AgenticGoKit vNext exposes a Stream you can iterate over, with multiple chunk types like text deltas, metadata, tool calls, and final completion signals.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Go installed and working in this repo</li>
+<li>Ollama running locally (default http://localhost:11434)</li>
+<li>Model: gemma3:1b</li>
+<li>Repo paths in this post are relative to the project root</li>
+</ul>
+<p>Pull the model if needed:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>ollama pull gemma3<span style="color:#960050;background-color:#1e0010">:</span>1b
+</span></span></code></pre></div><p>Alternatively, you can use OpenAI or Azure OpenAI instead of Ollama by setting API keys and pointing your agent config to those providers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># OpenAI</span>
+</span></span><span style="display:flex;"><span>$env:OPENAI_API_KEY = <span style="color:#e6db74">&#34;&lt;your-openai-api-key&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Azure OpenAI</span>
+</span></span><span style="display:flex;"><span>$env:AZURE_OPENAI_KEY = <span style="color:#e6db74">&#34;&lt;your-azure-openai-key&gt;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Your Azure Base URL typically looks like:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://&lt;your-resource-name&gt;.openai.azure.com/</span>
+</span></span></code></pre></div><p>For a deeper dive into APIs and options, see <code>core/vnext/STREAMING_GUIDE.md</code>.</p>
+<h2 id="part-1-minimal-simple-streaming">Part 1: Minimal simple-streaming</h2>
+<p>The example lives here: <a href="https://github.com/AgenticGoKit/AgenticGoKit/blob/master/examples/vnext/simple-streaming/main.go">examples/vnext/simple-streaming/main.go</a>.</p>
+<p>It creates a small chat agent and prints tokens as they arrive:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Start streaming</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stream</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">RunStream</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">prompt</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;Failed to start streaming: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Print tokens as they arrive</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">chunk</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Chunks</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Error</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;\n❌ Error: %v\n&#34;</span>, <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Error</span>); <span style="color:#66d9ef">break</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Type</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ChunkTypeDelta</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Delta</span>) <span style="color:#75715e">// token-by-token</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ChunkTypeDone</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;\n\n✅ Streaming completed!&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Always check the final result</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Wait</span>()
+</span></span></code></pre></div><p>Run it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd examples/vnext/simple-streaming
+</span></span><span style="display:flex;"><span>go run .
+</span></span></code></pre></div><p>You’ll see something like:</p>
+<p><img src="../../../../simple-streaming.gif" alt="Simple streaming (terminal)"></p>
+<p>Notes:</p>
+<ul>
+<li>The example uses Ollama with <code>gemma3:1b</code>. Adjust the model/provider in the config if needed.</li>
+<li>Always call <code>stream.Wait()</code> after consuming chunks to surface any trailing errors.</li>
+</ul>
+<h2 id="part-2-multiagent-streaming-workflow">Part 2: Multi‑agent streaming workflow</h2>
+<p>Now, let’s level up with a sequential, two‑agent workflow that streams each step in real time. Code: <a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/streaming_workflow/main.go">examples/vnext/streaming_workflow/main.go</a>.</p>
+<p>We’ll create two specialized agents—Researcher and Summarizer—and wire them into a vNext Workflow. Each step streams its own tokens and emits metadata so you know what’s happening.</p>
+<h3 id="defining-agents">Defining agents</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateResearcherAgent</span>() (<span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Agent</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">QuickChatAgentWithConfig</span>(<span style="color:#e6db74">&#34;Researcher&#34;</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;researcher&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a Research Agent...&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Timeout</span>:      <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMConfig</span>{ <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;ollama&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gemma3:1b&#34;</span>, <span style="color:#a6e22e">Temperature</span>: <span style="color:#ae81ff">0.2</span>, <span style="color:#a6e22e">MaxTokens</span>: <span style="color:#ae81ff">300</span>, <span style="color:#a6e22e">BaseURL</span>: <span style="color:#e6db74">&#34;http://localhost:11434&#34;</span> },
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateSummarizerAgent</span>() (<span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Agent</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">QuickChatAgentWithConfig</span>(<span style="color:#e6db74">&#34;Summarizer&#34;</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;summarizer&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a Summarizer Agent...&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Timeout</span>:      <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMConfig</span>{ <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;ollama&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gemma3:1b&#34;</span>, <span style="color:#a6e22e">Temperature</span>: <span style="color:#ae81ff">0.3</span>, <span style="color:#a6e22e">MaxTokens</span>: <span style="color:#ae81ff">150</span>, <span style="color:#a6e22e">BaseURL</span>: <span style="color:#e6db74">&#34;http://localhost:11434&#34;</span> },
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="using-openai-or-azure-openai">Using OpenAI or Azure OpenAI</h4>
+<p>Where the Ollama LLM config is defined above, you can swap in OpenAI or Azure OpenAI with minimal changes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// OpenAI</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;openai&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;gpt-4&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">APIKey</span>:   <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>),
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Azure OpenAI</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;azure&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;gpt-4&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">BaseURL</span>:  <span style="color:#e6db74">&#34;https://your-resource.openai.azure.com/&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">APIKey</span>:   <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;AZURE_OPENAI_KEY&#34;</span>),
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Notes:</p>
+<ul>
+<li>Keep the rest of the streaming code exactly the same; provider selection is handled via <code>LLMConfig</code>.</li>
+<li>Ensure the appropriate environment variables are set in your shell before running the examples.</li>
+</ul>
+<h3 id="building-a-sequential-workflow">Building a sequential workflow</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">workflow</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">NewSequentialWorkflow</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">WorkflowConfig</span>{ <span style="color:#a6e22e">Mode</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Sequential</span>, <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">180</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span> })
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>) }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">workflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">WorkflowStep</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:  <span style="color:#e6db74">&#34;research&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">researcher</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Transform</span>: <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">input</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;Research the topic: %s. Provide key information, benefits, and current applications.&#34;</span>, <span style="color:#a6e22e">input</span>)
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">workflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">WorkflowStep</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:  <span style="color:#e6db74">&#34;summarize&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">summarizer</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Transform</span>: <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">input</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;Please summarize this research into key points:\n\n%s&#34;</span>, <span style="color:#a6e22e">input</span>)
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><h3 id="running-with-streaming">Running with streaming</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stream</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">workflow</span>.<span style="color:#a6e22e">RunStream</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">topic</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>) }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">chunk</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Chunks</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Type</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ChunkTypeMetadata</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">stepName</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Metadata</span>[<span style="color:#e6db74">&#34;step_name&#34;</span>].(<span style="color:#66d9ef">string</span>); <span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;\n🔄 [STEP: %s] %s\n&#34;</span>, <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">ToUpper</span>(<span style="color:#a6e22e">stepName</span>), <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Content</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;─────────────────────&#34;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ChunkTypeDelta</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Delta</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ChunkTypeDone</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;\n✅ Workflow step completed!&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Wait</span>() <span style="color:#75715e">// final success/error</span>
+</span></span></code></pre></div><p>Run it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>cd examples/vnext/streaming_workflow
+</span></span><span style="display:flex;"><span>go run .
+</span></span></code></pre></div><p>What you’ll see:</p>
+<pre tabindex="0"><code>🚀 vnext.Workflow Streaming Showcase
 ====================================
 
 🔍 Testing Ollama connection...
@@ -136,14 +395,109 @@ Streaming is a really cool way to access content...
 Based on the research findings, here are the key points:
 
 🎉 vnext.WORKFLOW STREAMING COMPLETED!
-</code></pre><h2 id=when-to-use-streaming-vs-nonstreaming>When to use streaming vs. non‑streaming</h2><p>Without streaming:</p><pre tabindex=0><code>User: &#34;Research AI streaming benefits&#34;
+</code></pre><h2 id="when-to-use-streaming-vs-nonstreaming">When to use streaming vs. non‑streaming</h2>
+<p>Without streaming:</p>
+<pre tabindex="0"><code>User: &#34;Research AI streaming benefits&#34;
 System: [Working... 60–90s of silence]
 System: [Full results appear all at once]
-</code></pre><p>With streaming:</p><pre tabindex=0><code>User: &#34;Research AI streaming benefits&#34;
+</code></pre><p>With streaming:</p>
+<pre tabindex="0"><code>User: &#34;Research AI streaming benefits&#34;
 System: 🔄 [STEP: RESEARCH] … tokens stream live …
 System: 🔄 [STEP: SUMMARIZE] … tokens stream live …
 System: ✅ Workflow completed
-</code></pre><p>Streaming shines when:</p><ul><li>The task takes more than ~1–2 seconds</li><li>You want visibility into multi‑step progress</li><li>You’re building chat UIs or CLIs where responsiveness matters</li></ul><h2 id=tips-options-and-best-practices>Tips, options, and best practices</h2><ul><li>Always use contexts with timeouts for cancellation:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>cancel</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>WithTimeout</span>(<span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>(), <span style=color:#ae81ff>30</span><span style=color:#f92672>*</span><span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Second</span>)
-</span></span><span style=display:flex><span><span style=color:#66d9ef>defer</span> <span style=color:#a6e22e>cancel</span>()
-</span></span></code></pre></div></li><li>After consuming chunks, call <code>stream.Wait()</code> to catch final errors and access the final result</li><li>Need only text? Use text‑only streaming to reduce noise</li><li>For UIs, include metadata to display current step/agent</li><li>Tune buffer size and flush intervals for your UX/perf needs</li></ul><p>See <code>core/vnext/STREAMING_GUIDE.md</code> for:</p><ul><li>Chunk types (Text, Delta, Thought, ToolCall, ToolResult, Metadata, Error, Done)</li><li>Stream options: buffer size, thoughts/tool calls, metadata, flush interval</li><li>Utilities: <code>CollectStream</code>, <code>PrintStream</code>, <code>StreamToChannel</code>, <code>AsReader</code></li></ul><h2 id=troubleshooting>Troubleshooting</h2><ul><li>Stream hangs or never finishes: use a context with timeout and ensure you read all chunks</li><li>Missing output: verify you’re handling <code>ChunkTypeDelta</code> (token deltas) and/or <code>ChunkTypeText</code></li><li>Slow UI updates: try a larger buffer or longer flush interval</li><li>Provider issues: confirm Ollama is running and the model is pulled</li></ul><h2 id=wrapup>Wrap‑up</h2><p>You now have two paths:</p><ul><li>Start simple with <code>examples/vnext/simple-streaming</code> to understand token streaming</li><li>Build richer, explainable systems with <code>examples/vnext/streaming_workflow</code></li></ul><p>Both rely on the same Stream primitives, so once you’re comfortable with one, the other feels natural.</p><p>If you want to go deeper, open <code>core/vnext/STREAMING_GUIDE.md</code> and explore advanced options like tool‑call streaming, thought visibility, and custom stream builders.</p></section><footer class="mt-12 flex flex-wrap"><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/go>go</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/ai>ai</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/streaming>streaming</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/agenticgokit>agenticgokit</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/workflows>workflows</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/ollama>ollama</a></footer><nav class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"><a class="ltr:pr-3 rtl:pl-3" href=https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Building Context-Aware AI Agents with Memory in AgenticGoKit</span></a><a class="justify-end pl-3 ltr:ml-auto rtl:mr-auto" href=https://kunalkushwaha.github.io/2025/10/20/building-multi-agent-workflows/><span>Building Multi-Agent Workflows in Go: Simpler Than You Think</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a></nav><div class=mt-24 id=disqus_thread></div><script>const disqusShortname="kunalkushwaha",script=document.createElement("script");script.src="https://"+disqusShortname+".disqus.com/embed.js",script.setAttribute("data-timestamp",+new Date),document.head.appendChild(script)</script></article></main><footer class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"><div class=mr-auto>Kunal Kushwaha</div><a class="link mx-6" href=https://gohugo.io/ rel=noopener target=_blank>powered by hugo️️</a>️
-<a class=link href=https://github.com/nanxiaobei/hugo-paper rel=noopener target=_blank>hugo-paper</a></footer></body></html>
+</code></pre><p>Streaming shines when:</p>
+<ul>
+<li>The task takes more than ~1–2 seconds</li>
+<li>You want visibility into multi‑step progress</li>
+<li>You’re building chat UIs or CLIs where responsiveness matters</li>
+</ul>
+<h2 id="tips-options-and-best-practices">Tips, options, and best practices</h2>
+<ul>
+<li>Always use contexts with timeouts for cancellation:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
+</span></span></code></pre></div></li>
+<li>After consuming chunks, call <code>stream.Wait()</code> to catch final errors and access the final result</li>
+<li>Need only text? Use text‑only streaming to reduce noise</li>
+<li>For UIs, include metadata to display current step/agent</li>
+<li>Tune buffer size and flush intervals for your UX/perf needs</li>
+</ul>
+<p>See <code>core/vnext/STREAMING_GUIDE.md</code> for:</p>
+<ul>
+<li>Chunk types (Text, Delta, Thought, ToolCall, ToolResult, Metadata, Error, Done)</li>
+<li>Stream options: buffer size, thoughts/tool calls, metadata, flush interval</li>
+<li>Utilities: <code>CollectStream</code>, <code>PrintStream</code>, <code>StreamToChannel</code>, <code>AsReader</code></li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>Stream hangs or never finishes: use a context with timeout and ensure you read all chunks</li>
+<li>Missing output: verify you’re handling <code>ChunkTypeDelta</code> (token deltas) and/or <code>ChunkTypeText</code></li>
+<li>Slow UI updates: try a larger buffer or longer flush interval</li>
+<li>Provider issues: confirm Ollama is running and the model is pulled</li>
+</ul>
+<h2 id="wrapup">Wrap‑up</h2>
+<p>You now have two paths:</p>
+<ul>
+<li>Start simple with <code>examples/vnext/simple-streaming</code> to understand token streaming</li>
+<li>Build richer, explainable systems with <code>examples/vnext/streaming_workflow</code></li>
+</ul>
+<p>Both rely on the same Stream primitives, so once you’re comfortable with one, the other feels natural.</p>
+<p>If you want to go deeper, open <code>core/vnext/STREAMING_GUIDE.md</code> and explore advanced options like tool‑call streaming, thought visibility, and custom stream builders.</p>
+</section>
+
+  <footer class="mt-12 flex flex-wrap"><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/go"
+      >go</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/ai"
+      >ai</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/streaming"
+      >streaming</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/agenticgokit"
+      >agenticgokit</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/workflows"
+      >workflows</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/ollama"
+      >ollama</a
+    ></footer><nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Building Context-Aware AI Agents with Memory in AgenticGoKit</span></a
+    ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="https://kunalkushwaha.github.io/2025/10/20/building-multi-agent-workflows/"
+      ><span>Building Multi-Agent Workflows in Go: Simpler Than You Think</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav><div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'kunalkushwaha';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">Kunal Kushwaha</div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>

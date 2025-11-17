@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Infrakit on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/infrakit/</link><description>Recent content in Infrakit on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><copyright>Kunal Kushwaha</copyright><lastBuildDate>Fri, 14 Oct 2016 14:05:58 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/infrakit/index.xml" rel="self" type="application/rss+xml"/><item><title>Understanding Infrakit</title><link>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</link><pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate><guid>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</guid><description>&lt;p>Docker recently open sourced new project &lt;a href="https://github.com/docker/infrakit">Infrakit&lt;/a> at ContainerCon 2016, Berlin.&lt;/p>
-&lt;p>As project describes itself as&lt;/p>
-&lt;blockquote>
-&lt;p>&amp;ldquo;A toolkit for creating and managing declarative, self-healing infrastructure&amp;rdquo;&lt;/p>&lt;/blockquote>
-&lt;p>Lets try to understand what it does and how it adds value to existing tools.&lt;/p>
-&lt;h3 id="infrakit">Infrakit&lt;/h3>
-&lt;h5 id="problem">Problem&lt;/h5>
-&lt;p>Managing docker on different infrastructure is difficult and not portable.&lt;/p>
-&lt;h4 id="history">History&lt;/h4>
-&lt;ul>
-&lt;li>
-&lt;p>Initially Docker machine project was focused for building docker environment on various platforms, but there were lot of issues mainly due to unreliable third party drivers.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Infrakit on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/tags/infrakit/</link>
+    <description>Recent content in Infrakit on Kunal Kushwaha</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Fri, 14 Oct 2016 14:05:58 +0900</lastBuildDate>
+    <atom:link href="https://kunalkushwaha.github.io/tags/infrakit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding Infrakit</title>
+      <link>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</link>
+      <pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate>
+      <guid>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</guid>
+      <description>&lt;p&gt;Docker recently open sourced new project &lt;a href=&#34;https://github.com/docker/infrakit&#34;&gt;Infrakit&lt;/a&gt; at ContainerCon 2016, Berlin.&lt;/p&gt;&#xA;&lt;p&gt;As project describes itself as&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;A toolkit for creating and managing declarative, self-healing infrastructure&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;Lets try to understand what it does and how it adds value to existing tools.&lt;/p&gt;&#xA;&lt;h3 id=&#34;infrakit&#34;&gt;Infrakit&lt;/h3&gt;&#xA;&lt;h5 id=&#34;problem&#34;&gt;Problem&lt;/h5&gt;&#xA;&lt;p&gt;Managing docker on different infrastructure is difficult and not portable.&lt;/p&gt;&#xA;&lt;h4 id=&#34;history&#34;&gt;History&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Initially Docker machine project was focused for building docker environment on various platforms, but there were lot of issues mainly due to unreliable third party drivers.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

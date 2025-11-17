@@ -1,14 +1,237 @@
-<!doctype html><html class="not-ready lg:text-base" style=--bg:#faf8f1 lang=en-us dir=ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Building AI Agents with AgentFlow: A Beginner's Journey - Kunal Kushwaha</title>
-<meta name=theme-color><meta name=description content="
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Building AI Agents with AgentFlow: A Beginner&#39;s Journey - Kunal Kushwaha</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="
 Imagine you&rsquo;re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.
-Enter AgentFlow—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents&rsquo; behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI&rsquo;s GPT-4."><meta name=author content="Kunal Kushwaha"><link rel="preload stylesheet" as=style href=https://kunalkushwaha.github.io/main.min.css><link rel=preload as=image href=https://kunalkushwaha.github.io/theme.png><link rel=preload as=image href=https://kunalkushwaha.github.io/twitter.svg><link rel=preload as=image href=https://kunalkushwaha.github.io/github.svg><link rel=preload as=image href=https://kunalkushwaha.github.io/linkedin.svg><script defer src=https://kunalkushwaha.github.io/highlight.min.js onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://kunalkushwaha.github.io/favicon.ico><link rel=apple-touch-icon href=https://kunalkushwaha.github.io/apple-touch-icon.png><meta name=generator content="Hugo 0.147.2"><script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-K16B935QET")}</script><meta itemprop=name content="Building AI Agents with AgentFlow: A Beginner's Journey"><meta itemprop=description content="Imagine you’re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.
-Enter AgentFlow—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents’ behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI’s GPT-4."><meta itemprop=datePublished content="2025-05-12T17:15:04+09:00"><meta itemprop=dateModified content="2025-05-12T17:15:04+09:00"><meta itemprop=wordCount content="934"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/05/12/building-ai-agents-with-agentflow/"><meta property="og:site_name" content="Kunal Kushwaha"><meta property="og:title" content="Building AI Agents with AgentFlow: A Beginner's Journey"><meta property="og:description" content="Imagine you’re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.
-Enter AgentFlow—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents’ behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI’s GPT-4."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2025-05-12T17:15:04+09:00"><meta property="article:modified_time" content="2025-05-12T17:15:04+09:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Building AI Agents with AgentFlow: A Beginner's Journey"><meta name=twitter:description content="Imagine you’re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.
-Enter AgentFlow—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents’ behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI’s GPT-4."><link rel=canonical href=https://kunalkushwaha.github.io/2025/05/12/building-ai-agents-with-agentflow/></head><body class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"><header class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"><div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto"><a class="-translate-y-[1px] text-2xl font-medium" href=https://kunalkushwaha.github.io/>Kunal Kushwaha</a><div class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]" role=button aria-label=Dark></div></div><div class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8" role=button aria-label=Menu></div><script>const htmlClass=document.documentElement.classList;setTimeout(()=>{htmlClass.remove("not-ready")},10);const btnMenu=document.querySelector(".btn-menu");btnMenu.addEventListener("click",()=>{htmlClass.toggle("open")});const metaTheme=document.querySelector('meta[name="theme-color"]'),lightBg="#faf8f1".replace(/"/g,""),setDark=e=>{metaTheme.setAttribute("content",e?"#000":lightBg),htmlClass[e?"add":"remove"]("dark"),localStorage.setItem("dark",e)},darkScheme=window.matchMedia("(prefers-color-scheme: dark)");if(htmlClass.contains("dark"))setDark(!0);else{const e=localStorage.getItem("dark");setDark(e?e==="true":darkScheme.matches)}darkScheme.addEventListener("change",e=>{setDark(e.matches)});const btnDark=document.querySelector(".btn-dark");btnDark.addEventListener("click",()=>{setDark(localStorage.getItem("dark")!=="true")})</script><div class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"><nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=../../../../>Blog</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=https://speakerdeck.com/kunalkushwaha>Slide Deck</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=../../../../about/>About</a></nav><nav class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"><a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./twitter.svg) href=https://twitter.com/kunalkushwaha target=_blank rel=me>twitter</a>
-<a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./github.svg) href=https://github.com/kunalkushwaha target=_blank rel=me>github</a>
-<a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./linkedin.svg) href=https://linkedin.com/in/kunalkushwaha target=_blank rel=me>linkedin</a></nav></div></header><main class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"><article><header class=mb-14><h1 class="my-0! pb-2.5">Building AI Agents with AgentFlow: A Beginner's Journey</h1><div class="text-xs antialiased opacity-60"><time>May 12, 2025</time></div></header><section><p><img src=../../../../AgentFlow.JPG alt="AgentFlow In Action" title></p><p>Imagine you&rsquo;re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.</p><p>Enter <strong>AgentFlow</strong>—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents&rsquo; behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI&rsquo;s GPT-4.</p><p>In this blog post, I will introduce you to AgentFlow&rsquo;s core concepts, demonstrate how to build a simple multi-agent workflow using LLMs, explore the built-in tracing functionality, and show how AgentFlow can streamline your AI development process.</p><hr><h2 id=what-is-agentflow>What is AgentFlow?</h2><p>AgentFlow is a Go-based framework that enables developers to build AI agents as modular, event-driven components. Each agent is a simple Go function that processes an <code>Event</code>, updates a shared <code>State</code>, and returns a result. AgentFlow provides built-in orchestration patterns—such as sequential, parallel, and looped execution—to manage complex workflows with ease.</p><h3 id=key-features>Key Features</h3><ul><li><strong>Modular Agent Design</strong>: Define agents as individual Go functions, promoting code reusability and simplicity.</li><li><strong>Built-in Orchestration</strong>: Utilize predefined patterns like <code>SequentialAgent</code>, <code>ParallelAgent</code>, and <code>LoopAgent</code> to structure your workflows.</li><li><strong>LLM Integration</strong>: Seamlessly integrate with LLM providers like OpenAI, Azure OpenAI, and Ollama through a unified <code>ModelProvider</code> interface.</li><li><strong>Observability</strong>: Leverage the <code>agentcli</code> tool to trace and debug your workflows effectively.</li><li><strong>Extensibility</strong>: Enhance agent capabilities by registering custom tools and functions.</li></ul><hr><h2 id=core-workflow-patterns>Core Workflow Patterns</h2><p>AgentFlow supports various orchestration patterns to manage how agents interact within a workflow. Let&rsquo;s explore the primary patterns:</p><h3 id=sequential-execution>Sequential Execution</h3><p>Agents are executed one after another, with each agent receiving the updated state from the previous one.</p><pre tabindex=0><code class=language-mermaid data-lang=mermaid>graph TD
+Enter AgentFlow—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents&rsquo; behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI&rsquo;s GPT-4." />
+  <meta name="author" content="Kunal Kushwaha" /><link rel="preload stylesheet" as="style" href="https://kunalkushwaha.github.io/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/theme.png" />
+
+  
+
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/linkedin.svg" />
+
+  <script
+    defer
+    src="https://kunalkushwaha.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="https://kunalkushwaha.github.io/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://kunalkushwaha.github.io/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.147.2">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K16B935QET');
+        }
+      </script>
+  <meta itemprop="name" content="Building AI Agents with AgentFlow: A Beginner&#39;s Journey">
+  <meta itemprop="description" content="Imagine you’re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.
+Enter AgentFlow—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents’ behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI’s GPT-4.">
+  <meta itemprop="datePublished" content="2025-05-12T17:15:04+09:00">
+  <meta itemprop="dateModified" content="2025-05-12T17:15:04+09:00">
+  <meta itemprop="wordCount" content="934"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/05/12/building-ai-agents-with-agentflow/">
+  <meta property="og:site_name" content="Kunal Kushwaha">
+  <meta property="og:title" content="Building AI Agents with AgentFlow: A Beginner&#39;s Journey">
+  <meta property="og:description" content="Imagine you’re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.
+Enter AgentFlow—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents’ behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI’s GPT-4.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-05-12T17:15:04+09:00">
+    <meta property="article:modified_time" content="2025-05-12T17:15:04+09:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Building AI Agents with AgentFlow: A Beginner&#39;s Journey">
+  <meta name="twitter:description" content="Imagine you’re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.
+Enter AgentFlow—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents’ behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI’s GPT-4.">
+
+  <link rel="canonical" href="https://kunalkushwaha.github.io/2025/05/12/building-ai-agents-with-agentflow/" />
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="https://kunalkushwaha.github.io/"
+      >Kunal Kushwaha</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../"
+        >Blog</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://speakerdeck.com/kunalkushwaha"
+        >Slide Deck</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../about/"
+        >About</a
+      ></nav><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >twitter</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Building AI Agents with AgentFlow: A Beginner&#39;s Journey</h1><div class="text-xs antialiased opacity-60"><time>May 12, 2025</time></div></header>
+
+  <section><p><img src="../../../../AgentFlow.JPG" alt="AgentFlow In Action" title=""></p>
+<p>Imagine you&rsquo;re building an AI agent for the first time. You want it to translate text, summarize documents, or perhaps even plan tasks. But as you dive in, you realize that orchestrating these agents, managing their states, and ensuring smooth communication between them is more complex than anticipated.</p>
+<p>Enter <strong>AgentFlow</strong>—a lightweight, Go-native framework designed to simplify the creation of event-driven AI agent workflows. With AgentFlow, you can focus on defining your agents&rsquo; behaviors, while the framework handles the orchestration, state management, and integration with large language models (LLMs) like OpenAI&rsquo;s GPT-4.</p>
+<p>In this blog post, I will introduce you to AgentFlow&rsquo;s core concepts, demonstrate how to build a simple multi-agent workflow using LLMs, explore the built-in tracing functionality, and show how AgentFlow can streamline your AI development process.</p>
+<hr>
+<h2 id="what-is-agentflow">What is AgentFlow?</h2>
+<p>AgentFlow is a Go-based framework that enables developers to build AI agents as modular, event-driven components. Each agent is a simple Go function that processes an <code>Event</code>, updates a shared <code>State</code>, and returns a result. AgentFlow provides built-in orchestration patterns—such as sequential, parallel, and looped execution—to manage complex workflows with ease.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li><strong>Modular Agent Design</strong>: Define agents as individual Go functions, promoting code reusability and simplicity.</li>
+<li><strong>Built-in Orchestration</strong>: Utilize predefined patterns like <code>SequentialAgent</code>, <code>ParallelAgent</code>, and <code>LoopAgent</code> to structure your workflows.</li>
+<li><strong>LLM Integration</strong>: Seamlessly integrate with LLM providers like OpenAI, Azure OpenAI, and Ollama through a unified <code>ModelProvider</code> interface.</li>
+<li><strong>Observability</strong>: Leverage the <code>agentcli</code> tool to trace and debug your workflows effectively.</li>
+<li><strong>Extensibility</strong>: Enhance agent capabilities by registering custom tools and functions.</li>
+</ul>
+<hr>
+<h2 id="core-workflow-patterns">Core Workflow Patterns</h2>
+<p>AgentFlow supports various orchestration patterns to manage how agents interact within a workflow. Let&rsquo;s explore the primary patterns:</p>
+<h3 id="sequential-execution">Sequential Execution</h3>
+<p>Agents are executed one after another, with each agent receiving the updated state from the previous one.</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TD
   Start --&gt; Agent1 --&gt; Agent2 --&gt; Agent3 --&gt; End
-</code></pre><h3 id=parallel-execution>Parallel Execution</h3><p>Multiple agents are executed concurrently, and their outputs are merged into a single state.</p><pre tabindex=0><code class=language-mermaid data-lang=mermaid>graph TD
+</code></pre><h3 id="parallel-execution">Parallel Execution</h3>
+<p>Multiple agents are executed concurrently, and their outputs are merged into a single state.</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TD
   Start --&gt; AgentA
   Start --&gt; AgentB
   Start --&gt; AgentC
@@ -16,69 +239,90 @@ Enter AgentFlow—a lightweight, Go-native framework designed to simplify the cr
   AgentB --&gt; Merge
   AgentC --&gt; Merge
   Merge --&gt; End
-</code></pre><h3 id=loop-execution>Loop Execution</h3><p>An agent or group of agents is executed repeatedly until a specified condition is met or a maximum number of iterations is reached.</p><pre tabindex=0><code class=language-mermaid data-lang=mermaid>graph TD
+</code></pre><h3 id="loop-execution">Loop Execution</h3>
+<p>An agent or group of agents is executed repeatedly until a specified condition is met or a maximum number of iterations is reached.</p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TD
   Start --&gt; LoopStart
   LoopStart --&gt; AgentX
   AgentX --&gt; ConditionCheck
   ConditionCheck -- Yes --&gt; End
   ConditionCheck -- No --&gt; LoopStart
-</code></pre><hr><h2 id=building-a-multi-agent-llm-workflow>Building a Multi-Agent LLM Workflow</h2><p>Let’s walk through creating a simple workflow that translates text into French and then summarizes it, using OpenAI&rsquo;s GPT-4 model.</p><h3 id=prerequisites>Prerequisites</h3><ul><li>Go installed on your system.</li><li>An OpenAI API key set as the <code>OPENAI_API_KEY</code> environment variable.</li></ul><h3 id=step-1-define-the-agents>Step 1: Define the Agents</h3><p>We’ll create two agents: one for translation and another for summarization. AgentFlow includes built-in support for LLMs via a <code>ModelProvider</code> interface, and you can access it through the context in your handlers. Here&rsquo;s an example inspired by <a href=https://github.com/kunalkushwaha/agentflow/blob/master/examples/openai_example/main.go>opeanai example</a>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>TranslateAgent</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>, <span style=color:#a6e22e>ev</span> <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>Event</span>, <span style=color:#a6e22e>st</span> <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>State</span>) (<span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>AgentResult</span>, <span style=color:#66d9ef>error</span>) {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>provider</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>llms</span>.<span style=color:#a6e22e>GetProviderFromContext</span>(<span style=color:#a6e22e>ctx</span>)
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>input</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>ev</span>.<span style=color:#a6e22e>GetData</span>()[<span style=color:#e6db74>&#34;text&#34;</span>].(<span style=color:#66d9ef>string</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>prompt</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;Translate the following text to French:\n\n%s&#34;</span>, <span style=color:#a6e22e>input</span>)
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>translated</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>provider</span>.<span style=color:#a6e22e>Call</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>prompt</span>)
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>AgentResult</span>{}, <span style=color:#a6e22e>err</span>
-</span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>st</span>.<span style=color:#a6e22e>Set</span>(<span style=color:#e6db74>&#34;translated&#34;</span>, <span style=color:#a6e22e>translated</span>)
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>AgentResult</span>{<span style=color:#a6e22e>OutputState</span>: <span style=color:#a6e22e>st</span>}, <span style=color:#66d9ef>nil</span>
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>SummarizeAgent</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>, <span style=color:#a6e22e>ev</span> <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>Event</span>, <span style=color:#a6e22e>st</span> <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>State</span>) (<span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>AgentResult</span>, <span style=color:#66d9ef>error</span>) {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>provider</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>llms</span>.<span style=color:#a6e22e>GetProviderFromContext</span>(<span style=color:#a6e22e>ctx</span>)
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>input</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>ev</span>.<span style=color:#a6e22e>GetData</span>()[<span style=color:#e6db74>&#34;text&#34;</span>].(<span style=color:#66d9ef>string</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>prompt</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;Summarize the following text:\n\n%s&#34;</span>, <span style=color:#a6e22e>input</span>)
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>summary</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>provider</span>.<span style=color:#a6e22e>Call</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>prompt</span>)
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>AgentResult</span>{}, <span style=color:#a6e22e>err</span>
-</span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>st</span>.<span style=color:#a6e22e>Set</span>(<span style=color:#e6db74>&#34;summary&#34;</span>, <span style=color:#a6e22e>summary</span>)
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>AgentResult</span>{<span style=color:#a6e22e>OutputState</span>: <span style=color:#a6e22e>st</span>}, <span style=color:#66d9ef>nil</span>
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h3 id=step-2-set-up-the-workflow>Step 2: Set Up the Workflow</h3><p>We&rsquo;ll use the <code>ParallelAgent</code> to execute both agents concurrently.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>handlers</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#a6e22e>factory</span>.<span style=color:#a6e22e>AgentHandlerFunc</span>{
-</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;translate&#34;</span>: <span style=color:#a6e22e>TranslateAgent</span>,
-</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#34;summarize&#34;</span>: <span style=color:#a6e22e>SummarizeAgent</span>,
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>flow</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>agents</span>.<span style=color:#a6e22e>NewParallelAgent</span>([]<span style=color:#66d9ef>string</span>{<span style=color:#e6db74>&#34;translate&#34;</span>, <span style=color:#e6db74>&#34;summarize&#34;</span>})
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>runner</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>factory</span>.<span style=color:#a6e22e>NewRunnerWithConfig</span>(<span style=color:#a6e22e>factory</span>.<span style=color:#a6e22e>RunnerConfig</span>{
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>Agents</span>: <span style=color:#a6e22e>handlers</span>,
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>Flow</span>:   <span style=color:#a6e22e>flow</span>,
-</span></span><span style=display:flex><span>})
-</span></span></code></pre></div><h3 id=step-3-execute-the-workflow>Step 3: Execute the Workflow</h3><p>Emit an event to start the workflow and retrieve the results.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>runner</span>.<span style=color:#a6e22e>Start</span>(<span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>())
-</span></span><span style=display:flex><span><span style=color:#a6e22e>session</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>runner</span>.<span style=color:#a6e22e>Emit</span>(<span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>NewEvent</span>(<span style=color:#e6db74>&#34;parallel&#34;</span>, <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>EventData</span>{<span style=color:#e6db74>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;Hello, AgentFlow!&#34;</span>}, <span style=color:#66d9ef>nil</span>))
-</span></span><span style=display:flex><span><span style=color:#a6e22e>trace</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>runner</span>.<span style=color:#a6e22e>DumpTrace</span>(<span style=color:#a6e22e>session</span>)
-</span></span><span style=display:flex><span><span style=color:#a6e22e>result</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>trace</span>[len(<span style=color:#a6e22e>trace</span>)<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>].<span style=color:#a6e22e>State</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#e6db74>&#34;Translated Text:&#34;</span>, <span style=color:#a6e22e>result</span>.<span style=color:#a6e22e>Get</span>(<span style=color:#e6db74>&#34;translated&#34;</span>))
-</span></span><span style=display:flex><span><span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#e6db74>&#34;Summary:&#34;</span>, <span style=color:#a6e22e>result</span>.<span style=color:#a6e22e>Get</span>(<span style=color:#e6db74>&#34;summary&#34;</span>))
-</span></span><span style=display:flex><span><span style=color:#a6e22e>runner</span>.<span style=color:#a6e22e>Stop</span>()
-</span></span></code></pre></div><hr><h2 id=tracing-your-agent-workflow>Tracing Your Agent Workflow</h2><p>AgentFlow includes built-in support for tracing, allowing you to inspect each step of your agent workflow—what data was passed, how state changed, and what each agent did.</p><p>When you run a workflow using <code>runner.Emit()</code>, AgentFlow collects a trace of each step. You can dump and inspect this trace using <code>runner.DumpTrace()</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// Emit the initial event</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>session</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>runner</span>.<span style=color:#a6e22e>Emit</span>(<span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>NewEvent</span>(<span style=color:#e6db74>&#34;parallel&#34;</span>, <span style=color:#a6e22e>core</span>.<span style=color:#a6e22e>EventData</span>{<span style=color:#e6db74>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;Hello, AgentFlow!&#34;</span>}, <span style=color:#66d9ef>nil</span>))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Dump and inspect the trace</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>trace</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>runner</span>.<span style=color:#a6e22e>DumpTrace</span>(<span style=color:#a6e22e>session</span>)
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span>, <span style=color:#a6e22e>step</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>trace</span> {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;Step %d:\n&#34;</span>, <span style=color:#a6e22e>i</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;  Agent ID: %s\n&#34;</span>, <span style=color:#a6e22e>step</span>.<span style=color:#a6e22e>AgentID</span>)
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;  Input Event: %+v\n&#34;</span>, <span style=color:#a6e22e>step</span>.<span style=color:#a6e22e>InputEvent</span>.<span style=color:#a6e22e>Data</span>)
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;  Output State: %+v\n&#34;</span>, <span style=color:#a6e22e>step</span>.<span style=color:#a6e22e>State</span>.<span style=color:#a6e22e>Data</span>)
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h3 id=example-output>Example Output</h3><pre tabindex=0><code>Step 1:
+</code></pre><hr>
+<h2 id="building-a-multi-agent-llm-workflow">Building a Multi-Agent LLM Workflow</h2>
+<p>Let’s walk through creating a simple workflow that translates text into French and then summarizes it, using OpenAI&rsquo;s GPT-4 model.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Go installed on your system.</li>
+<li>An OpenAI API key set as the <code>OPENAI_API_KEY</code> environment variable.</li>
+</ul>
+<h3 id="step-1-define-the-agents">Step 1: Define the Agents</h3>
+<p>We’ll create two agents: one for translation and another for summarization. AgentFlow includes built-in support for LLMs via a <code>ModelProvider</code> interface, and you can access it through the context in your handlers. Here&rsquo;s an example inspired by <a href="https://github.com/kunalkushwaha/agentflow/blob/master/examples/openai_example/main.go">opeanai example</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TranslateAgent</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">ev</span> <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">Event</span>, <span style="color:#a6e22e">st</span> <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">State</span>) (<span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">AgentResult</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">provider</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">llms</span>.<span style="color:#a6e22e">GetProviderFromContext</span>(<span style="color:#a6e22e">ctx</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">input</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ev</span>.<span style="color:#a6e22e">GetData</span>()[<span style="color:#e6db74">&#34;text&#34;</span>].(<span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">prompt</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;Translate the following text to French:\n\n%s&#34;</span>, <span style="color:#a6e22e">input</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">translated</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">provider</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">prompt</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">AgentResult</span>{}, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">st</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;translated&#34;</span>, <span style="color:#a6e22e">translated</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">AgentResult</span>{<span style="color:#a6e22e">OutputState</span>: <span style="color:#a6e22e">st</span>}, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SummarizeAgent</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">ev</span> <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">Event</span>, <span style="color:#a6e22e">st</span> <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">State</span>) (<span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">AgentResult</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">provider</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">llms</span>.<span style="color:#a6e22e">GetProviderFromContext</span>(<span style="color:#a6e22e">ctx</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">input</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ev</span>.<span style="color:#a6e22e">GetData</span>()[<span style="color:#e6db74">&#34;text&#34;</span>].(<span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">prompt</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;Summarize the following text:\n\n%s&#34;</span>, <span style="color:#a6e22e">input</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">summary</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">provider</span>.<span style="color:#a6e22e">Call</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">prompt</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">AgentResult</span>{}, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">st</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;summary&#34;</span>, <span style="color:#a6e22e">summary</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">AgentResult</span>{<span style="color:#a6e22e">OutputState</span>: <span style="color:#a6e22e">st</span>}, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="step-2-set-up-the-workflow">Step 2: Set Up the Workflow</h3>
+<p>We&rsquo;ll use the <code>ParallelAgent</code> to execute both agents concurrently.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">handlers</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#a6e22e">factory</span>.<span style="color:#a6e22e">AgentHandlerFunc</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;translate&#34;</span>: <span style="color:#a6e22e">TranslateAgent</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;summarize&#34;</span>: <span style="color:#a6e22e">SummarizeAgent</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">flow</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agents</span>.<span style="color:#a6e22e">NewParallelAgent</span>([]<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;translate&#34;</span>, <span style="color:#e6db74">&#34;summarize&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">runner</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">factory</span>.<span style="color:#a6e22e">NewRunnerWithConfig</span>(<span style="color:#a6e22e">factory</span>.<span style="color:#a6e22e">RunnerConfig</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Agents</span>: <span style="color:#a6e22e">handlers</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Flow</span>:   <span style="color:#a6e22e">flow</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><h3 id="step-3-execute-the-workflow">Step 3: Execute the Workflow</h3>
+<p>Emit an event to start the workflow and retrieve the results.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">runner</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>())
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">session</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">runner</span>.<span style="color:#a6e22e">Emit</span>(<span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">NewEvent</span>(<span style="color:#e6db74">&#34;parallel&#34;</span>, <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">EventData</span>{<span style="color:#e6db74">&#34;text&#34;</span>: <span style="color:#e6db74">&#34;Hello, AgentFlow!&#34;</span>}, <span style="color:#66d9ef">nil</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">trace</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">runner</span>.<span style="color:#a6e22e">DumpTrace</span>(<span style="color:#a6e22e">session</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">trace</span>[len(<span style="color:#a6e22e">trace</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>].<span style="color:#a6e22e">State</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Translated Text:&#34;</span>, <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;translated&#34;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Summary:&#34;</span>, <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;summary&#34;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">runner</span>.<span style="color:#a6e22e">Stop</span>()
+</span></span></code></pre></div><hr>
+<h2 id="tracing-your-agent-workflow">Tracing Your Agent Workflow</h2>
+<p>AgentFlow includes built-in support for tracing, allowing you to inspect each step of your agent workflow—what data was passed, how state changed, and what each agent did.</p>
+<p>When you run a workflow using <code>runner.Emit()</code>, AgentFlow collects a trace of each step. You can dump and inspect this trace using <code>runner.DumpTrace()</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Emit the initial event</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">session</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">runner</span>.<span style="color:#a6e22e">Emit</span>(<span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">NewEvent</span>(<span style="color:#e6db74">&#34;parallel&#34;</span>, <span style="color:#a6e22e">core</span>.<span style="color:#a6e22e">EventData</span>{<span style="color:#e6db74">&#34;text&#34;</span>: <span style="color:#e6db74">&#34;Hello, AgentFlow!&#34;</span>}, <span style="color:#66d9ef">nil</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Dump and inspect the trace</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">trace</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">runner</span>.<span style="color:#a6e22e">DumpTrace</span>(<span style="color:#a6e22e">session</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">step</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">trace</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Step %d:\n&#34;</span>, <span style="color:#a6e22e">i</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;  Agent ID: %s\n&#34;</span>, <span style="color:#a6e22e">step</span>.<span style="color:#a6e22e">AgentID</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;  Input Event: %+v\n&#34;</span>, <span style="color:#a6e22e">step</span>.<span style="color:#a6e22e">InputEvent</span>.<span style="color:#a6e22e">Data</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;  Output State: %+v\n&#34;</span>, <span style="color:#a6e22e">step</span>.<span style="color:#a6e22e">State</span>.<span style="color:#a6e22e">Data</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="example-output">Example Output</h3>
+<pre tabindex="0"><code>Step 1:
   Agent ID: translate
   Input Event: map[text:Hello, AgentFlow!]
   Output State: map[translated:Bonjour, AgentFlow!]
@@ -87,10 +331,75 @@ Step 2:
   Agent ID: summarize
   Input Event: map[text:Hello, AgentFlow!]
   Output State: map[summary:An overview of AgentFlow.]
-</code></pre><h3 id=visualizing-workflow-with-agentcli>Visualizing Workflow with <code>agentcli</code></h3><p>You can also use the <code>agentcli</code> tool to load and inspect trace files in a more visual or structured way:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>agentcli trace --load trace.json --pretty
-</span></span></code></pre></div><p>This makes it easier to debug workflows, compare outputs, and track down issues when agents don’t behave as expected.</p><hr><h2 id=getting-started>Getting Started</h2><p>To explore AgentFlow further:</p><ol><li><p><strong>Install AgentFlow</strong>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>go get github.com/kunalkushwaha/agentflow@latest
-</span></span></code></pre></div></li><li><p><strong>Explore Examples</strong>:</p><p>Navigate to the <code>examples/multi_agent</code> directory in the <a href=https://github.com/kunalkushwaha/agentflow/tree/master/examples/multi_agent>AgentFlow repository</a> to see more complex workflows in action.</p></li><li><p><strong>Consult the Documentation</strong>:</p><p>Refer to the <code>docs</code> directory for detailed guides and architectural overviews.</p></li><li><p><strong>Use the CLI Tool</strong>:</p><p>Leverage <code>agentcli</code> to trace and debug your workflows effectively.</p></li></ol><hr><p>AgentFlow simplifies the process of building AI agent workflows in Go, allowing you to focus on your application&rsquo;s logic rather than the intricacies of orchestration and state management. Whether you&rsquo;re just starting with AI agents or looking to streamline your existing workflows, AgentFlow provides the tools and patterns to accelerate your development.</p><p>Explore AgentFlow today and experience a more straightforward approach to building AI-powered applications.</p></section><nav class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"><a class="ltr:pr-3 rtl:pl-3" href=https://kunalkushwaha.github.io/2025/10/20/building-multi-agent-workflows/><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Building Multi-Agent Workflows in Go: Simpler Than You Think</span></a><a class="justify-end pl-3 ltr:ml-auto rtl:mr-auto" href=https://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/><span>ConfigMaps and Pods</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a></nav><div class=mt-24 id=disqus_thread></div><script>const disqusShortname="kunalkushwaha",script=document.createElement("script");script.src="https://"+disqusShortname+".disqus.com/embed.js",script.setAttribute("data-timestamp",+new Date),document.head.appendChild(script)</script><script type=module>
+</code></pre><h3 id="visualizing-workflow-with-agentcli">Visualizing Workflow with <code>agentcli</code></h3>
+<p>You can also use the <code>agentcli</code> tool to load and inspect trace files in a more visual or structured way:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>agentcli trace --load trace.json --pretty
+</span></span></code></pre></div><p>This makes it easier to debug workflows, compare outputs, and track down issues when agents don’t behave as expected.</p>
+<hr>
+<h2 id="getting-started">Getting Started</h2>
+<p>To explore AgentFlow further:</p>
+<ol>
+<li>
+<p><strong>Install AgentFlow</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/kunalkushwaha/agentflow@latest
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Explore Examples</strong>:</p>
+<p>Navigate to the <code>examples/multi_agent</code> directory in the <a href="https://github.com/kunalkushwaha/agentflow/tree/master/examples/multi_agent">AgentFlow repository</a> to see more complex workflows in action.</p>
+</li>
+<li>
+<p><strong>Consult the Documentation</strong>:</p>
+<p>Refer to the <code>docs</code> directory for detailed guides and architectural overviews.</p>
+</li>
+<li>
+<p><strong>Use the CLI Tool</strong>:</p>
+<p>Leverage <code>agentcli</code> to trace and debug your workflows effectively.</p>
+</li>
+</ol>
+<hr>
+<p>AgentFlow simplifies the process of building AI agent workflows in Go, allowing you to focus on your application&rsquo;s logic rather than the intricacies of orchestration and state management. Whether you&rsquo;re just starting with AI agents or looking to streamline your existing workflows, AgentFlow provides the tools and patterns to accelerate your development.</p>
+<p>Explore AgentFlow today and experience a more straightforward approach to building AI-powered applications.</p>
+</section>
+
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="https://kunalkushwaha.github.io/2025/10/20/building-multi-agent-workflows/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Building Multi-Agent Workflows in Go: Simpler Than You Think</span></a
+    ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="https://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/"
+      ><span>ConfigMaps and Pods</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav><div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'kunalkushwaha';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script><script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
-</script><script>Array.from(document.getElementsByClassName("language-mermaid")).forEach(e=>{e.parentElement.outerHTML=`<div class="mermaid [&_svg]:block [&_svg]:m-auto">${e.innerHTML}</div>`})</script></article></main><footer class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"><div class=mr-auto>Kunal Kushwaha</div><a class="link mx-6" href=https://gohugo.io/ rel=noopener target=_blank>powered by hugo️️</a>️
-<a class=link href=https://github.com/nanxiaobei/hugo-paper rel=noopener target=_blank>hugo-paper</a></footer></body></html>
+</script>
+<script>
+  Array.from(document.getElementsByClassName('language-mermaid')).forEach(
+    (el) => {
+      el.parentElement.outerHTML = `<div class="mermaid [&_svg]:block [&_svg]:m-auto">${el.innerHTML}</div>`;
+    },
+  );
+</script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">Kunal Kushwaha</div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>

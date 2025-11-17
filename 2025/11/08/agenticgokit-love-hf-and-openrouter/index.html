@@ -1,113 +1,565 @@
-<!doctype html><html class="not-ready lg:text-base" style=--bg:#faf8f1 lang=en-us dir=ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>AgenticGoKit ❤️ HuggingFace and OpenRouter - Kunal Kushwaha</title>
-<meta name=theme-color><meta name=description content="
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>AgenticGoKit ❤️ HuggingFace and OpenRouter - Kunal Kushwaha</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="
 We&rsquo;re excited to announce the release of AgenticGoKit v0.4.6 — a major update that expands how Go developers can build and experiment with agentic workflows.
 With this release, AgenticGoKit now supports:
 
 Hugging Face — Access models through the new router API with OpenAI-compatible format
 OpenRouter — Use a wide variety of LLMs (GPT, Claude, Gemini, Llama) through a unified API
 
-These integrations empower developers to build richer, more flexible AI agents without switching languages or managing complex SDKs."><meta name=author content="AgenticGoKit Team"><link rel="preload stylesheet" as=style href=https://kunalkushwaha.github.io/main.min.css><link rel=preload as=image href=https://kunalkushwaha.github.io/theme.png><link rel=preload as=image href=https://kunalkushwaha.github.io/twitter.svg><link rel=preload as=image href=https://kunalkushwaha.github.io/github.svg><link rel=preload as=image href=https://kunalkushwaha.github.io/linkedin.svg><script defer src=https://kunalkushwaha.github.io/highlight.min.js onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://kunalkushwaha.github.io/favicon.ico><link rel=apple-touch-icon href=https://kunalkushwaha.github.io/apple-touch-icon.png><meta name=generator content="Hugo 0.147.2"><script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-K16B935QET")}</script><meta itemprop=name content="AgenticGoKit ❤️ HuggingFace and OpenRouter"><meta itemprop=description content="AgenticGoKit v0.4.6 introduces Hugging Face and OpenRouter support with the new router API, enabling Go developers to build agentic workflows with a wide variety of LLMs including Llama, Claude, and GPT models."><meta itemprop=datePublished content="2025-11-08T00:00:00+00:00"><meta itemprop=dateModified content="2025-11-08T00:00:00+00:00"><meta itemprop=wordCount content="1105"><meta itemprop=keywords content="Go,Ai,LLMs,Agents,HuggingFace,OpenRouter,Release,Llama"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/11/08/agenticgokit-love-hf-and-openrouter/"><meta property="og:site_name" content="Kunal Kushwaha"><meta property="og:title" content="AgenticGoKit ❤️ HuggingFace and OpenRouter"><meta property="og:description" content="AgenticGoKit v0.4.6 introduces Hugging Face and OpenRouter support with the new router API, enabling Go developers to build agentic workflows with a wide variety of LLMs including Llama, Claude, and GPT models."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2025-11-08T00:00:00+00:00"><meta property="article:modified_time" content="2025-11-08T00:00:00+00:00"><meta property="article:tag" content="Go"><meta property="article:tag" content="Ai"><meta property="article:tag" content="LLMs"><meta property="article:tag" content="Agents"><meta property="article:tag" content="HuggingFace"><meta property="article:tag" content="OpenRouter"><meta name=twitter:card content="summary"><meta name=twitter:title content="AgenticGoKit ❤️ HuggingFace and OpenRouter"><meta name=twitter:description content="AgenticGoKit v0.4.6 introduces Hugging Face and OpenRouter support with the new router API, enabling Go developers to build agentic workflows with a wide variety of LLMs including Llama, Claude, and GPT models."><link rel=canonical href=https://kunalkushwaha.github.io/2025/11/08/agenticgokit-love-hf-and-openrouter/></head><body class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"><header class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"><div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto"><a class="-translate-y-[1px] text-2xl font-medium" href=https://kunalkushwaha.github.io/>Kunal Kushwaha</a><div class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]" role=button aria-label=Dark></div></div><div class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8" role=button aria-label=Menu></div><script>const htmlClass=document.documentElement.classList;setTimeout(()=>{htmlClass.remove("not-ready")},10);const btnMenu=document.querySelector(".btn-menu");btnMenu.addEventListener("click",()=>{htmlClass.toggle("open")});const metaTheme=document.querySelector('meta[name="theme-color"]'),lightBg="#faf8f1".replace(/"/g,""),setDark=e=>{metaTheme.setAttribute("content",e?"#000":lightBg),htmlClass[e?"add":"remove"]("dark"),localStorage.setItem("dark",e)},darkScheme=window.matchMedia("(prefers-color-scheme: dark)");if(htmlClass.contains("dark"))setDark(!0);else{const e=localStorage.getItem("dark");setDark(e?e==="true":darkScheme.matches)}darkScheme.addEventListener("change",e=>{setDark(e.matches)});const btnDark=document.querySelector(".btn-dark");btnDark.addEventListener("click",()=>{setDark(localStorage.getItem("dark")!=="true")})</script><div class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"><nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=../../../../>Blog</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=https://speakerdeck.com/kunalkushwaha>Slide Deck</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=../../../../about/>About</a></nav><nav class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"><a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./twitter.svg) href=https://twitter.com/kunalkushwaha target=_blank rel=me>twitter</a>
-<a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./github.svg) href=https://github.com/kunalkushwaha target=_blank rel=me>github</a>
-<a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./linkedin.svg) href=https://linkedin.com/in/kunalkushwaha target=_blank rel=me>linkedin</a></nav></div></header><main class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"><article><header class=mb-14><h1 class="my-0! pb-2.5">AgenticGoKit ❤️ HuggingFace and OpenRouter</h1><div class="text-xs antialiased opacity-60"><time>Nov 8, 2025</time><span class=mx-1>&#183;</span>
-<span>AgenticGoKit Team</span></div></header><section><p><img src=../../../../agenticgokit-love-hf.png alt="AgenticGoKit Loves HuggingFace and OpenRouter"></p><p>We&rsquo;re excited to announce the release of <strong>AgenticGoKit v0.4.6</strong> — a major update that expands how Go developers can build and experiment with agentic workflows.</p><p>With this release, <strong>AgenticGoKit</strong> now supports:</p><ul><li><strong><a href=https://huggingface.co/>Hugging Face</a></strong> — Access models through the new router API with OpenAI-compatible format</li><li><strong><a href=https://openrouter.ai/>OpenRouter</a></strong> — Use a wide variety of LLMs (GPT, Claude, Gemini, Llama) through a unified API</li></ul><p>These integrations empower developers to build richer, more flexible <strong>AI agents</strong> without switching languages or managing complex SDKs.</p><hr><h2 id=whats-new>What&rsquo;s New</h2><h3 id=hugging-face-integration-with-new-router-api>Hugging Face Integration with New Router API</h3><p>AgenticGoKit now supports <strong>Hugging Face&rsquo;s latest router-based architecture</strong> (<code>router.huggingface.co</code>), which provides:</p><ul><li><strong>OpenAI-compatible format</strong> — Seamless migration from other providers</li><li><strong>Multiple API types</strong> — Inference API, Chat API, dedicated Endpoints, and self-hosted TGI</li><li><strong>Llama 3.2 models</strong> — Access to the latest open-source models</li><li><strong>Streaming support</strong> — Real-time token-by-token responses</li><li><strong>Advanced parameters</strong> — Fine-tune with temperature, top-p, top-k, and more</li></ul><h4 id=quick-example>Quick Example</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#f92672>import</span> (
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;context&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;github.com/kunalkushwaha/agenticgokit/core/vnext&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>_</span> <span style=color:#e6db74>&#34;github.com/kunalkushwaha/agenticgokit/plugins/llm/huggingface&#34;</span>
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Config</span>{
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Name</span>:         <span style=color:#e6db74>&#34;hf-assistant&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>SystemPrompt</span>: <span style=color:#e6db74>&#34;You are a helpful AI assistant.&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>LLM</span>: <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>LLMConfig</span>{
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Provider</span>:    <span style=color:#e6db74>&#34;huggingface&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Model</span>:       <span style=color:#e6db74>&#34;meta-llama/Llama-3.2-1B-Instruct&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>APIKey</span>:      <span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Getenv</span>(<span style=color:#e6db74>&#34;HUGGINGFACE_API_KEY&#34;</span>),
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Temperature</span>: <span style=color:#ae81ff>0.7</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>MaxTokens</span>:   <span style=color:#ae81ff>500</span>,
-</span></span><span style=display:flex><span>    },
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>agent</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>NewBuilder</span>(<span style=color:#e6db74>&#34;hf-assistant&#34;</span>).<span style=color:#a6e22e>WithConfig</span>(<span style=color:#a6e22e>config</span>).<span style=color:#a6e22e>Build</span>()
-</span></span><span style=display:flex><span><span style=color:#a6e22e>result</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>agent</span>.<span style=color:#a6e22e>Run</span>(<span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>(), <span style=color:#e6db74>&#34;Explain machine learning&#34;</span>)
-</span></span><span style=display:flex><span><span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>result</span>.<span style=color:#a6e22e>Content</span>)
-</span></span></code></pre></div><p><strong>Available Models:</strong></p><ul><li><code>meta-llama/Llama-3.2-1B-Instruct</code> — Fast, efficient</li><li><code>meta-llama/Llama-3.2-3B-Instruct</code> — Better quality</li><li><code>deepseek-ai/DeepSeek-R1</code> — Advanced reasoning</li><li>Model routing with <code>:fastest</code> and <code>:cheapest</code> suffixes</li></ul><p><a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/huggingface_usage>HuggingFace Examples</a> | <a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/huggingface-quickstart>HuggingFace vNext Quickstart</a></p><hr><h3 id=openrouter-integration>OpenRouter Integration</h3><p>OpenRouter provides a single interface to <strong>dozens of leading LLMs</strong> from OpenAI, Anthropic, Google, Meta, and more. With AgenticGoKit v0.4.6, you can:</p><ul><li>Access GPT-4, Claude 3, Gemini 2.0, Llama 3.1, and many others</li><li>Compare models side-by-side for your use case</li><li>Switch between providers with a single line of code</li><li>Track usage with site analytics</li></ul><h4 id=quick-example-1>Quick Example</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>config</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Config</span>{
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Name</span>:         <span style=color:#e6db74>&#34;openrouter-agent&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>SystemPrompt</span>: <span style=color:#e6db74>&#34;You are a helpful assistant.&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>LLM</span>: <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>LLMConfig</span>{
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Provider</span>:    <span style=color:#e6db74>&#34;openrouter&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Model</span>:       <span style=color:#e6db74>&#34;anthropic/claude-3-haiku&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>APIKey</span>:      <span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Getenv</span>(<span style=color:#e6db74>&#34;OPENROUTER_API_KEY&#34;</span>),
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Temperature</span>: <span style=color:#ae81ff>0.7</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>MaxTokens</span>:   <span style=color:#ae81ff>500</span>,
-</span></span><span style=display:flex><span>    },
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>agent</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>NewBuilder</span>(<span style=color:#e6db74>&#34;openrouter-agent&#34;</span>).<span style=color:#a6e22e>WithConfig</span>(<span style=color:#a6e22e>config</span>).<span style=color:#a6e22e>Build</span>()
-</span></span><span style=display:flex><span><span style=color:#a6e22e>result</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>agent</span>.<span style=color:#a6e22e>Run</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#e6db74>&#34;What&#39;s the difference between REST and GraphQL?&#34;</span>)
-</span></span></code></pre></div><p><strong>Popular Models Available:</strong></p><ul><li><code>openai/gpt-4-turbo</code> — Most capable GPT model</li><li><code>anthropic/claude-3-haiku</code> — Fast, cost-effective</li><li><code>google/gemini-2.0-flash-exp:free</code> — Free Google model</li><li><code>meta-llama/llama-3.1-8b-instruct</code> — Open-source Llama</li></ul><p><a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/openrouter_usage>OpenRouter Examples</a> | <a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/openrouter-quickstart>OpenRouter vNext Quickstart</a></p><hr><h2 id=why-this-matters>Why This Matters</h2><p>Building <strong>agentic systems</strong> in Go is now easier and more powerful than ever. By connecting to Hugging Face and OpenRouter, AgenticGoKit developers can:</p><ul><li><strong>Rapidly prototype</strong> with different LLMs and compare performance</li><li><strong>Optimize costs</strong> by testing various model/provider combinations</li><li><strong>Build multi-agent systems</strong> using diverse model capabilities</li><li><strong>Access the latest models</strong> including Llama 3.2, Claude 3, Gemini 2.0</li><li><strong>Keep the speed and reliability</strong> of Go with type safety</li><li><strong>Switch providers easily</strong> without rewriting application logic</li></ul><hr><h2 id=key-features-in-v046>Key Features in v0.4.6</h2><h3 id=multiple-api-types-for-huggingface>Multiple API Types for HuggingFace</h3><ol><li><strong>Inference API</strong> — New router with OpenAI-compatible format</li><li><strong>Chat API</strong> — Conversational models with legacy support</li><li><strong>Inference Endpoints</strong> — Dedicated hosting for production</li><li><strong>Text Generation Inference (TGI)</strong> — Self-hosted optimized inference</li></ol><h3 id=streaming-support>Streaming Support</h3><p>Both HuggingFace and OpenRouter now support real-time streaming:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>stream</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>agent</span>.<span style=color:#a6e22e>RunStream</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#e6db74>&#34;Write a story about AI&#34;</span>)
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>chunk</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>stream</span>.<span style=color:#a6e22e>Chunks</span>() {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Type</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ChunkTypeDelta</span> {
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Print</span>(<span style=color:#a6e22e>chunk</span>.<span style=color:#a6e22e>Delta</span>)
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h3 id=advanced-configuration>Advanced Configuration</h3><p>Fine-tune model behavior with provider-specific parameters:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>LLM</span>: <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>LLMConfig</span>{
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Provider</span>:          <span style=color:#e6db74>&#34;huggingface&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Model</span>:            <span style=color:#e6db74>&#34;meta-llama/Llama-3.2-1B-Instruct&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Temperature</span>:      <span style=color:#ae81ff>0.8</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>MaxTokens</span>:        <span style=color:#ae81ff>1000</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>TopP</span>:             <span style=color:#ae81ff>0.9</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>TopK</span>:             <span style=color:#ae81ff>50</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>RepetitionPenalty</span>: <span style=color:#ae81ff>1.2</span>,
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h3 id=comprehensive-examples>Comprehensive Examples</h3><ul><li><strong>9 HuggingFace examples</strong> covering all API types</li><li><strong>8 OpenRouter examples</strong> demonstrating various models</li><li><strong>Simple quickstart examples</strong> for both providers</li><li><strong>Migration guides</strong> for the new HuggingFace router API</li><li><strong>Complete documentation</strong> with troubleshooting tips</li></ul><hr><h2 id=the-story-breaking-free-from-llm-lock-in>The Story: Breaking Free from LLM Lock-In</h2><h3 id=the-challenge>The Challenge</h3><p>You&rsquo;re building an AI agent in Go. You start with OpenAI&rsquo;s GPT-4 because it&rsquo;s the best. But then:</p><ul><li><strong>Costs add up</strong> — Your prototype&rsquo;s API bills are growing faster than your user base</li><li><strong>You&rsquo;re locked in</strong> — What if you want to try Anthropic&rsquo;s Claude? Or use open-source Llama models?</li><li><strong>Experimentation is hard</strong> — Testing different models means rewriting integration code</li><li><strong>Enterprise needs</strong> — Your client wants Azure OpenAI for compliance, but your code is OpenAI-specific</li></ul><p><strong>You&rsquo;re stuck.</strong> Switching providers means days of refactoring.</p><h3 id=the-solution>The Solution</h3><p><strong>AgenticGoKit v0.4.6 changes the game.</strong> With HuggingFace and OpenRouter support, you can now:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// Start with HuggingFace for experimentation</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Provider</span> = <span style=color:#e6db74>&#34;huggingface&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Model</span> = <span style=color:#e6db74>&#34;meta-llama/Llama-3.2-1B-Instruct&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Switch to OpenRouter to test Claude</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Provider</span> = <span style=color:#e6db74>&#34;openrouter&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Model</span> = <span style=color:#e6db74>&#34;anthropic/claude-3-haiku&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Move to production with OpenAI</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Provider</span> = <span style=color:#e6db74>&#34;openai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Model</span> = <span style=color:#e6db74>&#34;gpt-4-turbo&#34;</span>
-</span></span></code></pre></div><p><strong>Same code. Different providers. One line change.</strong></p><h3 id=the-impact>The Impact</h3><p>With <strong>5 supported providers</strong> (OpenAI, Azure OpenAI, HuggingFace, OpenRouter, Ollama), AgenticGoKit now gives you:</p><table><thead><tr><th>Provider</th><th>What You Get</th><th>Why It Matters</th></tr></thead><tbody><tr><td><strong>HuggingFace</strong> (NEW)</td><td>Open-source models (Llama 3.2) + Router API</td><td>Free tier, experimentation, self-hosting options</td></tr><tr><td><strong>OpenRouter</strong> (NEW)</td><td>50+ models (GPT, Claude, Gemini, Llama)</td><td>Single API, compare models, optimize costs</td></tr><tr><td><strong>OpenAI</strong></td><td>GPT-4, GPT-3.5</td><td>Industry standard, highest quality</td></tr><tr><td><strong>Azure OpenAI</strong></td><td>Enterprise GPT models</td><td>Compliance, SLAs, enterprise support</td></tr><tr><td><strong>Ollama</strong></td><td>Local models</td><td>Privacy, offline, zero API costs</td></tr></tbody></table><p><strong>Build once. Deploy anywhere. Switch anytime.</strong></p><hr><h2 id=take-action-try-it-now>Take Action: Try It Now</h2><h3 id=step-1-install-30-seconds>Step 1: Install (30 seconds)</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>go get github.com/kunalkushwaha/agenticgokit@latest
-</span></span></code></pre></div><h3 id=step-2-get-an-api-key-2-minutes>Step 2: Get an API Key (2 minutes)</h3><p>Pick <strong>one</strong> provider to start:</p><ul><li><strong>HuggingFace</strong> (free tier): <a href=https://huggingface.co/settings/tokens>https://huggingface.co/settings/tokens</a></li><li><strong>OpenRouter</strong> (flexible): <a href=https://openrouter.ai/keys>https://openrouter.ai/keys</a></li></ul><h3 id=step-3-run-your-first-agent-1-minute>Step 3: Run Your First Agent (1 minute)</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># HuggingFace - Free tier, open models</span>
-</span></span><span style=display:flex><span>export HUGGINGFACE_API_KEY<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;hf_...&#34;</span>
-</span></span><span style=display:flex><span>cd examples/vnext/huggingface-quickstart
-</span></span><span style=display:flex><span>go run simple.go
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># OR OpenRouter - 50+ models to choose from</span>
-</span></span><span style=display:flex><span>export OPENROUTER_API_KEY<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;sk-or-...&#34;</span>
-</span></span><span style=display:flex><span>cd examples/vnext/openrouter-quickstart
-</span></span><span style=display:flex><span>go run main.go
-</span></span></code></pre></div><p><strong>That&rsquo;s it.</strong> You&rsquo;re running AI agents in Go.</p><hr><h2 id=what-you-can-build-today>What You Can Build Today</h2><h3 id=1-cost-optimizer-agent>1. Cost Optimizer Agent</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// Start cheap with HuggingFace Llama</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Provider</span> = <span style=color:#e6db74>&#34;huggingface&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Model</span> = <span style=color:#e6db74>&#34;meta-llama/Llama-3.2-1B-Instruct&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Upgrade to GPT-4 for complex queries</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>complexQuery</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Provider</span> = <span style=color:#e6db74>&#34;openai&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Model</span> = <span style=color:#e6db74>&#34;gpt-4-turbo&#34;</span>
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h3 id=2-multi-model-research-assistant>2. Multi-Model Research Assistant</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// Use OpenRouter to query multiple models</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>models</span> <span style=color:#f92672>:=</span> []<span style=color:#66d9ef>string</span>{
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;openai/gpt-4-turbo&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;anthropic/claude-3-haiku&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;google/gemini-2.0-flash-exp:free&#34;</span>,
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>model</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>models</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Model</span> = <span style=color:#a6e22e>model</span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// Compare responses from different models</span>
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h3 id=3-privacy-first-local-agent>3. Privacy-First Local Agent</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// Start with Ollama for development</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Provider</span> = <span style=color:#e6db74>&#34;ollama&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Model</span> = <span style=color:#e6db74>&#34;llama3.2&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Switch to HuggingFace TGI for production</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>Provider</span> = <span style=color:#e6db74>&#34;huggingface&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>LLM</span>.<span style=color:#a6e22e>BaseURL</span> = <span style=color:#e6db74>&#34;http://your-tgi-server:8080&#34;</span>
-</span></span></code></pre></div><hr><h2 id=learn-more>Learn More</h2><p><strong>Quick Links:</strong></p><ul><li><a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/huggingface-quickstart>HuggingFace Quickstart</a> — 9 examples</li><li><a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/openrouter-quickstart>OpenRouter Quickstart</a> — 8 examples</li><li><a href=https://github.com/AgenticGoKit/AgenticGoKit/blob/master/examples/huggingface_usage/MIGRATION_NOTES.md>HuggingFace Migration Guide</a> — New router API</li><li><a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples>All Examples</a> — 20+ working examples</li><li><a href=https://github.com/AgenticGoKit/AgenticGoKit/discussions>GitHub Discussions</a> — Get help</li></ul><hr><h2 id=join-the-community>Join the Community</h2><p>AgenticGoKit is open source and growing. We&rsquo;d love your feedback:</p><ul><li><strong>Found a bug?</strong> <a href=https://github.com/AgenticGoKit/AgenticGoKit/issues>Open an issue</a></li><li><strong>Have an idea?</strong> <a href=https://github.com/AgenticGoKit/AgenticGoKit/discussions>Start a discussion</a></li><li><strong>Want to contribute?</strong> <a href=https://github.com/AgenticGoKit/AgenticGoKit/blob/master/docs/contributors/ContributorGuide.md>Check out our contributor guide</a></li><li><strong>Like what you see?</strong> <a href=https://github.com/AgenticGoKit/AgenticGoKit>Star us on GitHub</a></li></ul><hr><h2 id=the-bottom-line>The Bottom Line</h2><p><strong>AgenticGoKit v0.4.6 gives you freedom.</strong></p><ul><li>Start with <strong>HuggingFace</strong> for free experimentation</li><li>Switch to <strong>OpenRouter</strong> to test 50+ models</li><li>Move to <strong>OpenAI</strong> for production quality</li><li>Deploy to <strong>Azure OpenAI</strong> for enterprise compliance</li><li>Or keep it local with <strong>Ollama</strong></li></ul><p><strong>One codebase. Five providers. Endless possibilities.</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Get started now</span>
-</span></span><span style=display:flex><span>go get github.com/kunalkushwaha/agenticgokit@latest
-</span></span></code></pre></div><p><strong>Happy building!</strong></p><hr><p><em>Questions? Join our <a href=https://github.com/AgenticGoKit/AgenticGoKit/discussions>community discussions</a> or check out the <a href=https://github.com/AgenticGoKit/AgenticGoKit/blob/master/docs/README.md>documentation</a>.</em></p></section><footer class="mt-12 flex flex-wrap"><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/go>Go</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/ai>AI</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/llms>LLMs</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/agents>Agents</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/huggingface>HuggingFace</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/openrouter>OpenRouter</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/release>Release</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/llama>Llama</a></footer><nav class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"><a class="ltr:pr-3 rtl:pl-3" href=https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</span></a><a class="justify-end pl-3 ltr:ml-auto rtl:mr-auto" href=https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/><span>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a></nav><div class=mt-24 id=disqus_thread></div><script>const disqusShortname="kunalkushwaha",script=document.createElement("script");script.src="https://"+disqusShortname+".disqus.com/embed.js",script.setAttribute("data-timestamp",+new Date),document.head.appendChild(script)</script></article></main><footer class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"><div class=mr-auto>Kunal Kushwaha</div><a class="link mx-6" href=https://gohugo.io/ rel=noopener target=_blank>powered by hugo️️</a>️
-<a class=link href=https://github.com/nanxiaobei/hugo-paper rel=noopener target=_blank>hugo-paper</a></footer></body></html>
+These integrations empower developers to build richer, more flexible AI agents without switching languages or managing complex SDKs." />
+  <meta name="author" content="AgenticGoKit Team" /><link rel="preload stylesheet" as="style" href="https://kunalkushwaha.github.io/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/theme.png" />
+
+  
+
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/linkedin.svg" />
+
+  <script
+    defer
+    src="https://kunalkushwaha.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="https://kunalkushwaha.github.io/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://kunalkushwaha.github.io/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.147.2">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K16B935QET');
+        }
+      </script>
+  <meta itemprop="name" content="AgenticGoKit ❤️ HuggingFace and OpenRouter">
+  <meta itemprop="description" content="AgenticGoKit v0.4.6 introduces Hugging Face and OpenRouter support with the new router API, enabling Go developers to build agentic workflows with a wide variety of LLMs including Llama, Claude, and GPT models.">
+  <meta itemprop="datePublished" content="2025-11-08T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-11-08T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1105">
+  <meta itemprop="keywords" content="Go,Ai,LLMs,Agents,HuggingFace,OpenRouter,Release,Llama"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/11/08/agenticgokit-love-hf-and-openrouter/">
+  <meta property="og:site_name" content="Kunal Kushwaha">
+  <meta property="og:title" content="AgenticGoKit ❤️ HuggingFace and OpenRouter">
+  <meta property="og:description" content="AgenticGoKit v0.4.6 introduces Hugging Face and OpenRouter support with the new router API, enabling Go developers to build agentic workflows with a wide variety of LLMs including Llama, Claude, and GPT models.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-11-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-11-08T00:00:00+00:00">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Ai">
+    <meta property="article:tag" content="LLMs">
+    <meta property="article:tag" content="Agents">
+    <meta property="article:tag" content="HuggingFace">
+    <meta property="article:tag" content="OpenRouter">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="AgenticGoKit ❤️ HuggingFace and OpenRouter">
+  <meta name="twitter:description" content="AgenticGoKit v0.4.6 introduces Hugging Face and OpenRouter support with the new router API, enabling Go developers to build agentic workflows with a wide variety of LLMs including Llama, Claude, and GPT models.">
+
+  <link rel="canonical" href="https://kunalkushwaha.github.io/2025/11/08/agenticgokit-love-hf-and-openrouter/" />
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="https://kunalkushwaha.github.io/"
+      >Kunal Kushwaha</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../"
+        >Blog</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://speakerdeck.com/kunalkushwaha"
+        >Slide Deck</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../about/"
+        >About</a
+      ></nav><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >twitter</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">AgenticGoKit ❤️ HuggingFace and OpenRouter</h1><div class="text-xs antialiased opacity-60"><time>Nov 8, 2025</time><span class="mx-1">&middot;</span>
+      <span>AgenticGoKit Team</span></div></header>
+
+  <section><p><img src="../../../../agenticgokit-love-hf.png" alt="AgenticGoKit Loves HuggingFace and OpenRouter"></p>
+<p>We&rsquo;re excited to announce the release of <strong>AgenticGoKit v0.4.6</strong> — a major update that expands how Go developers can build and experiment with agentic workflows.</p>
+<p>With this release, <strong>AgenticGoKit</strong> now supports:</p>
+<ul>
+<li><strong><a href="https://huggingface.co/">Hugging Face</a></strong> — Access models through the new router API with OpenAI-compatible format</li>
+<li><strong><a href="https://openrouter.ai/">OpenRouter</a></strong> — Use a wide variety of LLMs (GPT, Claude, Gemini, Llama) through a unified API</li>
+</ul>
+<p>These integrations empower developers to build richer, more flexible <strong>AI agents</strong> without switching languages or managing complex SDKs.</p>
+<hr>
+<h2 id="whats-new">What&rsquo;s New</h2>
+<h3 id="hugging-face-integration-with-new-router-api">Hugging Face Integration with New Router API</h3>
+<p>AgenticGoKit now supports <strong>Hugging Face&rsquo;s latest router-based architecture</strong> (<code>router.huggingface.co</code>), which provides:</p>
+<ul>
+<li><strong>OpenAI-compatible format</strong> — Seamless migration from other providers</li>
+<li><strong>Multiple API types</strong> — Inference API, Chat API, dedicated Endpoints, and self-hosted TGI</li>
+<li><strong>Llama 3.2 models</strong> — Access to the latest open-source models</li>
+<li><strong>Streaming support</strong> — Real-time token-by-token responses</li>
+<li><strong>Advanced parameters</strong> — Fine-tune with temperature, top-p, top-k, and more</li>
+</ul>
+<h4 id="quick-example">Quick Example</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/kunalkushwaha/agenticgokit/core/vnext&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;github.com/kunalkushwaha/agenticgokit/plugins/llm/huggingface&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;hf-assistant&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a helpful AI assistant.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Provider</span>:    <span style="color:#e6db74">&#34;huggingface&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Model</span>:       <span style="color:#e6db74">&#34;meta-llama/Llama-3.2-1B-Instruct&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">APIKey</span>:      <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;HUGGINGFACE_API_KEY&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Temperature</span>: <span style="color:#ae81ff">0.7</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">MaxTokens</span>:   <span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;hf-assistant&#34;</span>).<span style="color:#a6e22e">WithConfig</span>(<span style="color:#a6e22e">config</span>).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#e6db74">&#34;Explain machine learning&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">Content</span>)
+</span></span></code></pre></div><p><strong>Available Models:</strong></p>
+<ul>
+<li><code>meta-llama/Llama-3.2-1B-Instruct</code> — Fast, efficient</li>
+<li><code>meta-llama/Llama-3.2-3B-Instruct</code> — Better quality</li>
+<li><code>deepseek-ai/DeepSeek-R1</code> — Advanced reasoning</li>
+<li>Model routing with <code>:fastest</code> and <code>:cheapest</code> suffixes</li>
+</ul>
+<p><a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/huggingface_usage">HuggingFace Examples</a> | <a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/huggingface-quickstart">HuggingFace vNext Quickstart</a></p>
+<hr>
+<h3 id="openrouter-integration">OpenRouter Integration</h3>
+<p>OpenRouter provides a single interface to <strong>dozens of leading LLMs</strong> from OpenAI, Anthropic, Google, Meta, and more. With AgenticGoKit v0.4.6, you can:</p>
+<ul>
+<li>Access GPT-4, Claude 3, Gemini 2.0, Llama 3.1, and many others</li>
+<li>Compare models side-by-side for your use case</li>
+<li>Switch between providers with a single line of code</li>
+<li>Track usage with site analytics</li>
+</ul>
+<h4 id="quick-example-1">Quick Example</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">config</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;openrouter-agent&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a helpful assistant.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Provider</span>:    <span style="color:#e6db74">&#34;openrouter&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Model</span>:       <span style="color:#e6db74">&#34;anthropic/claude-3-haiku&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">APIKey</span>:      <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENROUTER_API_KEY&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Temperature</span>: <span style="color:#ae81ff">0.7</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">MaxTokens</span>:   <span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;openrouter-agent&#34;</span>).<span style="color:#a6e22e">WithConfig</span>(<span style="color:#a6e22e">config</span>).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;What&#39;s the difference between REST and GraphQL?&#34;</span>)
+</span></span></code></pre></div><p><strong>Popular Models Available:</strong></p>
+<ul>
+<li><code>openai/gpt-4-turbo</code> — Most capable GPT model</li>
+<li><code>anthropic/claude-3-haiku</code> — Fast, cost-effective</li>
+<li><code>google/gemini-2.0-flash-exp:free</code> — Free Google model</li>
+<li><code>meta-llama/llama-3.1-8b-instruct</code> — Open-source Llama</li>
+</ul>
+<p><a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/openrouter_usage">OpenRouter Examples</a> | <a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/openrouter-quickstart">OpenRouter vNext Quickstart</a></p>
+<hr>
+<h2 id="why-this-matters">Why This Matters</h2>
+<p>Building <strong>agentic systems</strong> in Go is now easier and more powerful than ever. By connecting to Hugging Face and OpenRouter, AgenticGoKit developers can:</p>
+<ul>
+<li><strong>Rapidly prototype</strong> with different LLMs and compare performance</li>
+<li><strong>Optimize costs</strong> by testing various model/provider combinations</li>
+<li><strong>Build multi-agent systems</strong> using diverse model capabilities</li>
+<li><strong>Access the latest models</strong> including Llama 3.2, Claude 3, Gemini 2.0</li>
+<li><strong>Keep the speed and reliability</strong> of Go with type safety</li>
+<li><strong>Switch providers easily</strong> without rewriting application logic</li>
+</ul>
+<hr>
+<h2 id="key-features-in-v046">Key Features in v0.4.6</h2>
+<h3 id="multiple-api-types-for-huggingface">Multiple API Types for HuggingFace</h3>
+<ol>
+<li><strong>Inference API</strong> — New router with OpenAI-compatible format</li>
+<li><strong>Chat API</strong> — Conversational models with legacy support</li>
+<li><strong>Inference Endpoints</strong> — Dedicated hosting for production</li>
+<li><strong>Text Generation Inference (TGI)</strong> — Self-hosted optimized inference</li>
+</ol>
+<h3 id="streaming-support">Streaming Support</h3>
+<p>Both HuggingFace and OpenRouter now support real-time streaming:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">stream</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">RunStream</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;Write a story about AI&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">chunk</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Chunks</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Type</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ChunkTypeDelta</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Delta</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="advanced-configuration">Advanced Configuration</h3>
+<p>Fine-tune model behavior with provider-specific parameters:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Provider</span>:          <span style="color:#e6db74">&#34;huggingface&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Model</span>:            <span style="color:#e6db74">&#34;meta-llama/Llama-3.2-1B-Instruct&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Temperature</span>:      <span style="color:#ae81ff">0.8</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MaxTokens</span>:        <span style="color:#ae81ff">1000</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">TopP</span>:             <span style="color:#ae81ff">0.9</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">TopK</span>:             <span style="color:#ae81ff">50</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">RepetitionPenalty</span>: <span style="color:#ae81ff">1.2</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="comprehensive-examples">Comprehensive Examples</h3>
+<ul>
+<li><strong>9 HuggingFace examples</strong> covering all API types</li>
+<li><strong>8 OpenRouter examples</strong> demonstrating various models</li>
+<li><strong>Simple quickstart examples</strong> for both providers</li>
+<li><strong>Migration guides</strong> for the new HuggingFace router API</li>
+<li><strong>Complete documentation</strong> with troubleshooting tips</li>
+</ul>
+<hr>
+<h2 id="the-story-breaking-free-from-llm-lock-in">The Story: Breaking Free from LLM Lock-In</h2>
+<h3 id="the-challenge">The Challenge</h3>
+<p>You&rsquo;re building an AI agent in Go. You start with OpenAI&rsquo;s GPT-4 because it&rsquo;s the best. But then:</p>
+<ul>
+<li><strong>Costs add up</strong> — Your prototype&rsquo;s API bills are growing faster than your user base</li>
+<li><strong>You&rsquo;re locked in</strong> — What if you want to try Anthropic&rsquo;s Claude? Or use open-source Llama models?</li>
+<li><strong>Experimentation is hard</strong> — Testing different models means rewriting integration code</li>
+<li><strong>Enterprise needs</strong> — Your client wants Azure OpenAI for compliance, but your code is OpenAI-specific</li>
+</ul>
+<p><strong>You&rsquo;re stuck.</strong> Switching providers means days of refactoring.</p>
+<h3 id="the-solution">The Solution</h3>
+<p><strong>AgenticGoKit v0.4.6 changes the game.</strong> With HuggingFace and OpenRouter support, you can now:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Start with HuggingFace for experimentation</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Provider</span> = <span style="color:#e6db74">&#34;huggingface&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Model</span> = <span style="color:#e6db74">&#34;meta-llama/Llama-3.2-1B-Instruct&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Switch to OpenRouter to test Claude</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Provider</span> = <span style="color:#e6db74">&#34;openrouter&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Model</span> = <span style="color:#e6db74">&#34;anthropic/claude-3-haiku&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Move to production with OpenAI</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Provider</span> = <span style="color:#e6db74">&#34;openai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Model</span> = <span style="color:#e6db74">&#34;gpt-4-turbo&#34;</span>
+</span></span></code></pre></div><p><strong>Same code. Different providers. One line change.</strong></p>
+<h3 id="the-impact">The Impact</h3>
+<p>With <strong>5 supported providers</strong> (OpenAI, Azure OpenAI, HuggingFace, OpenRouter, Ollama), AgenticGoKit now gives you:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Provider</th>
+          <th>What You Get</th>
+          <th>Why It Matters</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>HuggingFace</strong> (NEW)</td>
+          <td>Open-source models (Llama 3.2) + Router API</td>
+          <td>Free tier, experimentation, self-hosting options</td>
+      </tr>
+      <tr>
+          <td><strong>OpenRouter</strong> (NEW)</td>
+          <td>50+ models (GPT, Claude, Gemini, Llama)</td>
+          <td>Single API, compare models, optimize costs</td>
+      </tr>
+      <tr>
+          <td><strong>OpenAI</strong></td>
+          <td>GPT-4, GPT-3.5</td>
+          <td>Industry standard, highest quality</td>
+      </tr>
+      <tr>
+          <td><strong>Azure OpenAI</strong></td>
+          <td>Enterprise GPT models</td>
+          <td>Compliance, SLAs, enterprise support</td>
+      </tr>
+      <tr>
+          <td><strong>Ollama</strong></td>
+          <td>Local models</td>
+          <td>Privacy, offline, zero API costs</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Build once. Deploy anywhere. Switch anytime.</strong></p>
+<hr>
+<h2 id="take-action-try-it-now">Take Action: Try It Now</h2>
+<h3 id="step-1-install-30-seconds">Step 1: Install (30 seconds)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/kunalkushwaha/agenticgokit@latest
+</span></span></code></pre></div><h3 id="step-2-get-an-api-key-2-minutes">Step 2: Get an API Key (2 minutes)</h3>
+<p>Pick <strong>one</strong> provider to start:</p>
+<ul>
+<li><strong>HuggingFace</strong> (free tier): <a href="https://huggingface.co/settings/tokens">https://huggingface.co/settings/tokens</a></li>
+<li><strong>OpenRouter</strong> (flexible): <a href="https://openrouter.ai/keys">https://openrouter.ai/keys</a></li>
+</ul>
+<h3 id="step-3-run-your-first-agent-1-minute">Step 3: Run Your First Agent (1 minute)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># HuggingFace - Free tier, open models</span>
+</span></span><span style="display:flex;"><span>export HUGGINGFACE_API_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hf_...&#34;</span>
+</span></span><span style="display:flex;"><span>cd examples/vnext/huggingface-quickstart
+</span></span><span style="display:flex;"><span>go run simple.go
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># OR OpenRouter - 50+ models to choose from</span>
+</span></span><span style="display:flex;"><span>export OPENROUTER_API_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sk-or-...&#34;</span>
+</span></span><span style="display:flex;"><span>cd examples/vnext/openrouter-quickstart
+</span></span><span style="display:flex;"><span>go run main.go
+</span></span></code></pre></div><p><strong>That&rsquo;s it.</strong> You&rsquo;re running AI agents in Go.</p>
+<hr>
+<h2 id="what-you-can-build-today">What You Can Build Today</h2>
+<h3 id="1-cost-optimizer-agent">1. Cost Optimizer Agent</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Start cheap with HuggingFace Llama</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Provider</span> = <span style="color:#e6db74">&#34;huggingface&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Model</span> = <span style="color:#e6db74">&#34;meta-llama/Llama-3.2-1B-Instruct&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Upgrade to GPT-4 for complex queries</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">complexQuery</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Provider</span> = <span style="color:#e6db74">&#34;openai&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Model</span> = <span style="color:#e6db74">&#34;gpt-4-turbo&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="2-multi-model-research-assistant">2. Multi-Model Research Assistant</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Use OpenRouter to query multiple models</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">models</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;openai/gpt-4-turbo&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;anthropic/claude-3-haiku&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;google/gemini-2.0-flash-exp:free&#34;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">model</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">models</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Model</span> = <span style="color:#a6e22e">model</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Compare responses from different models</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-privacy-first-local-agent">3. Privacy-First Local Agent</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Start with Ollama for development</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Provider</span> = <span style="color:#e6db74">&#34;ollama&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Model</span> = <span style="color:#e6db74">&#34;llama3.2&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Switch to HuggingFace TGI for production</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">Provider</span> = <span style="color:#e6db74">&#34;huggingface&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">LLM</span>.<span style="color:#a6e22e">BaseURL</span> = <span style="color:#e6db74">&#34;http://your-tgi-server:8080&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="learn-more">Learn More</h2>
+<p><strong>Quick Links:</strong></p>
+<ul>
+<li><a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/huggingface-quickstart">HuggingFace Quickstart</a> — 9 examples</li>
+<li><a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/openrouter-quickstart">OpenRouter Quickstart</a> — 8 examples</li>
+<li><a href="https://github.com/AgenticGoKit/AgenticGoKit/blob/master/examples/huggingface_usage/MIGRATION_NOTES.md">HuggingFace Migration Guide</a> — New router API</li>
+<li><a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples">All Examples</a> — 20+ working examples</li>
+<li><a href="https://github.com/AgenticGoKit/AgenticGoKit/discussions">GitHub Discussions</a> — Get help</li>
+</ul>
+<hr>
+<h2 id="join-the-community">Join the Community</h2>
+<p>AgenticGoKit is open source and growing. We&rsquo;d love your feedback:</p>
+<ul>
+<li><strong>Found a bug?</strong> <a href="https://github.com/AgenticGoKit/AgenticGoKit/issues">Open an issue</a></li>
+<li><strong>Have an idea?</strong> <a href="https://github.com/AgenticGoKit/AgenticGoKit/discussions">Start a discussion</a></li>
+<li><strong>Want to contribute?</strong> <a href="https://github.com/AgenticGoKit/AgenticGoKit/blob/master/docs/contributors/ContributorGuide.md">Check out our contributor guide</a></li>
+<li><strong>Like what you see?</strong> <a href="https://github.com/AgenticGoKit/AgenticGoKit">Star us on GitHub</a></li>
+</ul>
+<hr>
+<h2 id="the-bottom-line">The Bottom Line</h2>
+<p><strong>AgenticGoKit v0.4.6 gives you freedom.</strong></p>
+<ul>
+<li>Start with <strong>HuggingFace</strong> for free experimentation</li>
+<li>Switch to <strong>OpenRouter</strong> to test 50+ models</li>
+<li>Move to <strong>OpenAI</strong> for production quality</li>
+<li>Deploy to <strong>Azure OpenAI</strong> for enterprise compliance</li>
+<li>Or keep it local with <strong>Ollama</strong></li>
+</ul>
+<p><strong>One codebase. Five providers. Endless possibilities.</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Get started now</span>
+</span></span><span style="display:flex;"><span>go get github.com/kunalkushwaha/agenticgokit@latest
+</span></span></code></pre></div><p><strong>Happy building!</strong></p>
+<hr>
+<p><em>Questions? Join our <a href="https://github.com/AgenticGoKit/AgenticGoKit/discussions">community discussions</a> or check out the <a href="https://github.com/AgenticGoKit/AgenticGoKit/blob/master/docs/README.md">documentation</a>.</em></p>
+</section>
+
+  <footer class="mt-12 flex flex-wrap"><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/go"
+      >Go</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/ai"
+      >AI</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/llms"
+      >LLMs</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/agents"
+      >Agents</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/huggingface"
+      >HuggingFace</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/openrouter"
+      >OpenRouter</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/release"
+      >Release</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/llama"
+      >Llama</a
+    ></footer><nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</span></a
+    ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/"
+      ><span>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav><div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'kunalkushwaha';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">Kunal Kushwaha</div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>

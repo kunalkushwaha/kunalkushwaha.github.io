@@ -1,12 +1,253 @@
-<!doctype html><html class="not-ready lg:text-base" style=--bg:#faf8f1 lang=en-us dir=ltr><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go - Kunal Kushwaha</title>
-<meta name=theme-color><meta name=description content="
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go - Kunal Kushwaha</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="
 If you&rsquo;re new to building AI agents in Go, you might think integrating tools and external services is complex. It&rsquo;s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
-In this hands-on guide, you&rsquo;ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it&rsquo;s just a few lines of Go code."><meta name=author content="Kunal Kushwaha"><link rel="preload stylesheet" as=style href=https://kunalkushwaha.github.io/main.min.css><link rel=preload as=image href=https://kunalkushwaha.github.io/theme.png><link rel=preload as=image href=https://kunalkushwaha.github.io/twitter.svg><link rel=preload as=image href=https://kunalkushwaha.github.io/github.svg><link rel=preload as=image href=https://kunalkushwaha.github.io/linkedin.svg><script defer src=https://kunalkushwaha.github.io/highlight.min.js onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://kunalkushwaha.github.io/favicon.ico><link rel=apple-touch-icon href=https://kunalkushwaha.github.io/apple-touch-icon.png><meta name=generator content="Hugo 0.147.2"><script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-K16B935QET")}</script><meta itemprop=name content="Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go"><meta itemprop=description content="If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. It’s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
-In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it’s just a few lines of Go code."><meta itemprop=datePublished content="2025-11-06T00:00:00+00:00"><meta itemprop=dateModified content="2025-11-06T00:00:00+00:00"><meta itemprop=wordCount content="1133"><meta itemprop=keywords content="Agenticgokit,Go,MCP,Tools,AI Agents,AI Tooling"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/"><meta property="og:site_name" content="Kunal Kushwaha"><meta property="og:title" content="Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go"><meta property="og:description" content="If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. It’s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
-In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it’s just a few lines of Go code."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2025-11-06T00:00:00+00:00"><meta property="article:modified_time" content="2025-11-06T00:00:00+00:00"><meta property="article:tag" content="Agenticgokit"><meta property="article:tag" content="Go"><meta property="article:tag" content="MCP"><meta property="article:tag" content="Tools"><meta property="article:tag" content="AI Agents"><meta property="article:tag" content="AI Tooling"><meta name=twitter:card content="summary"><meta name=twitter:title content="Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go"><meta name=twitter:description content="If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. It’s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
-In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it’s just a few lines of Go code."><link rel=canonical href=https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/></head><body class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"><header class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"><div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto"><a class="-translate-y-[1px] text-2xl font-medium" href=https://kunalkushwaha.github.io/>Kunal Kushwaha</a><div class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]" role=button aria-label=Dark></div></div><div class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8" role=button aria-label=Menu></div><script>const htmlClass=document.documentElement.classList;setTimeout(()=>{htmlClass.remove("not-ready")},10);const btnMenu=document.querySelector(".btn-menu");btnMenu.addEventListener("click",()=>{htmlClass.toggle("open")});const metaTheme=document.querySelector('meta[name="theme-color"]'),lightBg="#faf8f1".replace(/"/g,""),setDark=e=>{metaTheme.setAttribute("content",e?"#000":lightBg),htmlClass[e?"add":"remove"]("dark"),localStorage.setItem("dark",e)},darkScheme=window.matchMedia("(prefers-color-scheme: dark)");if(htmlClass.contains("dark"))setDark(!0);else{const e=localStorage.getItem("dark");setDark(e?e==="true":darkScheme.matches)}darkScheme.addEventListener("change",e=>{setDark(e.matches)});const btnDark=document.querySelector(".btn-dark");btnDark.addEventListener("click",()=>{setDark(localStorage.getItem("dark")!=="true")})</script><div class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"><nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=../../../../>Blog</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=https://speakerdeck.com/kunalkushwaha>Slide Deck</a><a class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal" href=../../../../about/>About</a></nav><nav class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"><a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./twitter.svg) href=https://twitter.com/kunalkushwaha target=_blank rel=me>twitter</a>
-<a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./github.svg) href=https://github.com/kunalkushwaha target=_blank rel=me>github</a>
-<a class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./linkedin.svg) href=https://linkedin.com/in/kunalkushwaha target=_blank rel=me>linkedin</a></nav></div></header><main class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"><article><header class=mb-14><h1 class="my-0! pb-2.5">Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</h1><div class="text-xs antialiased opacity-60"><time>Nov 6, 2025</time></div></header><section><p><img src=../../../../agentic-mcp-header.png alt="agentic workflow with tools"></p><p>If you&rsquo;re new to building AI agents in Go, you might think integrating tools and external services is complex. <strong>It&rsquo;s not.</strong> AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.</p><p>In this hands-on guide, you&rsquo;ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it&rsquo;s just a few lines of Go code.</p><p><strong>What makes this different?</strong> No complex setup, no wrestling with schemas, no boilerplate. Just clean, idiomatic Go that gets your agent talking to the world around it.</p><h2 id=what-youll-build>What you&rsquo;ll build</h2><ul><li>An agent with tools enabled</li><li>MCP tools via explicit server or automatic discovery</li><li>Direct tool calls from Go</li><li>LLM‑driven tool calls using a simple TOOL_CALL JSON envelope</li></ul><h2 id=prerequisites>Prerequisites</h2><ul><li>Go 1.24+</li><li>LLM provider plugin (examples use Ollama with <code>gemma3:1b</code>)</li><li>Optional: An MCP server (e.g., HTTP SSE on <code>localhost:8812</code>) or use discovery</li></ul><h2 id=quick-mental-model>Quick mental model</h2><p>AgenticGoKit supports two tool sources:</p><ul><li>Internal tools: in-process functions you implement and register</li><li>MCP tools: tools discovered from external MCP servers</li></ul><p>Enable tools on the Builder and they become available to your agent. You can call them directly or let the LLM trigger them.</p><h3 id=control-how-tools-are-invoked>Control how tools are invoked</h3><p><code>Builder.WithTools</code> wires tools (internal + MCP) into the agent’s capabilities. Choosing if/when to call tools is a policy—vNext leaves that up to your handler:</p><ul><li>Tool‑aware wrapper (<code>WithToolAugmentation</code>) = automatic tool execution when the model requests it</li><li><code>ToolsFirst</code> = a heuristic that tries tools first, then falls back to the LLM</li><li>Custom handler = complete control (e.g., parse a <code>TOOL_CALL</code> JSON envelope)</li></ul><p>Details below in “Choose your tool invocation policy.”</p><h4 id=diagram-tools-at-a-glance>Diagram: tools at a glance</h4><pre tabindex=0><code class=language-mermaid data-lang=mermaid>flowchart LR
+In this hands-on guide, you&rsquo;ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it&rsquo;s just a few lines of Go code." />
+  <meta name="author" content="Kunal Kushwaha" /><link rel="preload stylesheet" as="style" href="https://kunalkushwaha.github.io/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/theme.png" />
+
+  
+
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/linkedin.svg" />
+
+  <script
+    defer
+    src="https://kunalkushwaha.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="https://kunalkushwaha.github.io/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://kunalkushwaha.github.io/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.147.2">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K16B935QET');
+        }
+      </script>
+  <meta itemprop="name" content="Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go">
+  <meta itemprop="description" content="If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. It’s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
+In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it’s just a few lines of Go code.">
+  <meta itemprop="datePublished" content="2025-11-06T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-11-06T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1133">
+  <meta itemprop="keywords" content="Agenticgokit,Go,MCP,Tools,AI Agents,AI Tooling"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/">
+  <meta property="og:site_name" content="Kunal Kushwaha">
+  <meta property="og:title" content="Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go">
+  <meta property="og:description" content="If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. It’s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
+In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it’s just a few lines of Go code.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-11-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Agenticgokit">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="MCP">
+    <meta property="article:tag" content="Tools">
+    <meta property="article:tag" content="AI Agents">
+    <meta property="article:tag" content="AI Tooling">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go">
+  <meta name="twitter:description" content="If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. It’s not. AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.
+In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it’s just a few lines of Go code.">
+
+  <link rel="canonical" href="https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/" />
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="https://kunalkushwaha.github.io/"
+      >Kunal Kushwaha</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../"
+        >Blog</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://speakerdeck.com/kunalkushwaha"
+        >Slide Deck</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../about/"
+        >About</a
+      ></nav><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >twitter</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</h1><div class="text-xs antialiased opacity-60"><time>Nov 6, 2025</time></div></header>
+
+  <section><p><img src="../../../../agentic-mcp-header.png" alt="agentic workflow with tools"></p>
+<p>If you&rsquo;re new to building AI agents in Go, you might think integrating tools and external services is complex. <strong>It&rsquo;s not.</strong> AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.</p>
+<p>In this hands-on guide, you&rsquo;ll discover how AgenticGoKit treats tools as first-class citizens, making your AI agents genuinely useful by connecting them to real-world capabilities. Whether you want to call APIs, run system commands, or integrate with external services, it&rsquo;s just a few lines of Go code.</p>
+<p><strong>What makes this different?</strong> No complex setup, no wrestling with schemas, no boilerplate. Just clean, idiomatic Go that gets your agent talking to the world around it.</p>
+<h2 id="what-youll-build">What you&rsquo;ll build</h2>
+<ul>
+<li>An agent with tools enabled</li>
+<li>MCP tools via explicit server or automatic discovery</li>
+<li>Direct tool calls from Go</li>
+<li>LLM‑driven tool calls using a simple TOOL_CALL JSON envelope</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Go 1.24+</li>
+<li>LLM provider plugin (examples use Ollama with <code>gemma3:1b</code>)</li>
+<li>Optional: An MCP server (e.g., HTTP SSE on <code>localhost:8812</code>) or use discovery</li>
+</ul>
+<h2 id="quick-mental-model">Quick mental model</h2>
+<p>AgenticGoKit supports two tool sources:</p>
+<ul>
+<li>Internal tools: in-process functions you implement and register</li>
+<li>MCP tools: tools discovered from external MCP servers</li>
+</ul>
+<p>Enable tools on the Builder and they become available to your agent. You can call them directly or let the LLM trigger them.</p>
+<h3 id="control-how-tools-are-invoked">Control how tools are invoked</h3>
+<p><code>Builder.WithTools</code> wires tools (internal + MCP) into the agent’s capabilities. Choosing if/when to call tools is a policy—vNext leaves that up to your handler:</p>
+<ul>
+<li>Tool‑aware wrapper (<code>WithToolAugmentation</code>) = automatic tool execution when the model requests it</li>
+<li><code>ToolsFirst</code> = a heuristic that tries tools first, then falls back to the LLM</li>
+<li>Custom handler = complete control (e.g., parse a <code>TOOL_CALL</code> JSON envelope)</li>
+</ul>
+<p>Details below in “Choose your tool invocation policy.”</p>
+<h4 id="diagram-tools-at-a-glance">Diagram: tools at a glance</h4>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
   subgraph &#34;Tool sources&#34;
     A[&#34;Internal tools&#34;]
     B[&#34;MCP servers&#34;]
@@ -15,69 +256,87 @@ In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first
   A --&gt; D
   B --&gt; D
   D --&gt; E[&#34;Agent capabilities (tools)&#34;]
-</code></pre><h2 id=use-internal-tools-implement-or-reuse>Use internal tools (implement or reuse)</h2><p>You can implement your own tool by satisfying the <code>vnext.Tool</code> interface and registering it. There’s also a built-in <code>echo</code> tool you can use immediately.</p><h3 id=implement-and-register-your-own-tool>Implement and register your own tool</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// 1) Implement the Tool interface</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>helloTool</span> <span style=color:#66d9ef>struct</span>{}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>t</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>helloTool</span>) <span style=color:#a6e22e>Name</span>() <span style=color:#66d9ef>string</span>        { <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;hello&#34;</span> }
-</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>t</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>helloTool</span>) <span style=color:#a6e22e>Description</span>() <span style=color:#66d9ef>string</span> { <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Greets a name you pass&#34;</span> }
-</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>t</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>helloTool</span>) <span style=color:#a6e22e>Execute</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>, <span style=color:#a6e22e>args</span> <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>any</span>) (<span style=color:#f92672>*</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ToolResult</span>, <span style=color:#66d9ef>error</span>) {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>args</span>[<span style=color:#e6db74>&#34;name&#34;</span>].(<span style=color:#66d9ef>string</span>)
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>name</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;&#34;</span> { <span style=color:#a6e22e>name</span> = <span style=color:#e6db74>&#34;there&#34;</span> }
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ToolResult</span>{ <span style=color:#a6e22e>Success</span>: <span style=color:#66d9ef>true</span>, <span style=color:#a6e22e>Content</span>: <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;Hello, %s!&#34;</span>, <span style=color:#a6e22e>name</span>) }, <span style=color:#66d9ef>nil</span>
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 2) Register it (e.g., in init() or main())</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>init</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>RegisterInternalTool</span>(<span style=color:#e6db74>&#34;hello&#34;</span>, <span style=color:#66d9ef>func</span>() <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Tool</span> { <span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>helloTool</span>{} })
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// 3) Discover and call it</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>ctx</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>()
-</span></span><span style=display:flex><span><span style=color:#a6e22e>tools</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>DiscoverTools</span>() <span style=color:#75715e>// includes internal tools</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>t</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>tools</span> { <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>t</span>.<span style=color:#a6e22e>Name</span>(), <span style=color:#a6e22e>t</span>.<span style=color:#a6e22e>Description</span>()) }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>res</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ExecuteToolByName</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#e6db74>&#34;hello&#34;</span>, <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>any</span>{<span style=color:#e6db74>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;Kunal&#34;</span>})
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>nil</span> { <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>res</span>.<span style=color:#a6e22e>Content</span>) }
-</span></span></code></pre></div><h3 id=reuse-an-existing-internal-tool-echo>Reuse an existing internal tool (echo)</h3><p>An <code>echo</code> tool ships out of the box. Call it directly:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>ctx</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>()
-</span></span><span style=display:flex><span><span style=color:#a6e22e>res</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ExecuteToolByName</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#e6db74>&#34;echo&#34;</span>, <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>any</span>{<span style=color:#e6db74>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;hello world&#34;</span>})
-</span></span></code></pre></div><h2 id=1-enable-tools-on-an-agent>1) Enable tools on an agent</h2><p>Explicit MCP server (HTTP SSE shown; adjust for your transport):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>agent</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>NewBuilder</span>(<span style=color:#e6db74>&#34;mcp-agent&#34;</span>).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>WithConfig</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Config</span>{
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Name</span>:         <span style=color:#e6db74>&#34;mcp-agent&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>SystemPrompt</span>: <span style=color:#e6db74>&#34;You are a helpful assistant with access to tools.&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Timeout</span>:      <span style=color:#ae81ff>60</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Second</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>LLM</span>: <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>LLMConfig</span>{ <span style=color:#a6e22e>Provider</span>: <span style=color:#e6db74>&#34;ollama&#34;</span>, <span style=color:#a6e22e>Model</span>: <span style=color:#e6db74>&#34;gemma3:1b&#34;</span> },
-</span></span><span style=display:flex><span>  }).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>WithTools</span>(
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>WithMCP</span>(<span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>MCPServer</span>{ <span style=color:#a6e22e>Name</span>: <span style=color:#e6db74>&#34;tools&#34;</span>, <span style=color:#a6e22e>Type</span>: <span style=color:#e6db74>&#34;http_sse&#34;</span>, <span style=color:#a6e22e>Address</span>: <span style=color:#e6db74>&#34;localhost&#34;</span>, <span style=color:#a6e22e>Port</span>: <span style=color:#ae81ff>8812</span>, <span style=color:#a6e22e>Enabled</span>: <span style=color:#66d9ef>true</span> }),
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>WithToolTimeout</span>(<span style=color:#ae81ff>30</span><span style=color:#f92672>*</span><span style=color:#a6e22e>time</span>.<span style=color:#a6e22e>Second</span>),
-</span></span><span style=display:flex><span>  ).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>Build</span>()
-</span></span></code></pre></div><p>Prefer auto‑discovery? Scan common ports:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>agent</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>NewBuilder</span>(<span style=color:#e6db74>&#34;mcp-discovery&#34;</span>).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>WithConfig</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Config</span>{ <span style=color:#75715e>/* LLM + basics as above */</span> }).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>WithTools</span>(<span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>WithMCPDiscovery</span>(<span style=color:#ae81ff>8080</span>, <span style=color:#ae81ff>8081</span>, <span style=color:#ae81ff>8090</span>, <span style=color:#ae81ff>8100</span>, <span style=color:#ae81ff>8811</span>, <span style=color:#ae81ff>8812</span>)).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>Build</span>()
-</span></span></code></pre></div><h2 id=choose-your-tool-invocation-policy>Choose your tool invocation policy</h2><p>By default, tools don’t auto‑run on <code>agent.Run()</code>. They’re available once configured, and you decide how they’re invoked. Pick one of these options:</p><ol><li>Tool‑aware wrapper (automatic; no custom parsing)</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// Wrap an LLM-only handler so it can call tools when the model requests it</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>handler</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>WithToolAugmentation</span>(<span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>LLMOnly</span>(<span style=color:#e6db74>&#34;You are a helpful assistant.&#34;</span>))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>agent</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>NewBuilder</span>(<span style=color:#e6db74>&#34;tool-auto&#34;</span>).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>WithConfig</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Config</span>{ <span style=color:#75715e>/* LLM + basics */</span> }).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>WithTools</span>(<span style=color:#75715e>/* WithMCP or WithMCPDiscovery */</span>).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>WithHandler</span>(<span style=color:#a6e22e>handler</span>).
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>Build</span>()
-</span></span></code></pre></div><p>Alternatively, use a prebuilt strategy that tries tools first and falls back to the LLM:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>handler</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ToolsFirst</span>(<span style=color:#e6db74>&#34;You are a helpful assistant with tools.&#34;</span>)
-</span></span></code></pre></div><ol start=2><li>Manual TOOL_CALL parsing (complete control)</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>handler</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>func</span>(<span style=color:#a6e22e>ctx</span> <span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Context</span>, <span style=color:#a6e22e>input</span> <span style=color:#66d9ef>string</span>, <span style=color:#a6e22e>caps</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>Capabilities</span>) (<span style=color:#66d9ef>string</span>, <span style=color:#66d9ef>error</span>) {
-</span></span><span style=display:flex><span>  <span style=color:#75715e>// Ask LLM to output TOOL_CALL{&#34;name&#34;:..., &#34;args&#34;:{...}}</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>out</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>caps</span>.<span style=color:#a6e22e>LLM</span>(<span style=color:#e6db74>&#34;Use tools when helpful and emit TOOL_CALL JSON.&#34;</span>, <span style=color:#a6e22e>input</span>)
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> { <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;&#34;</span>, <span style=color:#a6e22e>err</span> }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#75715e>// Parse and execute any tool calls</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>results</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ExecuteToolsFromLLMResponse</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>out</span>)
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> len(<span style=color:#a6e22e>results</span>) &gt; <span style=color:#ae81ff>0</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>results</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>Success</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprint</span>(<span style=color:#a6e22e>results</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>Content</span>), <span style=color:#66d9ef>nil</span>
-</span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>out</span>, <span style=color:#66d9ef>nil</span>
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h3 id=sequence-policy-options>Sequence: policy options</h3><pre tabindex=0><code class=language-mermaid data-lang=mermaid>sequenceDiagram
+</code></pre><h2 id="use-internal-tools-implement-or-reuse">Use internal tools (implement or reuse)</h2>
+<p>You can implement your own tool by satisfying the <code>vnext.Tool</code> interface and registering it. There’s also a built-in <code>echo</code> tool you can use immediately.</p>
+<h3 id="implement-and-register-your-own-tool">Implement and register your own tool</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// 1) Implement the Tool interface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">helloTool</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">helloTool</span>) <span style="color:#a6e22e">Name</span>() <span style="color:#66d9ef">string</span>        { <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;hello&#34;</span> }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">helloTool</span>) <span style="color:#a6e22e">Description</span>() <span style="color:#66d9ef">string</span> { <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Greets a name you pass&#34;</span> }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">helloTool</span>) <span style="color:#a6e22e">Execute</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">args</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">any</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ToolResult</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">args</span>[<span style="color:#e6db74">&#34;name&#34;</span>].(<span style="color:#66d9ef">string</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> { <span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;there&#34;</span> }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ToolResult</span>{ <span style="color:#a6e22e">Success</span>: <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">Content</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;Hello, %s!&#34;</span>, <span style="color:#a6e22e">name</span>) }, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 2) Register it (e.g., in init() or main())</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">init</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">RegisterInternalTool</span>(<span style="color:#e6db74">&#34;hello&#34;</span>, <span style="color:#66d9ef">func</span>() <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Tool</span> { <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">helloTool</span>{} })
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 3) Discover and call it</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">tools</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">DiscoverTools</span>() <span style="color:#75715e">// includes internal tools</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">tools</span> { <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Name</span>(), <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Description</span>()) }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ExecuteToolByName</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;hello&#34;</span>, <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">any</span>{<span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Kunal&#34;</span>})
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> { <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Content</span>) }
+</span></span></code></pre></div><h3 id="reuse-an-existing-internal-tool-echo">Reuse an existing internal tool (echo)</h3>
+<p>An <code>echo</code> tool ships out of the box. Call it directly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ExecuteToolByName</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;echo&#34;</span>, <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">any</span>{<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;hello world&#34;</span>})
+</span></span></code></pre></div><h2 id="1-enable-tools-on-an-agent">1) Enable tools on an agent</h2>
+<p>Explicit MCP server (HTTP SSE shown; adjust for your transport):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;mcp-agent&#34;</span>).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;mcp-agent&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a helpful assistant with access to tools.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Timeout</span>:      <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMConfig</span>{ <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;ollama&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gemma3:1b&#34;</span> },
+</span></span><span style="display:flex;"><span>  }).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">WithTools</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">WithMCP</span>(<span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">MCPServer</span>{ <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;tools&#34;</span>, <span style="color:#a6e22e">Type</span>: <span style="color:#e6db74">&#34;http_sse&#34;</span>, <span style="color:#a6e22e">Address</span>: <span style="color:#e6db74">&#34;localhost&#34;</span>, <span style="color:#a6e22e">Port</span>: <span style="color:#ae81ff">8812</span>, <span style="color:#a6e22e">Enabled</span>: <span style="color:#66d9ef">true</span> }),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">WithToolTimeout</span>(<span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>),
+</span></span><span style="display:flex;"><span>  ).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Build</span>()
+</span></span></code></pre></div><p>Prefer auto‑discovery? Scan common ports:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;mcp-discovery&#34;</span>).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Config</span>{ <span style="color:#75715e">/* LLM + basics as above */</span> }).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">WithTools</span>(<span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">WithMCPDiscovery</span>(<span style="color:#ae81ff">8080</span>, <span style="color:#ae81ff">8081</span>, <span style="color:#ae81ff">8090</span>, <span style="color:#ae81ff">8100</span>, <span style="color:#ae81ff">8811</span>, <span style="color:#ae81ff">8812</span>)).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Build</span>()
+</span></span></code></pre></div><h2 id="choose-your-tool-invocation-policy">Choose your tool invocation policy</h2>
+<p>By default, tools don’t auto‑run on <code>agent.Run()</code>. They’re available once configured, and you decide how they’re invoked. Pick one of these options:</p>
+<ol>
+<li>Tool‑aware wrapper (automatic; no custom parsing)</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Wrap an LLM-only handler so it can call tools when the model requests it</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">handler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">WithToolAugmentation</span>(<span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">LLMOnly</span>(<span style="color:#e6db74">&#34;You are a helpful assistant.&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;tool-auto&#34;</span>).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Config</span>{ <span style="color:#75715e">/* LLM + basics */</span> }).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">WithTools</span>(<span style="color:#75715e">/* WithMCP or WithMCPDiscovery */</span>).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">WithHandler</span>(<span style="color:#a6e22e">handler</span>).
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Build</span>()
+</span></span></code></pre></div><p>Alternatively, use a prebuilt strategy that tries tools first and falls back to the LLM:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">handler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ToolsFirst</span>(<span style="color:#e6db74">&#34;You are a helpful assistant with tools.&#34;</span>)
+</span></span></code></pre></div><ol start="2">
+<li>Manual TOOL_CALL parsing (complete control)</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">handler</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">input</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">caps</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">Capabilities</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Ask LLM to output TOOL_CALL{&#34;name&#34;:..., &#34;args&#34;:{...}}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">out</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">caps</span>.<span style="color:#a6e22e">LLM</span>(<span style="color:#e6db74">&#34;Use tools when helpful and emit TOOL_CALL JSON.&#34;</span>, <span style="color:#a6e22e">input</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">err</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Parse and execute any tool calls</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">results</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ExecuteToolsFromLLMResponse</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">out</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">results</span>) &gt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">results</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">Success</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprint</span>(<span style="color:#a6e22e">results</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">Content</span>), <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="sequence-policy-options">Sequence: policy options</h3>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
   actor User
   participant Agent
   participant Handler
@@ -110,35 +369,127 @@ In this hands-on guide, you’ll discover how AgenticGoKit treats tools as first
     Handler--&gt;&gt;Agent: Final response
   end
   Agent--&gt;&gt;User: Reply
-</code></pre><p>Tip: In your main package, include blank imports for MCP transport/registry and an LLM provider (the examples already do this):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#f92672>import</span> (
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>_</span> <span style=color:#e6db74>&#34;github.com/kunalkushwaha/agenticgokit/plugins/mcp/unified&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>_</span> <span style=color:#e6db74>&#34;github.com/kunalkushwaha/agenticgokit/plugins/mcp/default&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>_</span> <span style=color:#e6db74>&#34;github.com/kunalkushwaha/agenticgokit/plugins/llm/ollama&#34;</span>
-</span></span><span style=display:flex><span>)
-</span></span></code></pre></div><h2 id=2-list-and-call-tools-from-code>2) List and call tools from code</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#75715e>// List all tools (internal + MCP)</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>tools</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>DiscoverTools</span>()
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>t</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>tools</span> {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;- %s: %s\n&#34;</span>, <span style=color:#a6e22e>t</span>.<span style=color:#a6e22e>Name</span>(), <span style=color:#a6e22e>t</span>.<span style=color:#a6e22e>Description</span>())
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// Execute a tool directly by name</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>res</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ExecuteToolByName</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#e6db74>&#34;echo&#34;</span>, <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>any</span>{<span style=color:#e6db74>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;hello&#34;</span>})
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> { <span style=color:#75715e>/* handle */</span> }
-</span></span><span style=display:flex><span><span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>res</span>.<span style=color:#a6e22e>Success</span>, <span style=color:#a6e22e>res</span>.<span style=color:#a6e22e>Content</span>)
-</span></span></code></pre></div><h2 id=3-let-the-llm-call-tools-tool_call>3) Let the LLM call tools (TOOL_CALL)</h2><p>Ask your model to emit this envelope when a tool helps:</p><pre tabindex=0><code>TOOL_CALL{&#34;name&#34;: &#34;search&#34;, &#34;args&#34;: {&#34;query&#34;: &#34;golang mcp&#34;, &#34;max_results&#34;: 5}}
-</code></pre><p>Parse and execute in one step:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#a6e22e>llmOutput</span> <span style=color:#f92672>:=</span> <span style=color:#e6db74>`Here is what I will do.\nTOOL_CALL{&#34;name&#34;: &#34;echo&#34;, &#34;args&#34;: {&#34;message&#34;: &#34;from llm&#34;}}`</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>results</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>vnext</span>.<span style=color:#a6e22e>ExecuteToolsFromLLMResponse</span>(<span style=color:#a6e22e>ctx</span>, <span style=color:#a6e22e>llmOutput</span>)
-</span></span></code></pre></div><h3 id=flow-tool_call-execution>Flow: TOOL_CALL execution</h3><pre tabindex=0><code class=language-mermaid data-lang=mermaid>flowchart TD
+</code></pre><p>Tip: In your main package, include blank imports for MCP transport/registry and an LLM provider (the examples already do this):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;github.com/kunalkushwaha/agenticgokit/plugins/mcp/unified&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;github.com/kunalkushwaha/agenticgokit/plugins/mcp/default&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;github.com/kunalkushwaha/agenticgokit/plugins/llm/ollama&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><h2 id="2-list-and-call-tools-from-code">2) List and call tools from code</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// List all tools (internal + MCP)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">tools</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">DiscoverTools</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">tools</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;- %s: %s\n&#34;</span>, <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Name</span>(), <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Description</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Execute a tool directly by name</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ExecuteToolByName</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;echo&#34;</span>, <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">any</span>{<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;hello&#34;</span>})
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> { <span style="color:#75715e">/* handle */</span> }
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Success</span>, <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Content</span>)
+</span></span></code></pre></div><h2 id="3-let-the-llm-call-tools-tool_call">3) Let the LLM call tools (TOOL_CALL)</h2>
+<p>Ask your model to emit this envelope when a tool helps:</p>
+<pre tabindex="0"><code>TOOL_CALL{&#34;name&#34;: &#34;search&#34;, &#34;args&#34;: {&#34;query&#34;: &#34;golang mcp&#34;, &#34;max_results&#34;: 5}}
+</code></pre><p>Parse and execute in one step:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">llmOutput</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">`Here is what I will do.\nTOOL_CALL{&#34;name&#34;: &#34;echo&#34;, &#34;args&#34;: {&#34;message&#34;: &#34;from llm&#34;}}`</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">results</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">vnext</span>.<span style="color:#a6e22e">ExecuteToolsFromLLMResponse</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">llmOutput</span>)
+</span></span></code></pre></div><h3 id="flow-tool_call-execution">Flow: TOOL_CALL execution</h3>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TD
   A[&#34;LLM output&#34;] --&gt; B{&#34;Contains TOOL_CALL?&#34;}
   B -- Yes --&gt; C[&#34;ExecuteToolsFromLLMResponse(ctx, output)&#34;]
   C --&gt; D[&#34;ToolResult(s)&#34;]
   D --&gt; E[&#34;Combine into final answer&#34;]
   B -- No --&gt; F[&#34;Return LLM text&#34;]
   F --&gt; E
-</code></pre><h2 id=try-it-now>Try it now</h2><p>Two runnable examples are included in the repo:</p><ul><li><a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/mcp-tools-blog-demo><code>examples/vnext/mcp-tools-blog-demo/</code></a> — minimal, annotated demo</li><li><a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/mcp-integration><code>examples/vnext/mcp-integration/</code></a> — fuller example with both modes</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># From repo root</span>
-</span></span><span style=display:flex><span><span style=color:#e6db74>&#34;cd examples/vnext/mcp-tools-blog-demo; go run .&#34;</span>
-</span></span></code></pre></div><h2 id=practical-tips>Practical tips</h2><ul><li>If no tools appear: verify MCP server address/port or use discovery; ensure plugins are imported in your binary.</li><li>When using TOOL_CALL, make sure argument names/types match the tool&rsquo;s schema.</li><li>Caching is available; enable it when tools are expensive or frequently called.</li></ul><h2 id=links>Links</h2><ul><li>Repo examples:<ul><li><a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/mcp-tools-blog-demo><code>examples/vnext/mcp-tools-blog-demo</code></a></li><li><a href=https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/mcp-integration><code>examples/vnext/mcp-integration</code></a></li></ul></li><li>vNext APIs Documentation : <a href=https://docs.agenticgokit.com/reference/api/vnext/README>vNext API Reference</a></li></ul><p>That’s it—treat MCP as just another tool source. Enable it, list tools, and either call them directly or let your LLM trigger them to deliver better answers.</p></section><footer class="mt-12 flex flex-wrap"><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/agenticgokit>AgenticGoKit</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/go>Go</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/mcp>MCP</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/tools>Tools</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/ai-agents>AI agents</a><a class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]" href=https://kunalkushwaha.github.io/tags/ai-tooling>AI Tooling</a></footer><nav class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"><a class="ltr:pr-3 rtl:pl-3" href=https://kunalkushwaha.github.io/2025/11/08/agenticgokit-love-hf-and-openrouter/><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>AgenticGoKit ❤️ HuggingFace and OpenRouter</span></a><a class="justify-end pl-3 ltr:ml-auto rtl:mr-auto" href=https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/><span>Building Context-Aware AI Agents with Memory in AgenticGoKit</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a></nav><div class=mt-24 id=disqus_thread></div><script>const disqusShortname="kunalkushwaha",script=document.createElement("script");script.src="https://"+disqusShortname+".disqus.com/embed.js",script.setAttribute("data-timestamp",+new Date),document.head.appendChild(script)</script><script type=module>
+</code></pre><h2 id="try-it-now">Try it now</h2>
+<p>Two runnable examples are included in the repo:</p>
+<ul>
+<li><a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/mcp-tools-blog-demo"><code>examples/vnext/mcp-tools-blog-demo/</code></a> — minimal, annotated demo</li>
+<li><a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/mcp-integration"><code>examples/vnext/mcp-integration/</code></a> — fuller example with both modes</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># From repo root</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;cd examples/vnext/mcp-tools-blog-demo; go run .&#34;</span>
+</span></span></code></pre></div><h2 id="practical-tips">Practical tips</h2>
+<ul>
+<li>If no tools appear: verify MCP server address/port or use discovery; ensure plugins are imported in your binary.</li>
+<li>When using TOOL_CALL, make sure argument names/types match the tool&rsquo;s schema.</li>
+<li>Caching is available; enable it when tools are expensive or frequently called.</li>
+</ul>
+<h2 id="links">Links</h2>
+<ul>
+<li>Repo examples:
+<ul>
+<li><a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/mcp-tools-blog-demo"><code>examples/vnext/mcp-tools-blog-demo</code></a></li>
+<li><a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/master/examples/vnext/mcp-integration"><code>examples/vnext/mcp-integration</code></a></li>
+</ul>
+</li>
+<li>vNext APIs Documentation : <a href="https://docs.agenticgokit.com/reference/api/vnext/README">vNext API Reference</a></li>
+</ul>
+<p>That’s it—treat MCP as just another tool source. Enable it, list tools, and either call them directly or let your LLM trigger them to deliver better answers.</p>
+</section>
+
+  <footer class="mt-12 flex flex-wrap"><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/agenticgokit"
+      >AgenticGoKit</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/go"
+      >Go</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/mcp"
+      >MCP</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/tools"
+      >Tools</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/ai-agents"
+      >AI agents</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/ai-tooling"
+      >AI Tooling</a
+    ></footer><nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a class="ltr:pr-3 rtl:pl-3" href="https://kunalkushwaha.github.io/2025/11/08/agenticgokit-love-hf-and-openrouter/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>AgenticGoKit ❤️ HuggingFace and OpenRouter</span></a
+    ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/"
+      ><span>Building Context-Aware AI Agents with Memory in AgenticGoKit</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav><div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'kunalkushwaha';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script><script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
-</script><script>Array.from(document.getElementsByClassName("language-mermaid")).forEach(e=>{e.parentElement.outerHTML=`<div class="mermaid [&_svg]:block [&_svg]:m-auto">${e.innerHTML}</div>`})</script></article></main><footer class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"><div class=mr-auto>Kunal Kushwaha</div><a class="link mx-6" href=https://gohugo.io/ rel=noopener target=_blank>powered by hugo️️</a>️
-<a class=link href=https://github.com/nanxiaobei/hugo-paper rel=noopener target=_blank>hugo-paper</a></footer></body></html>
+</script>
+<script>
+  Array.from(document.getElementsByClassName('language-mermaid')).forEach(
+    (el) => {
+      el.parentElement.outerHTML = `<div class="mermaid [&_svg]:block [&_svg]:m-auto">${el.innerHTML}</div>`;
+    },
+  );
+</script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">Kunal Kushwaha</div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>
