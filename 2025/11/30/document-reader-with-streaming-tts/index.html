@@ -1,0 +1,354 @@
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Building a Local Document Reader with Streaming TTS - Kunal Kushwaha</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="
+Ever wished you could just press play on a long document and have it read to you without uploading anything to the cloud? That&rsquo;s exactly what this project does. Feed it text, and within milliseconds, you&rsquo;re hearing it narrated. No waiting, no cloud APIs, just your machine doing the work.
+Why Go Small?
+Look, I get it. Everyone&rsquo;s obsessed with massive language models these days. But here&rsquo;s the thing: you don&rsquo;t need a sledgehammer to crack a nut. Small language models (SLMs) are perfect for focused tasks like summarizing documents or prepping text for speech synthesis. They&rsquo;re fast enough to run on your CPU, light on power consumption, completely private (nothing leaves your device), and available even when your WiFi isn&rsquo;t." />
+  <meta name="author" content="Kunal Kushwaha" /><link rel="preload stylesheet" as="style" href="https://kunalkushwaha.github.io/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/theme.png" />
+
+  
+
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/linkedin.svg" />
+
+  <script
+    defer
+    src="https://kunalkushwaha.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="https://kunalkushwaha.github.io/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://kunalkushwaha.github.io/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.147.2">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K16B935QET');
+        }
+      </script>
+  <meta itemprop="name" content="Building a Local Document Reader with Streaming TTS">
+  <meta itemprop="description" content="Ever wished you could just press play on a long document and have it read to you without uploading anything to the cloud? That’s exactly what this project does. Feed it text, and within milliseconds, you’re hearing it narrated. No waiting, no cloud APIs, just your machine doing the work.
+Why Go Small? Look, I get it. Everyone’s obsessed with massive language models these days. But here’s the thing: you don’t need a sledgehammer to crack a nut. Small language models (SLMs) are perfect for focused tasks like summarizing documents or prepping text for speech synthesis. They’re fast enough to run on your CPU, light on power consumption, completely private (nothing leaves your device), and available even when your WiFi isn’t.">
+  <meta itemprop="datePublished" content="2025-11-30T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-11-30T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1411">
+  <meta itemprop="keywords" content="TTS,ML,Edge,Python,Go"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/">
+  <meta property="og:site_name" content="Kunal Kushwaha">
+  <meta property="og:title" content="Building a Local Document Reader with Streaming TTS">
+  <meta property="og:description" content="Ever wished you could just press play on a long document and have it read to you without uploading anything to the cloud? That’s exactly what this project does. Feed it text, and within milliseconds, you’re hearing it narrated. No waiting, no cloud APIs, just your machine doing the work.
+Why Go Small? Look, I get it. Everyone’s obsessed with massive language models these days. But here’s the thing: you don’t need a sledgehammer to crack a nut. Small language models (SLMs) are perfect for focused tasks like summarizing documents or prepping text for speech synthesis. They’re fast enough to run on your CPU, light on power consumption, completely private (nothing leaves your device), and available even when your WiFi isn’t.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-11-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-11-30T00:00:00+00:00">
+    <meta property="article:tag" content="TTS">
+    <meta property="article:tag" content="ML">
+    <meta property="article:tag" content="Edge">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Go">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Building a Local Document Reader with Streaming TTS">
+  <meta name="twitter:description" content="Ever wished you could just press play on a long document and have it read to you without uploading anything to the cloud? That’s exactly what this project does. Feed it text, and within milliseconds, you’re hearing it narrated. No waiting, no cloud APIs, just your machine doing the work.
+Why Go Small? Look, I get it. Everyone’s obsessed with massive language models these days. But here’s the thing: you don’t need a sledgehammer to crack a nut. Small language models (SLMs) are perfect for focused tasks like summarizing documents or prepping text for speech synthesis. They’re fast enough to run on your CPU, light on power consumption, completely private (nothing leaves your device), and available even when your WiFi isn’t.">
+
+  <link rel="canonical" href="https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/" />
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="https://kunalkushwaha.github.io/"
+      >Kunal Kushwaha</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../"
+        >Blog</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://speakerdeck.com/kunalkushwaha"
+        >Slide Deck</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../about/"
+        >About</a
+      ></nav><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >twitter</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Building a Local Document Reader with Streaming TTS</h1><div class="text-xs antialiased opacity-60"><time>Nov 30, 2025</time></div></header>
+
+  <section><p><img src="../../../../KittenTTS-blog.PNG" alt="KittenTTS demo"></p>
+<p>Ever wished you could just press play on a long document and have it read to you without uploading anything to the cloud? That&rsquo;s exactly what this project does. Feed it text, and within milliseconds, you&rsquo;re hearing it narrated. No waiting, no cloud APIs, just your machine doing the work.</p>
+<h2 id="why-go-small">Why Go Small?</h2>
+<p>Look, I get it. Everyone&rsquo;s obsessed with massive language models these days. But here&rsquo;s the thing: you don&rsquo;t need a sledgehammer to crack a nut. Small language models (SLMs) are perfect for focused tasks like summarizing documents or prepping text for speech synthesis. They&rsquo;re fast enough to run on your CPU, light on power consumption, completely private (nothing leaves your device), and available even when your WiFi isn&rsquo;t.</p>
+<p>For a document reader, that&rsquo;s all you really need.</p>
+<h2 id="the-magic-of-streaming">The Magic of Streaming</h2>
+<p>Here&rsquo;s where it gets interesting. Instead of synthesizing the entire document before playing anything (yawn), we stream the audio as it&rsquo;s generated. The server sends chunks of audio data as soon as they&rsquo;re ready, and the client starts playing immediately.</p>
+<p>Think about it like buffering a video. You don&rsquo;t wait for the whole movie to download before hitting play. Same principle, but with text-to-speech.</p>
+<h2 id="real-uses-that-actually-make-sense">Real Uses (That Actually Make Sense)</h2>
+<p><strong>The documentation listener</strong>. Got a folder full of markdown docs? Technical notes? README files? Convert them to audio and listen while you work on something else. Perfect for absorbing knowledge when reading isn&rsquo;t practical.</p>
+<p><strong>The commute companion</strong>. Long-form articles, blog posts, or research papers saved as text files. Listen during your drive instead of having them sit in your &ldquo;read later&rdquo; pile forever.</p>
+<p><strong>The privacy-conscious reader</strong>. Sensitive documents like medical records, legal notes, or personal journals. Synthesize and listen locally; your data never touches a server.</p>
+<p><strong>The efficient multitasker</strong>. Listen to meeting notes or documentation while you&rsquo;re cooking dinner or doing chores. Your brain processes audio while your hands stay free.</p>
+<p><strong>The quick scanner</strong>. Use a small language model to summarize long content first, then have <a href="https://huggingface.co/KittenML/kitten-tts-mini-0.1">KittenTTS</a> read just the highlights. Perfect for deciding if something&rsquo;s worth a deep read.</p>
+<blockquote>
+<p><strong>Note on document formats</strong>: This system works with plain text. If you have PDFs, Word docs, or other formats, you&rsquo;ll want to extract the text first. Tools like <code>pdftotext</code>, <code>pandoc</code>, or Python libraries like <code>pypdf</code> work great for this. Many of us keep notes in markdown anyway, and those work perfectly out of the box.</p></blockquote>
+<h2 id="how-it-actually-works">How It Actually Works</h2>
+<p>The architecture is surprisingly straightforward.</p>
+<p>On the server side (Python + FastAPI), we take your text input, feed it to KittenTTS for synthesis, wrap the audio in a proper WAV format, and stream it chunk by chunk over HTTP.</p>
+<p>On the client side (Go), we send your text to the server, receive the WAV header (those critical first 44 bytes), then stream the rest directly to both a file AND your speakers simultaneously. We use Go&rsquo;s <code>io.Pipe</code> to avoid blocking issues.</p>
+<p>The beauty is in the simultaneous save-and-play. One network read feeds two destinations, so you&rsquo;re not choosing between &ldquo;save for later&rdquo; or &ldquo;listen now.&rdquo; You get both.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>Assuming have Python and Go installed, here&rsquo;s how to fire things up.</p>
+<p>Set up your Python environment:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>python -m venv kitten_env
+</span></span><span style="display:flex;"><span>.\kitten_env\Scripts\Activate.ps1
+</span></span><span style="display:flex;"><span>pip install -r requirements.txt
+</span></span></code></pre></div><p>Start the server (h11 is important for reliable streaming):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>uvicorn server<span style="color:#960050;background-color:#1e0010">:</span>app --host <span style="color:#ae81ff">127.0</span>.0.1 --port <span style="color:#ae81ff">8000</span> --http h11
+</span></span></code></pre></div><p>Run the client:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>go run client.go --save --stream --text <span style="color:#e6db74">&#34;Your document text here&#34;</span>
+</span></span></code></pre></div><p>Want to just test if it works? Hit it with curl:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>curl -X POST <span style="color:#e6db74">&#34;http://127.0.0.1:8000/synthesize&#34;</span> \
+</span></span><span style="display:flex;"><span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> \
+</span></span><span style="display:flex;"><span>  -d <span style="color:#e6db74">&#39;{&#34;text&#34;:&#34;Testing one two three&#34;}&#39;</span> \
+</span></span><span style="display:flex;"><span>  --output test.wav
+</span></span></code></pre></div><h2 id="the-tricky-bits-so-you-dont-have-to-learn-the-hard-way">The Tricky Bits (So You Don&rsquo;t Have To Learn The Hard Way)</h2>
+<p><strong>Problem: Client only gets 44 bytes then stops</strong></p>
+<p>This one burned me. The culprit? The audio player&rsquo;s <code>Play()</code> call was blocking everything. Solution: spin up <code>Play()</code> in its own goroutine and feed it via <code>io.Pipe</code>. Now the network read can continue while playback happens in parallel.</p>
+<p><strong>Problem: Audio sounds like a robot gargling marbles</strong></p>
+<p>Check your WAV header parameters. Sample rate, channels, and bit depth must match on both server and client. Mismatch equals chaos.</p>
+<p><strong>Problem: Long documents eat all your RAM</strong></p>
+<p>Don&rsquo;t try to synthesize War and Peace in one go. Chunk it. Process pieces incrementally and stream each one. Your memory (and users) will thank you.</p>
+<p>Pro tip for speed: If synthesis feels sluggish, try quantized models (int8) or switch to ONNX Runtime. You&rsquo;d be surprised how much faster a compact, optimized model can be versus a bloated one.</p>
+<h2 id="the-code-conceptual-sketch">The Code (Conceptual Sketch)</h2>
+<p>Here&rsquo;s the core idea in the Go client:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Grab the WAV header first</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">header</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">byte</span>, <span style="color:#ae81ff">44</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">ReadFull</span>(<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>, <span style="color:#a6e22e">header</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">outFile</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">header</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Set up pipe for simultaneous save + play</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">reader</span>, <span style="color:#a6e22e">writer</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Pipe</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">multiOut</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">MultiWriter</span>(<span style="color:#a6e22e">outFile</span>, <span style="color:#a6e22e">writer</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Start playback in background</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">player</span>.<span style="color:#a6e22e">Play</span>(<span style="color:#a6e22e">reader</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Stream everything else</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Copy</span>(<span style="color:#a6e22e">multiOut</span>, <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">writer</span>.<span style="color:#a6e22e">Close</span>()
+</span></span></code></pre></div><p>That&rsquo;s it. One read loop, two outputs, zero blocking.</p>
+<h2 id="why-this-matters">Why This Matters</h2>
+<p>Big models are cool, but they&rsquo;re not always the answer. Sometimes you just need something that works: fast, private, and local. This setup proves you can build genuinely useful tools without cloud dependencies or heavyweight infrastructure.</p>
+<p>Your documents, your device, your audio. Simple as that.</p>
+<h2 id="where-im-headed-on-device-podcasts">Where I&rsquo;m Headed: On-Device Podcasts</h2>
+<p>Here&rsquo;s what I&rsquo;m really excited about: turning this into something that feels less like a robotic document reader and more like an actual podcast.</p>
+<p>Voice cloning with MelloTTS and OpenVoice lets you have your favorite writer&rsquo;s articles read in a voice that sounds natural and engaging, or even clone your own voice for personal content. These models can do voice cloning with just a few seconds of reference audio, and they support way more than just English. Spanish technical docs? Japanese research papers? No problem.</p>
+<p>The dream setup goes like this: take a long-form article or research paper, run it through a small LLM to restructure it into a conversational format (maybe even a two-host dialogue), then synthesize it with cloned voices. Suddenly your dense technical whitepaper becomes an engaging 20-minute &ldquo;podcast episode&rdquo; you can listen to on your morning run.</p>
+<p>Picture this conversation:</p>
+<ul>
+<li>Host A: &ldquo;So the key finding in this paper is&hellip;&rdquo;</li>
+<li>Host B: &ldquo;Wait, back up. What does that mean for practical applications?&rdquo;</li>
+<li>Host A: &ldquo;Great question! Let me break it down&hellip;&rdquo;</li>
+</ul>
+<p>All generated locally, all private, all in whatever language you need. The SLM handles the conversational restructuring, the TTS handles making it sound natural, and you get podcast-quality content from any document.</p>
+<p>The technical challenges I&rsquo;m exploring include getting voice cloning to work efficiently on-device (these models can be heavy), structuring prompts so the SLM generates natural dialogue instead of stiff Q&amp;A, handling multiple voices in a single audio stream without glitches, supporting multilingual content smoothly (code-switching between languages mid-episode), and keeping latency reasonable. Nobody wants to wait 10 minutes for their &ldquo;instant&rdquo; podcast.</p>
+<p>Here&rsquo;s why this matters: Most podcast summaries or AI-narrated content still rely on cloud services. Your document goes up, audio comes back. But what if you could do all of this on your laptop? Privacy-sensitive content, offline operation, and zero recurring costs. That&rsquo;s the goal.</p>
+<h2 id="beyond-text-multimodal-agentic-workflows">Beyond Text: Multimodal Agentic Workflows</h2>
+<p>While this project focuses on text-to-speech, I&rsquo;m also working on something bigger in parallel: <a href="https://github.com/AgenticGoKit/AgenticGoKit/tree/multi-model-support">multimodal support for AgenticGokit</a>. The goal is to enable agentic workflows that go beyond just text. Think images, video, and audio all processed locally.</p>
+<p>What this could unlock is pretty exciting. Document understanding where you feed in a PDF with diagrams and charts, and the agent extracts text, analyzes images, and generates an audio summary that references &ldquo;the graph on page 5.&rdquo; Video content processing that extracts audio from videos, transcribes it, summarizes key points, and generates a concise audio recap. Visual learning where you take a technical diagram or flowchart and have the agent explain it step-by-step in natural language audio. Meeting recordings where you process video calls to extract both speech and screen shares, then generate searchable summaries with audio playback.</p>
+<p>The vision is to build agentic workflows where small models coordinate different modalities. Vision models process images, audio models handle speech, language models tie it all together, and everything runs on your device without external APIs.</p>
+<p>This multimodal work is still early stage, but it&rsquo;s the natural evolution of what started here with streaming TTS. I&rsquo;ll be sharing progress as these pieces come together.</p>
+<hr>
+<p>Complete Source code for this demo : <a href="https://github.com/kunalkushwaha/kittentts-example">https://github.com/kunalkushwaha/kittentts-example</a></p>
+<p>Give it a spin and let me know what documents you end up listening to!</p>
+</section>
+
+  <footer class="mt-12 flex flex-wrap"><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/tts"
+      >TTS</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/ml"
+      >ML</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/edge"
+      >edge</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/python"
+      >python</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/go"
+      >go</a
+    ></footer><nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/"
+      ><span>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav><div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'kunalkushwaha';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">Kunal Kushwaha</div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>

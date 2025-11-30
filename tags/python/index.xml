@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Kunal Kushwaha</title>
+    <link>https://kunalkushwaha.github.io/tags/python/</link>
+    <description>Recent content in Python on Kunal Kushwaha</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Kunal Kushwaha</copyright>
+    <lastBuildDate>Sun, 30 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://kunalkushwaha.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building a Local Document Reader with Streaming TTS</title>
+      <link>https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/</link>
+      <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;../../KittenTTS-blog.PNG&#34; alt=&#34;KittenTTS demo&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Ever wished you could just press play on a long document and have it read to you without uploading anything to the cloud? That&amp;rsquo;s exactly what this project does. Feed it text, and within milliseconds, you&amp;rsquo;re hearing it narrated. No waiting, no cloud APIs, just your machine doing the work.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-go-small&#34;&gt;Why Go Small?&lt;/h2&gt;&#xA;&lt;p&gt;Look, I get it. Everyone&amp;rsquo;s obsessed with massive language models these days. But here&amp;rsquo;s the thing: you don&amp;rsquo;t need a sledgehammer to crack a nut. Small language models (SLMs) are perfect for focused tasks like summarizing documents or prepping text for speech synthesis. They&amp;rsquo;re fast enough to run on your CPU, light on power consumption, completely private (nothing leaves your device), and available even when your WiFi isn&amp;rsquo;t.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
