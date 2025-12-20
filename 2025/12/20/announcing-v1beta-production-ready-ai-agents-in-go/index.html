@@ -1,0 +1,909 @@
+<!doctype html>
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="en-us"
+  dir="ltr"
+><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Announcing v1beta: Production-Ready AI Agents in Go - Kunal Kushwaha</title>
+
+  
+  <meta name="theme-color" />
+
+  <meta name="description" content="We&rsquo;re excited to announce v1beta, our next-generation API for building AI agents in Go. With streaming-first architecture, multimodal support, and powerful workflow orchestration, building production-ready AI systems has never been easier." />
+  <meta name="author" content="AgenticGoKit Team" /><link rel="preload stylesheet" as="style" href="https://kunalkushwaha.github.io/main.min.css" />
+
+  
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/theme.png" />
+
+  
+
+  <link rel="preload" as="image" href="https://kunalkushwaha.github.io/twitter.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/github.svg" /><link rel="preload" as="image" href="https://kunalkushwaha.github.io/linkedin.svg" />
+
+  <script
+    defer
+    src="https://kunalkushwaha.github.io/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="https://kunalkushwaha.github.io/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="https://kunalkushwaha.github.io/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.147.2">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-K16B935QET"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-K16B935QET');
+        }
+      </script>
+  <meta itemprop="name" content="Announcing v1beta: Production-Ready AI Agents in Go">
+  <meta itemprop="description" content="Introducing v1beta - a modern, streaming-first framework for building intelligent multi-agent AI systems in Go. From simple chatbots to complex orchestrated workflows.">
+  <meta itemprop="datePublished" content="2025-12-20T09:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-12-20T09:00:00+00:00">
+  <meta itemprop="wordCount" content="2457">
+  <meta itemprop="keywords" content="Release,V1beta,Ai,Agents,Golang,Llm"><meta property="og:url" content="https://kunalkushwaha.github.io/2025/12/20/announcing-v1beta-production-ready-ai-agents-in-go/">
+  <meta property="og:site_name" content="Kunal Kushwaha">
+  <meta property="og:title" content="Announcing v1beta: Production-Ready AI Agents in Go">
+  <meta property="og:description" content="Introducing v1beta - a modern, streaming-first framework for building intelligent multi-agent AI systems in Go. From simple chatbots to complex orchestrated workflows.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-12-20T09:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-20T09:00:00+00:00">
+    <meta property="article:tag" content="Release">
+    <meta property="article:tag" content="V1beta">
+    <meta property="article:tag" content="Ai">
+    <meta property="article:tag" content="Agents">
+    <meta property="article:tag" content="Golang">
+    <meta property="article:tag" content="Llm">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Announcing v1beta: Production-Ready AI Agents in Go">
+  <meta name="twitter:description" content="Introducing v1beta - a modern, streaming-first framework for building intelligent multi-agent AI systems in Go. From simple chatbots to complex orchestrated workflows.">
+
+  <link rel="canonical" href="https://kunalkushwaha.github.io/2025/12/20/announcing-v1beta-production-ready-ai-agents-in-go/" />
+</head>
+<body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="https://kunalkushwaha.github.io/"
+      >Kunal Kushwaha</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../"
+        >Blog</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://speakerdeck.com/kunalkushwaha"
+        >Slide Deck</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../../../about/"
+        >About</a
+      ></nav><nav
+      class="mt-12 flex justify-center space-x-10 lg:mt-0 lg:items-center ltr:lg:ml-14 rtl:space-x-reverse rtl:lg:mr-14 dark:invert"
+    >
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >twitter</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >github</a>
+      <a
+        class="h-7 w-7 text-[0px] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/kunalkushwaha"
+        target="_blank"
+        rel="me"
+      >linkedin</a>
+    </nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    ><article>
+  <header class="mb-14">
+    <h1 class="my-0! pb-2.5">Announcing v1beta: Production-Ready AI Agents in Go</h1><div class="text-xs antialiased opacity-60"><time>Dec 20, 2025</time><span class="mx-1">&middot;</span>
+      <span>AgenticGoKit Team</span></div></header>
+
+  <section><h2 id="tldr">TL;DR</h2>
+<p><strong>AgenticGoKit v1beta is here (v0.5.0).</strong> Build AI agents in Go with first-class streaming, multimodal input, multi-agent workflows, and support for major LLM providers. Whether you&rsquo;re building your first chatbot or orchestrating complex agent teams, v1beta keeps it simple.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/agenticgokit/agenticgokit/v1beta
+</span></span></code></pre></div><hr>
+<h2 id="why-this-matters">Why This Matters</h2>
+<p>If you&rsquo;re a Go developer looking to build AI-powered applications, you&rsquo;ve probably hit these pain points:</p>
+<ul>
+<li><strong>Python Lock-in</strong>: Most AI frameworks force you into Python, losing Go&rsquo;s performance and type safety</li>
+<li><strong>Streaming Complexity</strong>: Real-time token streaming requires complex async code</li>
+<li><strong>Multi-Agent Chaos</strong>: Coordinating multiple agents means writing custom orchestration</li>
+<li><strong>Provider Limitations</strong>: Switching between OpenAI, Ollama, or Azure means rewriting code</li>
+</ul>
+<p><strong>v1beta solves all of this.</strong> One unified API with explicit <code>Run()</code> and <code>RunStream()</code>, built-in orchestration, and seamless provider switching—all with the performance and simplicity you expect from Go.</p>
+<h3 id="whats-in-v050--v1beta">What’s in v0.5.0 / v1beta?</h3>
+<ul>
+<li>A modern <code>v1beta</code> package (evolution of <code>core/vnext</code>) with a unified builder</li>
+<li>Streaming-first execution via <code>RunStream()</code> for agents and workflows</li>
+<li>Multimodal inputs (images, audio, video) via <code>RunWithOptions()</code></li>
+<li>Workflow orchestration: sequential, parallel, DAG, and loop</li>
+<li>Better errors: typed, actionable, and easier to handle programmatically</li>
+</ul>
+<blockquote>
+<p>If you’re starting fresh: use <code>github.com/agenticgokit/agenticgokit/v1beta</code>.
+If you’re on <code>core/vnext</code>: update imports to <code>v1beta</code>.</p></blockquote>
+<hr>
+<h2 id="for-the-impatient-60-seconds-to-your-first-ai-agent">For the Impatient: 60 Seconds to Your First AI Agent</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/agenticgokit/agenticgokit/v1beta&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Create agent with Ollama (runs locally)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;assistant&#34;</span>).
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;assistant&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a helpful coding assistant&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Timeout</span>:      <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;ollama&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;gemma3:1b&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">BaseURL</span>:  <span style="color:#e6db74">&#34;http://localhost:11434&#34;</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>        }).
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Run and stream the response</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">stream</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">RunStream</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Explain Go channels in 50 words&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Watch it think in real-time</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">chunk</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Chunks</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Type</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">ChunkTypeDelta</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Delta</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Wait</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;\n\nDone in %.2fs (%d tokens)\n&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">Duration</span>.<span style="color:#a6e22e">Seconds</span>(), <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">TokensUsed</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>That&rsquo;s it.</strong> Real-time streaming AI in 30 lines of Go. No complex async. No callback hell. Just straightforward, readable code.</p>
+<hr>
+<h2 id="the-power-of-streaming-first">The Power of Streaming-First</h2>
+<p>Traditional AI frameworks bolt streaming on as an afterthought. v1beta is <strong>built so streaming is a first-class path</strong>, not a special-case.</p>
+<h3 id="watch-your-agents-think">Watch Your Agents Think</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Traditional: Wait for complete response</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">prompt</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;...&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">prompt</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">Content</span>) <span style="color:#75715e">// User waits for full completion</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// v1beta: Stream tokens as they&#39;re generated</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stream</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">RunStream</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">prompt</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">chunk</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Chunks</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Delta</span>) <span style="color:#75715e">// Real-time output</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This isn&rsquo;t just about user experience—<strong>it&rsquo;s about debuggability</strong>. When you can see exactly what your agent is generating in real-time, debugging becomes dramatically easier.</p>
+<hr>
+<h2 id="multi-agent-workflows-from-simple-to-sophisticated">Multi-Agent Workflows: From Simple to Sophisticated</h2>
+<p>Building one agent is easy. Coordinating <strong>teams</strong> of specialized agents? That&rsquo;s where v1beta shines.</p>
+<h3 id="sequential-workflow-the-pipeline">Sequential Workflow: The Pipeline</h3>
+<p>Perfect for research, analysis, or content generation pipelines:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Create specialized agents</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">researcher</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;researcher&#34;</span>).
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;researcher&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a technical research specialist. Gather facts.&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{<span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;ollama&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gemma3:1b&#34;</span>},
+</span></span><span style="display:flex;"><span>    }).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">analyzer</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;analyzer&#34;</span>).
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;analyzer&#34;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a data analyst. Find patterns and insights.&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{<span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;ollama&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gemma3:1b&#34;</span>},
+</span></span><span style="display:flex;"><span>    }).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">writer</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;writer&#34;</span>).
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;writer&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a technical writer. Create clear documentation.&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{<span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;ollama&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gemma3:1b&#34;</span>},
+</span></span><span style="display:flex;"><span>    }).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Build the pipeline</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">workflow</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewSequentialWorkflow</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">300</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">workflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;research&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">researcher</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">workflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;analyze&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">analyzer</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">workflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;write&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">writer</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Execute and stream the entire workflow</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stream</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">workflow</span>.<span style="color:#a6e22e">RunStream</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;Write a technical guide on Go concurrency&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">chunk</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Chunks</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Type</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">ChunkTypeDelta</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Workflows annotate chunks with step metadata (e.g., &#34;step_name&#34;).</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// If not present, fall back to stream-level metadata.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">label</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Metadata</span>().<span style="color:#a6e22e">AgentName</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Metadata</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">stepName</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Metadata</span>[<span style="color:#e6db74">&#34;step_name&#34;</span>].(<span style="color:#66d9ef">string</span>); <span style="color:#a6e22e">ok</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">stepName</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">label</span> = <span style="color:#a6e22e">stepName</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;[%s] %s&#34;</span>, <span style="color:#a6e22e">label</span>, <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Delta</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Output streaming shows you each agent&rsquo;s contribution in real-time.</strong> No more black-box workflows.</p>
+<h3 id="parallel-workflow-speed-through-concurrency">Parallel Workflow: Speed Through Concurrency</h3>
+<p>When tasks are independent, run them concurrently:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">parallel</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewParallelWorkflow</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">parallel</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;technical&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">techAnalyst</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">parallel</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;business&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">bizAnalyst</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">parallel</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;security&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">secAnalyst</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// All three agents run simultaneously</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stream</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">parallel</span>.<span style="color:#a6e22e">RunStream</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;Analyze this architecture proposal&#34;</span>)
+</span></span></code></pre></div><p>Lower end-to-end latency for independent tasks, with automatic result aggregation.</p>
+<h3 id="dag-workflow-complex-dependencies-made-simple">DAG Workflow: Complex Dependencies Made Simple</h3>
+<p>For sophisticated workflows with dependencies:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">dag</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewDAGWorkflow</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">120</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Step 1: Code review (no dependencies)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dag</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:  <span style="color:#e6db74">&#34;review&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">codeReviewer</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Step 2: Security scan (depends on review passing)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dag</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;security&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Agent</span>:        <span style="color:#a6e22e">secScanner</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Dependencies</span>: []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;review&#34;</span>},
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Step 3: Performance analysis (depends on review passing)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dag</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;performance&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Agent</span>:        <span style="color:#a6e22e">perfAnalyzer</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Dependencies</span>: []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;review&#34;</span>},
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Step 4: Final approval (depends on both security and performance)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dag</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;approve&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Agent</span>:        <span style="color:#a6e22e">approver</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Dependencies</span>: []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;security&#34;</span>, <span style="color:#e6db74">&#34;performance&#34;</span>},
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><p><strong>Automatic dependency resolution</strong> with optimal parallel execution wherever possible.</p>
+<h3 id="loop-workflow-iterative-refinement">Loop Workflow: Iterative Refinement</h3>
+<p>For tasks that need iteration until meeting quality criteria:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">loop</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewLoopWorkflow</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MaxIterations</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Timeout</span>:       <span style="color:#ae81ff">120</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">loop</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;generate&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">codeGenerator</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">loop</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;review&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">codeReviewer</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Keep iterating until code is approved or max iterations reached</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Requires: import &#34;strings&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">loop</span>.<span style="color:#a6e22e">SetLoopCondition</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">iteration</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">last</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowResult</span>) (<span style="color:#66d9ef">bool</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">last</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// LoopConditionFunc returns true to continue looping, false to exit.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> !<span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">last</span>.<span style="color:#a6e22e">FinalOutput</span>, <span style="color:#e6db74">&#34;APPROVED&#34;</span>), <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">stream</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">loop</span>.<span style="color:#a6e22e">RunStream</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;Generate a secure login handler in Go&#34;</span>)
+</span></span></code></pre></div><p><strong>Automatic iteration</strong> with custom exit conditions—no manual retry logic needed.</p>
+<hr>
+<h2 id="multimodal-beyond-text">Multimodal: Beyond Text</h2>
+<p>Modern AI isn&rsquo;t just about text. v1beta supports <strong>images, audio, and video</strong> as first-class citizens:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">opts</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewRunOptions</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Add images (from URL or Base64)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">opts</span>.<span style="color:#a6e22e">Images</span> = []<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">ImageData</span>{
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">URL</span>:      <span style="color:#e6db74">&#34;https://example.com/architecture-diagram.png&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Metadata</span>: <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;diagram&#34;</span>},
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Add audio files</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">opts</span>.<span style="color:#a6e22e">Audio</span> = []<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">AudioData</span>{
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">URL</span>:    <span style="color:#e6db74">&#34;https://example.com/meeting-recording.mp3&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Format</span>: <span style="color:#e6db74">&#34;mp3&#34;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Add video</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">opts</span>.<span style="color:#a6e22e">Video</span> = []<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">VideoData</span>{
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">URL</span>:    <span style="color:#e6db74">&#34;https://example.com/demo.mp4&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Format</span>: <span style="color:#e6db74">&#34;mp4&#34;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">RunWithOptions</span>(<span style="color:#a6e22e">ctx</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Analyze this architecture, summarize the meeting, and review the demo&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">opts</span>)
+</span></span></code></pre></div><p><strong>Works with GPT-4o-class vision models</strong> (and other multimodal-capable models exposed by your provider)—no special handling required.</p>
+<blockquote>
+<p>Note: Direct Google Gemini support is not available yet, but is planned.</p></blockquote>
+<hr>
+<h2 id="provider-freedom-your-choice-zero-lock-in">Provider Freedom: Your Choice, Zero Lock-in</h2>
+<p>One of v1beta&rsquo;s superpowers: <strong>switch LLM providers with a config change</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Requires: import &#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Development: Free local models with Ollama</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;ollama&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;gemma3:1b&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">BaseURL</span>:  <span style="color:#e6db74">&#34;http://localhost:11434&#34;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Production: GPT-4 via OpenAI</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;openai&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;gpt-4&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">APIKey</span>:   <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>),
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Enterprise: Azure OpenAI</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">config</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;azure&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;gpt-4&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">BaseURL</span>:  <span style="color:#e6db74">&#34;https://your-resource.openai.azure.com&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">APIKey</span>:   <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;AZURE_OPENAI_API_KEY&#34;</span>),
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Supported providers:</strong></p>
+<ul>
+<li>OpenAI (e.g., GPT-4o / GPT-4.1-class, plus newer reasoning models)</li>
+<li>Azure OpenAI (same model families, enterprise deployment)</li>
+<li>Ollama (local models like Llama 3.x, Gemma, Mistral, Phi, etc.)</li>
+<li>HuggingFace (open-source + hosted inference)</li>
+<li>OpenRouter (multi-provider gateway)</li>
+<li>Any OpenAI-compatible API (self-hosted or third-party)</li>
+</ul>
+<blockquote>
+<p>Coming soon: direct integrations for <strong>Anthropic (Claude)</strong> and <strong>Google Gemini</strong>.</p></blockquote>
+<p><strong>Model examples (non-exhaustive):</strong></p>
+<ul>
+<li>OpenAI: GPT-4o, GPT-4.1, GPT-4-class, newer reasoning models</li>
+<li>Open-source: Llama 3.1/3.2-class, Mistral Large-class, Qwen 2.5-class</li>
+</ul>
+<p><strong>Your code doesn&rsquo;t change.</strong> Just the config.</p>
+<hr>
+<h2 id="memory--rag-context-aware-agents">Memory &amp; RAG: Context-Aware Agents</h2>
+<p>Build agents that remember conversations and leverage knowledge bases:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Requires: import &#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;support-agent&#34;</span>).
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;support-agent&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a helpful customer support agent&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;openai&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;gpt-4&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">APIKey</span>:   <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>),
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }).
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">WithMemory</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WithMemoryProvider</span>(<span style="color:#e6db74">&#34;conversation-store&#34;</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WithRAG</span>(<span style="color:#ae81ff">4000</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.7</span>), <span style="color:#75715e">// context size, min/max relevance</span>
+</span></span><span style="display:flex;"><span>    ).
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Agent automatically retrieves relevant context from memory</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;What was my previous issue about?&#34;</span>)
+</span></span></code></pre></div><p><strong>Built-in support</strong> for conversation memory and RAG patterns—no need to wire up vector databases manually (though you can if you want).</p>
+<hr>
+<h2 id="extensibility-custom-handlers-bring-your-own-control-loop">Extensibility: Custom Handlers (Bring Your Own Control Loop)</h2>
+<p>Prompts and presets are great for getting started, but most production systems need more control: input shaping, guardrails, deterministic pre/post processing, retries, and domain-specific logic.</p>
+<p>v1beta supports <strong>custom handlers</strong> via <code>WithHandler()</code>. A handler gets a <code>Capabilities</code> object that can call the configured LLM, tools, and memory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/agenticgokit/agenticgokit/v1beta&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Base handler: you fully control the request/response loop.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">base</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">input</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Capabilities</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">system</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;You are a strict senior Go reviewer. Reply with concise bullet points.&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">LLM</span>(<span style="color:#a6e22e">system</span>, <span style="color:#a6e22e">input</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Compose behaviors: retries, tool augmentation, RAG augmentation, etc.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">handler</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WithLLMAugmentation</span>(<span style="color:#a6e22e">base</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;reviewer&#34;</span>).
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;reviewer&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;openai&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;gpt-4&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">APIKey</span>:   <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>),
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>        }).
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">WithHandler</span>(<span style="color:#a6e22e">handler</span>).
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#e6db74">&#34;Review this function for correctness and security: ...&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">Content</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You can also compose handlers using built-in utilities like <code>Retry(...)</code>, <code>WithToolAugmentation(...)</code>, and <code>WithRAGAugmentation(...)</code> to keep your agent logic modular and testable.</p>
+<hr>
+<h2 id="subworkflows-compose-at-scale">Subworkflows: Compose at Scale</h2>
+<p>The real power move? <strong>Use workflows as agents</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Create a parallel research workflow</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">researchWorkflow</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewParallelWorkflow</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">120</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">researchWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;web&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">webResearcher</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">researchWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;academic&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">academicResearcher</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">researchWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;news&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">newsResearcher</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Wrap the entire workflow as a single agent</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">researchAgent</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewSubWorkflowAgent</span>(<span style="color:#e6db74">&#34;research-team&#34;</span>, <span style="color:#a6e22e">researchWorkflow</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Use it in a larger workflow</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mainWorkflow</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewSequentialWorkflow</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowConfig</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">300</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mainWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>:  <span style="color:#e6db74">&#34;research&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">researchAgent</span>, <span style="color:#75715e">// 3-agent workflow acting as 1 agent!</span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mainWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;write&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">contentWriter</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mainWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;edit&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">editor</span>})
+</span></span></code></pre></div><p><strong>Hierarchical composition</strong> lets you build complex systems from simple, testable components. Each subworkflow can be developed, tested, and versioned independently.</p>
+<hr>
+<h2 id="production-ready-from-day-one">Production-Ready from Day One</h2>
+<p>v1beta isn&rsquo;t a toy—it&rsquo;s built for production:</p>
+<h3 id="comprehensive-error-handling">Comprehensive Error Handling</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Imports you’ll typically want here:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//   &#34;context&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//   &#34;errors&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//   &#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">agent</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">prompt</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// v1beta returns structured errors you can inspect programmatically.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">agentErr</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">AgentError</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">agentErr</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;agent error: code=%s message=%s details=%v&#34;</span>, <span style="color:#a6e22e">agentErr</span>.<span style="color:#a6e22e">Code</span>, <span style="color:#a6e22e">agentErr</span>.<span style="color:#a6e22e">Message</span>, <span style="color:#a6e22e">agentErr</span>.<span style="color:#a6e22e">Details</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Is</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">DeadlineExceeded</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;timed out: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;unexpected error: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">result</span>
+</span></span></code></pre></div><p><strong>Typed errors</strong> with actionable context—no more guessing what went wrong.</p>
+<h3 id="timeouts-and-circuit-breaking">Timeouts and Circuit Breaking</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">config</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>, <span style="color:#75715e">// Overall agent timeout</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Tools</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">ToolsConfig</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Enabled</span>:    <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">MaxRetries</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Timeout</span>:    <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">CircuitBreaker</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">CircuitBreakerConfig</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Enabled</span>:          <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">FailureThreshold</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">SuccessThreshold</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Timeout</span>:          <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">HalfOpenMaxCalls</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="configuration-validation">Configuration Validation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">config</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#75715e">// Invalid!</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LLM</span>:  <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{<span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;unknown&#34;</span>}, <span style="color:#75715e">// Invalid!</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;test&#34;</span>).<span style="color:#a6e22e">WithConfig</span>(<span style="color:#a6e22e">config</span>).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// err contains detailed validation errors</span>
+</span></span></code></pre></div><p><strong>Fail fast</strong> with clear error messages before anything runs.</p>
+<hr>
+<h2 id="real-world-example-ai-code-reviewer">Real-World Example: AI Code Reviewer</h2>
+<p>Here&rsquo;s a complete example combining multiple features:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/agenticgokit/agenticgokit/v1beta&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Security reviewer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">secAgent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;security&#34;</span>).
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;security&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a security expert. Find vulnerabilities.&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{<span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;openai&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gpt-4&#34;</span>, <span style="color:#a6e22e">APIKey</span>: <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>)},
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Performance reviewer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">perfAgent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;performance&#34;</span>).
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;performance&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a performance expert. Find bottlenecks.&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{<span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;openai&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gpt-4&#34;</span>, <span style="color:#a6e22e">APIKey</span>: <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>)},
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Best practices reviewer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">practicesAgent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;practices&#34;</span>).
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;practices&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a Go expert. Check best practices.&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{<span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;openai&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gpt-4&#34;</span>, <span style="color:#a6e22e">APIKey</span>: <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>)},
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Summarizer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">summaryAgent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;summarizer&#34;</span>).
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;summarizer&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;Synthesize review feedback into actionable items.&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{<span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;openai&#34;</span>, <span style="color:#a6e22e">Model</span>: <span style="color:#e6db74">&#34;gpt-4&#34;</span>, <span style="color:#a6e22e">APIKey</span>: <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>)},
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">Build</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 1: Parallel review (3 agents at once)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">reviewWorkflow</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewParallelWorkflow</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowConfig</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">reviewWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;security&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">secAgent</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">reviewWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;performance&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">perfAgent</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">reviewWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;practices&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">practicesAgent</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 2: Sequential pipeline (review -&gt; summarize)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mainWorkflow</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewSequentialWorkflow</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowConfig</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Timeout</span>: <span style="color:#ae81ff">300</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">reviewAgent</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewSubWorkflowAgent</span>(<span style="color:#e6db74">&#34;reviewers&#34;</span>, <span style="color:#a6e22e">reviewWorkflow</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mainWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;review&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">reviewAgent</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mainWorkflow</span>.<span style="color:#a6e22e">AddStep</span>(<span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">WorkflowStep</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;summarize&#34;</span>, <span style="color:#a6e22e">Agent</span>: <span style="color:#a6e22e">summaryAgent</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Execute with streaming</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">codeToReview</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">`
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    func ProcessPayment(amount float64) error {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        db.Exec(&#34;UPDATE accounts SET balance = balance - &#34; + fmt.Sprintf(&#34;%.2f&#34;, amount))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        return nil
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    `</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">stream</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mainWorkflow</span>.<span style="color:#a6e22e">RunStream</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Review this Go code:\n&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">codeToReview</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;AI Code Review in Progress...\n&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">chunk</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Chunks</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Type</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">ChunkTypeDelta</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">label</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Metadata</span>().<span style="color:#a6e22e">AgentName</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Metadata</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">stepName</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Metadata</span>[<span style="color:#e6db74">&#34;step_name&#34;</span>].(<span style="color:#66d9ef">string</span>); <span style="color:#a6e22e">ok</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">stepName</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">label</span> = <span style="color:#a6e22e">stepName</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;[%s] %s&#34;</span>, <span style="color:#a6e22e">label</span>, <span style="color:#a6e22e">chunk</span>.<span style="color:#a6e22e">Delta</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">stream</span>.<span style="color:#a6e22e">Wait</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;\n\nReview complete in %.2fs\n&#34;</span>, <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">Duration</span>.<span style="color:#a6e22e">Seconds</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>This example demonstrates:</strong></p>
+<ul>
+<li>Parallel execution (3 reviewers at once)</li>
+<li>Subworkflows (review team as single agent)</li>
+<li>Sequential pipeline (review → summarize)</li>
+<li>Real-time streaming output</li>
+<li>Production-ready error handling</li>
+</ul>
+<hr>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="installation">Installation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/agenticgokit/agenticgokit/v1beta
+</span></span></code></pre></div><h3 id="quick-start-with-ollama-local-free">Quick Start with Ollama (Local, Free)</h3>
+<ol>
+<li><strong>Install Ollama</strong>: <a href="https://ollama.ai">ollama.ai</a></li>
+<li><strong>Pull a model</strong>: <code>ollama pull gemma3:1b</code></li>
+<li><strong>Run the example</strong>: See &ldquo;60 Seconds to Your First AI Agent&rdquo; above</li>
+</ol>
+<h3 id="quick-start-with-openai">Quick Start with OpenAI</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Requires: import &#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">agent</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">NewBuilder</span>(<span style="color:#e6db74">&#34;assistant&#34;</span>).
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">WithConfig</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Name</span>:         <span style="color:#e6db74">&#34;assistant&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">SystemPrompt</span>: <span style="color:#e6db74">&#34;You are a helpful assistant&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">LLM</span>: <span style="color:#a6e22e">v1beta</span>.<span style="color:#a6e22e">LLMConfig</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Provider</span>: <span style="color:#e6db74">&#34;openai&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Model</span>:    <span style="color:#e6db74">&#34;gpt-4&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">APIKey</span>:   <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>),
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }).
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Build</span>()
+</span></span></code></pre></div><hr>
+<h2 id="learning-resources">Learning Resources</h2>
+<h3 id="documentation">Documentation</h3>
+<ul>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/blob/main/v1beta/README.md">v1beta API Reference</a></li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/blob/main/docs/MIGRATION.md">Migration Guide</a></li>
+<li><a href="https://docs.agenticgokit.com">Full Documentation</a></li>
+</ul>
+<h3 id="examples">Examples</h3>
+<ul>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/tree/main/examples">19+ Working Examples</a></li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/tree/main/examples/story-writer-chat-v2">Story Writer Chat v2</a> - Real-time multi-agent workflow</li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/tree/main/examples/streaming_workflow">Streaming Workflow</a> - Advanced streaming patterns</li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/tree/main/examples/mcp-integration">MCP Integration</a> - Tool integration</li>
+</ul>
+<h3 id="provider-quickstarts">Provider Quickstarts</h3>
+<ul>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/tree/main/examples/ollama-quickstart">Ollama Quickstart</a></li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/tree/main/examples/huggingface-quickstart">HuggingFace Quickstart</a></li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/tree/main/examples/openrouter-quickstart">OpenRouter Quickstart</a></li>
+</ul>
+<hr>
+<h2 id="whats-next-the-road-to-v10">What&rsquo;s Next: The Road to v1.0</h2>
+<p>v1beta is <strong>stable and production-ready</strong>, but we&rsquo;re not stopping here. Based on community feedback, we&rsquo;re working towards v1.0 with:</p>
+<ul>
+<li><strong>Tool registry upgrades</strong> - Rich tool schemas, lifecycle management (register/unregister), and smoother discovery across internal + MCP tools</li>
+<li><strong>Advanced RAG patterns</strong> - Deeper retrieval pipelines and more native vector DB integrations (pgvector today; expanding beyond)</li>
+<li><strong>Turn-key production observability</strong> - Built-in metrics/tracing exports and better correlation (run/workflow/tool IDs) out of the box</li>
+<li><strong>Performance optimizations</strong> - Even faster execution and lower latency</li>
+<li><strong>New CLI tool</strong> (<code>agk</code>) - Scaffolding, testing, and deployment helpers</li>
+<li><strong>Workflow pattern recipes</strong> - Higher-level helpers and examples for routing/branching/conditionals on top of existing sequential/parallel/DAG/loop workflows</li>
+</ul>
+<p><strong>Your feedback shapes the future.</strong> Join us:</p>
+<ul>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/discussions">GitHub Discussions</a></li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/issues">Issues &amp; Feature Requests</a></li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/blob/main/docs/contributors/ContributorGuide.md">Contributing Guide</a></li>
+</ul>
+<hr>
+<h2 id="why-now">Why Now?</h2>
+<p>AI agent frameworks have matured rapidly in 2025. The patterns are proven. The use cases are clear. What&rsquo;s been missing is a <strong>Go-native solution</strong> that matches the language&rsquo;s philosophy:</p>
+<ul>
+<li><strong>Simple, not easy</strong>: Powerful features without magic</li>
+<li><strong>Explicit over implicit</strong>: Clear control flow and error handling</li>
+<li><strong>Performance matters</strong>: Compiled binaries, efficient concurrency</li>
+<li><strong>Production-ready</strong>: Type safety, comprehensive testing, real-world deployment</li>
+</ul>
+<p><strong>v1beta delivers all of this.</strong> Whether you&rsquo;re building your first chatbot or orchestrating dozens of specialized agents, you get the same clean, performant API.</p>
+<hr>
+<h2 id="try-it-today">Try It Today</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Install</span>
+</span></span><span style="display:flex;"><span>go get github.com/agenticgokit/agenticgokit/v1beta
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Run a complete example</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/kunalkushwaha/agenticgokit.git
+</span></span><span style="display:flex;"><span>cd agenticgokit/examples/ollama-quickstart
+</span></span><span style="display:flex;"><span>go run .
+</span></span></code></pre></div><p><strong>Join the community:</strong></p>
+<ul>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit">Star on GitHub</a></li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/discussions">Join Discussions</a></li>
+<li><a href="https://github.com/kunalkushwaha/agenticgokit/issues">Report Issues</a></li>
+<li><a href="https://docs.agenticgokit.com">Read the Docs</a></li>
+</ul>
+<hr>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>Building AI agents should feel like building any other Go application: <strong>straightforward, type-safe, and efficient</strong>. v1beta makes that vision a reality.</p>
+<p>Whether you&rsquo;re experimenting with local models via Ollama, deploying production services with GPT-4, or building complex multi-agent systems—<strong>you&rsquo;re writing the same clean Go code</strong>.</p>
+<p>We can&rsquo;t wait to see what you build.</p>
+<p>Happy coding.</p>
+<hr>
+<p><em>AgenticGoKit is Apache 2.0 licensed and welcomes contributions from the community.</em></p>
+</section>
+
+  <footer class="mt-12 flex flex-wrap"><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/release"
+      >release</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/v1beta"
+      >v1beta</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/ai"
+      >ai</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/agents"
+      >agents</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/golang"
+      >golang</a
+    ><a
+      class="mb-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] ltr:mr-1.5 rtl:ml-1.5 dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="https://kunalkushwaha.github.io/tags/llm"
+      >llm</a
+    ></footer><nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg leading-[1.2]! *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  ><a
+      class="justify-end pl-3 ltr:ml-auto rtl:mr-auto"
+      href="https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/"
+      ><span>Building a Local Document Reader with Streaming TTS</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    ></nav><div class="mt-24" id="disqus_thread"></div>
+  <script>
+    const disqusShortname = 'kunalkushwaha';
+    const script = document.createElement('script');
+    script.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    script.setAttribute('data-timestamp', +new Date());
+    document.head.appendChild(script);
+  </script></article></main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">Kunal Kushwaha</div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+</body>
+</html>

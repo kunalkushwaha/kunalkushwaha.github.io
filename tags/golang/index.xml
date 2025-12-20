@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Dec 2025 09:00:00 +0000</lastBuildDate>
     <atom:link href="https://kunalkushwaha.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Announcing v1beta: Production-Ready AI Agents in Go</title>
+      <link>https://kunalkushwaha.github.io/2025/12/20/announcing-v1beta-production-ready-ai-agents-in-go/</link>
+      <pubDate>Sat, 20 Dec 2025 09:00:00 +0000</pubDate>
+      <guid>https://kunalkushwaha.github.io/2025/12/20/announcing-v1beta-production-ready-ai-agents-in-go/</guid>
+      <description>We&amp;rsquo;re excited to announce v1beta, our next-generation API for building AI agents in Go. With streaming-first architecture, multimodal support, and powerful workflow orchestration, building production-ready AI systems has never been easier.</description>
+    </item>
     <item>
       <title>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</title>
       <link>https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/</link>
