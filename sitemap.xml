@@ -2,12 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://kunalkushwaha.github.io/tags/agenticgokit/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>https://kunalkushwaha.github.io/</loc>
     <lastmod>2026-01-10T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
+    <loc>https://kunalkushwaha.github.io/tags/langchain/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://kunalkushwaha.github.io/tags/ollama/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://kunalkushwaha.github.io/tags/performance/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>https://kunalkushwaha.github.io/post/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://kunalkushwaha.github.io/tags/pprof/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://kunalkushwaha.github.io/tags/profiling/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://kunalkushwaha.github.io/tags/</loc>
+    <lastmod>2026-01-10T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://kunalkushwaha.github.io/2026/01/10/why-agenticgokit-was-2x-slower/</loc>
     <lastmod>2026-01-10T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -57,11 +97,6 @@
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://kunalkushwaha.github.io/tags/</loc>
-    <lastmod>2025-12-20T09:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://kunalkushwaha.github.io/tags/v1beta/</loc>
     <lastmod>2025-12-20T09:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
@@ -94,11 +129,6 @@
   </url><url>
     <loc>https://kunalkushwaha.github.io/tags/tts/</loc>
     <lastmod>2025-11-30T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://kunalkushwaha.github.io/tags/agenticgokit/</loc>
-    <lastmod>2025-11-16T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
@@ -189,11 +219,6 @@
   </url><url>
     <loc>https://kunalkushwaha.github.io/tags/memoryagents/</loc>
     <lastmod>2025-10-30T02:18:55+09:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://kunalkushwaha.github.io/tags/ollama/</loc>
-    <lastmod>2025-10-26T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
