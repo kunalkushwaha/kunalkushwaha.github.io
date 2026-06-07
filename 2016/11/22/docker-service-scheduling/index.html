@@ -1,467 +1,200 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Docker Services Scheduling &middot; Kunal Kushwaha</title>
-        <meta name="description" content="Understanding how docker services scheduling works in swarm mode">
-        <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.63.2" />
-        <meta name="robots" content="index,follow">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <link rel="stylesheet" href="http://localhost:1313/dist/styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        
-        
-        
-        
-    </head>
-    <body>
-        
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-62566203-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-
-
-        <div id="wrapper">
-            <header class="site-header">
-                <div class="container">
-                    <div class="site-title-wrapper">
-                        
-                            <h1 class="site-title">
-                                <a title="Kunal Kushwaha" href="http://localhost:1313/">Kunal Kushwaha</a>
-                            </h1>
-                        
-                        <a class="button-square" href="http://localhost:1313/index.xml"><i class="fa fa-rss"></i></a>
-                        
-                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/kunalkushwaha" rel="me">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        
-                        
-                        
-                        
-                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kunalkushwaha" rel="me">
-                                <i class="fa fa-github-alt"></i>
-                            </a>
-                        
-                        
-                        
-                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="http://www.linkedin.com/in/kunalkushwaha" rel="me">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                        
-                        
-                            <a class="button-square button-social hint--top" data-hint="Google+" title="Google+" href="https://plus.google.com/&#43;KunalKushwaha14" rel="me">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                        
-                        
-                    </div>
-
-                    <ul class="site-nav">
-                        
-    <li class="site-nav-item">
-        <a title="Blog" href="/">Blog</a>
-    </li>
-
-    <li class="site-nav-item">
-        <a title="About" href="/about/">About</a>
-    </li>
-
-                    </ul>
-                </div>
-            </header>
-
-            <div id="container">
-
-
-<div class="container">
-    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
-        <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Docker Services Scheduling</h1>
-    
-        <p class="post-description" itemprop="description">Understanding how docker services scheduling works in swarm mode</p>
-    
-    <p class="post-date post-line">
-        <span>Published <time datetime="2016-11-22" itemprop="datePublished">Tue, Nov 22, 2016</time></span>
-        <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
-            <span itemprop="name">
-                <a href="https://plus.google.com/u/0/&#43;KunalKushwaha14" itemprop="url" rel="author">Kunal Kushwaha</a>
-            </span>
-        </span>
-    </p>
-    
-</header>
-
-        <div class="post-content clearfix" itemprop="articleBody">
-    
-
-    <h4 id="overview">Overview</h4>
-<p>Docker service scheduling is one of important aspect in planing and deployment of service over docker cluster.
-Your Docker swarm mode default&rsquo;s scheduling strategy is &ldquo;spread&rdquo;. With spread strategy, swarm scheduler ranks node based on available CPU,RAM and number of containers.</p>
-<p><em>NOTE: Docker containers eat resources during its life-cycle irrespective of their state, even containers with <code>Exited</code> state. Hence scheduler consider all containers including container with <code>Exited</code> state</em></p>
-<h1 id="todo-why-needs-to-be-controlled">TODO: Why needs to be controlled?</h1>
-<p>But it can be controlled by adding various constraints.</p>
-<p>Constraints: Operators can control or limit the set of nodes on which tasks can be scheduled.</p>
-<p>Constraints: Operators can limit the set of nodes where a task can be scheduled by defining constraint expressions. Multiple constraints find nodes that satisfy every expression, i.e., an AND match. Constraints can match node attributes in the following table. Note that engine.labels are collected from Docker Engine with information like operating system, drivers, etc. node.labels are added by cluster administrators for operational purpose. For example, some nodes have security compliant labels to run tasks with compliant requirements.</p>
-<table>
-<thead>
-<tr>
-<th>node attribute</th>
-<th>matches</th>
-<th>example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>node.id</td>
-<td>node&rsquo;s ID</td>
-<td><code>node.id == 2ivku8v2gvtg4</code></td>
-</tr>
-<tr>
-<td>node.hostname</td>
-<td>node&rsquo;s hostname</td>
-<td><code>node.hostname != node-2</code></td>
-</tr>
-<tr>
-<td>node.role</td>
-<td>node&rsquo;s manager or worker role</td>
-<td><code>node.role == manager</code></td>
-</tr>
-<tr>
-<td>node.labels</td>
-<td>node&rsquo;s labels added by cluster admins</td>
-<td><code>node.labels.security == high</code></td>
-</tr>
-<tr>
-<td>engine.labels</td>
-<td>Docker Engine&rsquo;s labels</td>
-<td><code>engine.labels.operatingsystem == ubuntu 14.04</code></td>
-</tr>
-</tbody>
-</table>
-<p>Why node lebels when docker engines had engine labels?</p>
-<ul>
-<li>Engine labels can&rsquo;t be trusted for security sensitive scheduling decisions, since any worker can report any label up to a manager. They are, however, useful for things like &ldquo;Does this host have an SSD?&quot;, or &ldquo;how much ram/disk space does this host have?&quot;.</li>
-</ul>
-<p>These swarm labels, on the other hand, are always trustworthy, since they are set by an administrator explicitly. This means that we can label a host as pci-dss, and create a constraint to ensure that credit-card-app only gets scheduled on worker nodes that are labeled as pci-dss, and that no malicious worker can self-label itself as pci-dss.</p>
-<pre><code>$ docker-machine create -d virtualbox --engine-env HTTP_PROXY=&quot;http://proxy.rdh.ecl.ntt.co.jp:20066&quot; --engine-env HTTPS_PROXY=&quot;http://proxy.rdh.ecl.ntt.co.jp:20066&quot; --engine-label node=node2 --engine-label storage=ssd node2
-Running pre-create checks...
-Creating machine...
-(node2) Unable to get the latest Boot2Docker ISO release version:  Get https://api.github.com/repos/boot2docker/boot2docker/releases/latest: x509: certificate is valid for inetnf.auth, not api.github.com
-(node2) Copying /Users/kunalkushwaha/.docker/machine/cache/boot2docker.iso to /Users/kunalkushwaha/.docker/machine/machines/node2/boot2docker.iso...
-(node2) Creating VirtualBox VM...
-(node2) Creating SSH key...
-(node2) Starting the VM...
-(node2) Check network to re-create if needed...
-(node2) Waiting for an IP...
-Waiting for machine to be running, this may take a few minutes...
-Detecting operating system of created instance...
-Waiting for SSH to be available...
-Detecting the provisioner...
-Provisioning with boot2docker...
-Copying certs to the local machine directory...
-Copying certs to the remote machine...
-Setting Docker configuration on the remote daemon...
-Checking connection to Docker...
-Docker is up and running!
-To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env node2
-
-$ eval $(docker-machine env node2)
-
-$ docker info
-Containers: 0
- Running: 0
- Paused: 0
- Stopped: 0
-Images: 0
-Server Version: 1.12.3
-Storage Driver: aufs
- Root Dir: /mnt/sda1/var/lib/docker/aufs
- Backing Filesystem: extfs
- Dirs: 0
- Dirperm1 Supported: true
-Logging Driver: json-file
-Cgroup Driver: cgroupfs
-Plugins:
- Volume: local
- Network: overlay null host bridge
-Swarm: inactive
-Runtimes: runc
-Default Runtime: runc
-Security Options: seccomp
-Kernel Version: 4.4.27-boot2docker
-Operating System: Boot2Docker 1.12.3 (TCL 7.2); HEAD : 7fc7575 - Thu Oct 27 17:23:17 UTC 2016
-OSType: linux
-Architecture: x86_64
-CPUs: 1
-Total Memory: 995.8 MiB
-Name: node2
-ID: 5HAZ:LAGO:KVF4:WLRP:P356:O6IA:W6GD:3LYO:JGDJ:5QN6:U6L6:J3BZ
-Docker Root Dir: /mnt/sda1/var/lib/docker
-Debug Mode (client): false
-Debug Mode (server): true
- File Descriptors: 13
- Goroutines: 23
- System Time: 2016-11-22T02:20:13.630275393Z
- EventsListeners: 0
-Http Proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
-Https Proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
-Username: kunalkushwaha
-Registry: https://index.docker.io/v1/
-Labels:
- node=node2
- storage=ssd
- provider=virtualbox
-Insecure Registries:
- 127.0.0.0/8
-
-
-
- $ eval $(docker-machine env default)
-
-~/Downloads ⌚ 11:21:03
-$ docker swarm init --advertise-addr 192.168.99.100
-Swarm initialized: current node (4r4qnxd8ztxuiusldvrf9gub6) is now a manager.
-
-To add a worker to this swarm, run the following command:
-
-    docker swarm join \
-    --token SWMTKN-1-1b7a6a6ophwlo85ihe3ss2lkg678d0re52p5dqezk5m3xtwur5-2vsgk9in2cm2b97f3gg3xmii4 \
-    192.168.99.100:2377
-
-To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
-
-
-~/Downloads ⌚ 11:21:22
-$ eval $(docker-machine env node2)
-
-~/Downloads ⌚ 11:21:37
-$ docker swarm join \
-    --token SWMTKN-1-1b7a6a6ophwlo85ihe3ss2lkg678d0re52p5dqezk5m3xtwur5-2vsgk9in2cm2b97f3gg3xmii4 \
-    192.168.99.100:2377
-This node joined a swarm as a worker.
-
-$ docker info
-Containers: 0
- Running: 0
- Paused: 0
- Stopped: 0
-Images: 0
-Server Version: 1.12.3
-Storage Driver: aufs
- Root Dir: /mnt/sda1/var/lib/docker/aufs
- Backing Filesystem: extfs
- Dirs: 0
- Dirperm1 Supported: true
-Logging Driver: json-file
-Cgroup Driver: cgroupfs
-Plugins:
- Volume: local
- Network: bridge null overlay host
-Swarm: active
- NodeID: 5z607lfu3sigaliuzcpo0wsrf
- Is Manager: false
- Node Address: 192.168.99.101
-Runtimes: runc
-Default Runtime: runc
-Security Options: seccomp
-Kernel Version: 4.4.27-boot2docker
-Operating System: Boot2Docker 1.12.3 (TCL 7.2); HEAD : 7fc7575 - Thu Oct 27 17:23:17 UTC 2016
-OSType: linux
-Architecture: x86_64
-CPUs: 1
-Total Memory: 995.8 MiB
-Name: node2
-ID: 5HAZ:LAGO:KVF4:WLRP:P356:O6IA:W6GD:3LYO:JGDJ:5QN6:U6L6:J3BZ
-Docker Root Dir: /mnt/sda1/var/lib/docker
-Debug Mode (client): false
-Debug Mode (server): true
- File Descriptors: 22
- Goroutines: 68
- System Time: 2016-11-22T02:21:46.868274301Z
- EventsListeners: 0
-Http Proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
-Https Proxy: http://proxy.rdh.ecl.ntt.co.jp:20066
-Username: kunalkushwaha
-Registry: https://index.docker.io/v1/
-Labels:
- node=node2
- storage=ssd
- provider=virtualbox
-Insecure Registries:
- 127.0.0.0/8
-
-
- docker service create \
-  --replicas 2 \
-  --name helloworld1 \
-  --constraint 'engine.labels.storage == ssd' \
-  alpine ping docker.com
-
-  ~/work/GlobalMentorWeek on  master! ⌚ 13:53:25
-  $ docker node update --label-add key1=master default
-  default
-
-  ~/work/GlobalMentorWeek on  master! ⌚ 13:54:05
-  $ docker node inspect 4r4qnxd8ztxuiusldvrf9gub6 --pretty
-  ID:			4r4qnxd8ztxuiusldvrf9gub6
-  Labels:
-   - key = primary
-   - key1 = master
-  Hostname:		default
-  Joined at:		2016-11-22 02:21:21.596149476 +0000 utc
-  Status:
-   State:			Ready
-   Availability:		Active
-  Manager Status:
-   Address:		192.168.99.100:2377
-   Raft Status:		Reachable
-   Leader:		Yes
-  Platform:
-   Operating System:	linux
-   Architecture:		x86_64
-  Resources:
-   CPUs:			1
-   Memory:		995.8 MiB
-  Plugins:
-    Network:		bridge, host, null, overlay
-    Volume:		local
-  Engine Version:		1.12.3
-  Engine Labels:
-   - node = node1
-   - provider = virtualbox
-   - storage = hdd
-
-
-$ docker service create \
-  --replicas 2 \
-  --name helloworld2 \
-  --constraint 'node.labels.key == primary' \
-  alpine ping docker.com
-b2g40mrmok4ii9wcmqdlgv7s0
-
-</code></pre>
-</div>
-
-        <footer class="post-footer clearfix">
-    
-        <p class="post-tags">
-            <span>Tagged:</span>
-            
-            
-                <a href="/tags/docker/">docker</a>, 
-            
-                <a href="/tags/swarm-mode/">swarm mode</a>, 
-            
-                <a href="/tags/services/">services</a>, 
-            
-                <a href="/tags/scheduling/">scheduling</a>
-            
-        </p>
-    
-
-    <div class="share">
-        
-            <a class="icon-twitter" href="https://twitter.com/share?text=Docker%20Services%20Scheduling&url=http%3a%2f%2flocalhost%3a1313%2f2016%2f11%2f22%2fdocker-service-scheduling%2f"
-                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                <i class="fa fa-twitter"></i>
-                <span class="hidden">Twitter</span>
-            </a>
-        
-
-        
-            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2f2016%2f11%2f22%2fdocker-service-scheduling%2f"
-                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                <i class="fa fa-facebook"></i>
-                <span class="hidden">Facebook</span>
-            </a>
-        
-
-        
-            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2f2016%2f11%2f22%2fdocker-service-scheduling%2f"
-              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-              <i class="fa fa-google-plus"></i>
-                <span class="hidden">Google+</span>
-            </a>
-        
-        
-    </div>
-</footer>
-
-        
-    <div class="comments">
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "kunalkushwaha" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    </div>
-
-    </article>
-</div>
-
-            </div>
-        </div>
-
-        <footer class="footer">
-            <div class="container">
-                <div class="site-title-wrapper">
-                    <h1 class="site-title">
-                        <a title="Kunal Kushwaha" href="http://localhost:1313/">Kunal Kushwaha</a>
-                    </h1>
-                    <a class="button-square button-jump-top js-jump-top" href="#">
-                        <i class="fa fa-angle-up"></i>
-                    </a>
-                </div>
-
-                <p class="footer-copyright">
-                    <span>&copy; 2020 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
-                </p>
-                <p class="footer-copyright">
-                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
-                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
-                </p>
-            </div>
-        </footer>
-
-        <script src="http://localhost:1313/js/jquery-1.11.3.min.js"></script>
-        <script src="http://localhost:1313/js/jquery.fitvids.js"></script>
-        
-        
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        
-        
-        <script src="http://localhost:1313/js/scripts.js"></script>
-    <script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10&v=2"></' + 'script>')</script></body>
-</html>
-
+<!doctype html><html lang=en-us data-palette=cobalt data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Docker Services Scheduling · Kunal Kushwaha</title><meta name=description content="Understanding how docker services scheduling works in swarm mode"><meta name=author content="Kunal Kushwaha"><meta name=theme-color content="#c0441f"><meta property="og:site_name" content="Kunal Kushwaha"><meta property="og:title" content="Docker Services Scheduling"><meta property="og:description" content="Understanding how docker services scheduling works in swarm mode"><meta property="og:type" content="article"><meta property="og:url" content="https://kunalkushwaha.github.io/2016/11/22/docker-service-scheduling/"><meta name=twitter:card content="summary_large_image"><link rel=canonical href=https://kunalkushwaha.github.io/2016/11/22/docker-service-scheduling/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel=stylesheet><link rel=stylesheet href=/css/main.min.18f37d9ce722b64e44f402022011436eac188ed4b5737cd77b742c7d33ebfb84.css integrity="sha256-GPN9nOcitk5E9AICIBFDbqwYjtS1c3zXe3QsfTPr+4Q="><script>(function(){try{var t,n,e=localStorage.getItem("praxis-theme");e||(n=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,e=n?"dark":"light"),document.documentElement.setAttribute("data-theme",e),t=localStorage.getItem("praxis-palette"),t&&document.documentElement.setAttribute("data-palette",t)}catch{}})()</script></head><body><a href=#main class=skip-link>Skip to content</a><div class=grain aria-hidden=true></div><header class=site-head><div class="wrap-wide bar"><a class=brand href=/ aria-label="Kunal Kushwaha — home"><span class=mark>KK</span>
+<span class=name>Kunal Kushwaha<small>Leading AI strategy and applied systems</small></span></a><nav class=nav data-nav aria-label=Primary><a class=navlink href=/posts/>Writing</a><a class=navlink href=/tags/>Topics</a><a class=navlink href=/about/>About</a></nav><div class=controls><div class=palette-pick data-palette-pick><button class=tbtn data-palette-toggle aria-label="Choose color palette" title="Color palette">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 100 18c1 0 1.5-.8 1.5-1.6.0-.5-.2-.9-.5-1.2s-.5-.7-.5-1.2c0-.9.7-1.6 1.6-1.6H16a5 5 0 005-5C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="11" cy="7.5" r="1"/><circle cx="15.5" cy="8.5" r="1"/></svg></button><div class=swatches role=menu><span class="dot terracotta" role=menuitem tabindex=0 data-set-palette=terracotta title=Terracotta aria-current=false></span><span class="dot slate" role=menuitem tabindex=0 data-set-palette=slate title=Slate aria-current=false></span><span class="dot ink" role=menuitem tabindex=0 data-set-palette=ink title=Ink aria-current=false></span><span class="dot forest" role=menuitem tabindex=0 data-set-palette=forest title=Forest aria-current=false></span><span class="dot cobalt" role=menuitem tabindex=0 data-set-palette=cobalt title=Cobalt aria-current=true></span></div></div><button class=tbtn data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
+<span class=sun><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2m0 15v2M2.5 12h2m15 0h2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M6.4 17.6 5 19"/></svg></span>
+<span class=moon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 019.5 4 7 7 0 1020 14.5z"/></svg></span>
+</button>
+<button class="tbtn menu-toggle" data-menu-toggle aria-label=Menu>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></header><main id=main><div class="article-shell has-toc"><aside class=post-toc aria-label="Table of contents"><div class=toc-inner><p class=toc-title>On this page</p><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></aside><div class=article-col><article><header class=post><p class=kicker>Posts</p><h1>Docker Services Scheduling</h1><p class=dek>Understanding how docker services scheduling works in swarm mode</p><div class=byline><span class=avatar>KK</span><div><b>Kunal Kushwaha</b> · Leading AI strategy and applied systems<br><time datetime=2016-11-22>November 22, 2016</time>
+<span class=sep>·</span> 5 min read</div></div></header><div class=post-content><h4 id=overview>Overview</h4><p>Docker service scheduling is one of important aspect in planing and deployment of service over docker cluster.
+Your Docker swarm mode default’s scheduling strategy is “spread”. With spread strategy, swarm scheduler ranks node based on available CPU,RAM and number of containers.</p><p><em>NOTE: Docker containers eat resources during its life-cycle irrespective of their state, even containers with <code>Exited</code> state. Hence scheduler consider all containers including container with <code>Exited</code> state</em></p><h1 id=todo-why-needs-to-be-controlled>TODO: Why needs to be controlled?</h1><p>But it can be controlled by adding various constraints.</p><p>Constraints: Operators can control or limit the set of nodes on which tasks can be scheduled.</p><p>Constraints: Operators can limit the set of nodes where a task can be scheduled by defining constraint expressions. Multiple constraints find nodes that satisfy every expression, i.e., an AND match. Constraints can match node attributes in the following table. Note that engine.labels are collected from Docker Engine with information like operating system, drivers, etc. node.labels are added by cluster administrators for operational purpose. For example, some nodes have security compliant labels to run tasks with compliant requirements.</p><table><thead><tr><th>node attribute</th><th>matches</th><th>example</th></tr></thead><tbody><tr><td>node.id</td><td>node’s ID</td><td><code>node.id == 2ivku8v2gvtg4</code></td></tr><tr><td>node.hostname</td><td>node’s hostname</td><td><code>node.hostname != node-2</code></td></tr><tr><td>node.role</td><td>node’s manager or worker role</td><td><code>node.role == manager</code></td></tr><tr><td>node.labels</td><td>node’s labels added by cluster admins</td><td><code>node.labels.security == high</code></td></tr><tr><td>engine.labels</td><td>Docker Engine’s labels</td><td><code>engine.labels.operatingsystem == ubuntu 14.04</code></td></tr></tbody></table><p>Why node lebels when docker engines had engine labels?</p><ul><li>Engine labels can’t be trusted for security sensitive scheduling decisions, since any worker can report any label up to a manager. They are, however, useful for things like “Does this host have an SSD?", or “how much ram/disk space does this host have?".</li></ul><p>These swarm labels, on the other hand, are always trustworthy, since they are set by an administrator explicitly. This means that we can label a host as pci-dss, and create a constraint to ensure that credit-card-app only gets scheduled on worker nodes that are labeled as pci-dss, and that no malicious worker can self-label itself as pci-dss.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>$</span> <span class=n>docker</span><span class=o>-</span><span class=n>machine</span> <span class=n>create</span> <span class=o>-</span><span class=n>d</span> <span class=n>virtualbox</span> <span class=o>--</span><span class=n>engine</span><span class=o>-</span><span class=n>env</span> <span class=n>HTTP_PROXY</span><span class=o>=</span><span class=s2>&#34;http://proxy.rdh.ecl.ntt.co.jp:20066&#34;</span> <span class=o>--</span><span class=n>engine</span><span class=o>-</span><span class=n>env</span> <span class=n>HTTPS_PROXY</span><span class=o>=</span><span class=s2>&#34;http://proxy.rdh.ecl.ntt.co.jp:20066&#34;</span> <span class=o>--</span><span class=n>engine</span><span class=o>-</span><span class=n>label</span> <span class=n>node</span><span class=o>=</span><span class=n>node2</span> <span class=o>--</span><span class=n>engine</span><span class=o>-</span><span class=n>label</span> <span class=n>storage</span><span class=o>=</span><span class=n>ssd</span> <span class=n>node2</span>
+</span></span><span class=line><span class=cl><span class=n>Running</span> <span class=n>pre</span><span class=o>-</span><span class=n>create</span> <span class=n>checks</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Creating</span> <span class=n>machine</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=n>node2</span><span class=p>)</span> <span class=n>Unable</span> <span class=n>to</span> <span class=n>get</span> <span class=n>the</span> <span class=n>latest</span> <span class=n>Boot2Docker</span> <span class=n>ISO</span> <span class=n>release</span> <span class=n>version</span><span class=p>:</span>  <span class=n>Get</span> <span class=n>https</span><span class=p>:</span><span class=o>//</span><span class=n>api</span><span class=o>.</span><span class=n>github</span><span class=o>.</span><span class=n>com</span><span class=o>/</span><span class=n>repos</span><span class=o>/</span><span class=n>boot2docker</span><span class=o>/</span><span class=n>boot2docker</span><span class=o>/</span><span class=n>releases</span><span class=o>/</span><span class=n>latest</span><span class=p>:</span> <span class=n>x509</span><span class=p>:</span> <span class=n>certificate</span> <span class=n>is</span> <span class=n>valid</span> <span class=k>for</span> <span class=n>inetnf</span><span class=o>.</span><span class=n>auth</span><span class=p>,</span> <span class=ow>not</span> <span class=n>api</span><span class=o>.</span><span class=n>github</span><span class=o>.</span><span class=n>com</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=n>node2</span><span class=p>)</span> <span class=n>Copying</span> <span class=o>/</span><span class=n>Users</span><span class=o>/</span><span class=n>kunalkushwaha</span><span class=o>/.</span><span class=n>docker</span><span class=o>/</span><span class=n>machine</span><span class=o>/</span><span class=n>cache</span><span class=o>/</span><span class=n>boot2docker</span><span class=o>.</span><span class=n>iso</span> <span class=n>to</span> <span class=o>/</span><span class=n>Users</span><span class=o>/</span><span class=n>kunalkushwaha</span><span class=o>/.</span><span class=n>docker</span><span class=o>/</span><span class=n>machine</span><span class=o>/</span><span class=n>machines</span><span class=o>/</span><span class=n>node2</span><span class=o>/</span><span class=n>boot2docker</span><span class=o>.</span><span class=n>iso</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=n>node2</span><span class=p>)</span> <span class=n>Creating</span> <span class=n>VirtualBox</span> <span class=n>VM</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=n>node2</span><span class=p>)</span> <span class=n>Creating</span> <span class=n>SSH</span> <span class=n>key</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=n>node2</span><span class=p>)</span> <span class=n>Starting</span> <span class=n>the</span> <span class=n>VM</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=n>node2</span><span class=p>)</span> <span class=n>Check</span> <span class=n>network</span> <span class=n>to</span> <span class=n>re</span><span class=o>-</span><span class=n>create</span> <span class=k>if</span> <span class=n>needed</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=n>node2</span><span class=p>)</span> <span class=n>Waiting</span> <span class=k>for</span> <span class=n>an</span> <span class=ne>IP</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Waiting</span> <span class=k>for</span> <span class=n>machine</span> <span class=n>to</span> <span class=n>be</span> <span class=n>running</span><span class=p>,</span> <span class=n>this</span> <span class=n>may</span> <span class=n>take</span> <span class=n>a</span> <span class=n>few</span> <span class=n>minutes</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Detecting</span> <span class=n>operating</span> <span class=n>system</span> <span class=n>of</span> <span class=n>created</span> <span class=n>instance</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Waiting</span> <span class=k>for</span> <span class=n>SSH</span> <span class=n>to</span> <span class=n>be</span> <span class=n>available</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Detecting</span> <span class=n>the</span> <span class=n>provisioner</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Provisioning</span> <span class=n>with</span> <span class=n>boot2docker</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Copying</span> <span class=n>certs</span> <span class=n>to</span> <span class=n>the</span> <span class=n>local</span> <span class=n>machine</span> <span class=n>directory</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Copying</span> <span class=n>certs</span> <span class=n>to</span> <span class=n>the</span> <span class=n>remote</span> <span class=n>machine</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Setting</span> <span class=n>Docker</span> <span class=n>configuration</span> <span class=n>on</span> <span class=n>the</span> <span class=n>remote</span> <span class=n>daemon</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Checking</span> <span class=n>connection</span> <span class=n>to</span> <span class=n>Docker</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Docker</span> <span class=n>is</span> <span class=n>up</span> <span class=ow>and</span> <span class=n>running</span><span class=o>!</span>
+</span></span><span class=line><span class=cl><span class=n>To</span> <span class=n>see</span> <span class=n>how</span> <span class=n>to</span> <span class=n>connect</span> <span class=n>your</span> <span class=n>Docker</span> <span class=n>Client</span> <span class=n>to</span> <span class=n>the</span> <span class=n>Docker</span> <span class=n>Engine</span> <span class=n>running</span> <span class=n>on</span> <span class=n>this</span> <span class=n>virtual</span> <span class=n>machine</span><span class=p>,</span> <span class=n>run</span><span class=p>:</span> <span class=n>docker</span><span class=o>-</span><span class=n>machine</span> <span class=n>env</span> <span class=n>node2</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>$</span> <span class=n>eval</span> <span class=o>$</span><span class=p>(</span><span class=n>docker</span><span class=o>-</span><span class=n>machine</span> <span class=n>env</span> <span class=n>node2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>$</span> <span class=n>docker</span> <span class=n>info</span>
+</span></span><span class=line><span class=cl><span class=n>Containers</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> <span class=n>Running</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> <span class=n>Paused</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> <span class=n>Stopped</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>Images</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>Server</span> <span class=n>Version</span><span class=p>:</span> <span class=mf>1.12</span><span class=o>.</span><span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=n>Storage</span> <span class=n>Driver</span><span class=p>:</span> <span class=n>aufs</span>
+</span></span><span class=line><span class=cl> <span class=n>Root</span> <span class=n>Dir</span><span class=p>:</span> <span class=o>/</span><span class=n>mnt</span><span class=o>/</span><span class=n>sda1</span><span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>docker</span><span class=o>/</span><span class=n>aufs</span>
+</span></span><span class=line><span class=cl> <span class=n>Backing</span> <span class=n>Filesystem</span><span class=p>:</span> <span class=n>extfs</span>
+</span></span><span class=line><span class=cl> <span class=n>Dirs</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> <span class=n>Dirperm1</span> <span class=n>Supported</span><span class=p>:</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl><span class=n>Logging</span> <span class=n>Driver</span><span class=p>:</span> <span class=n>json</span><span class=o>-</span><span class=n>file</span>
+</span></span><span class=line><span class=cl><span class=n>Cgroup</span> <span class=n>Driver</span><span class=p>:</span> <span class=n>cgroupfs</span>
+</span></span><span class=line><span class=cl><span class=n>Plugins</span><span class=p>:</span>
+</span></span><span class=line><span class=cl> <span class=n>Volume</span><span class=p>:</span> <span class=n>local</span>
+</span></span><span class=line><span class=cl> <span class=n>Network</span><span class=p>:</span> <span class=n>overlay</span> <span class=n>null</span> <span class=n>host</span> <span class=n>bridge</span>
+</span></span><span class=line><span class=cl><span class=n>Swarm</span><span class=p>:</span> <span class=n>inactive</span>
+</span></span><span class=line><span class=cl><span class=n>Runtimes</span><span class=p>:</span> <span class=n>runc</span>
+</span></span><span class=line><span class=cl><span class=n>Default</span> <span class=n>Runtime</span><span class=p>:</span> <span class=n>runc</span>
+</span></span><span class=line><span class=cl><span class=n>Security</span> <span class=n>Options</span><span class=p>:</span> <span class=n>seccomp</span>
+</span></span><span class=line><span class=cl><span class=n>Kernel</span> <span class=n>Version</span><span class=p>:</span> <span class=mf>4.4</span><span class=o>.</span><span class=mi>27</span><span class=o>-</span><span class=n>boot2docker</span>
+</span></span><span class=line><span class=cl><span class=n>Operating</span> <span class=n>System</span><span class=p>:</span> <span class=n>Boot2Docker</span> <span class=mf>1.12</span><span class=o>.</span><span class=mi>3</span> <span class=p>(</span><span class=n>TCL</span> <span class=mf>7.2</span><span class=p>);</span> <span class=n>HEAD</span> <span class=p>:</span> <span class=mi>7</span><span class=n>fc7575</span> <span class=o>-</span> <span class=n>Thu</span> <span class=n>Oct</span> <span class=mi>27</span> <span class=mi>17</span><span class=p>:</span><span class=mi>23</span><span class=p>:</span><span class=mi>17</span> <span class=n>UTC</span> <span class=mi>2016</span>
+</span></span><span class=line><span class=cl><span class=n>OSType</span><span class=p>:</span> <span class=n>linux</span>
+</span></span><span class=line><span class=cl><span class=n>Architecture</span><span class=p>:</span> <span class=n>x86_64</span>
+</span></span><span class=line><span class=cl><span class=n>CPUs</span><span class=p>:</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>Total</span> <span class=n>Memory</span><span class=p>:</span> <span class=mf>995.8</span> <span class=n>MiB</span>
+</span></span><span class=line><span class=cl><span class=n>Name</span><span class=p>:</span> <span class=n>node2</span>
+</span></span><span class=line><span class=cl><span class=n>ID</span><span class=p>:</span> <span class=mi>5</span><span class=n>HAZ</span><span class=p>:</span><span class=n>LAGO</span><span class=p>:</span><span class=n>KVF4</span><span class=p>:</span><span class=n>WLRP</span><span class=p>:</span><span class=n>P356</span><span class=p>:</span><span class=n>O6IA</span><span class=p>:</span><span class=n>W6GD</span><span class=p>:</span><span class=mi>3</span><span class=n>LYO</span><span class=p>:</span><span class=n>JGDJ</span><span class=p>:</span><span class=mi>5</span><span class=n>QN6</span><span class=p>:</span><span class=n>U6L6</span><span class=p>:</span><span class=n>J3BZ</span>
+</span></span><span class=line><span class=cl><span class=n>Docker</span> <span class=n>Root</span> <span class=n>Dir</span><span class=p>:</span> <span class=o>/</span><span class=n>mnt</span><span class=o>/</span><span class=n>sda1</span><span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>docker</span>
+</span></span><span class=line><span class=cl><span class=n>Debug</span> <span class=n>Mode</span> <span class=p>(</span><span class=n>client</span><span class=p>):</span> <span class=bp>false</span>
+</span></span><span class=line><span class=cl><span class=n>Debug</span> <span class=n>Mode</span> <span class=p>(</span><span class=n>server</span><span class=p>):</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl> <span class=ne>File</span> <span class=n>Descriptors</span><span class=p>:</span> <span class=mi>13</span>
+</span></span><span class=line><span class=cl> <span class=n>Goroutines</span><span class=p>:</span> <span class=mi>23</span>
+</span></span><span class=line><span class=cl> <span class=n>System</span> <span class=n>Time</span><span class=p>:</span> <span class=mi>2016</span><span class=o>-</span><span class=mi>11</span><span class=o>-</span><span class=mi>22</span><span class=n>T02</span><span class=p>:</span><span class=mi>20</span><span class=p>:</span><span class=mf>13.630275393</span><span class=n>Z</span>
+</span></span><span class=line><span class=cl> <span class=n>EventsListeners</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>Http</span> <span class=n>Proxy</span><span class=p>:</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=n>proxy</span><span class=o>.</span><span class=n>rdh</span><span class=o>.</span><span class=n>ecl</span><span class=o>.</span><span class=n>ntt</span><span class=o>.</span><span class=n>co</span><span class=o>.</span><span class=n>jp</span><span class=p>:</span><span class=mi>20066</span>
+</span></span><span class=line><span class=cl><span class=n>Https</span> <span class=n>Proxy</span><span class=p>:</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=n>proxy</span><span class=o>.</span><span class=n>rdh</span><span class=o>.</span><span class=n>ecl</span><span class=o>.</span><span class=n>ntt</span><span class=o>.</span><span class=n>co</span><span class=o>.</span><span class=n>jp</span><span class=p>:</span><span class=mi>20066</span>
+</span></span><span class=line><span class=cl><span class=n>Username</span><span class=p>:</span> <span class=n>kunalkushwaha</span>
+</span></span><span class=line><span class=cl><span class=n>Registry</span><span class=p>:</span> <span class=n>https</span><span class=p>:</span><span class=o>//</span><span class=n>index</span><span class=o>.</span><span class=n>docker</span><span class=o>.</span><span class=n>io</span><span class=o>/</span><span class=n>v1</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=n>Labels</span><span class=p>:</span>
+</span></span><span class=line><span class=cl> <span class=n>node</span><span class=o>=</span><span class=n>node2</span>
+</span></span><span class=line><span class=cl> <span class=n>storage</span><span class=o>=</span><span class=n>ssd</span>
+</span></span><span class=line><span class=cl> <span class=n>provider</span><span class=o>=</span><span class=n>virtualbox</span>
+</span></span><span class=line><span class=cl><span class=n>Insecure</span> <span class=n>Registries</span><span class=p>:</span>
+</span></span><span class=line><span class=cl> <span class=mf>127.0</span><span class=o>.</span><span class=mf>0.0</span><span class=o>/</span><span class=mi>8</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=o>$</span> <span class=n>eval</span> <span class=o>$</span><span class=p>(</span><span class=n>docker</span><span class=o>-</span><span class=n>machine</span> <span class=n>env</span> <span class=n>default</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>~/</span><span class=n>Downloads</span> <span class=err>⌚</span> <span class=mi>11</span><span class=p>:</span><span class=mi>21</span><span class=p>:</span><span class=mi>03</span>
+</span></span><span class=line><span class=cl><span class=o>$</span> <span class=n>docker</span> <span class=n>swarm</span> <span class=n>init</span> <span class=o>--</span><span class=n>advertise</span><span class=o>-</span><span class=n>addr</span> <span class=mf>192.168</span><span class=o>.</span><span class=mf>99.100</span>
+</span></span><span class=line><span class=cl><span class=n>Swarm</span> <span class=n>initialized</span><span class=p>:</span> <span class=n>current</span> <span class=n>node</span> <span class=p>(</span><span class=mi>4</span><span class=n>r4qnxd8ztxuiusldvrf9gub6</span><span class=p>)</span> <span class=n>is</span> <span class=n>now</span> <span class=n>a</span> <span class=n>manager</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>To</span> <span class=n>add</span> <span class=n>a</span> <span class=n>worker</span> <span class=n>to</span> <span class=n>this</span> <span class=n>swarm</span><span class=p>,</span> <span class=n>run</span> <span class=n>the</span> <span class=n>following</span> <span class=n>command</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>docker</span> <span class=n>swarm</span> <span class=n>join</span> \
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=n>token</span> <span class=n>SWMTKN</span><span class=o>-</span><span class=mi>1</span><span class=o>-</span><span class=mi>1</span><span class=n>b7a6a6ophwlo85ihe3ss2lkg678d0re52p5dqezk5m3xtwur5</span><span class=o>-</span><span class=mi>2</span><span class=n>vsgk9in2cm2b97f3gg3xmii4</span> \
+</span></span><span class=line><span class=cl>    <span class=mf>192.168</span><span class=o>.</span><span class=mf>99.100</span><span class=p>:</span><span class=mi>2377</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>To</span> <span class=n>add</span> <span class=n>a</span> <span class=n>manager</span> <span class=n>to</span> <span class=n>this</span> <span class=n>swarm</span><span class=p>,</span> <span class=n>run</span> <span class=s1>&#39;docker swarm join-token manager&#39;</span> <span class=ow>and</span> <span class=n>follow</span> <span class=n>the</span> <span class=n>instructions</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>~/</span><span class=n>Downloads</span> <span class=err>⌚</span> <span class=mi>11</span><span class=p>:</span><span class=mi>21</span><span class=p>:</span><span class=mi>22</span>
+</span></span><span class=line><span class=cl><span class=o>$</span> <span class=n>eval</span> <span class=o>$</span><span class=p>(</span><span class=n>docker</span><span class=o>-</span><span class=n>machine</span> <span class=n>env</span> <span class=n>node2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>~/</span><span class=n>Downloads</span> <span class=err>⌚</span> <span class=mi>11</span><span class=p>:</span><span class=mi>21</span><span class=p>:</span><span class=mi>37</span>
+</span></span><span class=line><span class=cl><span class=o>$</span> <span class=n>docker</span> <span class=n>swarm</span> <span class=n>join</span> \
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=n>token</span> <span class=n>SWMTKN</span><span class=o>-</span><span class=mi>1</span><span class=o>-</span><span class=mi>1</span><span class=n>b7a6a6ophwlo85ihe3ss2lkg678d0re52p5dqezk5m3xtwur5</span><span class=o>-</span><span class=mi>2</span><span class=n>vsgk9in2cm2b97f3gg3xmii4</span> \
+</span></span><span class=line><span class=cl>    <span class=mf>192.168</span><span class=o>.</span><span class=mf>99.100</span><span class=p>:</span><span class=mi>2377</span>
+</span></span><span class=line><span class=cl><span class=n>This</span> <span class=n>node</span> <span class=n>joined</span> <span class=n>a</span> <span class=n>swarm</span> <span class=n>as</span> <span class=n>a</span> <span class=n>worker</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>$</span> <span class=n>docker</span> <span class=n>info</span>
+</span></span><span class=line><span class=cl><span class=n>Containers</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> <span class=n>Running</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> <span class=n>Paused</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> <span class=n>Stopped</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>Images</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>Server</span> <span class=n>Version</span><span class=p>:</span> <span class=mf>1.12</span><span class=o>.</span><span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=n>Storage</span> <span class=n>Driver</span><span class=p>:</span> <span class=n>aufs</span>
+</span></span><span class=line><span class=cl> <span class=n>Root</span> <span class=n>Dir</span><span class=p>:</span> <span class=o>/</span><span class=n>mnt</span><span class=o>/</span><span class=n>sda1</span><span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>docker</span><span class=o>/</span><span class=n>aufs</span>
+</span></span><span class=line><span class=cl> <span class=n>Backing</span> <span class=n>Filesystem</span><span class=p>:</span> <span class=n>extfs</span>
+</span></span><span class=line><span class=cl> <span class=n>Dirs</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> <span class=n>Dirperm1</span> <span class=n>Supported</span><span class=p>:</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl><span class=n>Logging</span> <span class=n>Driver</span><span class=p>:</span> <span class=n>json</span><span class=o>-</span><span class=n>file</span>
+</span></span><span class=line><span class=cl><span class=n>Cgroup</span> <span class=n>Driver</span><span class=p>:</span> <span class=n>cgroupfs</span>
+</span></span><span class=line><span class=cl><span class=n>Plugins</span><span class=p>:</span>
+</span></span><span class=line><span class=cl> <span class=n>Volume</span><span class=p>:</span> <span class=n>local</span>
+</span></span><span class=line><span class=cl> <span class=n>Network</span><span class=p>:</span> <span class=n>bridge</span> <span class=n>null</span> <span class=n>overlay</span> <span class=n>host</span>
+</span></span><span class=line><span class=cl><span class=n>Swarm</span><span class=p>:</span> <span class=n>active</span>
+</span></span><span class=line><span class=cl> <span class=n>NodeID</span><span class=p>:</span> <span class=mi>5</span><span class=n>z607lfu3sigaliuzcpo0wsrf</span>
+</span></span><span class=line><span class=cl> <span class=n>Is</span> <span class=n>Manager</span><span class=p>:</span> <span class=bp>false</span>
+</span></span><span class=line><span class=cl> <span class=ne>Node</span> <span class=n>Address</span><span class=p>:</span> <span class=mf>192.168</span><span class=o>.</span><span class=mf>99.101</span>
+</span></span><span class=line><span class=cl><span class=n>Runtimes</span><span class=p>:</span> <span class=n>runc</span>
+</span></span><span class=line><span class=cl><span class=n>Default</span> <span class=n>Runtime</span><span class=p>:</span> <span class=n>runc</span>
+</span></span><span class=line><span class=cl><span class=n>Security</span> <span class=n>Options</span><span class=p>:</span> <span class=n>seccomp</span>
+</span></span><span class=line><span class=cl><span class=n>Kernel</span> <span class=n>Version</span><span class=p>:</span> <span class=mf>4.4</span><span class=o>.</span><span class=mi>27</span><span class=o>-</span><span class=n>boot2docker</span>
+</span></span><span class=line><span class=cl><span class=n>Operating</span> <span class=n>System</span><span class=p>:</span> <span class=n>Boot2Docker</span> <span class=mf>1.12</span><span class=o>.</span><span class=mi>3</span> <span class=p>(</span><span class=n>TCL</span> <span class=mf>7.2</span><span class=p>);</span> <span class=n>HEAD</span> <span class=p>:</span> <span class=mi>7</span><span class=n>fc7575</span> <span class=o>-</span> <span class=n>Thu</span> <span class=n>Oct</span> <span class=mi>27</span> <span class=mi>17</span><span class=p>:</span><span class=mi>23</span><span class=p>:</span><span class=mi>17</span> <span class=n>UTC</span> <span class=mi>2016</span>
+</span></span><span class=line><span class=cl><span class=n>OSType</span><span class=p>:</span> <span class=n>linux</span>
+</span></span><span class=line><span class=cl><span class=n>Architecture</span><span class=p>:</span> <span class=n>x86_64</span>
+</span></span><span class=line><span class=cl><span class=n>CPUs</span><span class=p>:</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>Total</span> <span class=n>Memory</span><span class=p>:</span> <span class=mf>995.8</span> <span class=n>MiB</span>
+</span></span><span class=line><span class=cl><span class=n>Name</span><span class=p>:</span> <span class=n>node2</span>
+</span></span><span class=line><span class=cl><span class=n>ID</span><span class=p>:</span> <span class=mi>5</span><span class=n>HAZ</span><span class=p>:</span><span class=n>LAGO</span><span class=p>:</span><span class=n>KVF4</span><span class=p>:</span><span class=n>WLRP</span><span class=p>:</span><span class=n>P356</span><span class=p>:</span><span class=n>O6IA</span><span class=p>:</span><span class=n>W6GD</span><span class=p>:</span><span class=mi>3</span><span class=n>LYO</span><span class=p>:</span><span class=n>JGDJ</span><span class=p>:</span><span class=mi>5</span><span class=n>QN6</span><span class=p>:</span><span class=n>U6L6</span><span class=p>:</span><span class=n>J3BZ</span>
+</span></span><span class=line><span class=cl><span class=n>Docker</span> <span class=n>Root</span> <span class=n>Dir</span><span class=p>:</span> <span class=o>/</span><span class=n>mnt</span><span class=o>/</span><span class=n>sda1</span><span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>docker</span>
+</span></span><span class=line><span class=cl><span class=n>Debug</span> <span class=n>Mode</span> <span class=p>(</span><span class=n>client</span><span class=p>):</span> <span class=bp>false</span>
+</span></span><span class=line><span class=cl><span class=n>Debug</span> <span class=n>Mode</span> <span class=p>(</span><span class=n>server</span><span class=p>):</span> <span class=bp>true</span>
+</span></span><span class=line><span class=cl> <span class=ne>File</span> <span class=n>Descriptors</span><span class=p>:</span> <span class=mi>22</span>
+</span></span><span class=line><span class=cl> <span class=n>Goroutines</span><span class=p>:</span> <span class=mi>68</span>
+</span></span><span class=line><span class=cl> <span class=n>System</span> <span class=n>Time</span><span class=p>:</span> <span class=mi>2016</span><span class=o>-</span><span class=mi>11</span><span class=o>-</span><span class=mi>22</span><span class=n>T02</span><span class=p>:</span><span class=mi>21</span><span class=p>:</span><span class=mf>46.868274301</span><span class=n>Z</span>
+</span></span><span class=line><span class=cl> <span class=n>EventsListeners</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>Http</span> <span class=n>Proxy</span><span class=p>:</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=n>proxy</span><span class=o>.</span><span class=n>rdh</span><span class=o>.</span><span class=n>ecl</span><span class=o>.</span><span class=n>ntt</span><span class=o>.</span><span class=n>co</span><span class=o>.</span><span class=n>jp</span><span class=p>:</span><span class=mi>20066</span>
+</span></span><span class=line><span class=cl><span class=n>Https</span> <span class=n>Proxy</span><span class=p>:</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=n>proxy</span><span class=o>.</span><span class=n>rdh</span><span class=o>.</span><span class=n>ecl</span><span class=o>.</span><span class=n>ntt</span><span class=o>.</span><span class=n>co</span><span class=o>.</span><span class=n>jp</span><span class=p>:</span><span class=mi>20066</span>
+</span></span><span class=line><span class=cl><span class=n>Username</span><span class=p>:</span> <span class=n>kunalkushwaha</span>
+</span></span><span class=line><span class=cl><span class=n>Registry</span><span class=p>:</span> <span class=n>https</span><span class=p>:</span><span class=o>//</span><span class=n>index</span><span class=o>.</span><span class=n>docker</span><span class=o>.</span><span class=n>io</span><span class=o>/</span><span class=n>v1</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=n>Labels</span><span class=p>:</span>
+</span></span><span class=line><span class=cl> <span class=n>node</span><span class=o>=</span><span class=n>node2</span>
+</span></span><span class=line><span class=cl> <span class=n>storage</span><span class=o>=</span><span class=n>ssd</span>
+</span></span><span class=line><span class=cl> <span class=n>provider</span><span class=o>=</span><span class=n>virtualbox</span>
+</span></span><span class=line><span class=cl><span class=n>Insecure</span> <span class=n>Registries</span><span class=p>:</span>
+</span></span><span class=line><span class=cl> <span class=mf>127.0</span><span class=o>.</span><span class=mf>0.0</span><span class=o>/</span><span class=mi>8</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=n>docker</span> <span class=n>service</span> <span class=n>create</span> \
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>replicas</span> <span class=mi>2</span> \
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>name</span> <span class=n>helloworld1</span> \
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>constraint</span> <span class=s1>&#39;engine.labels.storage == ssd&#39;</span> \
+</span></span><span class=line><span class=cl>  <span class=n>alpine</span> <span class=n>ping</span> <span class=n>docker</span><span class=o>.</span><span class=n>com</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=o>~/</span><span class=n>work</span><span class=o>/</span><span class=n>GlobalMentorWeek</span> <span class=n>on</span> <span class=err></span> <span class=n>master</span><span class=o>!</span> <span class=err>⌚</span> <span class=mi>13</span><span class=p>:</span><span class=mi>53</span><span class=p>:</span><span class=mi>25</span>
+</span></span><span class=line><span class=cl>  <span class=o>$</span> <span class=n>docker</span> <span class=n>node</span> <span class=n>update</span> <span class=o>--</span><span class=n>label</span><span class=o>-</span><span class=n>add</span> <span class=n>key1</span><span class=o>=</span><span class=n>master</span> <span class=n>default</span>
+</span></span><span class=line><span class=cl>  <span class=n>default</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=o>~/</span><span class=n>work</span><span class=o>/</span><span class=n>GlobalMentorWeek</span> <span class=n>on</span> <span class=err></span> <span class=n>master</span><span class=o>!</span> <span class=err>⌚</span> <span class=mi>13</span><span class=p>:</span><span class=mi>54</span><span class=p>:</span><span class=mi>05</span>
+</span></span><span class=line><span class=cl>  <span class=o>$</span> <span class=n>docker</span> <span class=n>node</span> <span class=n>inspect</span> <span class=mi>4</span><span class=n>r4qnxd8ztxuiusldvrf9gub6</span> <span class=o>--</span><span class=n>pretty</span>
+</span></span><span class=line><span class=cl>  <span class=n>ID</span><span class=p>:</span>			<span class=mi>4</span><span class=n>r4qnxd8ztxuiusldvrf9gub6</span>
+</span></span><span class=line><span class=cl>  <span class=n>Labels</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>   <span class=o>-</span> <span class=n>key</span> <span class=o>=</span> <span class=n>primary</span>
+</span></span><span class=line><span class=cl>   <span class=o>-</span> <span class=n>key1</span> <span class=o>=</span> <span class=n>master</span>
+</span></span><span class=line><span class=cl>  <span class=n>Hostname</span><span class=p>:</span>		<span class=n>default</span>
+</span></span><span class=line><span class=cl>  <span class=n>Joined</span> <span class=n>at</span><span class=p>:</span>		<span class=mi>2016</span><span class=o>-</span><span class=mi>11</span><span class=o>-</span><span class=mi>22</span> <span class=mi>02</span><span class=p>:</span><span class=mi>21</span><span class=p>:</span><span class=mf>21.596149476</span> <span class=o>+</span><span class=mi>0000</span> <span class=n>utc</span>
+</span></span><span class=line><span class=cl>  <span class=n>Status</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>   <span class=n>State</span><span class=p>:</span>			<span class=n>Ready</span>
+</span></span><span class=line><span class=cl>   <span class=n>Availability</span><span class=p>:</span>		<span class=n>Active</span>
+</span></span><span class=line><span class=cl>  <span class=n>Manager</span> <span class=n>Status</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>   <span class=n>Address</span><span class=p>:</span>		<span class=mf>192.168</span><span class=o>.</span><span class=mf>99.100</span><span class=p>:</span><span class=mi>2377</span>
+</span></span><span class=line><span class=cl>   <span class=n>Raft</span> <span class=n>Status</span><span class=p>:</span>		<span class=n>Reachable</span>
+</span></span><span class=line><span class=cl>   <span class=n>Leader</span><span class=p>:</span>		<span class=n>Yes</span>
+</span></span><span class=line><span class=cl>  <span class=n>Platform</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>   <span class=n>Operating</span> <span class=n>System</span><span class=p>:</span>	<span class=n>linux</span>
+</span></span><span class=line><span class=cl>   <span class=n>Architecture</span><span class=p>:</span>		<span class=n>x86_64</span>
+</span></span><span class=line><span class=cl>  <span class=n>Resources</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>   <span class=n>CPUs</span><span class=p>:</span>			<span class=mi>1</span>
+</span></span><span class=line><span class=cl>   <span class=n>Memory</span><span class=p>:</span>		<span class=mf>995.8</span> <span class=n>MiB</span>
+</span></span><span class=line><span class=cl>  <span class=n>Plugins</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>Network</span><span class=p>:</span>		<span class=n>bridge</span><span class=p>,</span> <span class=n>host</span><span class=p>,</span> <span class=n>null</span><span class=p>,</span> <span class=n>overlay</span>
+</span></span><span class=line><span class=cl>    <span class=n>Volume</span><span class=p>:</span>		<span class=n>local</span>
+</span></span><span class=line><span class=cl>  <span class=n>Engine</span> <span class=n>Version</span><span class=p>:</span>		<span class=mf>1.12</span><span class=o>.</span><span class=mi>3</span>
+</span></span><span class=line><span class=cl>  <span class=n>Engine</span> <span class=n>Labels</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>   <span class=o>-</span> <span class=n>node</span> <span class=o>=</span> <span class=n>node1</span>
+</span></span><span class=line><span class=cl>   <span class=o>-</span> <span class=n>provider</span> <span class=o>=</span> <span class=n>virtualbox</span>
+</span></span><span class=line><span class=cl>   <span class=o>-</span> <span class=n>storage</span> <span class=o>=</span> <span class=n>hdd</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>$</span> <span class=n>docker</span> <span class=n>service</span> <span class=n>create</span> \
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>replicas</span> <span class=mi>2</span> \
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>name</span> <span class=n>helloworld2</span> \
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>constraint</span> <span class=s1>&#39;node.labels.key == primary&#39;</span> \
+</span></span><span class=line><span class=cl>  <span class=n>alpine</span> <span class=n>ping</span> <span class=n>docker</span><span class=o>.</span><span class=n>com</span>
+</span></span><span class=line><span class=cl><span class=n>b2g40mrmok4ii9wcmqdlgv7s0</span>
+</span></span></code></pre></div></div><div class=post-foot><div class=tags><a class=tag href=/tags/docker/>Docker</a><a class=tag href=/tags/swarm/>Swarm</a></div><p class=signoff>Thanks for reading. Disagreements and counter-examples welcome.</p><nav class=post-nav aria-label="More posts"><a class=prev href=/2016/10/14/understanding-infrakit/><div class=dir>← Previous</div><div class=ttl>Understanding Infrakit</div></a><a class=next href=/2020/01/28/configmaps-secrets-and-pods/><div class=dir>Next →</div><div class=ttl>ConfigMaps, Secrets and Pods</div></a></nav></div></article></div></div></main><footer class=site-foot><div class=wrap-wide><div class=cols><p class=blurb>Written while building. If it resonated, the best compliment is to argue with it.</p><div class=links><a href=https://github.com/kunalkushwaha aria-label=GitHub rel=me>GitHub</a><a href=https://www.linkedin.com/in/kunalkushwaha/ aria-label=LinkedIn rel=me>LinkedIn</a><a href=https://x.com/kunalkushwaha aria-label=X rel=me>X / Twitter</a><a href=mailto:kunal.kushwaha@gmail.com>Email</a></div></div><p class=fine>© 2026 Kunal Kushwaha · Leading AI strategy and applied systems · Built with Hugo & the Praxis theme.</p></div></footer><script src=/js/app.min.ab1fc0504fe5d7bc789f2a8b7fda2fa29c8c2a836ce3f3f26257764bf016161a.js integrity="sha256-qx/AUE/l17x4nyqLf9ovopyMKoNs4/PyYld2S/AWFho=" defer></script></body></html>

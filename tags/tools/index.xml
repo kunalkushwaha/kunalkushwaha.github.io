@@ -1,20 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Tools on Kunal Kushwaha</title>
-    <link>https://kunalkushwaha.github.io/tags/tools/</link>
-    <description>Recent content in Tools on Kunal Kushwaha</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Thu, 06 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://kunalkushwaha.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</title>
-      <link>https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/</link>
-      <pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/</guid>
-      <description></description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tools on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/tools/</link><description>Recent content in Tools on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 06 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml"/><item><title>Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go</title><link>https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/</link><pubDate>Thu, 06 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/</guid><description>&lt;p&gt;&lt;figure&gt;
+ &lt;div class="fig-card"&gt;&lt;img src="agentic-mcp-header.png" alt="agentic workflow with tools" loading="lazy" decoding="async"&gt;
+ &lt;/div&gt;&lt;figcaption&gt;agentic workflow with tools&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;If you’re new to building AI agents in Go, you might think integrating tools and external services is complex. &lt;strong&gt;It’s not.&lt;/strong&gt; AgenticGoKit makes tools—including Model Context Protocol (MCP) tools—incredibly simple to use.&lt;/p&gt;</description></item></channel></rss>

@@ -1,20 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Announcements on Kunal Kushwaha</title>
-    <link>https://kunalkushwaha.github.io/categories/announcements/</link>
-    <description>Recent content in Announcements on Kunal Kushwaha</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Sat, 20 Dec 2025 09:00:00 +0000</lastBuildDate>
-    <atom:link href="https://kunalkushwaha.github.io/categories/announcements/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Announcing v1beta: Production-Ready AI Agents in Go</title>
-      <link>https://kunalkushwaha.github.io/2025/12/20/announcing-v1beta-production-ready-ai-agents-in-go/</link>
-      <pubDate>Sat, 20 Dec 2025 09:00:00 +0000</pubDate>
-      <guid>https://kunalkushwaha.github.io/2025/12/20/announcing-v1beta-production-ready-ai-agents-in-go/</guid>
-      <description>We&amp;rsquo;re excited to announce v1beta, our next-generation API for building AI agents in Go. With streaming-first architecture, multimodal support, and powerful workflow orchestration, building production-ready AI systems has never been easier.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Announcements on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/categories/announcements/</link><description>Recent content in Announcements on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 20 Dec 2025 09:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/categories/announcements/index.xml" rel="self" type="application/rss+xml"/><item><title>Announcing v1beta: Production-Ready AI Agents in Go</title><link>https://kunalkushwaha.github.io/2025/12/20/announcing-v1beta-production-ready-ai-agents-in-go/</link><pubDate>Sat, 20 Dec 2025 09:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/2025/12/20/announcing-v1beta-production-ready-ai-agents-in-go/</guid><description>&lt;p&gt;&lt;figure&gt;
+ &lt;div class="fig-card"&gt;&lt;img src="beta-release.png" alt="AgenticGoKit v1beta" loading="lazy" decoding="async"&gt;
+ &lt;/div&gt;&lt;figcaption&gt;AgenticGoKit v1beta&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id="tldr"&gt;TL;DR&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;AgenticGoKit v1beta is here (v0.5.0).&lt;/strong&gt; Build AI agents in Go with first-class streaming, multimodal input, multi-agent workflows, and support for major LLM providers. Whether you’re building your first chatbot or orchestrating complex agent teams, v1beta keeps it simple.&lt;/p&gt;</description></item></channel></rss>

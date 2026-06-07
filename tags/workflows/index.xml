@@ -1,34 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Workflows on Kunal Kushwaha</title>
-    <link>https://kunalkushwaha.github.io/tags/workflows/</link>
-    <description>Recent content in Workflows on Kunal Kushwaha</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://kunalkushwaha.github.io/tags/workflows/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</title>
-      <link>https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/</link>
-      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/</guid>
-      <description>Build real-time AI editorial workflows in Go with AgenticGoKit — loop revisions, stream progress to a live UI, and publish polished stories.</description>
-    </item>
-    <item>
-      <title>Building Context-Aware AI Agents with Memory in AgenticGoKit</title>
-      <link>https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/</link>
-      <pubDate>Thu, 30 Oct 2025 02:18:55 +0900</pubDate>
-      <guid>https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Streaming AI Responses in Go with AgenticGoKit</title>
-      <link>https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/</link>
-      <pubDate>Sun, 26 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/</guid>
-      <description></description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Workflows on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/workflows/</link><description>Recent content in Workflows on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/workflows/index.xml" rel="self" type="application/rss+xml"/><item><title>Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit</title><link>https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/</link><pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/</guid><description>&lt;p&gt;&lt;figure&gt;
+ &lt;div class="fig-card"&gt;&lt;img src="writer-workflow-hero.PNG" alt="writer workflow" loading="lazy" decoding="async"&gt;
+ &lt;/div&gt;&lt;figcaption&gt;writer workflow&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Picture this:&lt;/em&gt; You ask for a bedtime story. A Writer agent drafts it in seconds—intentionally making a few typos. An Editor agent reads it, spots “tyme” instead of “time,” and fires back with corrections. The Writer fixes the issues and resubmits. The Editor approves. A Publisher agent then polishes everything into a beautiful final piece.&lt;/p&gt;</description></item><item><title>Building Multi-Agent Workflows in Go: Simpler Than You Think</title><link>https://kunalkushwaha.github.io/2025/10/20/building-multi-agent-workflows/</link><pubDate>Mon, 20 Oct 2025 00:13:47 +0900</pubDate><guid>https://kunalkushwaha.github.io/2025/10/20/building-multi-agent-workflows/</guid><description>&lt;p&gt;&lt;strong&gt;TL;DR&lt;/strong&gt;: Create a professional research-to-report pipeline with two AI agents in under 60 lines of Go code.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-challenge"&gt;The Challenge&lt;/h2&gt;
+&lt;p&gt;You want to build an AI system that:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Researches a topic thoroughly&lt;/li&gt;
+&lt;li&gt;Synthesizes findings into a professional report&lt;/li&gt;
+&lt;li&gt;Handles the orchestration automatically&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Traditionally, this means wrestling with:&lt;/p&gt;</description></item></channel></rss>

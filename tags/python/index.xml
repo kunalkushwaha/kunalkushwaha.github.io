@@ -1,20 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Python on Kunal Kushwaha</title>
-    <link>https://kunalkushwaha.github.io/tags/python/</link>
-    <description>Recent content in Python on Kunal Kushwaha</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <copyright>Kunal Kushwaha</copyright>
-    <lastBuildDate>Sun, 30 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://kunalkushwaha.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Building a Local Document Reader with Streaming TTS</title>
-      <link>https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/</link>
-      <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/</guid>
-      <description></description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/python/</link><description>Recent content in Python on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 30 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>Building a Local Document Reader with Streaming TTS</title><link>https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/</guid><description>&lt;p&gt;&lt;figure&gt;
+ &lt;div class="fig-card"&gt;&lt;img src="KittenTTS-blog.PNG" alt="KittenTTS demo" loading="lazy" decoding="async"&gt;
+ &lt;/div&gt;&lt;figcaption&gt;KittenTTS demo&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Ever wished you could just press play on a long document and have it read to you without uploading anything to the cloud? That’s exactly what this project does. Feed it text, and within milliseconds, you’re hearing it narrated. No waiting, no cloud APIs, just your machine doing the work.&lt;/p&gt;</description></item></channel></rss>

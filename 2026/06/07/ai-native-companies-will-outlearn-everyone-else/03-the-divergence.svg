@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="400" viewBox="0 0 700 400">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+</defs>
+<rect x="4" y="4" width="692" height="392" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="350" y="46" text-anchor="middle" class="sd" font-size="14" font-weight="600" fill="#9a3415" letter-spacing="3">THE DIVERGENCE</text>
+<g transform="translate(40,60)">
+  <line x1="64" y1="40" x2="64" y2="262" stroke="#c9c0af" stroke-width="1.5"/>
+  <line x1="64" y1="262" x2="568" y2="262" stroke="#c9c0af" stroke-width="1.5"/>
+  <text x="50" y="150" text-anchor="middle" class="st" font-size="13" fill="#6f685a" transform="rotate(-90 50 150)">Capability &amp; learning</text>
+  <text x="316" y="294" text-anchor="middle" class="st" font-size="13" fill="#6f685a">Time</text>
+  <path d="M64 250 C 220 244, 360 228, 568 196 C 360 150, 220 96, 64 60 Z" fill="#c0441f" opacity="0.08"/>
+  <path d="M64 250 C 200 240, 360 224, 568 196" fill="none" stroke="#9a9080" stroke-width="3"/>
+  <path d="M64 250 C 250 236, 360 178, 568 60" fill="none" stroke="#c0441f" stroke-width="3.4"/>
+  <circle cx="568" cy="196" r="5" fill="#9a9080"/>
+  <text x="556" y="184" text-anchor="end" class="sd" font-size="14" font-weight="600" fill="#6f685a">Traditional</text>
+  <circle cx="568" cy="60" r="5.5" fill="#c0441f"/>
+  <text x="556" y="54" text-anchor="end" class="sd" font-size="14" font-weight="600" fill="#9a3415">AI-Native</text>
+  <text x="300" y="140" text-anchor="middle" class="st" font-style="italic" font-size="12.5" fill="#b08a6e">the widening gap</text>
+</g>
+</svg>

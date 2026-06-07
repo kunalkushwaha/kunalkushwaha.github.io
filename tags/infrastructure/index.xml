@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Infrastructure on Kunal Kushwaha</title><link>https://kunalkushwaha.github.io/tags/infrastructure/</link><description>Recent content in Infrastructure on Kunal Kushwaha</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 14 Oct 2016 14:05:58 +0900</lastBuildDate><atom:link href="https://kunalkushwaha.github.io/tags/infrastructure/index.xml" rel="self" type="application/rss+xml"/><item><title>Understanding Infrakit</title><link>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</link><pubDate>Fri, 14 Oct 2016 14:05:58 +0900</pubDate><guid>https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/</guid><description>&lt;p&gt;Docker recently open sourced new project &lt;a href="https://github.com/docker/infrakit"&gt;Infrakit&lt;/a&gt; at ContainerCon 2016, Berlin.&lt;/p&gt;
+&lt;p&gt;As project describes itself as&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“A toolkit for creating and managing declarative, self-healing infrastructure”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Lets try to understand what it does and how it adds value to existing tools.&lt;/p&gt;</description></item></channel></rss>
