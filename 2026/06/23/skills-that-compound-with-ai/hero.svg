@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="380" viewBox="0 0 720 380">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+</defs>
+<rect x="4" y="4" width="712" height="372" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="44" y="52" class="sd" font-size="14" font-weight="600" fill="#9a3415" letter-spacing="3">ON BUILDING WITH AI</text>
+
+<!-- converging lines -->
+<g stroke="#c8a24a" stroke-width="1.1" opacity="0.85">
+  <line x1="150" y1="150" x2="520" y2="196"/>
+  <line x1="150" y1="196" x2="520" y2="196"/>
+  <line x1="100" y1="242" x2="520" y2="196"/>
+</g>
+
+<!-- grid of small "build" blocks, now cheap -->
+<g fill="none" stroke="#c9c0af" stroke-width="1.4">
+  <rect x="48"  y="96"  width="40" height="40" rx="7"/>
+  <rect x="98"  y="96"  width="40" height="40" rx="7"/>
+  <rect x="48"  y="146" width="40" height="40" rx="7"/>
+  <rect x="98"  y="146" width="40" height="40" rx="7"/>
+  <rect x="48"  y="196" width="40" height="40" rx="7"/>
+  <rect x="98"  y="196" width="40" height="40" rx="7"/>
+  <rect x="48"  y="246" width="40" height="40" rx="7"/>
+</g>
+<g stroke="#c9c0af" stroke-width="1.1" opacity="0.7">
+  <line x1="111" y1="150" x2="111" y2="182"/>
+  <line x1="125" y1="150" x2="125" y2="182"/>
+  <line x1="111" y1="200" x2="111" y2="232"/>
+  <line x1="125" y1="200" x2="125" y2="232"/>
+</g>
+<text x="48" y="312" class="st" font-size="13" fill="#a89e8b" font-style="italic">building, now cheap</text>
+
+<!-- the problem worth solving -->
+<circle cx="572" cy="196" r="96" fill="none" stroke="#c8a24a" stroke-width="2.4"/>
+<circle cx="572" cy="196" r="9" fill="#c8a24a"/>
+<text x="572" y="320" text-anchor="middle" class="st" font-size="13" fill="#6f685a">the problem worth solving</text>
+</svg>

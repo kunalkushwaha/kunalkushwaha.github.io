@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="380" viewBox="0 0 720 380">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+</defs>
+<rect x="4" y="4" width="712" height="372" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+
+<!-- BEFORE -->
+<text x="44" y="74" class="sd" font-size="13" font-weight="600" fill="#6f685a" letter-spacing="2">BEFORE</text>
+<text x="44" y="50" class="sd" font-size="16" font-weight="600" fill="#1f1b16">When building was hard</text>
+<g>
+  <rect x="148" y="58" width="150" height="44" rx="6" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+  <text x="223" y="86" text-anchor="middle" class="st" font-size="14" fill="#9a3415">Problem</text>
+  <rect x="306" y="58" width="362" height="44" rx="6" fill="#1f1b16"/>
+  <text x="487" y="86" text-anchor="middle" class="st" font-size="14" fill="#f3ede1">Building</text>
+</g>
+
+<line x1="44" y1="158" x2="676" y2="158" stroke="#e3dccd" stroke-width="1.2"/>
+
+<!-- NOW -->
+<text x="44" y="232" class="sd" font-size="13" font-weight="600" fill="#6f685a" letter-spacing="2">NOW</text>
+<text x="44" y="208" class="sd" font-size="16" font-weight="600" fill="#1f1b16">When building is cheap</text>
+<g>
+  <rect x="148" y="216" width="436" height="44" rx="6" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+  <text x="366" y="244" text-anchor="middle" class="st" font-size="14" fill="#9a3415">Problem and the person you build for</text>
+  <rect x="592" y="216" width="76" height="44" rx="6" fill="#1f1b16"/>
+  <text x="630" y="244" text-anchor="middle" class="st" font-size="13" fill="#f3ede1">Building</text>
+</g>
+
+<text x="44" y="322" class="st" font-size="13" fill="#a89e8b" font-style="italic">The hard part moved from how to build to what is worth building.</text>
+</svg>

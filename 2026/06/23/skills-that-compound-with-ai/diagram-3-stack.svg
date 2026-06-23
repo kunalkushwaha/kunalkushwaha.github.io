@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+<marker id="down" markerWidth="9" markerHeight="9" refX="4.5" refY="7" orient="auto"><path d="M0 0 L9 0 L4.5 8 z" fill="#3a352e"/></marker>
+</defs>
+<rect x="4" y="4" width="712" height="352" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="44" y="50" class="sd" font-size="16" font-weight="600" fill="#1f1b16">The two traits, stacked</text>
+<text x="44" y="74" class="st" font-size="13" fill="#6f685a">Empathy picks the problem. Problem-first thinking solves it.</text>
+
+<!-- Empathy box -->
+<rect x="180" y="108" width="360" height="74" rx="8" fill="#fffdf8" stroke="#c8a24a" stroke-width="2"/>
+<text x="360" y="142" text-anchor="middle" class="sd" font-size="18" font-weight="600" fill="#9a3415">Empathy</text>
+<text x="360" y="166" text-anchor="middle" class="st" font-size="13" fill="#6f685a">tells you which problem is worth solving</text>
+
+<!-- arrow -->
+<line x1="360" y1="184" x2="360" y2="222" stroke="#3a352e" stroke-width="1.8" marker-end="url(#down)"/>
+
+<!-- Problem-first box -->
+<rect x="180" y="232" width="360" height="74" rx="8" fill="#1f1b16"/>
+<text x="360" y="266" text-anchor="middle" class="sd" font-size="18" font-weight="600" fill="#fffdf8">Problem-first thinking</text>
+<text x="360" y="290" text-anchor="middle" class="st" font-size="13" fill="#c8a24a">turns the right problem into the right build</text>
+</svg>

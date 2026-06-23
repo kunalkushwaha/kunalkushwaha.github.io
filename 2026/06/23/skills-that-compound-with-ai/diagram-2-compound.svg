@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="380" viewBox="0 0 720 380">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+</defs>
+<rect x="4" y="4" width="712" height="372" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="44" y="50" class="sd" font-size="16" font-weight="600" fill="#1f1b16">Same tool. Different ceiling.</text>
+
+<!-- axes -->
+<line x1="96" y1="86" x2="96" y2="300" stroke="#3a352e" stroke-width="1.6"/>
+<line x1="96" y1="300" x2="660" y2="300" stroke="#3a352e" stroke-width="1.6"/>
+<text x="62" y="200" text-anchor="middle" class="st" font-size="12" fill="#6f685a" transform="rotate(-90 62 200)">Value created</text>
+<text x="378" y="332" text-anchor="middle" class="st" font-size="12" fill="#6f685a">Time and number of builds</text>
+
+<!-- solution-first: plateaus -->
+<path d="M96 290 C 200 150, 300 138, 640 136" fill="none" stroke="#b9b1a0" stroke-width="3"/>
+<circle cx="640" cy="136" r="6" fill="#b9b1a0"/>
+<text x="632" y="120" text-anchor="end" class="st" font-size="13" fill="#8a8273">Solution-first: plateaus</text>
+
+<!-- problem-first: compounds -->
+<path d="M96 290 C 320 282, 470 200, 640 104" fill="none" stroke="#c8a24a" stroke-width="3.2"/>
+<circle cx="640" cy="104" r="6" fill="#c8a24a"/>
+<text x="632" y="88" text-anchor="end" class="sd" font-size="13" font-weight="600" fill="#9a3415">Problem-first: compounds</text>
+</svg>
