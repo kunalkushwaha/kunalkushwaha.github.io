@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="380" viewBox="0 0 720 380">
+<defs>
+<radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f4d27a" stop-opacity="0.95"/><stop offset="0.35" stop-color="#d9a93f" stop-opacity="0.45"/><stop offset="1" stop-color="#d9a93f" stop-opacity="0"/></radialGradient>
+<linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a93f" stop-opacity="0.5"/><stop offset="1" stop-color="#d9a93f" stop-opacity="0.04"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.mono{font-family:'SFMono-Regular',Menlo,Consolas,monospace;}</style>
+</defs>
+<rect x="0" y="0" width="720" height="380" rx="14" fill="#1c1813"/>
+
+<text x="44" y="48" class="mono" font-size="12" fill="#c8a24a" letter-spacing="4">ON BUILDING WITH AI</text>
+
+<!-- beams from each mode up to the judgment node -->
+<polygon points="360,118 195,300 230,300" fill="url(#beam)"/>
+<polygon points="360,118 350,300 370,300" fill="url(#beam)"/>
+<polygon points="360,118 525,300 560,300" fill="url(#beam)"/>
+<!-- vibe: dashed, no layers -->
+<line x1="360" y1="118" x2="180" y2="300" stroke="#6e6045" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
+
+<!-- judgment beacon -->
+<circle cx="360" cy="118" r="60" fill="url(#glow)"/>
+<circle cx="360" cy="118" r="26" fill="none" stroke="#e6c25c" stroke-width="2"/>
+<circle cx="360" cy="118" r="7" fill="#f4d27a"/>
+<text x="360" y="64" text-anchor="middle" class="mono" font-size="11" fill="#e6c25c" letter-spacing="3">YOUR JUDGMENT</text>
+
+<!-- vibe column -->
+<text x="180" y="190" text-anchor="middle" class="mono" font-size="12" fill="#b7a98c">vibe</text>
+<text x="180" y="208" text-anchor="middle" class="mono" font-size="10" fill="#7d7259">no layers</text>
+
+<!-- assisted column -->
+<text x="360" y="190" text-anchor="middle" class="mono" font-size="12" fill="#cdbf9c">assisted</text>
+<rect x="322" y="200" width="76" height="22" rx="11" fill="none" stroke="#c8a24a" stroke-width="1.3"/>
+<text x="360" y="215" text-anchor="middle" class="mono" font-size="10" fill="#e6c25c">you</text>
+
+<!-- agentic column -->
+<text x="540" y="150" text-anchor="middle" class="mono" font-size="12" fill="#cdbf9c">agentic</text>
+<rect x="492" y="160" width="96" height="22" rx="11" fill="none" stroke="#c8a24a" stroke-width="1.3"/>
+<text x="540" y="175" text-anchor="middle" class="mono" font-size="10" fill="#e6c25c">design</text>
+<rect x="492" y="190" width="96" height="22" rx="11" fill="none" stroke="#c8a24a" stroke-width="1.3"/>
+<text x="540" y="205" text-anchor="middle" class="mono" font-size="10" fill="#e6c25c">code / test</text>
+<rect x="492" y="220" width="96" height="22" rx="11" fill="none" stroke="#c8a24a" stroke-width="1.3"/>
+<text x="540" y="235" text-anchor="middle" class="mono" font-size="10" fill="#e6c25c">review</text>
+
+<!-- code footer -->
+<line x1="0" y1="296" x2="720" y2="296" stroke="#322b21" stroke-width="1"/>
+<g class="mono" font-size="10.5" fill="#8c7f63">
+  <text x="44" y="322">def ship(feature):</text>
+  <text x="44" y="338">    work = build(feature)   # the model writes this</text>
+  <text x="44" y="354">    while not review(work):  # who owns this loop?</text>
+  <text x="44" y="370">        work = revise(work)  # ...until the goal is met</text>
+</g>
+<g class="mono" font-size="10.5" fill="#8c7f63" text-anchor="end">
+  <text x="690" y="322"># vibe    : trust the output</text>
+  <text x="690" y="338"># assisted: trust your own eyes</text>
+  <text x="690" y="354"># agentic : trust the loop you built</text>
+  <text x="690" y="370"># judgment: owner = "you"  # never None</text>
+</g>
+</svg>

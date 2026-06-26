@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+<marker id="arr" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#c8a24a"/></marker>
+</defs>
+<rect x="4" y="4" width="712" height="392" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="44" y="48" class="sd" font-size="17" font-weight="600" fill="#1f1b16">Who holds judgment</text>
+<text x="44" y="72" class="st" font-size="13" fill="#6f685a">The mode is not about the tool. It is about who checks the work.</text>
+
+<!-- columns -->
+<!-- VIBE -->
+<text x="160" y="118" text-anchor="middle" class="sd" font-size="16" font-weight="600" fill="#1f1b16">Vibe</text>
+<rect x="70" y="132" width="180" height="50" rx="7" fill="#1f1b16"/>
+<text x="160" y="162" text-anchor="middle" class="st" font-size="13" fill="#f3ede1">AI writes it</text>
+<rect x="70" y="196" width="180" height="50" rx="7" fill="none" stroke="#b9b1a0" stroke-width="1.4" stroke-dasharray="5 5"/>
+<text x="160" y="226" text-anchor="middle" class="st" font-size="13" fill="#8a8273">nobody checks</text>
+<text x="160" y="278" text-anchor="middle" class="st" font-size="12" fill="#9a9483">you trust the output</text>
+
+<!-- ASSISTED -->
+<text x="360" y="118" text-anchor="middle" class="sd" font-size="16" font-weight="600" fill="#1f1b16">Assisted</text>
+<rect x="270" y="132" width="180" height="50" rx="7" fill="#1f1b16"/>
+<text x="360" y="162" text-anchor="middle" class="st" font-size="13" fill="#f3ede1">AI writes it</text>
+<rect x="270" y="196" width="180" height="50" rx="7" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+<text x="360" y="226" text-anchor="middle" class="st" font-size="13" fill="#9a3415">you check every line</text>
+<text x="360" y="278" text-anchor="middle" class="st" font-size="12" fill="#9a9483">judgment sits on the code</text>
+
+<!-- AGENTIC -->
+<text x="560" y="118" text-anchor="middle" class="sd" font-size="16" font-weight="600" fill="#1f1b16">Agentic</text>
+<rect x="478" y="132" width="164" height="42" rx="7" fill="#1f1b16"/>
+<text x="560" y="158" text-anchor="middle" class="st" font-size="12.5" fill="#f3ede1">agents write it</text>
+<rect x="478" y="180" width="164" height="42" rx="7" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+<text x="560" y="206" text-anchor="middle" class="st" font-size="12.5" fill="#9a3415">agents check it</text>
+<rect x="478" y="228" width="164" height="42" rx="7" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+<text x="560" y="254" text-anchor="middle" class="st" font-size="12.5" fill="#9a3415">you check the system</text>
+<text x="560" y="298" text-anchor="middle" class="st" font-size="12" fill="#9a9483">judgment sits on the process</text>
+
+<!-- progression arrow -->
+<line x1="70" y1="340" x2="650" y2="340" stroke="#c8a24a" stroke-width="2" marker-end="url(#arr)"/>
+<text x="360" y="372" text-anchor="middle" class="st" font-size="13" fill="#9a3415">judgment moves further from the code, never away from you</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+<clipPath id="bust1"><rect x="120" y="248" width="80" height="40"/></clipPath>
+<clipPath id="bust2"><rect x="312" y="158" width="80" height="40"/></clipPath>
+<clipPath id="bust3"><rect x="504" y="108" width="80" height="40"/></clipPath>
+</defs>
+<rect x="4" y="4" width="712" height="392" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="44" y="48" class="sd" font-size="18" font-weight="600" fill="#1f1b16">The same shape, long before AI</text>
+<text x="44" y="72" class="st" font-size="13" fill="#6f685a">As you climb, you touch less of the code and hold more of the whole.</text>
+
+<text x="40" y="210" text-anchor="middle" class="st" font-size="11" fill="#a89e8b" transform="rotate(-90 40 210)">altitude over the work</text>
+
+<!-- ascending dotted line -->
+<line x1="120" y1="290" x2="600" y2="135" stroke="#c9c0af" stroke-width="1.6" stroke-dasharray="2 6"/>
+
+<!-- Manager (black, low) -->
+<circle cx="160" cy="262" r="20" fill="#1f1b16"/>
+<circle cx="160" cy="300" r="34" fill="#1f1b16" clip-path="url(#bust1)"/>
+<text x="160" y="332" text-anchor="middle" class="sd" font-size="16" font-weight="600" fill="#1f1b16">Manager</text>
+<text x="160" y="354" text-anchor="middle" class="st" font-size="12.5" fill="#6f685a">judges the demo</text>
+<text x="160" y="372" text-anchor="middle" class="st" font-size="11" fill="#a89e8b">reads none of the code</text>
+
+<!-- Senior dev (gold, mid) -->
+<circle cx="352" cy="172" r="20" fill="#c8a24a"/>
+<circle cx="352" cy="210" r="34" fill="#c8a24a" clip-path="url(#bust2)"/>
+<text x="352" y="242" text-anchor="middle" class="sd" font-size="16" font-weight="600" fill="#9a3415">Senior dev</text>
+<text x="352" y="264" text-anchor="middle" class="st" font-size="12.5" fill="#6f685a">reviews every line</text>
+<text x="352" y="282" text-anchor="middle" class="st" font-size="11" fill="#a89e8b">holds the standard</text>
+
+<!-- Architect (gold, high) -->
+<circle cx="544" cy="122" r="20" fill="#c8a24a"/>
+<circle cx="544" cy="160" r="34" fill="#c8a24a" clip-path="url(#bust3)"/>
+<text x="544" y="192" text-anchor="middle" class="sd" font-size="16" font-weight="600" fill="#9a3415">Architect</text>
+<text x="544" y="214" text-anchor="middle" class="st" font-size="12.5" fill="#6f685a">reviews the system</text>
+<text x="544" y="232" text-anchor="middle" class="st" font-size="11" fill="#a89e8b">trusts the process</text>
+</svg>

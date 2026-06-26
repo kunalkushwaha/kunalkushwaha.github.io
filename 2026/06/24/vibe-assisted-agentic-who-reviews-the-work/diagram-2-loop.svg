@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+<marker id="g" markerWidth="11" markerHeight="11" refX="7" refY="5.5" orient="auto"><path d="M0 0 L11 5.5 L0 11 z" fill="#c8a24a"/></marker>
+<marker id="gray" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#b9b1a0"/></marker>
+</defs>
+<rect x="4" y="4" width="712" height="412" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="44" y="48" class="sd" font-size="17" font-weight="600" fill="#1f1b16">You do not trust the output. You trust the loop.</text>
+<text x="44" y="72" class="st" font-size="13" fill="#6f685a">The agents run this cycle themselves until the feature is actually met.</text>
+
+<!-- loop arcs (clockwise: Design->Code->Test->Review->Design) -->
+<g fill="none" stroke="#c8a24a" stroke-width="2.4">
+  <path d="M432 150 C 510 168, 556 210, 556 232" marker-end="url(#g)"/>
+  <path d="M548 286 C 520 330, 452 348, 432 350" marker-end="url(#g)"/>
+  <path d="M288 350 C 200 348, 172 330, 168 290" marker-end="url(#g)"/>
+  <path d="M172 232 C 176 200, 214 168, 288 150" marker-end="url(#g)"/>
+</g>
+
+<!-- nodes -->
+<rect x="288" y="120" width="144" height="56" rx="26" fill="#1f1b16"/>
+<text x="360" y="154" text-anchor="middle" class="st" font-size="15" fill="#fffdf8">Design</text>
+
+<rect x="540" y="232" width="140" height="56" rx="26" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+<text x="610" y="266" text-anchor="middle" class="st" font-size="15" fill="#9a3415">Code</text>
+
+<rect x="288" y="320" width="144" height="56" rx="26" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+<text x="360" y="354" text-anchor="middle" class="st" font-size="15" fill="#9a3415">Test</text>
+
+<rect x="40" y="232" width="140" height="56" rx="26" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+<text x="110" y="266" text-anchor="middle" class="st" font-size="15" fill="#9a3415">Review</text>
+
+<!-- review fails -> back to code -->
+<line x1="180" y1="252" x2="540" y2="252" stroke="#b9b1a0" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#gray)"/>
+<text x="360" y="244" text-anchor="middle" class="st" font-size="12" fill="#8a8273">review fails, work goes back to code</text>
+<text x="360" y="282" text-anchor="middle" class="sd" font-size="13" font-weight="600" fill="#9a3415">loops until the feature is met</text>
+
+<text x="360" y="404" text-anchor="middle" class="st" font-size="12.5" fill="#9a9483" font-style="italic">Vibe coding has none of this. One output, no loop, nothing to catch the mistake.</text>
+</svg>
