@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+<marker id="g" markerWidth="11" markerHeight="11" refX="7" refY="5.5" orient="auto"><path d="M0 0 L11 5.5 L0 11 z" fill="#c8a24a"/></marker>
+<marker id="gray" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#b9b1a0"/></marker>
+</defs>
+<rect x="4" y="4" width="712" height="412" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="44" y="48" class="sd" font-size="17" font-weight="600" fill="#1f1b16">The loop is law.</text>
+<text x="44" y="72" class="st" font-size="13" fill="#6f685a">Five phases, each ending at an exit gate a machine can check. No gate, no merge.</text>
+
+<!-- phase pills -->
+<g class="st" font-size="14">
+  <rect x="36" y="140" width="100" height="48" rx="24" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+  <text x="86" y="170" text-anchor="middle" fill="#9a3415">Design</text>
+  <rect x="162" y="140" width="112" height="48" rx="24" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+  <text x="218" y="170" text-anchor="middle" fill="#9a3415">Implement</text>
+  <rect x="300" y="140" width="94" height="48" rx="24" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+  <text x="347" y="170" text-anchor="middle" fill="#9a3415">Test</text>
+  <rect x="420" y="140" width="96" height="48" rx="24" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+  <text x="468" y="170" text-anchor="middle" fill="#9a3415">Verify</text>
+  <rect x="542" y="140" width="98" height="48" rx="24" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.8"/>
+  <text x="591" y="170" text-anchor="middle" fill="#9a3415">Review</text>
+</g>
+
+<!-- forward arrows -->
+<g fill="none" stroke="#c8a24a" stroke-width="2.2">
+  <line x1="136" y1="164" x2="154" y2="164" marker-end="url(#g)"/>
+  <line x1="274" y1="164" x2="292" y2="164" marker-end="url(#g)"/>
+  <line x1="394" y1="164" x2="412" y2="164" marker-end="url(#g)"/>
+  <line x1="516" y1="164" x2="534" y2="164" marker-end="url(#g)"/>
+  <line x1="640" y1="164" x2="648" y2="164" marker-end="url(#g)"/>
+</g>
+
+<!-- merge -->
+<rect x="654" y="140" width="54" height="48" rx="24" fill="#1f1b16"/>
+<text x="681" y="169" text-anchor="middle" class="st" font-size="13" fill="#fffdf8">merge</text>
+
+<!-- exit gates under each phase -->
+<g class="st" font-size="11.5" fill="#8a8273" text-anchor="middle" font-style="italic">
+  <text x="86" y="212">note posted</text>
+  <text x="86" y="227">on the issue</text>
+  <text x="218" y="212">build</text>
+  <text x="218" y="227">passes</text>
+  <text x="347" y="212">suites green</text>
+  <text x="347" y="227">locally</text>
+  <text x="468" y="212">seen working</text>
+  <text x="468" y="227">in the browser</text>
+  <text x="591" y="212">findings fixed</text>
+  <text x="591" y="227">or filed</text>
+</g>
+<g class="st" font-size="10" fill="#c8a24a" text-anchor="middle">
+  <text x="86" y="198">▲ exit gate</text>
+  <text x="218" y="198">▲ exit gate</text>
+  <text x="347" y="198">▲ exit gate</text>
+  <text x="468" y="198">▲ exit gate</text>
+  <text x="591" y="198">▲ exit gate</text>
+</g>
+
+<!-- failure returns -->
+<g fill="none" stroke="#b9b1a0" stroke-width="1.6" stroke-dasharray="6 5">
+  <path d="M347 248 C 332 276, 252 276, 224 252" marker-end="url(#gray)"/>
+  <path d="M591 248 C 562 350, 152 350, 92 252" marker-end="url(#gray)"/>
+</g>
+<text x="286" y="288" text-anchor="middle" class="st" font-size="12" fill="#8a8273">a failing test goes back to implementation</text>
+<text x="368" y="348" text-anchor="middle" class="st" font-size="12" fill="#8a8273">a wrong approach goes back to design, amended in public</text>
+
+<text x="360" y="378" text-anchor="middle" class="sd" font-size="13" font-weight="600" fill="#9a3415">gates convert quality from a vibe into a rule</text>
+<text x="360" y="404" text-anchor="middle" class="st" font-size="12.5" fill="#9a9483" font-style="italic">One issue, one branch, one PR. The audit trail is the issue thread.</text>
+</svg>

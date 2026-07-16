@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}.mono{font-family:'SFMono-Regular',Menlo,Consolas,monospace;}</style>
+<marker id="g" markerWidth="11" markerHeight="11" refX="7" refY="5.5" orient="auto"><path d="M0 0 L11 5.5 L0 11 z" fill="#c8a24a"/></marker>
+</defs>
+<rect x="4" y="4" width="712" height="412" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="44" y="48" class="sd" font-size="17" font-weight="600" fill="#1f1b16">The process has to live in the repo and ratchet.</text>
+<text x="44" y="72" class="st" font-size="13" fill="#6f685a">Three rungs of running agents. Only the last one survives the session.</text>
+
+<!-- rung 1: chat driven -->
+<rect x="44" y="240" width="180" height="96" rx="12" fill="none" stroke="#b9b1a0" stroke-width="1.4" stroke-dasharray="5 5"/>
+<text x="134" y="272" text-anchor="middle" class="sd" font-size="14" font-weight="600" fill="#6f685a">chat driven</text>
+<text x="134" y="296" text-anchor="middle" class="st" font-size="12" fill="#8a8273">ask, paste, run, ask again</text>
+<text x="134" y="314" text-anchor="middle" class="st" font-size="12" fill="#8a8273" font-style="italic">nothing survives the scrollback</text>
+
+<!-- rung 2: goals and loops -->
+<rect x="270" y="180" width="180" height="96" rx="12" fill="#fffdf8" stroke="#c8a24a" stroke-width="1.6"/>
+<text x="360" y="212" text-anchor="middle" class="sd" font-size="14" font-weight="600" fill="#9a3415">goals and loops</text>
+<text x="360" y="236" text-anchor="middle" class="st" font-size="12" fill="#8a8273">standing objective, dev loop</text>
+<text x="360" y="254" text-anchor="middle" class="st" font-size="12" fill="#8a8273" font-style="italic">the process lives in my prompts</text>
+
+<!-- rung 3: process in the repo -->
+<rect x="496" y="108" width="180" height="108" rx="12" fill="#1f1b16"/>
+<text x="586" y="138" text-anchor="middle" class="sd" font-size="14" font-weight="600" fill="#fffdf8">process in the repo</text>
+<text x="586" y="162" text-anchor="middle" class="mono" font-size="10.5" fill="#e6c25c">AGENTS.md · issue queue</text>
+<text x="586" y="180" text-anchor="middle" class="mono" font-size="10.5" fill="#e6c25c">sweep · memory · gates</text>
+<text x="586" y="202" text-anchor="middle" class="st" font-size="11.5" fill="#cdbf9c" font-style="italic">every session starts mature</text>
+
+<!-- ascent arrows -->
+<g fill="none" stroke="#c8a24a" stroke-width="2.2">
+  <path d="M228 268 C 248 262, 252 244, 264 232" marker-end="url(#g)"/>
+  <path d="M454 208 C 474 200, 478 178, 490 166" marker-end="url(#g)"/>
+</g>
+
+<!-- ratchet line -->
+<line x1="80" y1="356" x2="640" y2="356" stroke="#d9d1c2" stroke-width="1"/>
+<g fill="none" stroke="#c8a24a" stroke-width="1.8">
+  <path d="M308 356 l-8 -8 M308 356 l-8 8" transform="translate(-140,0)"/>
+  <path d="M308 356 l-8 -8 M308 356 l-8 8"/>
+  <path d="M308 356 l-8 -8 M308 356 l-8 8" transform="translate(140,0)"/>
+</g>
+<text x="360" y="382" text-anchor="middle" class="sd" font-size="13" font-weight="600" fill="#9a3415">the ratchet only turns one way</text>
+<text x="360" y="404" text-anchor="middle" class="st" font-size="12.5" fill="#9a9483" font-style="italic">Each project starts more mature than the last one ended.</text>
+</svg>

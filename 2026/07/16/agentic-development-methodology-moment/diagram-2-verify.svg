@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf8"/><stop offset="1" stop-color="#f3ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}.mono{font-family:'SFMono-Regular',Menlo,Consolas,monospace;}</style>
+</defs>
+<rect x="4" y="4" width="712" height="412" rx="14" fill="url(#card)" stroke="#d9d1c2" stroke-width="1.2"/>
+<text x="44" y="48" class="sd" font-size="17" font-weight="600" fill="#1f1b16">Tests infer. Verification observes.</text>
+<text x="44" y="72" class="st" font-size="13" fill="#6f685a">The same four features, as the test suite saw them and as the screen showed them.</text>
+
+<!-- column headers -->
+<text x="204" y="112" text-anchor="middle" class="mono" font-size="11" fill="#6f685a" letter-spacing="2">WHAT THE TESTS SAID</text>
+<text x="524" y="112" text-anchor="middle" class="mono" font-size="11" fill="#9a3415" letter-spacing="2">WHAT THE SCREEN SHOWED</text>
+
+<!-- divider -->
+<line x1="364" y1="96" x2="364" y2="330" stroke="#d9d1c2" stroke-width="1"/>
+
+<!-- rows -->
+<g class="mono" font-size="12" fill="#4d7a3f">
+  <text x="64" y="150">✓ rotation tests green</text>
+  <text x="64" y="196">✓ path sampled, deterministic</text>
+  <text x="64" y="242">✓ command path all green</text>
+  <text x="64" y="288">✓ scene document validated</text>
+</g>
+<g class="mono" font-size="12" fill="#9a3415">
+  <text x="392" y="150">✗ camera stares into empty sky</text>
+  <text x="392" y="196">✗ flight clips through towers</text>
+  <text x="392" y="242">✗ drag commits, screen stays dead</text>
+  <text x="392" y="288">✗ 3D cube fills the 2D scene</text>
+</g>
+<g class="st" font-size="11.5" fill="#8a8273" font-style="italic">
+  <text x="64" y="167">symmetric rotations hide a transpose</text>
+  <text x="64" y="213">valid data, absurd flight</text>
+  <text x="64" y="259">the bug was pure presentation</text>
+  <text x="64" y="305">nothing asserted what it looked like</text>
+</g>
+
+<line x1="44" y1="330" x2="676" y2="330" stroke="#d9d1c2" stroke-width="1"/>
+<text x="360" y="360" text-anchor="middle" class="sd" font-size="13" font-weight="600" fill="#9a3415">phase 4: run the real app, click the real buttons, read the screenshots</text>
+<text x="360" y="392" text-anchor="middle" class="st" font-size="12.5" fill="#9a9483" font-style="italic">The ad hoc checks hardened into a thirteen assertion sweep that gates every later PR.</text>
+</svg>
