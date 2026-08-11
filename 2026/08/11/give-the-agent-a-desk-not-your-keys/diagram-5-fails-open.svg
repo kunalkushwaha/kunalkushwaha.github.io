@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660" role="img" aria-label="Four layers of the safety system, each of which looks correct from outside whether or not it is working.">
+  <rect width="1200" height="660" fill="#FAF6EF"/>
+
+  <text x="60" y="48" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" letter-spacing="4" fill="#7A6E60">LAYER</text>
+  <text x="392" y="48" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" letter-spacing="4" fill="#7A6E60">WHAT I SAW</text>
+  <text x="700" y="48" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" letter-spacing="4" fill="#C0441F">WHAT WAS ALSO TRUE</text>
+  <line x1="60" y1="66" x2="1140" y2="66" stroke="#DDD1BF" stroke-width="2"/>
+
+  <g font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="21" fill="#2A2622">
+    <text x="60" y="122">The rule</text>
+    <text x="60" y="242">The report</text>
+    <text x="60" y="362">The default</text>
+    <text x="60" y="482">The test</text>
+  </g>
+  <g font-family="Helvetica Neue, Arial, sans-serif" font-size="15" fill="#7A6E60">
+    <text x="60" y="148">host firewall</text>
+    <text x="60" y="268">the setup banner</text>
+    <text x="60" y="388">sealed on install</text>
+    <text x="60" y="508">the break out suite</text>
+  </g>
+
+  <!-- identical "what I saw" pills -->
+  <g>
+    <rect x="392" y="98" width="252" height="56" rx="28" fill="#F1E9DC" stroke="#C8922A" stroke-width="2.5"/>
+    <text x="424" y="133" font-family="Helvetica Neue, Arial, sans-serif" font-size="20" fill="#C8922A">&#10003;</text>
+    <text x="452" y="133" font-family="Helvetica Neue, Arial, sans-serif" font-size="17" fill="#2A2622">contained</text>
+
+    <rect x="392" y="218" width="252" height="56" rx="28" fill="#F1E9DC" stroke="#C8922A" stroke-width="2.5"/>
+    <text x="424" y="253" font-family="Helvetica Neue, Arial, sans-serif" font-size="20" fill="#C8922A">&#10003;</text>
+    <text x="452" y="253" font-family="Helvetica Neue, Arial, sans-serif" font-size="17" fill="#2A2622">contained</text>
+
+    <rect x="392" y="338" width="252" height="56" rx="28" fill="#F1E9DC" stroke="#C8922A" stroke-width="2.5"/>
+    <text x="424" y="373" font-family="Helvetica Neue, Arial, sans-serif" font-size="20" fill="#C8922A">&#10003;</text>
+    <text x="452" y="373" font-family="Helvetica Neue, Arial, sans-serif" font-size="17" fill="#2A2622">contained</text>
+
+    <rect x="392" y="458" width="252" height="56" rx="28" fill="#F1E9DC" stroke="#C8922A" stroke-width="2.5"/>
+    <text x="424" y="493" font-family="Helvetica Neue, Arial, sans-serif" font-size="20" fill="#C8922A">&#10003;</text>
+    <text x="452" y="493" font-family="Helvetica Neue, Arial, sans-serif" font-size="17" fill="#2A2622">contained</text>
+  </g>
+
+  <!-- realities -->
+  <g font-family="Helvetica Neue, Arial, sans-serif" font-size="17" fill="#C0441F">
+    <text x="700" y="118">It silently never loaded, and a rule</text>
+    <text x="700" y="142">that did not load looks like one that did.</text>
+
+    <text x="700" y="238">It printed success before anything was</text>
+    <text x="700" y="262">checked. The truth was one row above, in yellow.</text>
+
+    <text x="700" y="358">Too inconvenient to keep, so its own author</text>
+    <text x="700" y="382">turned it off on day two and left it off.</text>
+
+    <text x="700" y="478">Four false alarms on the first run. A suite</text>
+    <text x="700" y="502">that cries wolf gets muted, and a muted suite</text>
+    <text x="700" y="526">is indistinguishable from no suite at all.</text>
+  </g>
+
+  <line x1="668" y1="98" x2="668" y2="546" stroke="#DDD1BF" stroke-width="2"/>
+  <line x1="60" y1="566" x2="1140" y2="566" stroke="#DDD1BF" stroke-width="2"/>
+  <text x="60" y="602" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="22" fill="#C0441F">Nothing here announces its own absence.</text>
+  <text x="60" y="634" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="22" fill="#C0441F">Each layer has to be checked from somewhere it does not control.</text>
+</svg>

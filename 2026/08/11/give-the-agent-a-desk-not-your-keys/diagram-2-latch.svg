@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" role="img" aria-label="The same firewall rule enforced inside the VM versus on the host interface.">
+  <rect width="1200" height="560" fill="#FAF6EF"/>
+
+  <defs>
+    <marker id="a2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2A2622"/>
+    </marker>
+    <marker id="a2r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#C0441F"/>
+    </marker>
+  </defs>
+
+  <!-- PANEL A -->
+  <text x="60" y="56" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="25" fill="#2A2622">Rule enforced inside the VM</text>
+  <text x="60" y="84" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#7A6E60">The agent has root here. It can flush the rule away.</text>
+
+  <rect x="60" y="112" width="452" height="292" rx="8" fill="#F1E9DC" stroke="#2A2622" stroke-width="3"/>
+  <text x="82" y="146" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" letter-spacing="4" fill="#7A6E60">S A N D B O X</text>
+
+  <rect x="98" y="176" width="150" height="66" rx="6" fill="#FDFBF7" stroke="#2A2622" stroke-width="2.5"/>
+  <text x="173" y="216" text-anchor="middle" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="20" fill="#2A2622">agent (root)</text>
+
+  <!-- broken rule inside -->
+  <rect x="330" y="176" width="140" height="66" rx="6" fill="#F7E7E0" stroke="#C0441F" stroke-width="2.5" stroke-dasharray="9 7"/>
+  <text x="400" y="209" text-anchor="middle" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="20" fill="#C0441F">rule</text>
+  <text x="400" y="230" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#C0441F">flushed</text>
+
+  <line x1="252" y1="209" x2="322" y2="209" stroke="#C0441F" stroke-width="2.5" marker-end="url(#a2r)"/>
+  <text x="287" y="196" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#C0441F">flush</text>
+
+  <line x1="173" y1="246" x2="173" y2="330" stroke="#2A2622" stroke-width="2.5"/>
+  <line x1="173" y1="330" x2="556" y2="330" stroke="#2A2622" stroke-width="2.5" marker-end="url(#a2)"/>
+  <text x="300" y="356" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#2A2622">traffic leaves anyway</text>
+
+  <text x="60" y="452" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" letter-spacing="3" fill="#C0441F">V E R D I C T</text>
+  <text x="60" y="486" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="26" fill="#C0441F">Theatre.</text>
+
+  <!-- divider -->
+  <line x1="600" y1="40" x2="600" y2="520" stroke="#DDD1BF" stroke-width="2"/>
+
+  <!-- PANEL B -->
+  <text x="648" y="56" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="25" fill="#2A2622">Rule enforced on the host interface</text>
+  <text x="648" y="84" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#7A6E60">Same agent. Same root. It cannot reach the rule at all.</text>
+
+  <rect x="648" y="112" width="330" height="292" rx="8" fill="#F1E9DC" stroke="#2A2622" stroke-width="3"/>
+  <text x="670" y="146" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" letter-spacing="4" fill="#7A6E60">S A N D B O X</text>
+
+  <rect x="686" y="176" width="150" height="66" rx="6" fill="#FDFBF7" stroke="#2A2622" stroke-width="2.5"/>
+  <text x="761" y="216" text-anchor="middle" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="20" fill="#2A2622">agent (root)</text>
+
+  <!-- rule outside the box -->
+  <rect x="1008" y="150" width="26" height="216" rx="13" fill="#C0441F"/>
+  <text x="1058" y="238" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="20" fill="#C0441F">rule</text>
+  <text x="1058" y="262" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#7A6E60">on the tap</text>
+  <text x="1058" y="282" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#7A6E60">interface</text>
+
+  <line x1="840" y1="209" x2="998" y2="209" stroke="#2A2622" stroke-width="2.5"/>
+  <circle cx="1004" cy="209" r="0" fill="none"/>
+  <line x1="990" y1="192" x2="1006" y2="226" stroke="#C0441F" stroke-width="4" stroke-linecap="round"/>
+  <line x1="1006" y1="192" x2="990" y2="226" stroke="#C0441F" stroke-width="4" stroke-linecap="round"/>
+
+  <line x1="761" y1="246" x2="761" y2="330" stroke="#DDD1BF" stroke-width="2.5" stroke-dasharray="7 7"/>
+  <line x1="761" y1="330" x2="990" y2="330" stroke="#DDD1BF" stroke-width="2.5" stroke-dasharray="7 7"/>
+  <line x1="990" y1="313" x2="1006" y2="347" stroke="#C0441F" stroke-width="4" stroke-linecap="round"/>
+  <line x1="1006" y1="313" x2="990" y2="347" stroke="#C0441F" stroke-width="4" stroke-linecap="round"/>
+  <text x="700" y="380" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#7A6E60">no route out that it can open</text>
+
+  <text x="648" y="452" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" letter-spacing="3" fill="#C8922A">V E R D I C T</text>
+  <text x="648" y="486" font-family="Iowan Old Style, Palatino, Georgia, serif" font-size="26" fill="#2A2622">A control.</text>
+</svg>
