@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" role="img" aria-labelledby="title desc">
+  <title id="title">Koala network packet flow</title>
+  <desc id="desc">Guest packets travel through koala-net and hit host policy. Permitted traffic reaches its destination. Traffic not on the allowlist is blocked on the host, outside the guest.</desc>
+
+  <!-- background -->
+  <rect width="960" height="320" rx="22" fill="#f5f7fa"/>
+
+  <!-- top label -->
+  <text x="36" y="48" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="1.8" fill="#596579">PACKET FLOW · POLICY ENFORCED OUTSIDE THE GUEST</text>
+
+  <!-- ── Node 1: Linux guest ── -->
+  <rect x="26" y="70" width="152" height="100" rx="14" fill="#ffffff" stroke="#d4dce6" stroke-width="1.5"/>
+  <text x="102" y="112" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#253247">Linux guest</text>
+  <text x="102" y="133" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">Agent traffic</text>
+
+  <!-- arrow 1 -->
+  <line x1="178" y1="120" x2="222" y2="120" stroke="#6583ad" stroke-width="2.5"/>
+  <path d="M215 113 L225 120 L215 127" fill="none" stroke="#6583ad" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- ── Node 2: koala-net (highlighted) ── -->
+  <rect x="226" y="70" width="210" height="100" rx="14" fill="#e8edf3" stroke="#c7d5e7" stroke-width="2"/>
+  <text x="331" y="106" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247">koala-net</text>
+  <text x="331" y="128" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">Go + gVisor netstack</text>
+  <text x="331" y="146" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">Inspects each flow</text>
+
+  <!-- arrow 2 -->
+  <line x1="436" y1="120" x2="478" y2="120" stroke="#6583ad" stroke-width="2.5"/>
+  <path d="M471 113 L481 120 L471 127" fill="none" stroke="#6583ad" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- ── Node 3: Host policy ── -->
+  <rect x="482" y="70" width="180" height="100" rx="14" fill="#ffffff" stroke="#d4dce6" stroke-width="1.5"/>
+  <text x="572" y="110" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#253247">Host policy</text>
+  <text x="572" y="131" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">Allow only granted</text>
+  <text x="572" y="149" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">destinations</text>
+
+  <!-- arrow 3: right (permitted, green) -->
+  <line x1="662" y1="120" x2="704" y2="120" stroke="#648a70" stroke-width="2.5"/>
+  <path d="M697 113 L707 120 L697 127" fill="none" stroke="#648a70" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="683" y="112" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#648a70">permitted</text>
+
+  <!-- ── Node 4: Destination ── -->
+  <rect x="708" y="70" width="196" height="100" rx="14" fill="#edf4ef" stroke="#c6d9cb" stroke-width="2"/>
+  <text x="806" y="110" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#253247">Destination</text>
+  <text x="806" y="131" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">Permitted traffic</text>
+  <text x="806" y="149" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">reaches its target</text>
+
+  <!-- arrow down from Host policy -->
+  <line x1="572" y1="170" x2="572" y2="224" stroke="#b05a48" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <path d="M565 217 L572 229 L579 217" fill="none" stroke="#b05a48" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="582" y="202" font-family="Inter,Arial,sans-serif" font-size="10" fill="#b05a48">blocked</text>
+
+  <!-- ── Node 5: Blocked ── -->
+  <rect x="432" y="232" width="280" height="58" rx="12" fill="#fdf0ee" stroke="#d9b0a8" stroke-width="1.5"/>
+  <text x="572" y="258" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#7a3a2c">Blocked if not granted</text>
+  <text x="572" y="277" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#7a3a2c">Traffic dropped on the host</text>
+
+  <!-- footer caption -->
+  <text x="480" y="308" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12" fill="#68758a">The check runs outside the guest · guest root cannot turn it off</text>
+</svg>

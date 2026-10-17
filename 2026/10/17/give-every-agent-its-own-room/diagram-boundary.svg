@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img" aria-labelledby="title desc">
+  <title id="title">Koala puts access controls on the Mac host</title>
+  <desc id="desc">A Linux workload runs in its own VM. On the Mac, Koala's manager supervises a per-VM Go network helper using gVisor netstack to check guest traffic against policy, and a credential broker.</desc>
+  <rect width="960" height="390" rx="22" fill="#f5f7fa"/>
+  <text x="36" y="48" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="1.8" fill="#596579">ONE WORKLOAD · ONE VM · HOST-OWNED ACCESS</text>
+  <rect x="32" y="76" width="386" height="276" rx="18" fill="#e8edf3" stroke="#cbd4df" stroke-width="2"/>
+  <text x="56" y="110" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#253247">APPLE SILICON MAC</text>
+  <rect x="54" y="128" width="342" height="52" rx="10" fill="#fff" stroke="#d4dce6"/>
+  <circle cx="77" cy="154" r="8" fill="#6583ad"/>
+  <text x="96" y="159" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="650" fill="#253247">Koala manager</text>
+  <text x="54" y="206" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1.2" fill="#596579">CONTROLS STAY OUTSIDE THE GUEST</text>
+  <rect x="54" y="220" width="162" height="102" rx="11" fill="#fff" stroke="#b9c9dd"/>
+  <text x="70" y="247" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#253247">koala-net · Go</text>
+  <text x="70" y="270" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">gVisor network stack</text>
+  <text x="70" y="288" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">Host checks each flow</text>
+  <rect x="232" y="220" width="164" height="102" rx="11" fill="#fff" stroke="#b9c9dd"/>
+  <text x="248" y="247" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#253247">Keychain + broker</text>
+  <text x="248" y="270" font-family="Inter,Arial,sans-serif" font-size="12" fill="#596579">Adds keys only to</text>
+  <text x="248" y="288" font-family="Inter,Arial,sans-serif" font-size="12" fill="#596579">allowed requests</text>
+  <rect x="526" y="76" width="402" height="276" rx="18" fill="#edf4ef" stroke="#c6d9cb" stroke-width="2"/>
+  <text x="550" y="110" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#253247">LINUX VM · ONE WORKLOAD</text>
+  <rect x="550" y="132" width="354" height="76" rx="12" fill="#fff" stroke="#bdd1c2"/>
+  <text x="572" y="161" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247">Own kernel · disk · network stack</text>
+  <text x="572" y="185" font-family="Inter,Arial,sans-serif" font-size="12" fill="#596579">Kernel from Koala runtime · filesystem from OCI image</text>
+  <rect x="550" y="232" width="354" height="84" rx="12" fill="#dcebe0" stroke="#b6cfbd"/>
+  <text x="572" y="266" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" fill="#253247">Agent · job · service</text>
+  <text x="572" y="291" font-family="Inter,Arial,sans-serif" font-size="13" fill="#596579">Can use only access granted from the Mac</text>
+  <path d="M418 153 H518" fill="none" stroke="#6583ad" stroke-width="3"/>
+  <path d="M510 145 L520 153 L510 161" fill="none" stroke="#6583ad" stroke-width="3"/>
+  <text x="430" y="139" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">lifecycle</text>
+  <path d="M526 262 H426 Q414 262 414 250 V243 H400" fill="none" stroke="#648a70" stroke-width="2.5" stroke-dasharray="6 5"/>
+  <path d="M409 237 L399 243 L409 249" fill="none" stroke="#648a70" stroke-width="2.5"/>
+  <text x="422" y="286" font-family="Inter,Arial,sans-serif" font-size="11" fill="#596579">policy checked on host</text>
+</svg>
