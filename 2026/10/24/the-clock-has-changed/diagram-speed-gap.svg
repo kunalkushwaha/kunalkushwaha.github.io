@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="title desc">
+<title id="title">The clock changed on one side</title><desc id="desc">Finding and using a weakness used to take about as long as fixing it. With AI, finding, testing, chaining and acting is compressed. Understanding exposure, deciding, fixing and reaching every deployment still takes as long as before. The difference is the exposure window.</desc>
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#fbeee8"/><line x1="0" y1="0" x2="0" y2="8" stroke="#efc9ba" stroke-width="3"/></pattern></defs>
+<rect width="960" height="470" rx="22" fill="#f5f7fa"/>
+<text x="36" y="48" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#596579" text-anchor="start" letter-spacing="1.8">THE CLOCK CHANGED ON ONE SIDE</text>
+<line x1="230" y1="84" x2="230" y2="300" stroke="#253247" stroke-width="2"/>
+<text x="230" y="76" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#253247" text-anchor="middle" >A weakness exists</text>
+<rect x="450" y="132" width="450" height="66" fill="url(#hatch)" stroke="#e6b9a8" stroke-dasharray="4 4" rx="8"/>
+<text x="675.0" y="162" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#c0441f" text-anchor="middle" >Exposure window</text>
+<text x="675.0" y="184" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#8a4a35" text-anchor="middle" >used before the fix lands everywhere</text>
+<text x="36" y="108" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247" text-anchor="start" >Finding and</text>
+<text x="36" y="127" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247" text-anchor="start" >using it</text>
+<rect x="230" y="96" width="670" height="28" rx="8" fill="none" stroke="#c9b2a8" stroke-dasharray="5 5"/>
+<text x="888" y="115" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#9a8a84" text-anchor="end" >before</text>
+<rect x="231.0" y="96" width="53.0" height="28" rx="6" fill="#c0441f"/>
+<text x="257.5" y="115" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#fff" text-anchor="middle" >Find</text>
+<rect x="286.0" y="96" width="53.0" height="28" rx="6" fill="#c0441f"/>
+<text x="312.5" y="115" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#fff" text-anchor="middle" >Test</text>
+<rect x="341.0" y="96" width="53.0" height="28" rx="6" fill="#c0441f"/>
+<text x="367.5" y="115" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#fff" text-anchor="middle" >Chain</text>
+<rect x="396.0" y="96" width="53.0" height="28" rx="6" fill="#c0441f"/>
+<text x="422.5" y="115" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#fff" text-anchor="middle" >Act</text>
+<text x="449" y="90" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#c0441f" text-anchor="end" >now, with AI</text>
+<text x="36" y="228" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247" text-anchor="start" >Fixing it</text>
+<text x="36" y="247" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247" text-anchor="start" >everywhere</text>
+<rect x="231" y="216" width="199.0" height="34" rx="7" fill="#e8edf3" stroke="#b9c9dd"/>
+<text x="330.5" y="238" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#253247" text-anchor="middle" >Understand exposure</text>
+<rect x="432.0" y="216" width="98.5" height="34" rx="7" fill="#e8edf3" stroke="#b9c9dd"/>
+<text x="481.25" y="238" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#253247" text-anchor="middle" >Decide</text>
+<rect x="532.5" y="216" width="132.0" height="34" rx="7" fill="#e8edf3" stroke="#b9c9dd"/>
+<text x="598.5" y="238" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#253247" text-anchor="middle" >Fix</text>
+<rect x="666.5" y="216" width="232.49999999999997" height="34" rx="7" fill="#e8edf3" stroke="#b9c9dd"/>
+<text x="782.75" y="238" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#253247" text-anchor="middle" >Reach every deployment</text>
+<text x="900" y="272" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#6583ad" text-anchor="end" >still moves at human speed</text>
+<line x1="36" y1="318" x2="924" y2="318" stroke="#d4dce6"/>
+<rect x="36" y="338" width="436" height="104" rx="14" fill="#fff" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="58" y="372" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#253247" text-anchor="start" >Shrink the window</text>
+<text x="58" y="398" font-family="Inter,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#596579" text-anchor="start" >Know what is running · automate patching</text>
+<text x="58" y="420" font-family="Inter,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#596579" text-anchor="start" >Ship fixes through a rollout you trust</text>
+<rect x="488" y="338" width="436" height="104" rx="14" fill="#edf4ef" stroke="#c6d9cb" stroke-width="1.5"/>
+<text x="510" y="372" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#253247" text-anchor="start" >Limit what it can cost</text>
+<text x="510" y="398" font-family="Inter,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#596579" text-anchor="start" >Isolate workloads · scope every credential</text>
+<text x="510" y="420" font-family="Inter,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#596579" text-anchor="start" >Be able to stop, revoke and recover</text>
+</svg>
