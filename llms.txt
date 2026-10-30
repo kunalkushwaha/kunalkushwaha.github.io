@@ -1,0 +1,58 @@
+# Kunal Kushwaha
+
+> Kunal Kushwaha leads applied AI and builds agentic systems, and is the founder of AgenticGoKit, writing about AI leadership, agentic AI, cloud native platforms, and what he's learning along the way.
+
+I'm a technical architect with 20 years building system level and cloud native products. I now lead AI strategy and applied systems in sport and entertainment, building the teams and agentic systems behind it, and I'm the founder of AgenticGoKit, an open source Go framework for AI agents. I write here about what I'm figuring out along the way.
+
+Every post below links to a plain Markdown copy. The HTML version lives at the same URL without `index.md`. Full text of all posts: https://kunalkushwaha.github.io/llms-full.txt
+
+## About
+
+- [About Kunal Kushwaha](https://kunalkushwaha.github.io/about/index.md): background, current work, and where to find Kunal Kushwaha online
+- [Github](https://github.com/kunalkushwaha)
+- [Linkedin](https://www.linkedin.com/in/kunalkushwaha/)
+- [X](https://x.com/kunalkushwaha)
+
+## Posts
+
+- [A Clean Room Is Not a Home](https://kunalkushwaha.github.io/2026/10/30/a-clean-room-is-not-a-home/index.md): 2026-10-30. A coding sandbox protects a task. A sandbox for a long-running agent has to protect a tenant. They look alike from the outside, but they need different guarantees.
+- [The Clock Has Changed. Have Our Foundations?](https://kunalkushwaha.github.io/2026/10/24/the-clock-has-changed/index.md): 2026-10-24. Every place we run software draws from the same shared building blocks. AI is shortening the time between finding a weakness in them and using it. The part we actually own is the gate around each place.
+- [Give Every Agent Its Own Room](https://kunalkushwaha.github.io/2026/10/17/give-every-agent-its-own-room/index.md): 2026-10-17. Running a model locally is the easy part. The agent still needs a shell, a network, and tools it can reach. Koala gives every workload its own Linux VM on Apple Silicon, with access controls that stay on the Mac.
+- [Give the Agent a Desk, Not Your Keys](https://kunalkushwaha.github.io/2026/08/11/give-the-agent-a-desk-not-your-keys/index.md): 2026-08-11. An autonomous agent with a shell is a coworker you cannot fully trust. Kagebox is an experiment in running one on a spare laptop: its own kernel, host held credentials, an egress latch it cannot reach, and a boundary that has to prove itself.
+- [Agentic Development Needs Its Methodology Moment](https://kunalkushwaha.github.io/2026/07/16/agentic-development-methodology-moment/index.md): 2026-07-16. Every leap in who writes software was unlocked by process, not talent. AI agents are the next leap, and the teams winning with them gave their agent a methodology.
+- [The AI Writes the Screenplay, the Renderer Never Lies](https://kunalkushwaha.github.io/2026/07/08/deterministic-video-ai-writes-the-screenplay/index.md): 2026-07-08. Notes from building vsim, a tool for AI assisted video that is completely reproducible. The model writes the screenplay as a validated document; a deterministic renderer turns it into the same MP4, byte for byte, forever.
+- [You Do Not Trust the Output. You Trust the Loop.](https://kunalkushwaha.github.io/2026/06/24/vibe-assisted-agentic-who-reviews-the-work/index.md): 2026-06-24. Vibe coding and agentic coding are not points on a scale. They are opposites, separated by one thing: whether you trust a single output or a process that earns it.
+- [The Skills That Compound With AI Aren't Technical](https://kunalkushwaha.github.io/2026/06/23/skills-that-compound-with-ai/index.md): 2026-06-23. As AI takes over the writing of code, the traits that separate good builders from great ones are problem-first thinking and empathy.
+- [AI Made Building Cheap. Safe Deployment Is the New Scarcity.](https://kunalkushwaha.github.io/2026/06/09/safe-deployment-is-the-new-scarcity/index.md): 2026-06-09. Why the real unlock for an AI-native company is not letting everyone build. It is letting everyone ship without burning the house down.
+- [AI-Native Companies Will Outlearn Everyone Else](https://kunalkushwaha.github.io/2026/06/07/ai-native-companies-will-outlearn-everyone-else/index.md): 2026-06-07. The real advantage was never automation. It is compounding learning.
+- [The Hidden LLM Call: Why AgenticGoKit Was 2x Slower](https://kunalkushwaha.github.io/2026/01/10/why-agenticgokit-was-2x-slower/index.md): 2026-01-10. 
+- [Announcing v1beta: Production-Ready AI Agents in Go](https://kunalkushwaha.github.io/2025/12/20/announcing-v1beta-production-ready-ai-agents-in-go/index.md): 2025-12-20. We’re excited to announce v1beta, our next-generation API for building AI agents in Go. With streaming-first architecture, multimodal support, and powerful workflow orchestration, building production-ready AI systems has never been easier.
+- [Building a Local Document Reader with Streaming TTS](https://kunalkushwaha.github.io/2025/11/30/document-reader-with-streaming-tts/index.md): 2025-11-30. 
+- [Real-Time AI Editorial Workflows in Go: Loop, Revise, Publish with AgenticGoKit](https://kunalkushwaha.github.io/2025/11/16/loop-revise-publish-demo/index.md): 2025-11-16. Build real-time AI editorial workflows in Go with AgenticGoKit — loop revisions, stream progress to a live UI, and publish polished stories.
+- [AgenticGoKit ❤️ HuggingFace and OpenRouter](https://kunalkushwaha.github.io/2025/11/08/agenticgokit-love-hf-and-openrouter/index.md): 2025-11-08. 
+- [Building AI Agents That Actually Do Things: Tools and MCP Made Simple in Go](https://kunalkushwaha.github.io/2025/11/06/mcp-tools-with-agenticgokit/index.md): 2025-11-06. 
+- [Building Context-Aware AI Agents with Memory in AgenticGoKit](https://kunalkushwaha.github.io/2025/10/30/context-aware-ai-agents-with-memory/index.md): 2025-10-30. 
+- [Streaming AI Responses in Go with AgenticGoKit](https://kunalkushwaha.github.io/2025/10/26/streaming-agenticgokit/index.md): 2025-10-26. 
+- [Building Multi-Agent Workflows in Go: Simpler Than You Think](https://kunalkushwaha.github.io/2025/10/20/building-multi-agent-workflows/index.md): 2025-10-20. 
+- [Building AI Agents with AgentFlow: A Beginner's Journey](https://kunalkushwaha.github.io/2025/05/12/building-ai-agents-with-agentflow/index.md): 2025-05-12. 
+- [ConfigMaps and Pods](https://kunalkushwaha.github.io/2020/01/28/configmaps-and-pods/index.md): 2020-01-28. 
+- [ConfigMaps, Secrets and Pods](https://kunalkushwaha.github.io/2020/01/28/configmaps-secrets-and-pods/index.md): 2020-01-28. A Pod is collection of containers running is shared namespace. A container is created from Docker/OCI Image, which is immutable in nature i.e. data bundled into image cannot be changed later in image. “While immutable image of application is great for security, but putting configurations & data like security keys is bad for security as well as portability” There are various ways to pass data to application in containers, without changing the flow of application e.
+- [Docker Services Scheduling](https://kunalkushwaha.github.io/2016/11/22/docker-service-scheduling/index.md): 2016-11-22. Understanding how docker services scheduling works in swarm mode
+- [Understanding Infrakit](https://kunalkushwaha.github.io/2016/10/14/understanding-infrakit/index.md): 2016-10-14. 
+- [Migrating traditional apps to docker](https://kunalkushwaha.github.io/2016/08/12/migrating-traditional-apps-to-docker/index.md): 2016-08-12. 
+- [docker 1.12RC demo](https://kunalkushwaha.github.io/2016/07/25/docker-1.12rc-demo/index.md): 2016-07-25. 
+- [Tutorial setting up docker-swarm with multihost networking using docker-machine.](https://kunalkushwaha.github.io/2016/01/14/tutorial-docker-swarm-with-multihost-networking/index.md): 2016-01-14. 
+- [Tutorial: Getting started with docker machine and Swarm](https://kunalkushwaha.github.io/2016/01/14/tutorial-getting-started-with-docker-machine-and-swarm/index.md): 2016-01-14. Docker-machine is tool to create Docker hosts on computer, on cloud providers, and inside data center. It creates Linux based server, and installs and configures docker. It is also capable of configuring docker-swarm nodes. This blog, will explain stepwise walkthrough for docker host creation using docker-machine. Installation.   If you use Windows or Mac, Docker has already made awesome packaged installer for you Docker-toolbox. Download and Install it. For Linux users, you can download docker-machine binaries from here.
+- [Understanding Golang Interfaces](https://kunalkushwaha.github.io/2015/09/11/understanding-golang-interfaces/index.md): 2015-09-11. 
+- [Conditional compilation in golang](https://kunalkushwaha.github.io/2015/07/24/conditional-compilation-in-golang/index.md): 2015-07-24. 
+- [docker-file-layout](https://kunalkushwaha.github.io/2015/07/09/docker-file-layout/index.md): 2015-07-09. 
+- [Container Virtualization and its building blocks](https://kunalkushwaha.github.io/2015/07/04/container-virtualization/index.md): 2015-07-04. 
+- [Golang Development Environment](https://kunalkushwaha.github.io/2015/04/27/golang-dev-environment/index.md): 2015-04-27. 
+- [Layman guide to Platform Virtualization](https://kunalkushwaha.github.io/2015/04/25/layman-guide-to-platform-virtualization/index.md): 2015-04-25. 
+- [Moving to Hugo & github](https://kunalkushwaha.github.io/2015/03/04/moved-to-github/index.md): 2015-03-04. 
+
+## Optional
+
+- [RSS feed](https://kunalkushwaha.github.io/index.xml)
+- [Sitemap](https://kunalkushwaha.github.io/sitemap.xml)
+- [Topics](https://kunalkushwaha.github.io/tags/)
