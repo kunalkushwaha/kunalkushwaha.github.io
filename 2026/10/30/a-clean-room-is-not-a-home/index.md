@@ -7,6 +7,8 @@
 - Tags: agents, security, sandbox, ai-gateway, koala, building
 - Canonical: https://kunalkushwaha.github.io/2026/10/30/a-clean-room-is-not-a-home/
 
+![A Clean Room Is Not a Home. On the left, an empty glass box with a desk and a checklist. On the right, an agent works in its own lit room in a building, with keys locked in a vault below and every connection to the outside passing through a guarded gate.](https://kunalkushwaha.github.io/2026/10/30/a-clean-room-is-not-a-home/hero.png)
+
 When I hear "sandbox" today, the picture is usually a coding agent: a container, a repo, run the tests, throw it away. That works. But an agent that answers email or runs a workflow for months is not a coding agent with a longer timeout. It lives somewhere.
 
 > A coding sandbox protects a task. An agent sandbox has to protect a tenant.
