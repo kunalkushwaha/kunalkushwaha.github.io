@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" role="img" aria-labelledby="t d">
+<title id="t">Your process versus the system</title><desc id="d">Peak memory while working. Live captions: the app 24 MB, the speech service 262 MB. Translation: the benchmark 19 MB, translationd 345 MB. Summaries: the app 22 MB, the on-device inference service 370 MB. Work on the Neural Engine and GPU isn&#x27;t counted, so the system&#x27;s real cost is higher.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#596579" stroke-width="1.8" stroke-linecap="round"/></marker><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#c0441f" stroke-width="1.8" stroke-linecap="round"/></marker></defs>
+<rect width="960" height="430" rx="22" fill="#f5f7fa"/>
+<text x="36" y="46" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#596579" text-anchor="start" letter-spacing="1.8">YOUR PROCESS VS THE SYSTEM: PEAK MEMORY</text>
+<text x="36" y="106" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247" text-anchor="start">Live captions</text>
+<rect x="200" y="84" width="33.599999999999994" height="26" rx="6" fill="#9aa6b6" stroke="#9aa6b6" stroke-width="1"/>
+<text x="243.6" y="102" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#596579" text-anchor="start">your app  24 MB</text>
+<rect x="200" y="120" width="366.79999999999995" height="26" rx="6" fill="#c0441f" stroke="#c0441f" stroke-width="1"/>
+<text x="576.8" y="138" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#c0441f" text-anchor="start">262 MB</text>
+<text x="208" y="138" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#fff" text-anchor="start">speech service</text>
+<text x="36" y="210" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247" text-anchor="start">Translation</text>
+<rect x="200" y="188" width="26.599999999999998" height="26" rx="6" fill="#9aa6b6" stroke="#9aa6b6" stroke-width="1"/>
+<text x="236.6" y="206" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#596579" text-anchor="start">your app  19 MB</text>
+<rect x="200" y="224" width="482.99999999999994" height="26" rx="6" fill="#c0441f" stroke="#c0441f" stroke-width="1"/>
+<text x="693.0" y="242" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#c0441f" text-anchor="start">345 MB</text>
+<text x="208" y="242" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#fff" text-anchor="start">translationd</text>
+<text x="36" y="314" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247" text-anchor="start">Summaries</text>
+<rect x="200" y="292" width="30.799999999999997" height="26" rx="6" fill="#9aa6b6" stroke="#9aa6b6" stroke-width="1"/>
+<text x="240.8" y="310" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#596579" text-anchor="start">your app  22 MB</text>
+<rect x="200" y="328" width="518.0" height="26" rx="6" fill="#c0441f" stroke="#c0441f" stroke-width="1"/>
+<text x="728.0" y="346" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#c0441f" text-anchor="start">370 MB</text>
+<text x="208" y="346" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#fff" text-anchor="start">inference service</text>
+<text x="36" y="396" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#253247" text-anchor="start" font-style="italic">Neural Engine and GPU work isn&#x27;t counted, so the system&#x27;s real cost is higher than shown.</text>
+</svg>

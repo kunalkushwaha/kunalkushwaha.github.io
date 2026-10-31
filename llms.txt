@@ -15,6 +15,7 @@ Every post below links to a plain Markdown copy. The HTML version lives at the s
 
 ## Posts
 
+- [Build With the Models Your Mac Already Has](https://kunalkushwaha.github.io/2026/10/31/build-with-the-models-your-mac-already-has/index.md): 2026-10-31. Macs now ship strong on-device models for speech, translation and text. I built Kikitori, a private meeting translator, on them alone: no third-party model, no cloud. Here is what it costs, measured.
 - [A Clean Room Is Not a Home](https://kunalkushwaha.github.io/2026/10/30/a-clean-room-is-not-a-home/index.md): 2026-10-30. A coding sandbox protects a task. A sandbox for a long-running agent has to protect a tenant. They look alike from the outside, but they need different guarantees.
 - [The Clock Has Changed. Have Our Foundations?](https://kunalkushwaha.github.io/2026/10/24/the-clock-has-changed/index.md): 2026-10-24. Every place we run software draws from the same shared building blocks. AI is shortening the time between finding a weakness in them and using it. The part we actually own is the gate around each place.
 - [Give Every Agent Its Own Room](https://kunalkushwaha.github.io/2026/10/17/give-every-agent-its-own-room/index.md): 2026-10-17. Running a model locally is the easy part. The agent still needs a shell, a network, and tools it can reach. Koala gives every workload its own Linux VM on Apple Silicon, with access controls that stay on the Mac.

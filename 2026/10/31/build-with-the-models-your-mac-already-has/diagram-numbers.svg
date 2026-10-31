@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 450" role="img" aria-labelledby="t d">
+<title id="t">The overhead, measured</title><desc id="d">Kikitori downloads as 582 KB with no model, versus a 3.1 GB Whisper model before. Live captions in two languages use about 6% of one CPU core. Final captions arrive 0.4 to 1.1 seconds after the speaker stops, and translations 68 to 198 milliseconds later. Four minutes of Japanese are transcribed in 1.3 seconds, 181 times faster than real time. The on-device language model writes 76 tokens per second, and a short meeting&#x27;s summary takes 3 to 5 seconds.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#596579" stroke-width="1.8" stroke-linecap="round"/></marker><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#c0441f" stroke-width="1.8" stroke-linecap="round"/></marker></defs>
+<rect width="960" height="450" rx="22" fill="#f5f7fa"/>
+<text x="36" y="46" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#596579" text-anchor="start" letter-spacing="1.8">THE OVERHEAD, MEASURED</text>
+<rect x="36" y="66" width="288" height="154" rx="18" fill="#fff" stroke="#c0441f" stroke-width="2"/>
+<text x="60" y="130" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="700" fill="#c0441f" text-anchor="start">582 KB</text>
+<text x="60" y="166" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="650" fill="#253247" text-anchor="start">download, no model</text>
+<text x="60" y="190" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#596579" text-anchor="start">was a 3.1 GB model + ffmpeg</text>
+<rect x="336" y="66" width="288" height="154" rx="18" fill="#fff" stroke="#c0441f" stroke-width="2"/>
+<text x="360" y="130" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="700" fill="#c0441f" text-anchor="start">≈ 6%</text>
+<text x="360" y="166" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="650" fill="#253247" text-anchor="start">of one CPU core</text>
+<text x="360" y="190" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#596579" text-anchor="start">live captions, two languages</text>
+<rect x="636" y="66" width="288" height="154" rx="18" fill="#fff" stroke="#d4dce6" stroke-width="2"/>
+<text x="660" y="130" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="700" fill="#253247" text-anchor="start">0.4–1.1 s</text>
+<text x="660" y="166" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="650" fill="#253247" text-anchor="start">final caption</text>
+<text x="660" y="190" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#596579" text-anchor="start">after the speaker pauses</text>
+<rect x="36" y="236" width="288" height="154" rx="18" fill="#fff" stroke="#d4dce6" stroke-width="2"/>
+<text x="60" y="300" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="700" fill="#253247" text-anchor="start">68–198 ms</text>
+<text x="60" y="336" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="650" fill="#253247" text-anchor="start">to translate a caption</text>
+<text x="60" y="360" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#596579" text-anchor="start">Japanese ↔ English</text>
+<rect x="336" y="236" width="288" height="154" rx="18" fill="#fff" stroke="#d4dce6" stroke-width="2"/>
+<text x="360" y="300" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="700" fill="#253247" text-anchor="start">181×</text>
+<text x="360" y="336" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="650" fill="#253247" text-anchor="start">faster than real time</text>
+<text x="360" y="360" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#596579" text-anchor="start">4 min of Japanese in 1.3 s</text>
+<rect x="636" y="236" width="288" height="154" rx="18" fill="#fff" stroke="#d4dce6" stroke-width="2"/>
+<text x="660" y="300" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="700" fill="#253247" text-anchor="start">76 tok/s</text>
+<text x="660" y="336" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="650" fill="#253247" text-anchor="start">on-device language model</text>
+<text x="660" y="360" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="400" fill="#596579" text-anchor="start">short summary in 3–5 s</text>
+<text x="36" y="424" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="400" fill="#596579" text-anchor="start">MacBook Pro M5 Pro, 48 GB, macOS 26.4.1 · synthetic speech (system voices) · medians of 3 runs on an idle Mac</text>
+</svg>

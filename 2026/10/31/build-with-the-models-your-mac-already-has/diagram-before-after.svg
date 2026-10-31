@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
+<title id="t">Bring your own model versus the system model</title><desc id="d">Before: every 2-second clip runs ffmpeg twice and starts whisper-cli, which loads a 3.1 GB model, so text appears only after the clip and words are cut in half. After: one SpeechAnalyzer stream for the whole meeting keeps the model loaded in the system, shows partial text while people speak, and gives a final caption 0.4 to 1.1 seconds after they stop.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#596579" stroke-width="1.8" stroke-linecap="round"/></marker><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#c0441f" stroke-width="1.8" stroke-linecap="round"/></marker></defs>
+<rect width="960" height="470" rx="22" fill="#f5f7fa"/>
+<text x="36" y="46" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#596579" text-anchor="start" letter-spacing="1.8">LIVE CAPTIONS, BEFORE AND AFTER</text>
+<rect x="36" y="66" width="888" height="175" rx="18" fill="#fff" stroke="#d4dce6" stroke-width="2"/>
+<text x="58" y="98" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#253247" text-anchor="start">Bring your own model</text>
+<text x="238" y="98" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#596579" text-anchor="start">whisper.cpp, repeated for every 2-second clip</text>
+<rect x="58" y="118" width="180" height="58" rx="10" fill="#e8edf3" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="148.0" y="143.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#253247" text-anchor="middle">ffmpeg</text>
+<text x="148.0" y="161.0" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="400" fill="#596579" text-anchor="middle">write a WAV clip</text>
+<rect x="268" y="118" width="180" height="58" rx="10" fill="#e8edf3" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="358.0" y="143.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#253247" text-anchor="middle">ffmpeg again</text>
+<text x="358.0" y="161.0" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="400" fill="#596579" text-anchor="middle">resample to 16 kHz</text>
+<line x1="242" y1="147" x2="262" y2="147" stroke="#596579" stroke-width="2" marker-end="url(#a)"/>
+<rect x="478" y="118" width="204" height="58" rx="10" fill="#e8edf3" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="580.0" y="143.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#253247" text-anchor="middle">whisper-cli</text>
+<text x="580.0" y="161.0" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="400" fill="#596579" text-anchor="middle">load a 3.1 GB model</text>
+<line x1="452" y1="147" x2="472" y2="147" stroke="#596579" stroke-width="2" marker-end="url(#a)"/>
+<rect x="712" y="118" width="190" height="58" rx="10" fill="#e8edf3" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="807.0" y="143.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#253247" text-anchor="middle">Text</text>
+<text x="807.0" y="161.0" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="400" fill="#596579" text-anchor="middle">only after the clip</text>
+<line x1="686" y1="147" x2="706" y2="147" stroke="#596579" stroke-width="2" marker-end="url(#a)"/>
+<text x="58" y="214" font-family="Inter,Arial,sans-serif" font-size="13.5" font-weight="600" fill="#c0441f" text-anchor="start">2 process launches and a model load per clip  ·  words cut in half  ·  no partial text</text>
+<rect x="36" y="261" width="888" height="175" rx="18" fill="#fff" stroke="#c0441f" stroke-width="2"/>
+<text x="58" y="293" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#253247" text-anchor="start">System model</text>
+<text x="184" y="293" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="400" fill="#596579" text-anchor="start">SpeechAnalyzer, one stream for the whole meeting</text>
+<rect x="58" y="313" width="180" height="58" rx="10" fill="#e8edf3" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="148.0" y="338.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#253247" text-anchor="middle">Mic or call audio</text>
+<text x="148.0" y="356.0" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="400" fill="#596579" text-anchor="middle">100 ms buffers</text>
+<rect x="268" y="313" width="214" height="58" rx="10" fill="#e8edf3" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="375.0" y="338.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#253247" text-anchor="middle">SpeechAnalyzer</text>
+<text x="375.0" y="356.0" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="400" fill="#596579" text-anchor="middle">model stays loaded in macOS</text>
+<line x1="242" y1="342" x2="262" y2="342" stroke="#c0441f" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="512" y="313" width="170" height="58" rx="10" fill="#fbe9e3" stroke="#c0441f" stroke-width="1.5"/>
+<text x="597.0" y="338.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#253247" text-anchor="middle">Partial text</text>
+<text x="597.0" y="356.0" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="400" fill="#596579" text-anchor="middle">while people speak</text>
+<line x1="486" y1="342" x2="506" y2="342" stroke="#c0441f" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="712" y="313" width="190" height="58" rx="10" fill="#e8edf3" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="807.0" y="338.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#253247" text-anchor="middle">Final caption</text>
+<text x="807.0" y="356.0" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="400" fill="#596579" text-anchor="middle">0.4–1.1 s after a pause</text>
+<line x1="686" y1="342" x2="706" y2="342" stroke="#c0441f" stroke-width="2" marker-end="url(#ar)"/>
+<text x="58" y="409" font-family="Inter,Arial,sans-serif" font-size="13.5" font-weight="600" fill="#253247" text-anchor="start">No model in the app  ·  no ffmpeg  ·  the model is shared by every app on the Mac</text>
+</svg>
