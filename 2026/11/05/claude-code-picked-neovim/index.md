@@ -7,6 +7,8 @@
 - Tags: Claude Code, Neovim, AI-assisted development, developer tools, local LLMs
 - Canonical: https://kunalkushwaha.github.io/2026/11/05/claude-code-picked-neovim/
 
+![Claude Code, in Neovim. Same workflow, lighter editor: file tree, code and Claude side by side, with editor memory per window dropping from about 670 MB in VS Code to about 50 to 85 MB in Neovim.](https://kunalkushwaha.github.io/2026/11/05/claude-code-picked-neovim/hero.png)
+
 My editor was using **6.7 GB of RAM**.
 
 That's VS Code with 10 windows open: just the windows, extension hosts and Electron helpers, not the language servers or Claude. My machine also runs local LLMs, a few VMs and a pile of containers. That's memory my models couldn't have.
