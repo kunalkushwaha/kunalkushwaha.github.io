@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="t d"><title id="t">If something else gets in</title><desc id="d">A hijacked hypervisor in Koala sits inside a second wall: each VM's Cloud Hypervisor runs as your user, not root, under Landlock, a seccomp allow-list and no_new_privs, in its own namespaces where allowed, and can open only Unix sockets to its own helpers. It can do only what this profile allows. The honest limit: code that can already write host kernel memory does not need the hypervisor, and no userspace sandbox stops it. What protects Koala here is the first wall, the guest has no path into that kernel code. Patch the host kernel anyway, because Docker or any VM tool that uses TAP can still reach the bug.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#596579" stroke-width="1.8" stroke-linecap="round"/></marker><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#c0441f" stroke-width="1.8" stroke-linecap="round"/></marker><marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#2f7f6f" stroke-width="1.8" stroke-linecap="round"/></marker></defs>
+<rect width="960" height="440" rx="22" fill="#f5f7fa"/>
+<text x="36" y="46" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#596579" text-anchor="start" letter-spacing="1.8">IF SOMETHING ELSE GETS IN</text>
+<rect x="36" y="70" width="568" height="340" rx="18" fill="#edf4ef" stroke="#c6d9cb" stroke-width="2"/>
+<rect x="56" y="90" width="528" height="300" rx="14" fill="#fff" stroke="#2f7f6f" stroke-width="2.5"/>
+<text x="76" y="116" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#2f7f6f" text-anchor="start">Wall 2: each VM's Cloud Hypervisor</text>
+<rect x="230" y="134" width="180" height="44" rx="10" fill="#fbeee8" stroke="#e6b9a8" stroke-width="1.5"/>
+<text x="320" y="161" font-family="Inter,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#8a4a35" text-anchor="middle">hijacked hypervisor</text>
+<rect x="76" y="198" width="238" height="34" rx="8" fill="#f3f6fa" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="195" y="220" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="600" fill="#253247" text-anchor="middle">runs as your user, not root</text>
+<rect x="330" y="198" width="238" height="34" rx="8" fill="#f3f6fa" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="449" y="220" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="600" fill="#253247" text-anchor="middle">Landlock</text>
+<rect x="76" y="242" width="238" height="34" rx="8" fill="#f3f6fa" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="195" y="264" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="600" fill="#253247" text-anchor="middle">seccomp allow-list</text>
+<rect x="330" y="242" width="238" height="34" rx="8" fill="#f3f6fa" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="449" y="264" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="600" fill="#253247" text-anchor="middle">no_new_privs</text>
+<rect x="76" y="286" width="238" height="34" rx="8" fill="#f3f6fa" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="195" y="308" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="600" fill="#253247" text-anchor="middle">own namespaces, where allowed</text>
+<rect x="330" y="286" width="238" height="34" rx="8" fill="#f3f6fa" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="449" y="308" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="600" fill="#253247" text-anchor="middle">only Unix sockets to its helpers</text>
+<text x="320" y="354" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#596579" text-anchor="middle">It can do only what this profile allows.</text>
+<rect x="628" y="70" width="296" height="116" rx="14" fill="#fff" stroke="#c0441f" stroke-width="2"/>
+<text x="648" y="98" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#c0441f" text-anchor="start">The honest limit</text>
+<text x="648" y="122" font-family="Inter,Arial,sans-serif" font-size="12.3" font-weight="500" fill="#596579" text-anchor="start">Code that can already write host</text>
+<text x="648" y="141" font-family="Inter,Arial,sans-serif" font-size="12.3" font-weight="500" fill="#596579" text-anchor="start">kernel memory doesn't need the</text>
+<text x="648" y="160" font-family="Inter,Arial,sans-serif" font-size="12.3" font-weight="500" fill="#596579" text-anchor="start">hypervisor. No userspace sandbox stops it.</text>
+<rect x="628" y="200" width="296" height="96" rx="14" fill="#fff" stroke="#2f7f6f" stroke-width="2"/>
+<text x="648" y="228" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#2f7f6f" text-anchor="start">What protects Koala here</text>
+<text x="648" y="252" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="500" fill="#596579" text-anchor="start">Wall 1: the guest has no path</text>
+<text x="648" y="271" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="500" fill="#596579" text-anchor="start">into that kernel code at all.</text>
+<rect x="628" y="310" width="296" height="100" rx="14" fill="#fff" stroke="#d4dce6" stroke-width="2"/>
+<text x="648" y="338" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#253247" text-anchor="start">Patch the host kernel anyway</text>
+<text x="648" y="360" font-family="Inter,Arial,sans-serif" font-size="12.3" font-weight="500" fill="#596579" text-anchor="start">Docker, or any VM tool that uses</text>
+<text x="648" y="378" font-family="Inter,Arial,sans-serif" font-size="12.3" font-weight="500" fill="#596579" text-anchor="start">TAP on the same machine, can</text>
+<text x="648" y="396" font-family="Inter,Arial,sans-serif" font-size="12.3" font-weight="500" fill="#596579" text-anchor="start">still reach the bug.</text>
+</svg>

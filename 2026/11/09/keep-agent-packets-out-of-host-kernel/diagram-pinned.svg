@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d"><title id="t">Pinned, not promised</title><desc id="d">Two tests keep offloads off. A unit test of the device requires the offered features to be exactly MAC, VERSION_1 and the vhost-user bit, written as literal bits, and requires 13 named offload requests to be refused; adding GUEST_TSO4 as a trial failed it with offered 0x1400000a0, want 0x140000020. A check in a real VM on KVM reads the guest's negotiated bits and fails on anything but 5 and 32; it passes 5 of 5 today and fails, naming it, for a guest that reports GUEST_TSO4. Both run on every Linux build, which also found a test that had never run on Linux.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#596579" stroke-width="1.8" stroke-linecap="round"/></marker><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#c0441f" stroke-width="1.8" stroke-linecap="round"/></marker><marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1l7 4-7 4" fill="none" stroke="#2f7f6f" stroke-width="1.8" stroke-linecap="round"/></marker></defs>
+<rect width="960" height="400" rx="22" fill="#f5f7fa"/>
+<text x="36" y="46" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#596579" text-anchor="start" letter-spacing="1.8">PINNED, NOT PROMISED</text>
+<rect x="36" y="72" width="430" height="232" rx="16" fill="#fff" stroke="#d4dce6" stroke-width="2"/>
+<text x="58" y="102" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247" text-anchor="start">Unit test of the device</text>
+<text x="58" y="130" font-family="Inter,Arial,sans-serif" font-size="12.8" font-weight="500" fill="#596579" text-anchor="start">Offered must be exactly MAC, VERSION_1</text>
+<text x="58" y="150" font-family="Inter,Arial,sans-serif" font-size="12.8" font-weight="500" fill="#596579" text-anchor="start">and the vhost-user bit, written as literal</text>
+<text x="58" y="170" font-family="Inter,Arial,sans-serif" font-size="12.8" font-weight="500" fill="#596579" text-anchor="start">bits, so widening the constant fails too.</text>
+<text x="58" y="190" font-family="Inter,Arial,sans-serif" font-size="12.8" font-weight="500" fill="#596579" text-anchor="start">13 named offload requests must be refused.</text>
+<rect x="58" y="214" width="386" height="74" rx="10" fill="#f3f6fa" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="76" y="238" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="650" fill="#253247" text-anchor="start">Trial: add GUEST_TSO4 to the device</text>
+<text x="76" y="258" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12.5" font-weight="650" fill="#c0441f" text-anchor="start">offered 0x1400000a0</text>
+<text x="76" y="278" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="12.5" font-weight="650" fill="#2f7f6f" text-anchor="start">want   0x140000020</text>
+<rect x="494" y="72" width="430" height="232" rx="16" fill="#fff" stroke="#d4dce6" stroke-width="2"/>
+<text x="516" y="102" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#253247" text-anchor="start">Check in a real VM on KVM</text>
+<text x="516" y="130" font-family="Inter,Arial,sans-serif" font-size="12.8" font-weight="500" fill="#596579" text-anchor="start">Runs against the installed Koala.</text>
+<text x="516" y="150" font-family="Inter,Arial,sans-serif" font-size="12.8" font-weight="500" fill="#596579" text-anchor="start">Reads the guest's negotiated bits.</text>
+<text x="516" y="170" font-family="Inter,Arial,sans-serif" font-size="12.8" font-weight="500" fill="#596579" text-anchor="start">Fails if anything but 5 and 32 is set.</text>
+<text x="516" y="190" font-family="Inter,Arial,sans-serif" font-size="12.8" font-weight="500" fill="#596579" text-anchor="start"></text>
+<rect x="516" y="214" width="386" height="74" rx="10" fill="#f3f6fa" stroke="#b9c9dd" stroke-width="1.5"/>
+<text x="534" y="238" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="650" fill="#2f7f6f" text-anchor="start">Today: passes 5/5</text>
+<text x="534" y="258" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="650" fill="#253247" text-anchor="start">Guest reporting GUEST_TSO4:</text>
+<text x="534" y="278" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="650" fill="#c0441f" text-anchor="start">fails, and names it</text>
+<rect x="36" y="322" width="888" height="56" rx="14" fill="#edf4ef" stroke="#c6d9cb" stroke-width="2"/>
+<text x="58" y="356" font-family="Inter,Arial,sans-serif" font-size="13.5" font-weight="600" fill="#2f7f6f" text-anchor="start">Both run on every Linux build. Turning that on also found a test that had never run on Linux.</text>
+</svg>
