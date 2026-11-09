@@ -15,7 +15,6 @@ Every post below links to a plain Markdown copy. The HTML version lives at the s
 
 ## Posts
 
-- [Keep the Agent's Packets Out of the Host Kernel](https://kunalkushwaha.github.io/2026/11/08/keep-agent-packets-out-of-host-kernel/index.md): 2026-11-08. Autonomous agents with shell access have superpowers, and a big attack surface. What this week's Firecracker escape shows about VM boundaries, and how to set one that holds for tomorrow's bug.
 - [Before I Trust an Agent, I Try to Break Its Box](https://kunalkushwaha.github.io/2026/11/06/before-i-trust-an-agent/index.md): 2026-11-06. Koala gives every agent its own room. A room is only a claim until something hostile tries the door. This is how I test the boundary from the inside, what broke, and what I have not tested yet.
 - [I Asked Claude Code to Build Me a Lighter VS Code. It Picked Neovim.](https://kunalkushwaha.github.io/2026/11/05/claude-code-picked-neovim/index.md): 2026-11-05. VS Code used 6.7 GB across 10 windows on a machine that also runs local LLMs and VMs. Claude Code rebuilt the same workflow in Neovim, offline by default, for under 1 GB of editor memory.
 - [Build With the Models Your Mac Already Has](https://kunalkushwaha.github.io/2026/10/31/build-with-the-models-your-mac-already-has/index.md): 2026-10-31. Macs now ship strong on-device models for speech, translation and text. I built Kikitori, a private meeting translator, on them alone: no third-party model, no cloud. Here is what it costs, measured.
