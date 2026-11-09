@@ -36,6 +36,257 @@ Feel free to explore my work on [GitHub](https://github.com/kunalkushwaha) or co
 
 ---
 
+# Keep the Agent's Packets Out of the Host Kernel
+
+URL: https://kunalkushwaha.github.io/2026/11/08/keep-agent-packets-out-of-host-kernel/
+Published: 2026-11-08
+Tags: agents, security, sandbox, virtualization, koala, building
+
+> Autonomous agents with shell access have superpowers, and a big attack surface. What this week's Firecracker escape shows about VM boundaries, and how to set one that holds for tomorrow's bug.
+
+![An AI agent works inside a glass box, its own VM. Its packet travels along a blue path through Koala, a koala at a laptop beside a stack of layers, and out to the globe. A red dashed path from the agent's box toward a large host server with a glowing core is blocked by a red X at the server's door.](https://kunalkushwaha.github.io/2026/11/08/keep-agent-packets-out-of-host-kernel/hero.png)
+
+An autonomous agent with a shell has superpowers. It installs packages, runs scripts, opens connections and fixes its own mistakes, without waiting for anyone. Nobody reviews each command. That's the point.
+
+It's also a big attack surface: every command it chooses, every package it pulls, every script a web page talks it into.
+
+> Give an agent a shell, and the boundary is the only reviewer left.
+
+So I run every agent in its own VM. This week, a guest VM got root on its host anyway. The first step was telling the host kernel **where to write a checksum**. The [write-up](https://pwn.ai/blog/firecracker-escape), published on 7 November, targets Firecracker. I read it with one question: could this happen in Koala?
+
+It can't, and the reason is a design choice worth checking in any VM setup.
+
+## First, what a checksum offload is
+
+Every network packet carries a checksum. Computing it costs CPU, so virtio lets the guest hand that job to the host: "the checksum starts here, write it there." That shortcut is an **offload**, and it's on by default in most fast VM networking.
+
+It also means the host kernel reads two numbers the guest wrote.
+
+> Anything the guest writes is input. What matters is where it gets parsed.
+
+## How the escape worked
+
+![Step one, the way in: a guest VM sends packets with checksum offload hints, csum_start and csum_offset. The host kernel's IPv4 code takes those offsets on trust, which lets the guest read host memory 32 bytes at a time and, in the authors' lab, make small writes. Step two, the escape: they rewrite a Firecracker vCPU thread's saved registers, and because the VMM ran as root with no jailer and no seccomp, that means root on the host. It only works when guest packets enter the host kernel's network stack with the hints attached, through TAP, vhost-net or AF_PACKET.](https://kunalkushwaha.github.io/2026/11/08/keep-agent-packets-out-of-host-kernel/diagram-escape-chain.svg)
+
+- **The way in.** A bug in the host kernel's IPv4 code trusted those two numbers. With crafted values, the guest could read host memory 32 bytes at a time. The authors also report small writes in their lab.
+- **The escape.** They used that access to rewrite a Firecracker vCPU thread's saved registers. That Firecracker ran as root with no jailer and no seccomp, so it meant root on the host.
+
+The kernel fix landed upstream on 14 October 2026. The bug gets patched. The pattern stays.
+
+## Where your guest's packets get parsed
+
+![In the usual fast path, the guest VM sends a frame with offload hints through a TAP device or vhost-net, and the host kernel network stack parses the guest's frame and trusts its hints. In Koala, the guest sends complete, checksummed frames over vhost-user queues handed over by Cloud Hypervisor to koala-net, a process that runs as you with gVisor's netstack in userspace. When policy allows a connection, koala-net opens an ordinary socket and the host kernel builds its own packets. The kernel only sees koala-net's own sockets.](https://kunalkushwaha.github.io/2026/11/08/keep-agent-packets-out-of-host-kernel/diagram-packet-path.svg)
+
+The attack needs guest packets to reach the host kernel's network stack with the hints attached. TAP and vhost-net, the usual fast paths, do exactly that. Koala uses neither.
+
+- **Frames stay in userspace.** Each VM's network card hands its frames to `koala-net`, a small process that runs as you, not root. It handles them with [netstack](https://github.com/google/gvisor/tree/master/pkg/tcpip), the network stack from Google's [gVisor](https://gvisor.dev/), used as a library. Only the network stack: the isolation boundary is still the VM.
+- **Traffic leaves through ordinary sockets.** When policy allows a connection, `koala-net` opens a normal socket. The host kernel builds those packets itself.
+- **The Mac works the same way.** Apple's Virtualization framework also hands frames to `koala-net` in userspace.
+
+The host kernel never parses a frame the guest built.
+
+## Two bits, and a test that keeps it that way
+
+![A strip of virtio feature bits 0 to 39. Only bit 5, the MAC address, and bit 32, VERSION_1, are agreed with the guest. Bit 30 is a vhost-user bookkeeping bit that never reaches the guest. The checksum bits 0 and 1 and the TSO, UFO and ECN offload bits 7 to 14 are refused. Asking for any of 13 offload features, or anything else not offered, makes the device refuse the connection.](https://kunalkushwaha.github.io/2026/11/08/keep-agent-packets-out-of-host-kernel/diagram-two-bits.svg)
+
+A virtio device and the guest agree on features at boot. Koala's network device offers only two that reach the guest: a MAC address and modern virtio. No offloads, so the guest can't even send the hints.
+
+You can see it from inside a running VM. Bit 0 comes first:
+
+```
+$ koala exec dev -- cat /sys/bus/virtio/devices/virtio5/features
+00000100000000000000000000000000100000000000000000000000…
+```
+
+That was true from day one. But a property nobody tests can disappear the day someone turns offloads on for speed. So now:
+
+- **A unit test** fails if the device offers anything else, or accepts any of 13 offload features. Adding one as a trial broke it straight away: `offered 0x1400000a0, want 0x140000020`.
+- **A check in a real VM** reads the bits from inside the guest and fails on anything but 5 and 32. It passes 5/5 today.
+- **Both run on every Linux build.** Wiring that up also found a test that had never run on Linux. That's its own post.
+
+## If something else gets in
+
+The escape's second step, hijacking the hypervisor, meets the [second wall](https://kunalkushwaha.github.io/2026/10/30/a-clean-room-is-not-a-home/). Each VM's Cloud Hypervisor runs as your user, under Landlock, seccomp and no_new_privs, and can't open network sockets.
+
+To be honest about the limit: code that can already write host kernel memory doesn't need the hypervisor, and no userspace sandbox stops it. What protects Koala here is the first wall. The sandbox is for the next bug. A boundary has to hold against tomorrow's bug, not just today's.
+
+And patch your host kernel anyway. Docker, or any VM tool that uses TAP, can still reach this one.
+
+## The cost, honestly
+
+| | TAP with offloads | Koala |
+|---|---|---|
+| Who parses guest frames | Host kernel | `koala-net`, in userspace |
+| Who does checksums | Host kernel, on the guest's word | The guest |
+| CPU per byte | Lower | Higher |
+| Built for | Moving huge amounts of data | Agents |
+
+For bulk data, that's a real cost. Agents aren't that workload. They call model APIs, fetch pages and clone repositories. For an agent, how far its traffic can reach matters more than how fast it goes.
+
+## What I'd take from this, beyond Koala
+
+- **A shell is a superpower.** An agent that can run anything will eventually try anything. Build the boundary for that.
+- **Know where the host reads the agent's data.** Find every place where data from the agent is read by the host. That's where the wall is weakest.
+- **Agree to as little as you can.** Every feature the host agrees to is one more thing that can break.
+- **Turn properties into tests.** "Offloads are off" used to be just true. Now the build breaks if anyone turns them on.
+- **Say what you gave up.** Koala trades some speed for a smaller attack surface. Say that openly, so readers can decide if the trade fits them.
+
+## Check your own setup
+
+1. Where are guest packets parsed? If it's the host kernel through TAP or vhost-net, offload hints are attack surface.
+2. Run `cat /sys/bus/virtio/devices/*/features` in the guest. Count the set bits.
+3. Is the hypervisor running as a normal user, sandboxed? This escape needed root and no seccomp.
+4. Which of these properties does a test enforce?
+
+Koala runs each AI agent, or any Linux workload, in its own VM on your Mac or Linux machine. Everything here is the default. The latest release is 0.1.0-rc.2:
+
+```
+# Apple silicon Mac (macOS 26+)
+brew install kunalkushwaha/koala/koala
+
+# Ubuntu 24.04 (x86-64, KVM): .deb from the releases page
+```
+
+[Releases](https://github.com/kunalkushwaha/homebrew-koala/releases)
+
+Agents get more capable every month. Set the boundary now, for tomorrow's agent and tomorrow's bug.
+
+---
+
+# Before I Trust an Agent, I Try to Break Its Box
+
+URL: https://kunalkushwaha.github.io/2026/11/06/before-i-trust-an-agent/
+Published: 2026-11-06
+Tags: agents, security, sandbox, testing, koala, building
+
+> Koala gives every agent its own room. A room is only a claim until something hostile tries the door. This is how I test the boundary from the inside, what broke, and what I have not tested yet.
+
+![Untrusted code runs inside the VM. The host stays outside the guest boundary.](https://kunalkushwaha.github.io/2026/11/06/before-i-trust-an-agent/hero.jpg)
+
+In October I wrote that Koala should [give every agent its own room](https://kunalkushwaha.github.io/2026/10/17/give-every-agent-its-own-room/): one Linux VM per workload, with the network check and the credentials kept on the host. That is a design claim. Claims are cheap.
+
+The question that matters is simpler. If the code inside that VM is hostile, what can it reach, and what breaks when something goes wrong?
+
+I do not treat an agent as a predictable app. It reads web pages, messages, and files, and it may act on instructions hidden in any of them. The safer assumption is that, sooner or later, something untrusted will run inside its environment. So the boundary has to be tested from the inside, by something trying to get out.
+
+## Tested by attacking it
+
+Every test runs on real virtual machines, on both supported platforms. After each run, the host and a neighboring control VM are checked, not just the VM under attack.
+
+![Root in the guest attacks the boundary, fuzzers hit every parser of guest data, and crash checks kill the manager, VM processes, and helpers at chosen moments. A canary key never shows up inside the VM.](https://kunalkushwaha.github.io/2026/11/06/before-i-trust-an-agent/diagram-tested-by-attacking.svg)
+
+Three numbers set the scale: more than 40 fuzz targets, at least 100,000 generated inputs for each, and about 1,400 crash checks on each platform. The numbers matter less than where they point. Every one of them aims at the boundary.
+
+## An attacker, a bystander, and witnesses
+
+Each hostile-guest run puts three things together.
+
+The attacker is a VM running as root, the most powerful user inside it. That is the worst case for an agent: fully taken over. The question is whether it can get out.
+
+The bystander is a healthy VM running beside it, answering a check every half second for the whole run. If the attack slows or breaks the neighbor, the test fails, even if nothing escaped.
+
+The witnesses live on the host, where the attacker cannot reach them. Listeners record every packet that arrives. Files are hashed before and after. Fake secrets, canaries, are planted on the host, so any leak has a name.
+
+> Never believe the attacker. Judge every result by what the host saw.
+
+This is where sandbox tests most often go wrong. Code inside the VM can print "access denied" while it gets through. A test that reads the guest's own report is testing the guest's honesty, not the boundary.
+
+The attacks are small programs copied in with `koala cp`, run against the real, installed, signed Koala. Not a special test build.
+
+## What attacking it looks like
+
+| What the attacker tried | What the host saw |
+|---|---|
+| Knock on every host port the VM could reach | 0 of 10 answered |
+| Race Koala for its private reply channels, 80,000 to 86,000 attempts per channel | Won 0 times |
+| Flood the console to fill the disk | The log stopped at exactly 4 MiB, as designed |
+| Rewrite Koala's shared, read-only system files | Refused; hashes identical afterwards |
+| Read a victim VM's disk, or attach its volume | Only its own four disks visible, no victim marker in any byte; attach refused at creation |
+| Plant a symlink in a shared folder pointing at a host credential, then wait for `koala cp` | Symlink refused, credential untouched. Swapping the file mid-copy returned only safe content |
+| Spoofed, fragmented, oversized, and IPv6 packets; claiming to be the router; DNS rebinding | Only the two allowed listeners received anything, and only expected test messages |
+| 2,000-query DNS flood | Capped at 486 answers; the network helper survived |
+
+The symlink row is the one I keep thinking about. It does not attack Koala's code. It attacks Koala's helpfulness: wait for the host to reach into the guest, and hand it something poisoned.
+
+Boundaries rarely fail where the guest reaches out. They fail where the host reaches in.
+
+## Break things while it is under attack
+
+Next, Koala itself is stressed while the attacker floods every channel at once. During the flood the test cancels a command, stops a VM, kills the network helper, and kills the manager outright with SIGKILL before restarting it. A sampler records memory, open files, and disk use every second.
+
+Resources stayed bounded. Memory peaked at 325 MiB, open files went from 30 to 18, and logs stayed within quota. When its network helper died, the attacker VM was marked degraded instead of quietly carrying on. The bystander kept answering: 97% of its checks succeeded across the run. Not 100%, and that gap is worth knowing too.
+
+The round also found two real problems. Killing the manager took down every VM's network until restart, and one VM's process was left orphaned. Neither was a security hole. Both failed safe, and both are recorded for fixing.
+
+## Assume the box already failed
+
+The Linux suite asks a harder question. What if the attacker gets out anyway, through a hypervisor bug for example?
+
+On Linux, every Koala process that touches a VM runs in its own locked-down sandbox: the hypervisor, the shared-folder server, the network helper, and the VM's worker. So an escape probe runs inside each of those four, as if the attacker were already there. It tries to read the home folder and a planted SSH key, read Koala's secret store or another VM's disk, talk to or freeze the manager, open network connections, become root or start a shell, and create devices or set-root files in the shared folder.
+
+Every attempt was refused, in all four sandboxes: 19, 19, 22, and 19 attempts. The same probe run without the sandbox succeeded at 17 of them. That control is what gives the refusals meaning. They came from Koala's sandbox, not from a machine that simply lacked those things.
+
+Defense in depth is easy to draw on a slide. This is what it looks like as a test.
+
+## The awkward paths
+
+Normal success paths are the easy part. The bugs live where nobody looks on a good day.
+
+| Check | What it does | What passing means |
+|---|---|---|
+| Fuzzing | 40+ targets in Swift, Go, and C hit every parser of guest data, each with at least 100,000 generated inputs and at least five minutes of run time. Swift and C targets run under AddressSanitizer. | No crashes, hangs, or memory errors |
+| Crash recovery | About 1,400 checks per platform kill the manager, each VM's process, and every helper (image extractor, file transfer, network helper, broker) at chosen moments | No lost or duplicated VMs, no orphaned processes, no damaged state, and the VM starts again |
+| Secret handling | A canary key stays on the host and is used through the broker. The guest disk, volumes, and image are searched for it. | The key appears only in the approved upstream request, outside the VM |
+| Release testing | Clean machines, upgrades from the published release, and removal | What users download works, not just what passed on a developer's machine |
+
+## A test suite that never fails is testing the wrong things
+
+These checks have found real bugs. Fuzzing found deeply nested input that could crash the manager. Crash testing exposed recovery cases where a VM could be left running after its manager stopped. The Linux escape probe caught something subtler: after one refused connection, the sandbox wrongly refused every later legitimate one. The cause was a number passed as 32 bits where 64 were needed, and an earlier unit test had missed it.
+
+That bug failed closed. More blocking, not less. Safe, but it would have broken real features. Failing closed is the right direction. It is still a bug.
+
+None of those would show up in a demo. All of them would show up in production.
+
+> Finding a bug is only useful when the failure becomes a regression test.
+
+Each fix now has a test that fails if the problem comes back.
+
+## Two platforms, one set of expectations
+
+Koala now runs on Linux too. It supports Apple silicon Macs through Apple's Virtualization framework, and x86-64 Linux through KVM and Cloud Hypervisor. The same acceptance suites run on real machines on both: command-line workflows, networking, hostile guests, the broker, and crash recovery.
+
+## What the numbers do not say
+
+These numbers describe specific checks. They are not a promise that every failure is impossible.
+
+One limit is by design. A VM can fake the result of its own command, and claim a failed command succeeded. The test confirmed it. A VM can always lie about itself; it cannot lie about anything else. That is recorded as a known limit, and it is why nothing on the host should trust a guest's report about itself.
+
+The detailed hostile-guest runs above were recorded on an Apple silicon Mac with macOS 26. The same network and hostile-guest suites run unchanged on Linux.
+
+Koala is still a preview. I have not yet run long-duration tests under sustained resource pressure, had an independent security audit, or tested across other Linux distributions and hardware. Those are the next gaps, and saying so is part of the evidence.
+
+## The questions to ask about any sandbox's tests
+
+When software runs code on your behalf, "it is isolated" is not enough. Five questions get closer to the truth:
+
+Last week, in [A Clean Room Is Not a Home](https://kunalkushwaha.github.io/2026/10/30/a-clean-room-is-not-a-home/), I asked what any sandbox should answer. These are the questions to ask about how it was tested.
+
+1. How was the boundary attacked?
+2. Who judged the result: the guest, or the host?
+3. Did the tests run against the real system, or a mock of it?
+4. What happened when something crashed halfway through?
+5. What has the team not tested yet?
+
+In [The Clock Has Changed](https://kunalkushwaha.github.io/2026/10/24/the-clock-has-changed/) I argued that mistakes are unavoidable, and a mistake that travels everywhere is a design choice. Testing from the inside is how you find out which one you built.
+
+Koala runs on Apple silicon Macs with macOS 26 or newer, and on x86-64 Ubuntu 24.04 with KVM. Read [how Koala is tested](https://kunalkushwaha.github.io/homebrew-koala/#hostile-guests-crashes-and-fuzzing-on-real-vms), the [release notes](https://github.com/kunalkushwaha/homebrew-koala/releases), or the [project on GitHub](https://github.com/kunalkushwaha/homebrew-koala).
+
+An isolation claim is a hypothesis. Root in the guest is the experiment.
+
+I trust the box after it has been attacked, not before.
+
+---
+
 # I Asked Claude Code to Build Me a Lighter VS Code. It Picked Neovim.
 
 URL: https://kunalkushwaha.github.io/2026/11/05/claude-code-picked-neovim/
