@@ -200,9 +200,9 @@ Around the attacks, more than 40 fuzz targets hit every parser of guest data, an
 
 ## Break it, and leave it running
 
-During the flood, the test also kills Koala's network helper, and kills its manager outright with SIGKILL. Memory peaked at 325 MiB and open files did not leak. The bystander kept answering: 97% of its checks succeeded. Not 100%: in the Linux run, every miss fell within two seconds of the manager kill. It also found two real bugs: after a manager kill, VMs lost their network, and one process was orphaned. Both failed safe, and both are fixed.
+During the flood, the test also kills Koala's network helper, and kills its manager outright with SIGKILL. Memory peaked at 325 MiB and open files did not leak. The bystander kept answering: 97% of its checks succeeded. Not 100%. Every check goes through the manager, which the test kills; in the Linux run, every miss fell within two seconds of the kill. It also found two real bugs: after a manager kill, VMs lost their network, and one process was orphaned. Both failed safe, and both are fixed.
 
-Then Koala runs for eight hours with faults injected along the way. On a Mac, all 9,884 operations succeeded. On Linux, one VM stopped taking commands after a restart; that bug is now fixed. Long runs also found that one command took 6.1 seconds once Koala had 67,000 operations of history. It now takes 0.35.
+Then Koala runs for eight hours with faults injected along the way. On a Mac, all 9,884 operations succeeded. On Linux, one VM stopped taking commands after a restart; the cause, a race in reading its event journal, is now fixed. Long runs also found that one command took 6.1 seconds once Koala had 67,000 operations of history. It now takes 0.35.
 
 ## Assume the box already failed
 
