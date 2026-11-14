@@ -4,9 +4,11 @@
 
 - Author: Kunal Kushwaha (https://kunalkushwaha.github.io/about/)
 - Published: 2026-11-06
+- Updated: 2026-11-15
 - Tags: agents, security, sandbox, testing, koala, building
 - Canonical: https://kunalkushwaha.github.io/2026/11/06/before-i-trust-an-agent/
 
+The results below were recorded in October 2026 on Koala's preview builds. See [What changed in rc.3](#what-changed-in-rc3) near the end.
 ![Untrusted code runs inside the VM. The host stays outside the guest boundary.](https://kunalkushwaha.github.io/2026/11/06/before-i-trust-an-agent/hero.jpg)
 
 In October I wrote that Koala should [give every agent its own room](https://kunalkushwaha.github.io/2026/10/17/give-every-agent-its-own-room/): one Linux VM per workload, with the network check and the credentials kept on the host. That is a design claim. Claims are cheap.
@@ -62,7 +64,7 @@ Next, Koala itself is stressed while the attacker floods every channel at once. 
 
 Resources stayed bounded. Memory peaked at 325 MiB, open files went from 30 to 18, and logs stayed within quota. When its network helper died, the attacker VM was marked degraded instead of quietly carrying on. The bystander kept answering: 97% of its checks succeeded across the run. Not 100%, and that gap is worth knowing too.
 
-The round also found two real problems. Killing the manager took down every VM's network until restart, and one VM's process was left orphaned. Neither was a security hole. Both failed safe, and both are recorded for fixing.
+The round also found two real problems. Killing the manager took down every VM's network until the VM was restarted, and one VM's process was left orphaned. Neither was a security hole, and both failed safe. Both are fixed: a restarted manager now rebuilds each running VM's network while the VM keeps running, and it reaps a worker it can no longer use.
 
 ## Assume the box already failed
 
@@ -109,13 +111,21 @@ One limit is by design. A VM can fake the result of its own command, and claim a
 
 The detailed hostile-guest runs above were recorded on an Apple silicon Mac with macOS 26. The same network and hostile-guest suites run unchanged on Linux.
 
-Koala is still a preview. I have not yet run long-duration tests under sustained resource pressure, had an independent security audit, or tested across other Linux distributions and hardware. Those are the next gaps, and saying so is part of the evidence.
+Koala is still a release candidate. It has now run for eight hours under load, with faults, on both platforms (below). I have not yet had an independent security audit, or tested across other Linux distributions and hardware. Those are the next gaps, and saying so is part of the evidence.
+
+## What changed in rc.3
+
+**Eight hours, with faults.** On a Mac, 32 lean and 8 full VMs, then eight hours of services, jobs and environments: 9,884 operations, none failed. The Mac slept and woke on a schedule, and the run survived a manager kill, the loss of a network helper and of a VM's worker, and a runtime update and rollback. The Linux run, on KVM, passed every check but four, and all four were one VM that stopped taking commands after a restart. That one took longer to pin down: a race in how Koala reads a VM's event journal, which a later check reproduced in about 300 fast execs. It is fixed in rc.3, and the fixed build ran 2,000 execs without it. Neither 8-hour run has been repeated since the last fixes.
+
+**What long runs found that a demo never would.** Execs slowed down as Koala's history grew: with 32 VMs and 67,000 recorded operations, one exec took 6.1 seconds. It now takes 0.35. After about 3,400 execs on one VM, every later exec hung, because the VM's event journal had filled up. And a Mac that slept with its lid closed could miss the wake, leaving VMs that no longer took commands. All of these are fixed in rc.3, and none of them is a security bug. They are the kind of bug a five-minute test never runs long enough to hit.
+
+**A new door: domain grants.** rc.3 lets a VM with the internet off reach a few named hosts, `koala create … --no-internet --domain pypi.org`, and nothing else. A new way out is a new thing to attack. The network helper checks both the TLS server name and the address that name resolved to, so a VM can't present a granted name to an ungranted server, or point a granted name at the LAN. Plain HTTP to a granted name is refused, and so is a grant that would cover a public suffix like `*.co.uk` or `*.github.io`. On both platforms, real VMs tried an ungranted name at a granted address and were refused, and the parser was fuzzed. What hasn't happened yet: running domain grants through the root-in-the-guest suite above. Until it has, treat a grant as a narrower door, not a tested one. The [networking guide](https://kunalkushwaha.github.io/homebrew-koala/guide/networking/) says what a grant does and doesn't stop.
 
 ## The questions to ask about any sandbox's tests
 
-When software runs code on your behalf, "it is isolated" is not enough. Five questions get closer to the truth:
-
 Last week, in [A Clean Room Is Not a Home](https://kunalkushwaha.github.io/2026/10/30/a-clean-room-is-not-a-home/), I asked what any sandbox should answer. These are the questions to ask about how it was tested.
+
+When software runs code on your behalf, "it is isolated" is not enough. Five questions get closer to the truth:
 
 1. How was the boundary attacked?
 2. Who judged the result: the guest, or the host?
@@ -126,7 +136,5 @@ Last week, in [A Clean Room Is Not a Home](https://kunalkushwaha.github.io/2026/
 In [The Clock Has Changed](https://kunalkushwaha.github.io/2026/10/24/the-clock-has-changed/) I argued that mistakes are unavoidable, and a mistake that travels everywhere is a design choice. Testing from the inside is how you find out which one you built.
 
 Koala runs on Apple silicon Macs with macOS 26 or newer, and on x86-64 Ubuntu 24.04 with KVM. Read [how Koala is tested](https://kunalkushwaha.github.io/homebrew-koala/#hostile-guests-crashes-and-fuzzing-on-real-vms), the [release notes](https://github.com/kunalkushwaha/homebrew-koala/releases), or the [project on GitHub](https://github.com/kunalkushwaha/homebrew-koala).
-
-An isolation claim is a hypothesis. Root in the guest is the experiment.
 
 I trust the box after it has been attacked, not before.
