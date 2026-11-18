@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400" role="img" aria-label="The information gap closing. Before: the leader stands on more knowledge than the team member, and authority comes from the gap. Now: both draw on the same AI, stand at the same level, and think together.">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdfaf3"/><stop offset="1" stop-color="#f4ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+<g id="person"><circle cx="0" cy="-82" r="14"/><path d="M-24 0 L-24 -40 Q-24 -62 0 -62 Q24 -62 24 -40 L24 0 Z"/></g>
+<marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#1f3566"/></marker>
+<marker id="arg" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#a89e8b"/></marker>
+<marker id="art" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#4fa69a"/></marker>
+<marker id="arts" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8 0 L0 4 L8 8 z" fill="#4fa69a"/></marker>
+</defs>
+<rect x="4" y="4" width="712" height="392" rx="14" fill="url(#card)" stroke="#ddd3c1" stroke-width="1.2"/>
+<text x="360" y="44" text-anchor="middle" class="sd" font-size="14" font-weight="600" fill="#1f3566" letter-spacing="3">THE INFORMATION GAP CLOSING</text>
+<rect x="336" y="56" width="48" height="3" rx="1.5" fill="#e2a92f"/>
+
+<!-- BEFORE -->
+<text x="185" y="90" text-anchor="middle" class="sd" font-size="12" font-weight="600" fill="#8a8170" letter-spacing="2">BEFORE</text>
+<text x="185" y="110" text-anchor="middle" class="sd" font-size="16" font-weight="600" fill="#1f3566">Parent → Child</text>
+<line x1="40" y1="310" x2="330" y2="310" stroke="#cfc5b2" stroke-width="1.4"/>
+<g stroke="#9cc2e3" stroke-width="1.2">
+  <rect x="80" y="290" width="80" height="20" rx="3" fill="#dbe9f5"/>
+  <rect x="80" y="270" width="80" height="20" rx="3" fill="#dbe9f5"/>
+  <rect x="80" y="250" width="80" height="20" rx="3" fill="#dbe9f5"/>
+  <rect x="80" y="230" width="80" height="20" rx="3" fill="#dbe9f5"/>
+  <rect x="226" y="290" width="48" height="20" rx="3" fill="#dbe9f5"/>
+</g>
+<use href="#person" transform="translate(120,230) scale(0.92)" fill="#1f3566"/>
+<use href="#person" transform="translate(250,290) scale(0.78)" fill="#5b7bb0"/>
+<!-- the gap -->
+<g stroke="#e2a92f" stroke-width="1.4" fill="none">
+  <path d="M138 155 H308" stroke-dasharray="3 4"/>
+  <path d="M262 226 H308" stroke-dasharray="3 4"/>
+  <path d="M308 155 V226"/>
+  <path d="M302 155 H314 M302 226 H314"/>
+</g>
+<text x="300" y="146" text-anchor="end" class="st" font-size="12" font-style="italic" fill="#a77510">the gap = authority</text>
+<!-- instructions / status -->
+<path d="M150 186 Q 190 174 222 214" fill="none" stroke="#1f3566" stroke-width="1.6" marker-end="url(#ar)"/>
+<path d="M226 248 Q 196 252 170 240" fill="none" stroke="#a89e8b" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#arg)"/>
+<text x="196" y="174" class="st" font-size="11.5" fill="#1f3566">instructions</text>
+<text x="176" y="266" class="st" font-size="11.5" fill="#8a8170">status</text>
+<g class="st" font-size="13" fill="#56504e" text-anchor="middle">
+  <text x="185" y="344">The leader knew more.</text>
+  <text x="185" y="363">Authority came from the information gap.</text>
+</g>
+
+<!-- arrow between -->
+<line x1="360" y1="100" x2="360" y2="370" stroke="#ddd3c1" stroke-width="1.2" stroke-dasharray="3 6"/>
+<circle cx="360" cy="220" r="16" fill="#fdfaf3" stroke="#ddd3c1" stroke-width="1.2"/>
+<path d="M352 220 H366 M361 214 L367 220 L361 226" fill="none" stroke="#1f3566" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- NOW -->
+<text x="535" y="90" text-anchor="middle" class="sd" font-size="12" font-weight="600" fill="#8a8170" letter-spacing="2">NOW</text>
+<text x="535" y="110" text-anchor="middle" class="sd" font-size="16" font-weight="600" fill="#1f3566">Peer ↔ Peer</text>
+<!-- shared AI -->
+<g stroke="#5b97c9" stroke-width="1.6" stroke-linecap="round">
+  <path d="M523 128 v-6 M535 128 v-6 M547 128 v-6 M523 172 v6 M535 172 v6 M547 172 v6 M513 138 h-6 M513 150 h-6 M513 162 h-6 M557 138 h6 M557 150 h6 M557 162 h6"/>
+</g>
+<rect x="513" y="128" width="44" height="44" rx="8" fill="#dbe9f5" stroke="#5b97c9" stroke-width="1.8"/>
+<text x="535" y="156" text-anchor="middle" class="sd" font-size="15" font-weight="600" fill="#1f3566">AI</text>
+<g stroke="#9cc2e3" stroke-width="1.4" stroke-dasharray="3 4" fill="none">
+  <path d="M520 180 Q 490 186 476 204"/>
+  <path d="M550 180 Q 580 186 594 204"/>
+</g>
+<rect x="410" y="290" width="250" height="20" rx="3" fill="#dbe9f5" stroke="#9cc2e3" stroke-width="1.2"/>
+<text x="535" y="304" text-anchor="middle" class="st" font-size="11" fill="#3f6f9a">same knowledge for everyone</text>
+<line x1="390" y1="310" x2="680" y2="310" stroke="#cfc5b2" stroke-width="1.4"/>
+<use href="#person" transform="translate(470,290) scale(0.85)" fill="#1f3566"/>
+<use href="#person" transform="translate(600,290) scale(0.85)" fill="#5b7bb0"/>
+<path d="M500 250 H570" fill="none" stroke="#4fa69a" stroke-width="2" marker-end="url(#art)" marker-start="url(#arts)"/>
+<text x="535" y="240" text-anchor="middle" class="st" font-size="11.5" font-style="italic" fill="#2f7d72">thinking together</text>
+<g class="st" font-size="13" fill="#56504e" text-anchor="middle">
+  <text x="535" y="344">Everyone can ask the same AI.</text>
+  <text x="535" y="363">Leaders bring context, trust and questions.</text>
+</g>
+</svg>

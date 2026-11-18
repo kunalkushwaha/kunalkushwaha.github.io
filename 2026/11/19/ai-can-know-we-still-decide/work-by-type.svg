@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" role="img" aria-label="One workflow, three kinds of work, using vendor selection as an example. Market scan and comparing options are knowledge work where AI runs hardest. Talking to users and bringing the team along are relationship work where AI supports. Choosing the vendor is a decision where AI informs and a human owns the call.">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdfaf3"/><stop offset="1" stop-color="#f4ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+<marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#a89e8b"/></marker>
+</defs>
+<rect x="4" y="4" width="712" height="332" rx="14" fill="url(#card)" stroke="#ddd3c1" stroke-width="1.2"/>
+<text x="360" y="44" text-anchor="middle" class="sd" font-size="14" font-weight="600" fill="#1f3566" letter-spacing="3">ONE WORKFLOW, THREE KINDS OF WORK</text>
+<rect x="336" y="56" width="48" height="3" rx="1.5" fill="#e2a92f"/>
+<text x="360" y="84" text-anchor="middle" class="st" font-size="13" font-style="italic" fill="#8a8170">Example: choosing a vendor</text>
+
+<!-- arrows -->
+<g stroke="#a89e8b" stroke-width="1.4" marker-end="url(#ar)">
+  <line x1="152" y1="150" x2="164" y2="150"/>
+  <line x1="286" y1="150" x2="298" y2="150"/>
+  <line x1="420" y1="150" x2="432" y2="150"/>
+  <line x1="554" y1="150" x2="566" y2="150"/>
+</g>
+
+<!-- steps: centers 92,226,360,494,628; width 116 -->
+<g class="sd" font-size="10" font-weight="600" letter-spacing="1" text-anchor="middle">
+  <rect x="40" y="104" width="104" height="18" rx="9" fill="#dbe9f5"/><text x="92" y="117" fill="#3f6f9a">KNOWLEDGE</text>
+  <rect x="174" y="104" width="104" height="18" rx="9" fill="#dbe9f5"/><text x="226" y="117" fill="#3f6f9a">KNOWLEDGE</text>
+  <rect x="298" y="104" width="124" height="18" rx="9" fill="#fbecc4"/><text x="360" y="117" fill="#a77510">RELATIONSHIP</text>
+  <rect x="446" y="104" width="96" height="18" rx="9" fill="#d8eeea"/><text x="494" y="117" fill="#2f7d72">DECISION</text>
+  <rect x="566" y="104" width="124" height="18" rx="9" fill="#fbecc4"/><text x="628" y="117" fill="#a77510">RELATIONSHIP</text>
+</g>
+<g stroke-width="1.4">
+  <rect x="34" y="130" width="116" height="44" rx="8" fill="#fffdf8" stroke="#9cc2e3"/>
+  <rect x="168" y="130" width="116" height="44" rx="8" fill="#fffdf8" stroke="#9cc2e3"/>
+  <rect x="302" y="130" width="116" height="44" rx="8" fill="#fffdf8" stroke="#ecc66a"/>
+  <rect x="436" y="130" width="116" height="44" rx="8" fill="#fffdf8" stroke="#4fa69a" stroke-width="2"/>
+  <rect x="570" y="130" width="116" height="44" rx="8" fill="#fffdf8" stroke="#ecc66a"/>
+</g>
+<g class="st" font-size="13.5" fill="#1f3566" text-anchor="middle">
+  <text x="92" y="157">Market scan</text>
+  <text x="226" y="157">Compare options</text>
+  <text x="360" y="157">Talk to users</text>
+  <text x="494" y="157">Choose vendor</text>
+  <text x="628" y="157">Bring team along</text>
+</g>
+
+<!-- AI effort meters: track width 90 -->
+<g>
+  <rect x="47" y="196" width="90" height="8" rx="4" fill="#e8e0d1"/><rect x="47" y="196" width="86" height="8" rx="4" fill="#5b97c9"/>
+  <rect x="181" y="196" width="90" height="8" rx="4" fill="#e8e0d1"/><rect x="181" y="196" width="80" height="8" rx="4" fill="#5b97c9"/>
+  <rect x="315" y="196" width="90" height="8" rx="4" fill="#e8e0d1"/><rect x="315" y="196" width="20" height="8" rx="4" fill="#e2a92f"/>
+  <rect x="449" y="196" width="90" height="8" rx="4" fill="#e8e0d1"/><rect x="449" y="196" width="42" height="8" rx="4" fill="#4fa69a"/>
+  <rect x="583" y="196" width="90" height="8" rx="4" fill="#e8e0d1"/><rect x="583" y="196" width="20" height="8" rx="4" fill="#e2a92f"/>
+</g>
+<g class="st" font-size="12" fill="#56504e" text-anchor="middle">
+  <text x="92" y="226">AI runs hard</text>
+  <text x="226" y="226">AI runs hard</text>
+  <text x="360" y="226">AI supports</text>
+  <text x="494" y="226">AI informs</text>
+  <text x="628" y="226">AI supports</text>
+</g>
+<!-- human owns badge -->
+<g transform="translate(494,252)">
+  <rect x="-66" y="-13" width="132" height="24" rx="12" fill="#1f3566"/>
+  <text x="0" y="3.5" text-anchor="middle" class="sd" font-size="11.5" font-weight="600" fill="#fdfaf3" letter-spacing="0.6">a human owns it</text>
+</g>
+<line x1="494" y1="232" x2="494" y2="239" stroke="#1f3566" stroke-width="1.4"/>
+
+<text x="360" y="306" text-anchor="middle" class="st" font-size="13.5" font-style="italic" fill="#1f3566">First question: which part is knowledge, which is relationship, and where is the decision?</text>
+</svg>

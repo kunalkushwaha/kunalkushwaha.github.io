@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="370" viewBox="0 0 720 370" role="img" aria-label="Three types of work. Knowledge: hand it to AI. Relationships: keep them human. Decisions: use AI to think, not to decide.">
+<defs>
+<linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdfaf3"/><stop offset="1" stop-color="#f4ede1"/></linearGradient>
+<style>.sd{font-family:'Fraunces',Georgia,serif;}.st{font-family:'Newsreader',Georgia,serif;}</style>
+</defs>
+<rect x="4" y="4" width="712" height="362" rx="14" fill="url(#card)" stroke="#ddd3c1" stroke-width="1.2"/>
+<text x="360" y="44" text-anchor="middle" class="sd" font-size="14" font-weight="600" fill="#1f3566" letter-spacing="3">THREE TYPES OF WORK</text>
+<rect x="336" y="56" width="48" height="3" rx="1.5" fill="#e2a92f"/>
+
+<!-- Knowledge -->
+<g transform="translate(130,0)">
+  <circle cx="0" cy="124" r="48" fill="#dbe9f5" stroke="#9cc2e3" stroke-width="1.4"/>
+  <g fill="none" stroke="#1f3566" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M-24 106 h18 q6 0 6 6 v34 q0 -5 -6 -5 h-18 z"/>
+    <path d="M24 106 h-18 q-6 0 -6 6 v34 q0 -5 6 -5 h18 z"/>
+    <path d="M-18 116 h8 M-18 124 h8 M-18 132 h8 M10 116 h8 M10 124 h8 M10 132 h8" stroke-width="1.4"/>
+  </g>
+  <path d="M30 92 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 z" fill="#e2a92f"/>
+  <text x="0" y="204" text-anchor="middle" class="sd" font-size="18" font-weight="600" fill="#1f3566">Knowledge</text>
+  <rect x="-90" y="220" width="180" height="14" rx="7" fill="#1f3566"/>
+  <rect x="-90" y="220" width="148" height="14" rx="7" fill="#5b97c9"/>
+  <rect x="50" y="220" width="8" height="14" fill="#5b97c9"/>
+  <g class="st" font-size="11.5" fill="#6f685a">
+    <text x="-90" y="250">AI does the work</text>
+    <text x="90" y="250" text-anchor="end">you check</text>
+  </g>
+  <text x="0" y="290" text-anchor="middle" class="st" font-size="16" font-style="italic" fill="#1f3566">Hand it to AI.</text>
+  <g class="st" font-size="12.5" fill="#56504e" text-anchor="middle">
+    <text x="0" y="318">Gather, synthesize,</text>
+    <text x="0" y="336">find patterns, recall.</text>
+  </g>
+</g>
+
+<!-- Relationships -->
+<g transform="translate(360,0)">
+  <circle cx="0" cy="124" r="48" fill="#fbecc4" stroke="#ecc66a" stroke-width="1.4"/>
+  <g fill="none" stroke="#1f3566" stroke-width="2" stroke-linecap="round">
+    <circle cx="0" cy="112" r="8"/>
+    <path d="M-15 144 q0 -18 15 -18 q15 0 15 18"/>
+    <circle cx="-22" cy="118" r="6"/>
+    <path d="M-34 144 q0 -14 12 -14 q4 0 7 2"/>
+    <circle cx="22" cy="118" r="6"/>
+    <path d="M34 144 q0 -14 -12 -14 q-4 0 -7 2"/>
+  </g>
+  <text x="0" y="204" text-anchor="middle" class="sd" font-size="18" font-weight="600" fill="#1f3566">Relationships</text>
+  <rect x="-90" y="220" width="180" height="14" rx="7" fill="#1f3566"/>
+  <rect x="-90" y="220" width="38" height="14" rx="7" fill="#e2a92f"/>
+  <rect x="-60" y="220" width="8" height="14" fill="#e2a92f"/>
+  <g class="st" font-size="11.5" fill="#6f685a">
+    <text x="-90" y="250">AI supports</text>
+    <text x="90" y="250" text-anchor="end">people connect</text>
+  </g>
+  <text x="0" y="290" text-anchor="middle" class="st" font-size="16" font-style="italic" fill="#1f3566">Keep them human.</text>
+  <g class="st" font-size="12.5" fill="#56504e" text-anchor="middle">
+    <text x="0" y="318">Trust, empathy, influence,</text>
+    <text x="0" y="336">bringing people together.</text>
+  </g>
+</g>
+
+<!-- Decisions -->
+<g transform="translate(590,0)">
+  <circle cx="0" cy="124" r="48" fill="#d8eeea" stroke="#8fcac0" stroke-width="1.4"/>
+  <g fill="none" stroke="#1f3566" stroke-width="2" stroke-linecap="round">
+    <circle cx="0" cy="126" r="24"/>
+    <path d="M0 98 v-6 M-4 92 h8"/>
+    <path d="M0 102 v3 M0 147 v3 M-24 126 h3 M21 126 h3" stroke-width="1.4"/>
+  </g>
+  <path d="M10 114 L3 129 L-10 138 L-3 123 Z" fill="#1f3566"/>
+  <circle cx="0" cy="126" r="2.4" fill="#fdfaf3"/>
+  <text x="0" y="204" text-anchor="middle" class="sd" font-size="18" font-weight="600" fill="#1f3566">Decisions</text>
+  <rect x="-90" y="220" width="180" height="14" rx="7" fill="#1f3566"/>
+  <rect x="-90" y="220" width="76" height="14" rx="7" fill="#4fa69a"/>
+  <rect x="-22" y="220" width="8" height="14" fill="#4fa69a"/>
+  <g class="st" font-size="11.5" fill="#6f685a">
+    <text x="-90" y="250">AI informs</text>
+    <text x="90" y="250" text-anchor="end">you decide, you own</text>
+  </g>
+  <text x="0" y="290" text-anchor="middle" class="st" font-size="16" font-style="italic" fill="#1f3566">Use AI to think, not to decide.</text>
+  <g class="st" font-size="12.5" fill="#56504e" text-anchor="middle">
+    <text x="0" y="318">Counter-checks, alternatives,</text>
+    <text x="0" y="336">questioned assumptions.</text>
+  </g>
+</g>
+
+<line x1="245" y1="96" x2="245" y2="340" stroke="#ddd3c1" stroke-width="1.2" stroke-dasharray="3 6"/>
+<line x1="475" y1="96" x2="475" y2="340" stroke="#ddd3c1" stroke-width="1.2" stroke-dasharray="3 6"/>
+</svg>
